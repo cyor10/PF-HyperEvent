@@ -2,16 +2,16 @@ const { DataTypes } = require("sequelize")
 
 
 module.exports = (sequelize) => {
-    sequelize.define("event", {
+    sequelize.define("Event", {
         event_id:{
-            type: DataTypes.UUIDV4,
-            autoIncrement: true,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true 
         },
         price:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: false,
-            defaultValue:0
+            defaultValue:0.0
         },
         stock:{
             type: DataTypes.INTEGER,
@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
             }
         },
         category:{
-            type: DataTypes.JSON,
+            type: DataTypes.STRING,
             allowNull: false
         },
         rating:{

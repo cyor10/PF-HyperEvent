@@ -2,15 +2,19 @@ const { DataTypes } = require("sequelize")
 
 
 module.exports = (sequelize) => {
-    sequelize.define("cart", {
+    sequelize.define("Cart", {
         cart_id:{
-            type: DataTypes.UUIDV4,
-            autoIncrement: true,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true 
         },
         user_id:{
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: "user",
+                key: "user_id" 
+            }
         },
         total_mount:{
             type: DataTypes.INTEGER,
