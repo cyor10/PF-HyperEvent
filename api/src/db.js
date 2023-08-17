@@ -5,9 +5,9 @@ const path = require('path');
 const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY,
 } = process.env;
-const env = process.env.ENV_DEPLOY || 'local';
+const ENV_DEPLOY = process.env.ENV_DEPLOY || 'local';
 
-if (env === 'local') {
+if (ENV_DEPLOY === 'local') {
   sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/hyperevents`, {
     logging: false,
     native: false,
