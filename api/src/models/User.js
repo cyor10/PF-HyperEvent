@@ -4,7 +4,7 @@ const { DataTypes } = require("sequelize")
 module.exports = (sequelize) => {
     sequelize.define("user", {
         user_id:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUIDV4,
             autoIncrement: true,
             primaryKey: true 
         },
@@ -27,9 +27,9 @@ module.exports = (sequelize) => {
         user_image:{
             type: DataTypes.TEXT,
             allowNull: true,
-            /* validate:{
+            validate:{
                 isUrl: true
-            }, */
+            },
             defaultValue: 'https://cdn.vectorstock.com/i/preview-1x/62/38/avatar-13-vector-42526238.jpg'
         },
         password:{
@@ -52,7 +52,6 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             allowNull: false
         },
-        
         // cart:{
         //     //type: DataTypes.ARRAY(DataTypes.STRING),
         //     type: DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.STRING)),

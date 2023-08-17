@@ -4,7 +4,7 @@ const { DataTypes } = require("sequelize")
 module.exports = (sequelize) => {
     sequelize.define("event", {
         event_id:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUIDV4,
             autoIncrement: true,
             primaryKey: true 
         },
