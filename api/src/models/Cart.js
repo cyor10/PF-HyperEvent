@@ -9,12 +9,8 @@ module.exports = (sequelize) => {
             primaryKey: true 
         },
         user_id:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
             allowNull: false,
-            references: {
-                model: "user",
-                key: "user_id" 
-            }
         },
         total_mount:{
             type: DataTypes.INTEGER,
