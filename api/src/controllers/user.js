@@ -1,7 +1,7 @@
 // Endpoint para crear un usuario
 require("dotenv").config();
 const { JWT_SECRET } = process.env;
-const { Users } = require("../db");
+const { User } = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("../utils/cloudinaryConfig")
@@ -15,11 +15,11 @@ const signupUser = async (req, res) => {
     let bufferString = Buffer.from(req.file.buffer).toString('base64')
     let obj2 = "data:" + req.file.mimetype + ";base64," + bufferString;
     // Verificar que el correo electrónico no existe en la base de datos
-    const emailExist = await Users.findOne({ where: { email: email } });
+    const emailExist = await User.findOne({ where: { email: email } });
     if (emailExist) {
       return res
         .status(400)
-        .send({ message: "El correo electrónico ya está registrado." });
+        .send({message:"El correo electrónico ya está registrado."});
     }
     // Se le pasa el buffer ya formateado a cloudinary para que suba la imagen al la nube y result es un objeto con la propiedad url de la imagen ya subida
     const result = await cloudinary.uploader.upload(obj2, { public_id: req.file.originalname })
@@ -28,10 +28,10 @@ const signupUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     // Guardar el correo electrónico y la contraseña hasheada en la base de datos
-    const newUser = await Users.create({
+    const newUser = await User.create({
       email: email,
       password: hashedPassword,
-      image: result.url
+      userimage: result.url
     });
 
     const userId = newUser.dataValues.id;
@@ -57,7 +57,7 @@ const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     // Verificar que el correo electrónico exista en la base de datos
-    const user = await Users.findOne({
+    const user = await User.findOne({
       where: {
         email: email,
       },

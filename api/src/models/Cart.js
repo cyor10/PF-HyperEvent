@@ -6,10 +6,11 @@ module.exports = (sequelize) => {
         id:{
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUID,
+            //autoIncrement: true,
             primaryKey: true 
         },
-        userid:{
-            type: DataTypes.INTEGER,
+        user_id:{
+            type: DataTypes.UUID,
             allowNull: false,
            /*  references: {
                 model: "user",
