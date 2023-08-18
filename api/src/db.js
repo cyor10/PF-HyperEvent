@@ -3,21 +3,13 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY,
+  DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
 } = process.env;
-const ENV_DEPLOY = process.env.ENV_DEPLOY || 'local';
 
-if (ENV_DEPLOY === 'local') {
-  sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/hyperevents`, {
+const sequelize = new Sequelize(`postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
     logging: false,
     native: false,
   });
-} else {
-  sequelize = new Sequelize(DB_DEPLOY, {
-    logging: false,
-    native: false,
-  });
-};
 
 const basename = path.basename(__filename);
 
