@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
     sequelize.define("event", {
         id:{
             type: DataTypes.UUID,
-            defaultValue: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true 
         },
         price:{
