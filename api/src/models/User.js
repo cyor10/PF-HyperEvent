@@ -2,17 +2,17 @@ const { DataTypes } = require("sequelize")
 
 
 module.exports = (sequelize) => {
-    sequelize.define("User", {
-        user_id:{
+    sequelize.define("user", {
+        id:{
             type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
+            defaultValue: DataTypes.UUID,
             primaryKey: true 
         },
         name:{
             type: DataTypes.STRING,
             allowNull: false
         },
-        last_name:{
+        lastname:{
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        user_image:{
+        userimage:{
             type: DataTypes.TEXT,
             allowNull: true,
             validate:{
@@ -39,11 +39,11 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        wallet_history:{
+        wallethistory:{
             type: DataTypes.JSON,
             allowNull: false
         },
-        event_history:{
+        eventhistory:{
             type: DataTypes.JSON,
             allowNull: false
         },
