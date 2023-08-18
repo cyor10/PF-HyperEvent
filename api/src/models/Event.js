@@ -2,10 +2,10 @@ const { DataTypes } = require("sequelize")
 
 
 module.exports = (sequelize) => {
-    sequelize.define("Event", {
-        event_id:{
+    sequelize.define("event", {
+        id:{
             type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
+            defaultValue: DataTypes.UUID,
             primaryKey: true 
         },
         price:{
@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        event_image:{
+        eventimage:{
             type: DataTypes.TEXT,
             allowNull: false,
             validate:{
@@ -36,11 +36,11 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: true
         },
-        event_name:{
+        eventname:{
             type: DataTypes.STRING,
             allowNull: false
         },
-        org_name:{
+        orgname:{
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -48,7 +48,7 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false
         },
-        event_date:{
+        eventdate:{
             type: DataTypes.DATEONLY,
             allowNull: false
         }
