@@ -1,10 +1,13 @@
 var express = require("express");
 var router = express.Router();
 const { signupUser, loginUser, protectedUser } = require("../controllers/index");
+const multer = require('multer')
+const storage = multer.memoryStorage();
+const upload = multer({ storage })
 
 
 // Endpoint para crear un usuario
-router.post("/signup", signupUser);
+router.post("/signup",upload.single("file"), signupUser);
 
 // Endpoint para iniciar sesión y obtener un token JWT
 router.post("/login", loginUser);
