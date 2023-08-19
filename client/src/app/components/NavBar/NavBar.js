@@ -5,6 +5,7 @@ import { faBars, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 export default function NavBar() {
   return (
+
     <div className="flex justify-around gap-8 bg-gray-400 w-full h-16 items-center">
 
       <Link className="text-white font-bold py-1 px-2 my-4 rounded text-3xl" href="/">H</Link>
@@ -19,5 +20,12 @@ export default function NavBar() {
 
       <FontAwesomeIcon className="c-red w-4" icon={faBars}></FontAwesomeIcon>
     </div>
+
+    <nav className="flex justify-center gap-8">
+      <Link className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" href="/">Home</Link>
+      <Link className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" href="/events">Eventos</Link>
+      <Link className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" href="/create_event">Crear Evento</Link>
+    </nav>
+
   );
 }
