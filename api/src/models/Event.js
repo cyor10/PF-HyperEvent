@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize")
 
 
 module.exports = (sequelize) => {
-    sequelize.define("Event", {
+    sequelize.define("event", {
         id:{
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        eventimage:{
+        eventImage:{
             type: DataTypes.TEXT,
             allowNull: false,
             validate:{

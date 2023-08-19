@@ -1,7 +1,7 @@
 require('dotenv').config()
 const { API_KEY, API_URL } = process.env
 const axios = require('axios')
-const {Events} = require('../db')
+const {Event} = require('../db')
 
 async function getEvents(req, res) {
     try {
