@@ -31,7 +31,7 @@ const signupUser = async (req, res) => {
     const newUser = await User.create({
       email: email,
       password: hashedPassword,
-      userImage: result.url
+      user_image: result.url
     });
 
     const userId = newUser.dataValues.id;

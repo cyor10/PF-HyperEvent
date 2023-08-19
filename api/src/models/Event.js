@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        eventImage:{
+        event_image:{
             type: DataTypes.TEXT,
             allowNull: false,
             validate:{
@@ -32,15 +32,15 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: true
         },
-        eventName:{
+        event_name:{
             type: DataTypes.STRING,
             allowNull: false
         },
-        orgName:{
+        org_name:{
             type: DataTypes.STRING,
             allowNull: false
         },
-        placeName:{
+        place_name:{
             type: DataTypes.TEXT,
             allowNull: false
         },
@@ -64,11 +64,11 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        startAt:{
+        start_at:{
             type: DataTypes.DATEONLY,
             allowNull: false
         },
-        endAt:{
+        end_at:{
             type: DataTypes.DATEONLY,
             allowNull: false
         },
@@ -80,7 +80,7 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false
         },
-        socialMedia: {
+        social_media: {
             type: DataTypes.ARRAY(DataTypes.STRING), 
             allowNull: true,
             validate: {

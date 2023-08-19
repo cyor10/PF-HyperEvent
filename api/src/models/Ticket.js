@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
         //     type: DataTypes.STRING,
         //     allowNull: false
         // },
-        boughtAt:{
+        bought_at:{
             type: DataTypes.DATE,
             allowNull: false,
             defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
