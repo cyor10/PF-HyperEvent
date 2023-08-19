@@ -12,23 +12,49 @@ export default function LandingPage() {
 
   const styles ="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md"
   
-
-  
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start gap-3 p-24 ">
-      <Link href='/login' className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded'>Login</Link>
-      <div className='"mt-8 flex flex-col justify-center "'>
-      <button className={styles} onClick={() => dispatch(increment())}>
-        increment
-      </button>
-      <span>
-        {count}
-      </span>
-      <button className={styles} onClick={() => dispatch(decrement())}>
-        decrement
-      </button>
+    <div className="flex min-h-screen w-full flex-col items-center">
+
+      <div className='pb-10 bg-white w-full flex justify-center min-h-ful'>
+        <h1 className='text-6xl pt-7 '>Hyper Events</h1>
       </div>
-    </main>
+
+      <div className='w-full h-80 pb-25 bg-slate-950 flex justify-center items-center relative'>
+        <h3 className='text-white'>IMG</h3>
+        <div className='w-2 h-2 bg-red-500 absolute bottom-10 rounded'></div>
+        <div className='w-2 h-2 bg-red-500 absolute bottom-10 left-40 rounded'></div>
+        <div className='w-2 h-2 bg-red-500 absolute bottom-10 rounded right-40'></div>
+      </div>
+
+      <div className='flex flex-col justify-start w-full pl-3'>
+        <h3 className='text-2xl text-start'>categories</h3>
+        <div className='flex flex-row gap-4'>
+        <div className='w-20 h-20 bg-slate-950 mt-3 rounded-xl'>
+          <p className='text-white'>cards</p>
+        </div>
+
+        <div className='w-20 h-20 bg-slate-950 mt-3 rounded-xl'>
+          <p className='text-white'>cards</p>
+        </div>
+
+        <div className='w-20 h-20 bg-slate-950 mt-3 rounded-xl'>
+          <p className='text-white'>cards</p>
+        </div>
+
+        <div className='w-20 h-20 bg-slate-950 mt-3 rounded-xl'>
+          <p className='text-white'>cards</p>
+        </div>
+        </div>
+      </div>
+
+      <div>
+        
+      </div>
+
+      <Link href='/login' className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-10'>Login</Link>
+      <div className='"mt-8 flex flex-col justify-center "'>
+      </div>
+    </div>
     
   )
 }

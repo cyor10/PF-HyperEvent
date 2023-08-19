@@ -2,16 +2,36 @@
 import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import {validateUser} from "../../validate/validate"
+
 export default function Login() {
   const [inputs, setInputs] = useState({ 
     email: "",
     password: "",
   });
+
+  const [errros, setErros] = useState({
+    email: "",
+    password: "",
+  })
+
   function handleInputs(event) {
-    setInputs({
-      ...inputs,
-      [event.target.name]: event.target.value,
-    });
+    // if(event.target.type === "email"){
+      // if it is an email, we lower case all the letters
+      // setInputs({
+      //   ...inputs,
+      //   email:event.target.value.toLowerCase()
+      // })
+    // }else{
+      setInputs({
+        ...inputs,
+        [event.target.name]: event.target.value
+      })
+      setErros(validateUser({
+        ...inputs,
+        [event.target.name]: event.target.value
+      }))
+    // }
   }
 
   function onSubmit(event) {
@@ -61,6 +81,7 @@ export default function Login() {
             value={inputs.email}
           ></input>
         </div>
+        {errros && <p>{errros.email}</p>}
 
         <div className="mb-6">
           <label className="block text-gray-700 font-semibold mb-2">
@@ -82,8 +103,17 @@ export default function Login() {
         >
           Submit
         </button>
+
+      <h2 className="text-gray-600 text-center mt-4 flex flex-col">
+        <Link className="text-blue-500 hover:underline" href="/login/reset-password ">
+        Forgot your password?{" "}
+        </Link>
+      </h2>
+
+  
       </form>
-      <h2 className="text-gray-600 text-center mt-4">
+
+      <h2 className="text-gray-600 text-center mt-4 flex flex-col">
         Don&apos;t have an account?{" "}
         <Link className="text-blue-500 hover:underline" href="/signup">
           SignUp
