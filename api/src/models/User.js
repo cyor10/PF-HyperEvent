@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize")
 
 
 module.exports = (sequelize) => {
-    sequelize.define("user", {
+    sequelize.define("User", {
         id:{
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
@@ -43,18 +43,10 @@ module.exports = (sequelize) => {
             type: DataTypes.JSON,
             allowNull: false
         },
-        eventhistory:{
-            type: DataTypes.JSON,
-            allowNull: false
-        },
         admin:{
             type: DataTypes.BOOLEAN,
             allowNull: false
-        },
-        creator:{
-            type: DataTypes.BOOLEAN,
-            allowNull: false
-        },
+        }
         // cart:{
         //     //type: DataTypes.ARRAY(DataTypes.STRING),
         //     type: DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.STRING)),
