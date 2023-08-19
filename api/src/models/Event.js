@@ -8,22 +8,18 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true 
         },
-        price:{
-            type: DataTypes.FLOAT,
-            allowNull: false,
-            defaultValue:0.0
-        },
         stock:{
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        eventimage:{
+        event_image:{
             type: DataTypes.TEXT,
             allowNull: false,
             validate:{
               isUrl: true,
             }
         },
+
         category:{
             type: DataTypes.STRING,
             allowNull: false
@@ -36,22 +32,61 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: true
         },
-        eventname:{
+        event_name:{
             type: DataTypes.STRING,
             allowNull: false
         },
-        orgname:{
+        org_name:{
             type: DataTypes.STRING,
             allowNull: false
         },
-        place:{
+        place_name:{
             type: DataTypes.TEXT,
             allowNull: false
         },
-        eventdate:{
+        adress:{
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: true
+        },
+        city:{
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        province:{
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        postal:{
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        country:{
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        start_at:{
             type: DataTypes.DATEONLY,
             allowNull: false
-        }
+        },
+        end_at:{
+            type: DataTypes.DATEONLY,
+            allowNull: false
+        },
+        description:{
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
+        intro:{
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
+        social_media: {
+            type: DataTypes.ARRAY(DataTypes.STRING), 
+            allowNull: true,
+            validate: {
+              isUrl: true,
+            },
+          },
     },{
         timestamps: false
     })
