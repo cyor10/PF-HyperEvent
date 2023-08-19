@@ -2,6 +2,7 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import { validateUser } from '@/validate/validate'
 
 export default function SignUp() { // comentados Todos cloudinary 
     const [inputs, setInputs] = useState({
@@ -10,18 +11,35 @@ export default function SignUp() { // comentados Todos cloudinary
       file: null
     })
 
+    const [errors, setErros] = useState({
+      email: "",
+      password: "",
+      file: null,
+    })
+
     function handleInputs(event) { 
       if(event.target.type === "file") {
         setInputs({...inputs,
           file: event.target.files[0]
         });
-      } else {
+      // } else if(event.target.type === "email"){
+      //   // if it is an email, we lower case all the letters
+      //   setInputs({
+      //     ...inputs,
+      //     email:event.target.value.toLowerCase()
+      //   })
+        }else{
         setInputs({
           ...inputs,
           [event.target.name]: event.target.value
-        });
+        })
+        setErros(validateUser({
+          ...inputs,
+          [event.target.name]: event.target.value
+        }))
       }
     }
+  
     
     async function onSubmit(event) { 
       event.preventDefault();
@@ -58,6 +76,7 @@ export default function SignUp() { // comentados Todos cloudinary
           value={inputs.email}
         />
       </div>
+      {errors.email && <p className='bg-red'>{errors.email}</p>}
       
       <div className="mb-6">
         <label className="block text-gray-700 font-semibold mb-2">Password</label>
