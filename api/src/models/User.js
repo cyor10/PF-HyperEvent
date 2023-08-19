@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        lastname:{
+        last_name:{
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        userimage:{
+        user_image:{
             type: DataTypes.TEXT,
             allowNull: true,
             validate:{
@@ -39,22 +39,14 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        wallethistory:{
-            type: DataTypes.JSON,
-            allowNull: false
-        },
-        eventhistory:{
+        wallet_history:{
             type: DataTypes.JSON,
             allowNull: false
         },
         admin:{
             type: DataTypes.BOOLEAN,
             allowNull: false
-        },
-        creator:{
-            type: DataTypes.BOOLEAN,
-            allowNull: false
-        },
+        }
         // cart:{
         //     //type: DataTypes.ARRAY(DataTypes.STRING),
         //     type: DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.STRING)),
