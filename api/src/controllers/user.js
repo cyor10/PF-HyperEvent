@@ -4,25 +4,25 @@ const { JWT_SECRET } = process.env;
 const { User } = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const cloudinary = require("../utils/cloudinaryConfig")
-
-
+const cloudinary = require("../utils/cloudinaryConfig");
 
 const signupUser = async (req, res) => {
   try {
-    const { email, password} = req.body;
+    const { email, password } = req.body;
     // Trae desde req.file el oobjeto imagen y pasa su buffer a string, ademas de formatearlo para que cloudinary lo acepte
-    let bufferString = Buffer.from(req.file.buffer).toString('base64')
+    let bufferString = Buffer.from(req.file.buffer).toString("base64");
     let obj2 = "data:" + req.file.mimetype + ";base64," + bufferString;
     // Verificar que el correo electrónico no existe en la base de datos
     const emailExist = await User.findOne({ where: { email: email } });
     if (emailExist) {
       return res
         .status(400)
-        .send({message:"El correo electrónico ya está registrado."});
+        .send({ message: "El correo electrónico ya está registrado." });
     }
     // Se le pasa el buffer ya formateado a cloudinary para que suba la imagen al la nube y result es un objeto con la propiedad url de la imagen ya subida
-    const result = await cloudinary.uploader.upload(obj2, { public_id: req.file.originalname })
+    const result = await cloudinary.uploader.upload(obj2, {
+      public_id: req.file.originalname,
+    });
     // Hashear la contraseña
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -31,7 +31,7 @@ const signupUser = async (req, res) => {
     const newUser = await User.create({
       email: email,
       password: hashedPassword,
-      user_image: result.url
+      user_image: result.url,
     });
 
     const userId = newUser.dataValues.id;
@@ -90,7 +90,7 @@ const loginUser = async (req, res) => {
 
 // Endpoint protegido que solo puede ser accedido con un token JWT válido
 // ###
-const protectedUser = (req, res) => {
+const protectedUser = async (req, res) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) {
     return res.status(401).send({ message: "No se proporcionó un token." });
@@ -98,8 +98,15 @@ const protectedUser = (req, res) => {
 
   try {
     const decodedToken = jwt.verify(token, JWT_SECRET);
-    // console.log("02.---decodedToken---> ",decodedToken)
-    res.send({ message: "Solicitud exitosa.", userId: decodedToken.userId });
+    console.log("02.---decodedToken---> ", decodedToken);
+
+    const user = await User.findOne({
+      where: {
+        id: decodedToken.userId
+      },
+    });
+
+    res.send({ message: "Solicitud exitosa.", userId: decodedToken.userId, user: user });
   } catch (error) {
     return res.status(401).send({ message: "Token inválido." });
   }
