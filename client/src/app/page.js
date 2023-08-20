@@ -27,7 +27,7 @@ export default function LandingPage() {
       </div>
 
       <div className='flex flex-col justify-start w-full pl-3'>
-        <h3 className='text-2xl text-start'>categories</h3>
+        <h3 id='categories' className='text-2xl text-start'>categories</h3>
         <div className='flex flex-row gap-4'>
         <div className='w-20 h-20 bg-slate-950 mt-3 rounded-xl'>
           <p className='text-white'>cards</p>
@@ -51,7 +51,7 @@ export default function LandingPage() {
         
       </div>
 
-      <Link href='/login' className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-10'>Login</Link>
+    
       <div className='"mt-8 flex flex-col justify-center "'>
       </div>
     </div>
