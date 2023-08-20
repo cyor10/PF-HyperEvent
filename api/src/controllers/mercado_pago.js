@@ -13,6 +13,7 @@ mercadopago.configure({
 const pagar = (req, res) => {
   const { monto, descripcion } = req.body;
   // descripcion   "tv celu ventilador"
+  console.log(monto, descripcion)
   const preference = {
     items: [
       { 
@@ -22,7 +23,7 @@ const pagar = (req, res) => {
       },
     ],
     back_urls: {
-      success: "http://127.0.0.1:3000/",
+      success: "http://127.0.0.1:3000/payment/success",
       failure: "http://127.0.0.1:3000/",
       pending: "http://127.0.0.1:3000/",
     },
