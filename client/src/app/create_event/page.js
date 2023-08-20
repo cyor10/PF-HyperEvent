@@ -61,12 +61,14 @@ function EventForm() {
   };
 
   return (
+    <div className="flex flex-col items-start mt-4">
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto p-4 bg-white rounded shadow-md"
+      className="max-w-md mx-auto p-4 bg-black rounded shadow-md rounded-md mt-4"
     >
+        <h1 className="text-2xl font-semibold mb-4 text-gray-700 text-center">Form to create </h1>
       <div>
-        <label>Stock:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Stock:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="number"
@@ -76,7 +78,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Upload image:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Upload image:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="file"
@@ -85,7 +87,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Event Name:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Event Name:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="text"
@@ -95,7 +97,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Organization Name:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Organization Name:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="text"
@@ -105,7 +107,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Place Name:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Place Name:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="text"
@@ -115,7 +117,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Address:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Address:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="text"
@@ -125,7 +127,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>City:</label>
+        <label className="block text-gray-700 font-semibold mb-2">City:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="text"
@@ -135,7 +137,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Province:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Province:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="text"
@@ -145,7 +147,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Postal Code:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Postal Code:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="text"
@@ -155,7 +157,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Country:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Country:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="text"
@@ -165,7 +167,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Start Date:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Start Date:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="date"
@@ -175,7 +177,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>End Date:</label>
+        <label className="block text-gray-700 font-semibold mb-2">End Date:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="date"
@@ -185,7 +187,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Rating:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Rating:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="number"
@@ -195,7 +197,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Review:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Review:</label>
         <textarea
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           name="review"
@@ -204,7 +206,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Description:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Description:</label>
         <textarea
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           name="description"
@@ -213,7 +215,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Introduction:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Introduction:</label>
         <textarea
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           name="intro"
@@ -222,7 +224,7 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Social Media:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Social Media:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="text"
@@ -236,10 +238,11 @@ function EventForm() {
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
         >
-          Save
+          Create Event
         </button>
       </div>
     </form>
+    </div>
   );
 }
 

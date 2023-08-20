@@ -49,7 +49,7 @@ export default function NavBar() {
                 <h2 className="text-2xl text-white font-bold">H</h2>
               </Link>
 
-                {reduxUser.email && <label htmlFor="user" className="text-white mr-2">{reduxUser.email}</label>}
+                {reduxUser.username && <label htmlFor="user" className="text-white mr-2">{reduxUser.username}</label>}
                 {reduxUser.user_image && <img name='user' className="w-10 h-10 rounded-full" src={reduxUser.user_image} />}
 
               <FontAwesomeIcon
