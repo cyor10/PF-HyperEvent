@@ -7,6 +7,10 @@ module.exports = (sequelize) => {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true 
+        },        
+        event_name:{
+            type: DataTypes.STRING,
+            allowNull: false
         },
         stock:{
             type: DataTypes.INTEGER,
@@ -14,10 +18,7 @@ module.exports = (sequelize) => {
         },
         event_image:{
             type: DataTypes.TEXT,
-            allowNull: false,
-            validate:{
-              isUrl: true,
-            }
+            allowNull: false
         },
         rating:{
             type: DataTypes.FLOAT,
@@ -25,22 +26,18 @@ module.exports = (sequelize) => {
         },
         review:{
             type: DataTypes.TEXT,
-            allowNull: true
-        },
-        event_name:{
-            type: DataTypes.STRING,
             allowNull: false
         },
         org_name:{
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         place_name:{
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: true
         },
         adress:{
-            type: DataTypes.ARRAY(DataTypes.STRING),
+            type: DataTypes.STRING,
             allowNull: true
         },
         city:{
@@ -76,13 +73,10 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         social_media: {
-            type: DataTypes.ARRAY(DataTypes.STRING), 
+            type: DataTypes.STRING, 
             allowNull: true,
-            validate: {
-              isUrl: true,
-            },
           },
     },{
-        timestamps: false
+        timestamps: true
     })
 }
