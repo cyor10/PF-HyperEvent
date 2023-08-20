@@ -10,11 +10,11 @@ module.exports = (sequelize) => {
         },
         name:{
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         last_name:{
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         email:{
             type: DataTypes.STRING,
@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
         },
         username:{
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         user_image:{
             type: DataTypes.TEXT,
@@ -41,11 +41,12 @@ module.exports = (sequelize) => {
         },
         wallet_history:{
             type: DataTypes.JSON,
-            allowNull: false
+            allowNull: true
         },
         admin:{
             type: DataTypes.BOOLEAN,
-            allowNull: false
+            allowNull: true,
+            defaultValue: false
         }
         // cart:{
         //     //type: DataTypes.ARRAY(DataTypes.STRING),
