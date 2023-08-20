@@ -3,7 +3,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    value: 0
+    email: "",
+    user_image: ""
 }
 
 export const counterSlice = createSlice({
@@ -12,10 +13,11 @@ export const counterSlice = createSlice({
     reducers: {
         increment: (state) => {state.value += 1},
         decrement: (state) => {state.value -= 1},
-        incrementByAmount: (state, action) => {state.value += action.payload}
+        incrementByAmount: (state, action) => {state.value += action.payload},
+        getUser: (state, action) => {state.email = action.payload.email, state.user_image = action.payload.user_image}
     }
 }) 
 
-export const {increment, decrement, incrementByAmount} = counterSlice.actions
+export const {increment, decrement, incrementByAmount, getUser} = counterSlice.actions
 
 export default counterSlice.reducer

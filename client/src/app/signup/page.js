@@ -3,8 +3,16 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import { validateUser } from '@/validate/validate'
+import {useRouter} from 'next/navigation'
+import { useSelector, useDispatch } from 'react-redux'
+import { getUser } from '@/redux/features/counter/counterSlice'
 
-export default function SignUp() { // comentados Todos cloudinary 
+export default function SignUp() {
+
+    const dispatch = useDispatch()
+
+    const router = useRouter()
+
     const [inputs, setInputs] = useState({
       email: "",
       password: "",
@@ -55,7 +63,13 @@ export default function SignUp() { // comentados Todos cloudinary
         });
         if (data.token) {
           localStorage.setItem('token', data.token);
-          console.log('Token guardado en el LocalStorage');
+          const response = await axios('http://localhost:3001/protected', {
+            headers:{
+              Authorization: `Bearer ${data.token}`
+            }
+          })
+            dispatch(getUser(response.data.user))
+          router.push('/')
         }
       } catch (error) {
         console.log(error);
