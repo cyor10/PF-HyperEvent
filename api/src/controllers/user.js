@@ -8,7 +8,7 @@ const cloudinary = require("../utils/cloudinaryConfig");
 
 const signupUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, email, name, last_name, password } = req.body;
     // Trae desde req.file el oobjeto imagen y pasa su buffer a string, ademas de formatearlo para que cloudinary lo acepte
     let bufferString = Buffer.from(req.file.buffer).toString("base64");
     let obj2 = "data:" + req.file.mimetype + ";base64," + bufferString;
@@ -17,7 +17,7 @@ const signupUser = async (req, res) => {
     if (emailExist) {
       return res
         .status(400)
-        .send({ message: "El correo electrónico ya está registrado." });
+        .send({ alert: "El correo electrónico ya está registrado." });
     }
     // Se le pasa el buffer ya formateado a cloudinary para que suba la imagen al la nube y result es un objeto con la propiedad url de la imagen ya subida
     const result = await cloudinary.uploader.upload(obj2, {
@@ -29,9 +29,13 @@ const signupUser = async (req, res) => {
 
     // Guardar el correo electrónico y la contraseña hasheada en la base de datos
     const newUser = await User.create({
+      username: username,
       email: email,
+      name: name,
+      last_name: last_name,
       password: hashedPassword,
       user_image: result.url,
+
     });
 
     const userId = newUser.dataValues.id;

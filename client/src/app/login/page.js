@@ -79,7 +79,7 @@ export default function Login() {
             Email
           </label>
           <input
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500 text-gray-700"
             key="email"
             type="email"
             name="email"
@@ -87,14 +87,14 @@ export default function Login() {
             value={inputs.email}
           ></input>
         </div>
-        {errros && <p>{errros.email}</p>}
+        {errros && <p className=' text-red-700'>{errros.email}</p>}
 
         <div className="mb-6">
           <label className="block text-gray-700 font-semibold mb-2">
             Password
           </label>
           <input
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500 text-gray-700"
             key="password"
             type="password"
             name="password"
