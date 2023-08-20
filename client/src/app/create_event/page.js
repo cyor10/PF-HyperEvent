@@ -1,77 +1,70 @@
-"use client";
+"use client"
 import React, { useState } from "react";
 import axios from "axios";
 
 function EventForm() {
   const [eventData, setEventData] = useState({
-    price: 0.0,
     stock: 0,
-    eventimage: null,
-    category: "",
+    event_image: "",
+    event_name: "",
+    org_name: "",
+    place_name: "",
+    adress: [""],
+    city: "",
+    province: "",
+    postal: "",
+    country: "",
+    start_at: "",
+    end_at: "",
     rating: 0.0,
     review: "",
-    eventname: "",
-    orgname: "",
-    place: "",
-    eventdate: "",
+    description: "",
+    intro: "",
+    social_media: [""],
   });
 
   function handleInputChange(event) {
-    if (event.target.type === "file") {
-      setEventData({ ...eventData, eventimage: event.target.files[0] });
+    const { name, value, type } = event.target;
+
+    if (type === "file") {
+      setEventData({ ...eventData, [name]: event.target.files[0] });
     } else {
       setEventData({
         ...eventData,
-        [event.target.name]: event.target.value,
+        [name]: value,
       });
     }
   }
-  console.log(eventData)
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       let formData = new FormData();
-      formData.set("id", Math.floor(Math.random() * 1000000))
-      formData.set("price", eventData.price);
-      formData.set("stock", eventData.stock);
-      formData.set("file", eventData.eventimage);
-      formData.set("category", eventData.category);
-      formData.set("rating", eventData.rating);
-      formData.set("review", eventData.review);
-      formData.set("eventname", eventData.eventname);
-      formData.set("orgname", eventData.orgname);
-      formData.set("place", eventData.place);
-      formData.set("eventdate", eventData.eventdate);
-  
+
+      for (const [key, value] of Object.entries(eventData)) {
+        formData.append(`${key}`, value);
+      }
+      console.log(formData.get("event_image"))
       const { data } = await axios.post("http://localhost:3001/events", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          // Puedes agregar otros headers necesarios aquí
         },
       });
-      if(data.created) console.log(data.created)
-      // Hacer algo con la respuesta del servidor si es necesario
+
+      if (data.created) {
+        console.log("Event created:", data.created);
+        // Puedes hacer algo con la respuesta del servidor si es necesario
+      }
     } catch (error) {
-      console.log(error);
+      console.log("Error:", error);
     }
   };
-  
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto p-4 bg-black rounded shadow-md"
+      className="max-w-md mx-auto p-4 bg-white rounded shadow-md"
     >
-      <div className="text-white mb-4">
-        <label>Price:</label>
-        <input
-          className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          type="number"
-          name="price"
-          value={eventData.price}
-          onChange={handleInputChange}
-        />
-      </div>
       <div>
         <label>Stock:</label>
         <input
@@ -87,17 +80,107 @@ function EventForm() {
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="file"
-          name="eventimage"
+          name="event_image"
           onChange={handleInputChange}
         />
       </div>
       <div>
-        <label>Category:</label>
+        <label>Event Name:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="text"
-          name="category"
-          value={eventData.category}
+          name="event_name"
+          value={eventData.event_name}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label>Organization Name:</label>
+        <input
+          className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="text"
+          name="org_name"
+          value={eventData.org_name}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label>Place Name:</label>
+        <input
+          className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="text"
+          name="place_name"
+          value={eventData.place_name}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label>Address:</label>
+        <input
+          className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="text"
+          name="adress"
+          value={eventData.adress}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label>City:</label>
+        <input
+          className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="text"
+          name="city"
+          value={eventData.city}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label>Province:</label>
+        <input
+          className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="text"
+          name="province"
+          value={eventData.province}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label>Postal Code:</label>
+        <input
+          className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="text"
+          name="postal"
+          value={eventData.postal}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label>Country:</label>
+        <input
+          className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="text"
+          name="country"
+          value={eventData.country}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label>Start Date:</label>
+        <input
+          className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="date"
+          name="start_at"
+          value={eventData.start_at}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label>End Date:</label>
+        <input
+          className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="date"
+          name="end_at"
+          value={eventData.end_at}
           onChange={handleInputChange}
         />
       </div>
@@ -121,41 +204,30 @@ function EventForm() {
         />
       </div>
       <div>
-        <label>Event Name:</label>
-        <input
-          className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          type="text"
-          name="eventname"
-          value={eventData.eventname}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label>Organization Name:</label>
-        <input
-          className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          type="text"
-          name="orgname"
-          value={eventData.orgname}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label>Place:</label>
+        <label>Description:</label>
         <textarea
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          name="place"
-          value={eventData.place}
+          name="description"
+          value={eventData.description}
           onChange={handleInputChange}
         />
       </div>
       <div>
-        <label>Event Date:</label>
+        <label>Introduction:</label>
+        <textarea
+          className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          name="intro"
+          value={eventData.intro}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label>Social Media:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          type="date"
-          name="eventdate"
-          value={eventData.eventdate}
+          type="text"
+          name="social_media"
+          value={eventData.social_media}
           onChange={handleInputChange}
         />
       </div>
