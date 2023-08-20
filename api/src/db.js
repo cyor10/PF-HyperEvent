@@ -46,8 +46,8 @@ const { Ticket, Event, User, Category } = sequelize.models;
 User.belongsToMany(Event, { through: "users_events" });
 Event.belongsToMany(User, { through: "users_events" });
 
-Category.hasMany(Event, { through: "events_categories" });
-Event.belongsTo(Category, { through: "events_categories" });
+Category.hasMany(Event); 
+Event.belongsTo(Category);
 
 User.hasMany(Ticket);
 Ticket.belongsTo(User);
