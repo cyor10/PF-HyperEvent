@@ -30,12 +30,6 @@ export default function SignUp() {
         setInputs({...inputs,
           file: event.target.files[0]
         });
-      // } else if(event.target.type === "email"){
-      //   // if it is an email, we lower case all the letters
-      //   setInputs({
-      //     ...inputs,
-      //     email:event.target.value.toLowerCase()
-      //   })
         }else{
         setInputs({
           ...inputs,
@@ -112,6 +106,9 @@ export default function SignUp() {
           onChange={handleInputs}
         />
       </div>
+
+     
+
       <button
         className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md"
         type="submit"
@@ -121,3 +118,7 @@ export default function SignUp() {
     </form>
   )
 }
+/* name: "",
+      last_name: "",
+      email: "",
+      username: "", */

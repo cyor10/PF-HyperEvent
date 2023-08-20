@@ -30,6 +30,7 @@ export default function NavBar() {
               Authorization: `Bearer ${token}`
             }
           })
+          console.log(data)
             dispatch(getUser(data.user))
         } catch (error) {
           console.log(error)

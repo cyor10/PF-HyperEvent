@@ -5,6 +5,7 @@ const path = require('path');
 const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
 } = process.env;
+const getEvents = require('./utils/loadDb')
 
 const sequelize = new Sequelize(`postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
     logging: false,
@@ -54,6 +55,8 @@ Ticket.belongsTo(User);
 
 Event.hasMany(Ticket)
 Ticket.belongsTo(Event)
+
+getEvents(Event).then(res=>console.log(res)).catch((error) => console.error(error))
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

@@ -7,8 +7,8 @@ import axios from 'axios'
 import Link from 'next/link'
 
 export default function LandingPage() {
-  const count  = useSelector(state => state.counter.value)
-  const dispatch = useDispatch()
+  //const count  = useSelector(state => state.counter.value)
+  //const dispatch = useDispatch()
 
   const styles ="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md"
   
