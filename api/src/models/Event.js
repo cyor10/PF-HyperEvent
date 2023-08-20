@@ -19,11 +19,6 @@ module.exports = (sequelize) => {
               isUrl: true,
             }
         },
-
-        category:{
-            type: DataTypes.STRING,
-            allowNull: false
-        },
         rating:{
             type: DataTypes.FLOAT,
             allowNull: false
