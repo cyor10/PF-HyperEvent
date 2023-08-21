@@ -54,7 +54,6 @@ export default async function Detail({ params }) {
         </div>
         <div>
           <h3 className='text-lg ml-4'>Location</h3>
-          <h3 className='ml-4 mt-1'>{data && data.adress}</h3>
           <h3 className='ml-4 mt-1'>{data && data.city} ({data.province})</h3>
         </div>
       </div>
