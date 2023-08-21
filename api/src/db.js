@@ -58,8 +58,8 @@ Event.hasMany(Ticket)
 Ticket.belongsTo(Event)
 
 
-getEvents(Event).then(res=>console.log(res)).catch((error) => console.error(error))
 getTaxonomies(Category).then(res=>console.log(res)).catch(error=>console.log(error))
+getEvents(Event).then(res=>console.log(res)).catch((error) => console.error(error))
 
 
 

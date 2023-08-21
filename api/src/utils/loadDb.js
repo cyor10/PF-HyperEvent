@@ -1,49 +1,21 @@
+require('dotenv').config()
 const { API_KEY, API_URL } = process.env;
 const axios = require("axios");
 
-const { v4: uuidv4 } = require('uuid');
-/* [
-    {
-      id: 1000000,
-      name: 'sports',
-      parent_id: null,
-      document_source: [Object],
-      rank: 0
-    },
-    {
-      id: 1050000,
-      name: 'soccer',
-      parent_id: 1000000,
-      document_source: [Object],
-      rank: 0
-    },
-    {
-      id: 1050100,
-      name: 'mls',
-      parent_id: 1050000,
-      document_source: [Object],
-      rank: 4
-    }
-  ], */
- 
 async function getTaxonomies(model) {
   try { const { data } = await axios.get(`${API_URL}/taxonomies?client_id=${API_KEY}`)
-  //console.log(data.taxonomies)
   const filteredTaxonomies = data?.taxonomies.filter(obj => {
       return obj.is_visible === true;
   });
 
   const saveCategories = filteredTaxonomies.map(async tax => {
       await model.findOrCreate({
-          where: {id: tax.id, name: tax.name, image: tax.images["500_700"] || "https://s.france24.com/media/display/6aca8d1a-7783-11ea-9cf2-005056bf87d6/w:980/p:16x9/WEB%2005ABR%20DEPORTES%20PORTADA%20FOTO.webp"} 
+          where: {id: tax.id, name: tax.name, image: tax.images["500_700"] || "https://s.france24.com/media/display/6aca8d1a-7783-11ea-9cf2-005056bf87d6/w:980/p:16x9/WEB%2005ABR%20DEPORTES%20PORTADA%20FOTO.webp%22%7D"}
       })
   });
 
   await Promise.all(saveCategories);
 
-  /* const totalCategories = await model.findAll({
-      order: [['id', 'ASC']] // Order by ID in ascending order
-  }); */
   return 'categories loaded in DB'
   } catch (error) {
     console.log(error)
@@ -53,32 +25,9 @@ async function getTaxonomies(model) {
 async function getEvents(model) {
   try {
     let { data } = await axios.get(`${API_URL}/events?client_id=${API_KEY}`);
-    console.log(data.events.map(event=> event.performers[0].taxonomies.map(tax=>tax.id)))
-    /* const events = data.events.map( (event) => {
-
-
-async function getEvents(model) {
-  try {
-    let { data } = await axios.get(`${API_URL}/events?client_id=${API_KEY}`);
-
-    const events = data.events.map((event) => {
-      const eventsBoilerPlate = {
-        event_name: event.performers[0].name,
-        event_image: event.performers[0].image,
-        start_at: event.announce_date,
-        country: event.venue.country,
-        city: event.venue.city,
-        postal: event.venue.postal_code,
-        adress: event.venue.location,
-      };
-
-      
-    return eventsBoilerPlate
-    }); */
     for (let i = 0; i < data.events.length; i++) {
       const element = data.events[i];
       const eventsBoilerPlate = {
-        id: uuidv4(),
         event_name: element.performers[0].name,
         event_image: element.performers[0].image,
         start_at: element.announce_date,
@@ -88,22 +37,10 @@ async function getEvents(model) {
         adress: element.venue.location,
       };
       const event = await model.create(eventsBoilerPlate)
-      console.log(event.__proto__)
       const category = data.events[i].performers[0].taxonomies.map(tax=>tax.id)
-      console.log(category)
       await event.addCategories(category)
     }
-   
-    //await model.bulkCreate(events)
-
-
-      return eventsBoilerPlate
-    });
-
-    await model.bulkCreate(events)
-
-
-    return 'Eventos cargados en la DB'
+      return "Eventos cargados correctamente"
   } catch (error) {
     console.log(error)
     return 'Error al cargar Eventos-----!';
