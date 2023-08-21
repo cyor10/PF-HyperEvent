@@ -36,7 +36,6 @@ export default function SignUp() {
         setInputs({...inputs,
           file: event.target.files[0]
         });
-      
         }else{
         setInputs({
           ...inputs,
@@ -60,14 +59,14 @@ export default function SignUp() {
         cloud.set("last name", inputs.last_name)
         cloud.set("password", inputs.password)
         cloud.set("file", inputs.file)
-        const { data } = await axios.post('http://localhost:3001/signup', cloud, {
+        const { data } = await axios.post('https://hyperevent-be.up.railway.app/signup', cloud, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         });
         if (data.token) {
           localStorage.setItem('token', data.token);
-          const response = await axios('http://localhost:3001/protected', {
+          const response = await axios('https://hyperevent-be.up.railway.app/protected', {
             headers:{
               Authorization: `Bearer ${data.token}`
             }
@@ -156,6 +155,9 @@ export default function SignUp() {
           onChange={handleInputs}
         />
       </div>
+
+     
+
       <button
         className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md "
         type="submit"
@@ -166,3 +168,7 @@ export default function SignUp() {
     </div>
   )
 }
+/* name: "",
+      last_name: "",
+      email: "",
+      username: "", */

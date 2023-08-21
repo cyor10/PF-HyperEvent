@@ -9,6 +9,10 @@ import Link from 'next/link'
 
 export default function LandingPage() {
 
+  //const count  = useSelector(state => state.counter.value)
+  //const dispatch = useDispatch()
+
+
   const slides = [
     "https://seatgeek.com/images/performers-landscape/generic-theater-ba8841/677168/500_700.jpg",
     "https://seatgeek.com/images/performers-landscape/generic-sports-5362fd/677214/500_700.jpg",
