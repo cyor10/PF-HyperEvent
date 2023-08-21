@@ -22,7 +22,8 @@ module.exports = (sequelize) => {
         },
         rating:{
             type: DataTypes.FLOAT,
-            allowNull: true
+            allowNull: false,
+            defaultValue: 0.0
         },
         review:{
             type: DataTypes.TEXT,

@@ -7,7 +7,7 @@ const {
 } = process.env;
 const getEvents = require('./utils/loadDb')
 
-const sequelize = new Sequelize(`postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
     logging: false,
     native: false,
   });
