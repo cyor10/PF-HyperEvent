@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from "react";
-import axios from "axios";
+import axiosInstance from '../../utils/axiosInstance';
 
 function EventForm() {
   const [eventData, setEventData] = useState({
@@ -45,7 +45,7 @@ function EventForm() {
         formData.append(`${key}`, value);
       }
       console.log(formData.get("event_image"))
-      const { data } = await axios.post("https://hyperevent-be.up.railway.app/events", formData, {
+      const { data } = await axiosInstance.post("/events", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

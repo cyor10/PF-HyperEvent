@@ -10,7 +10,7 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from '../../../utils/axiosInstance';
 import { getUser } from "@/redux/features/counter/counterSlice";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -25,7 +25,7 @@ export default function NavBar() {
     if (token) {
       (async () => {
         try {
-          const {data} = await axios('https://hyperevent-be.up.railway.app/protected', {
+          const {data} = await axiosInstance('/protected', {
             headers:{
               Authorization: `Bearer ${token}`
             }
