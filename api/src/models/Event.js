@@ -3,81 +3,82 @@ const { DataTypes } = require("sequelize")
 
 module.exports = (sequelize) => {
     sequelize.define("event", {
-        id:{
+        id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
-            primaryKey: true 
-        },        
-        event_name:{
+            primaryKey: true
+        },
+        event_name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        stock:{
+        stock: {
             type: DataTypes.INTEGER,
             allowNull: true
         },
-        event_image:{
+        event_image: {
             type: DataTypes.TEXT,
             allowNull: false
         },
-        rating:{
+        rating: {
             type: DataTypes.FLOAT,
             allowNull: true
         },
-        review:{
+        review: {
             type: DataTypes.TEXT,
             allowNull: true
         },
-        org_name:{
+        org_name: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        place_name:{
+        place_name: {
             type: DataTypes.TEXT,
             allowNull: true
         },
-        adress:{
+        adress: {
             type: DataTypes.JSON,
             allowNull: true
         },
-        city:{
+        city: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        province:{
+        province: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        postal:{
+        postal: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        country:{
+        country: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        start_at:{
+        start_at: {
             type: DataTypes.DATE,
             allowNull: false
         },
-        end_at:{
+        end_at: {
             type: DataTypes.DATEONLY,
             allowNull: true
         },
-        description:{
+        description: {
             type: DataTypes.TEXT,
             allowNull: true
         },
-        intro:{
+        intro: {
             type: DataTypes.TEXT,
             allowNull: true,
             defaultValue: 'intro'
         },
         social_media: {
-            type: DataTypes.STRING, 
+            type: DataTypes.STRING,
             allowNull: true,
-          },
-    },{
-        timestamps: true
+        },
+    }, {
+        freezeTableName: true,
+        timestamps: false
     })
 }
