@@ -36,7 +36,7 @@ export default function LandingPage() {
 
       <Carousel>
       {events && events.map((ev) => (
-          <Image className='w-96 h-96 object-cover' src={ev} alt="Descripción de la imagen" width={900} height={300} key={ev} />
+          <img className='w-96 h-96 object-cover' src={ev} alt="Descripción de la imagen" width={900} height={300} key={ev} />
       ))}
     </Carousel>
 
@@ -45,7 +45,7 @@ export default function LandingPage() {
       <h2 className='text-xl pl-3 pb-3'>Categories</h2>
         <Categories>
           {slides && slides.map((sl) => (
-            <Image className='w-[5.3rem] h-[5.3rem] rounded-md' src={sl} width={400} height={200} key={sl}></Image>
+            <img className='w-[5.3rem] h-[5.3rem] rounded-md' src={sl} width={400} height={200} key={sl} />
           ))}
         </Categories>
       </div>

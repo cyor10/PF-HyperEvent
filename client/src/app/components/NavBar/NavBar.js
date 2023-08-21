@@ -50,7 +50,7 @@ export default function NavBar() {
               </Link>
 
                 {reduxUser.username && <label htmlFor="user" className="text-white mr-2">{reduxUser.username}</label>}
-                {reduxUser.user_image && <Image name='user' className="w-10 h-10 rounded-full" src={reduxUser.user_image} height={100} width={100} />}
+                {reduxUser.user_image && <img name='user' className="w-10 h-10 rounded-full" src={reduxUser.user_image} height={100} width={100} />}
 
               <FontAwesomeIcon
                 className="text-white max-h-5 bg-slate-400	 p-2 rounded"
@@ -91,8 +91,8 @@ export default function NavBar() {
                   </Link>
                 </li>
                 <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
-                  <Link href="#contact" onClick={() => setNavbar(!navbar)}>
-                    Categories
+                  <Link href="/events" onClick={() => setNavbar(!navbar)}>
+                    Events
                   </Link>
                 </li>
                 <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
