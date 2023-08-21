@@ -48,13 +48,8 @@ module.exports = (sequelize) => {
             allowNull: true,
             defaultValue: false
         }
-        // cart:{
-        //     //type: DataTypes.ARRAY(DataTypes.STRING),
-        //     type: DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.STRING)),
-        //     allowNull: true,
-        //     defaultValue: [] 
-        // },
     },{
+        freezeTableName: true,
         timestamps: false
     })
 }
