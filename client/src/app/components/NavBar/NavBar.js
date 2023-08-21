@@ -25,7 +25,7 @@ export default function NavBar() {
     if (token) {
       (async () => {
         try {
-          const {data} = await axios('http://localhost:3001/protected', {
+          const {data} = await axios('https://hyperevent-be.up.railway.app/protected', {
             headers:{
               Authorization: `Bearer ${token}`
             }

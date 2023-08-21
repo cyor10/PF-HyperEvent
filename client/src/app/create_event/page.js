@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -45,7 +45,7 @@ function EventForm() {
         formData.append(`${key}`, value);
       }
       console.log(formData.get("event_image"))
-      const { data } = await axios.post("http://localhost:3001/events", formData, {
+      const { data } = await axios.post("https://hyperevent-be.up.railway.app/events", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

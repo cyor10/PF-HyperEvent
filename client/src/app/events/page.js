@@ -5,7 +5,7 @@ import Image from "next/image";
 
 
 export default async function FetchEvents({ params }) {
-   const {data} = await axios.get("http://localhost:3001/events")
+   const {data} = await axios.get("https://hyperevent-be.up.railway.app/events")
   
   return (
     <div className="p-8">

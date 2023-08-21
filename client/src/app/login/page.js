@@ -39,12 +39,12 @@ export default function Login() {
     async function submit() {
       try {
         const { data } = await axios.post(
-          "http://localhost:3001/login",
+          "https://hyperevent-be.up.railway.app/login",
           inputs
         );
         if (data.token) {
           localStorage.setItem("token", data.token);
-          const response = await axios("http://localhost:3001/protected", {
+          const response = await axios("https://hyperevent-be.up.railway.app/protected", {
             headers: {
               Authorization: `Bearer ${data.token}`,
             },

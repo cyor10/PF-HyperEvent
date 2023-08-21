@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default async function Detail({ params }) {
   const { data } = await axios.get(
-    `http://localhost:3001/events?name=${params.id}`
+    `https://hyperevent-be.up.railway.app/?name=${params.id}`
   );
   return (
     <div className="p-8 bg-gray-400 rounded-lg shadow-md">
