@@ -9,5 +9,5 @@ module.exports = {
     getCategories,
     signupUser,
     loginUser,
-    protectedUser
+    protectedUser,
 }
