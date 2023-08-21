@@ -53,7 +53,7 @@ export default function NavBar() {
                 {reduxUser.user_image && <Image name='user' className="w-10 h-10 rounded-full" src={reduxUser.user_image} height={100} width={100} />}
 
               <FontAwesomeIcon
-                className="text-white max-h-5"
+                className="text-white max-h-5 bg-slate-400	 p-2 rounded"
                 icon={faMagnifyingGlass}
               ></FontAwesomeIcon>
               <div className="md:hidden">
