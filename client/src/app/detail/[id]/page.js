@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Image from "next/image";
 
 export default async function Detail({ params }) {
   const { data } = await axios.get(
@@ -11,7 +12,7 @@ export default async function Detail({ params }) {
       <h2 className="text-gray-700 mb-2">
         {data?.city}, {data?.province}, {data?.country}
       </h2>
-      <img
+      <Image width={100} height={100}
         src={data?.event_image}
         alt={data?.event_name}
         className="w-large rounded-md"
