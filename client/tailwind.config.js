@@ -7,6 +7,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      borderRadius: {
+        "2xl": "1.8rem",
+      },
+      height: {
+        "30vh": "30vh",
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

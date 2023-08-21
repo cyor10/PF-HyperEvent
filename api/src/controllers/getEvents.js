@@ -1,24 +1,25 @@
-require('dotenv').config()
-const { API_KEY, API_URL } = process.env;
-const axios = require('axios');
-const { Event } = require('../db');
+require("dotenv").config();
+const { Event } = require("../db");
 
 async function getEvents(req, res) {
+  const { name } = req.query;
   try {
-    // Obtener eventos de la API externa
-    const externalResponse = await axios.get(`${API_URL}/events?client_id=${API_KEY}`);
-    const externalEvents = externalResponse.data.events;
+    if (name) {
+      const event = await Event.findOne({ where: { event_name: name } })
 
-    // Obtener eventos de la base de datos local
-    const dbEvents = await Event.findAll();
+      if(!event) return res.status(404).json({message: 'No se encontro un evento con ese nombre'})
+      return res.status(200).json(event.dataValues)
+    } else {
 
-    // Combinar los eventos de la API externa y los eventos de la base de datos local
-    const allEvents = [...externalEvents, ...dbEvents];
+      const dbEvents = await Event.findAll();
 
-    return res.json({ events: allEvents });
+      const allEvents = [...dbEvents];
+
+      return res.json({ events: allEvents });
+    }
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: "Internal server error" });
   }
 }
 
