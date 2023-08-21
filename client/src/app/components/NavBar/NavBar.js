@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from "react";
 import Link from "next/link";
@@ -25,11 +25,12 @@ export default function NavBar() {
     if (token) {
       (async () => {
         try {
-          const {data} = await axios('http://localhost:3001/protected', {
+          const {data} = await axios('https://hyperevent-be.up.railway.app/protected', {
             headers:{
               Authorization: `Bearer ${token}`
             }
           })
+          console.log(data)
             dispatch(getUser(data.user))
         } catch (error) {
           console.log(error)
@@ -49,7 +50,7 @@ export default function NavBar() {
               </Link>
 
                 {reduxUser.username && <label htmlFor="user" className="text-white mr-2">{reduxUser.username}</label>}
-                {reduxUser.user_image && <img name='user' className="w-10 h-10 rounded-full" src={reduxUser.user_image} />}
+                {reduxUser.user_image && <Image name='user' className="w-10 h-10 rounded-full" src={reduxUser.user_image} height={100} width={100} />}
 
               <FontAwesomeIcon
                 className="text-white max-h-5"

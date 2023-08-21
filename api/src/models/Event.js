@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
         },
         stock:{
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         event_image:{
             type: DataTypes.TEXT,
@@ -22,11 +22,11 @@ module.exports = (sequelize) => {
         },
         rating:{
             type: DataTypes.FLOAT,
-            allowNull: false
+            allowNull: true
         },
         review:{
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: true
         },
         org_name:{
             type: DataTypes.STRING,
@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
             allowNull: true
         },
         adress:{
-            type: DataTypes.STRING,
+            type: DataTypes.JSON,
             allowNull: true
         },
         city:{
@@ -57,20 +57,21 @@ module.exports = (sequelize) => {
             allowNull: true
         },
         start_at:{
-            type: DataTypes.DATEONLY,
+            type: DataTypes.DATE,
             allowNull: false
         },
         end_at:{
             type: DataTypes.DATEONLY,
-            allowNull: false
+            allowNull: true
         },
         description:{
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: true
         },
         intro:{
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: true,
+            defaultValue: 'intro'
         },
         social_media: {
             type: DataTypes.STRING, 
