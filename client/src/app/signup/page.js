@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { useState } from 'react'
-import axios from 'axios'
+import axiosInstance from '../../utils/axiosInstance';
 import { validateUser } from '@/validate/validate'
 import {useRouter} from 'next/navigation'
 import { useSelector, useDispatch } from 'react-redux'
@@ -59,14 +59,14 @@ export default function SignUp() {
         cloud.set("last name", inputs.last_name)
         cloud.set("password", inputs.password)
         cloud.set("file", inputs.file)
-        const { data } = await axios.post('https://hyperevent-be.up.railway.app/signup', cloud, {
+        const { data } = await axiosInstance.post('/signup', cloud, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         });
         if (data.token) {
           localStorage.setItem('token', data.token);
-          const response = await axios('https://hyperevent-be.up.railway.app/protected', {
+          const response = await axiosInstance('/protected', {
             headers:{
               Authorization: `Bearer ${data.token}`
             }

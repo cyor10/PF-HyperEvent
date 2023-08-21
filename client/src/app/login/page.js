@@ -1,5 +1,5 @@
-"use client";
-import axios from "axios";
+'use client';
+import axiosInstance from '../../utils/axiosInstance';
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { validateUser } from "../../validate/validate";
@@ -38,13 +38,13 @@ export default function Login() {
     event.preventDefault();
     async function submit() {
       try {
-        const { data } = await axios.post(
-          "https://hyperevent-be.up.railway.app/login",
+        const { data } = await axiosInstance.post(
+          "/login",
           inputs
         );
         if (data.token) {
           localStorage.setItem("token", data.token);
-          const response = await axios("https://hyperevent-be.up.railway.app/protected", {
+          const response = await axiosInstance("/protected", {
             headers: {
               Authorization: `Bearer ${data.token}`,
             },
@@ -129,9 +129,3 @@ export default function Login() {
     </div>
   );
 }
-
-/* Solucionar problema al deployar en Vervel:
- 75:6  Error: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
-75:6  Error: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
- info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
- Error: Command "npm run build" exited with 1 */

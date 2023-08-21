@@ -1,12 +1,11 @@
 import React from "react";
 import Link from "next/link";
-import axios from "axios";
 import Image from "next/image";
-
+import axiosInstance from '../../utils/axiosInstance';
 
 export default async function FetchEvents({ params }) {
-   const {data} = await axios.get("https://hyperevent-be.up.railway.app/events")
-  
+  const { data } = await axiosInstance("/events")
+
   return (
     <div className="p-8">
       {data.events.map((event) => (

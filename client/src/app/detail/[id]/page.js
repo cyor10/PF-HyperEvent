@@ -1,10 +1,10 @@
 import React from "react";
-import axios from "axios";
 import Image from "next/image";
+import axiosInstance from '../../../utils/axiosInstance';
 
 export default async function Detail({ params }) {
-  const { data } = await axios.get(
-    `https://hyperevent-be.up.railway.app/?name=${params.id}`
+  const { data } = await axiosInstance(
+    `/events?name=${params.id}`
   );
   return (
     <div className="p-8 bg-gray-400 rounded-lg shadow-md">
