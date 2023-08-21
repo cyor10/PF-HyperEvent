@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import axios from "axios";
+import axiosInstance from '../../utils/axiosInstance';
 
 export default function Payment() {
   const [inputs, setInputs] = useState({
@@ -28,7 +28,7 @@ export default function Payment() {
         descripcion: inputs.description,
       };
       
-      const {data} = await axios.post('http://localhost:3001/protected/pagar', requestData, {
+      const {data} = await axiosInstance.post('/protected/pagar', requestData, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",

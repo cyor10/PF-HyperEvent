@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from "react";
 import Link from "next/link";
@@ -10,7 +10,7 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from '../../../utils/axiosInstance';
 import { getUser } from "@/redux/features/counter/counterSlice";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -25,11 +25,12 @@ export default function NavBar() {
     if (token) {
       (async () => {
         try {
-          const {data} = await axios('http://localhost:3001/protected', {
+          const {data} = await axiosInstance('/protected', {
             headers:{
               Authorization: `Bearer ${token}`
             }
           })
+          console.log(data)
             dispatch(getUser(data.user))
         } catch (error) {
           console.log(error)
@@ -48,11 +49,11 @@ export default function NavBar() {
                 <h2 className="text-2xl text-white font-bold">H</h2>
               </Link>
 
-                {reduxUser.email && <label htmlFor="user" className="text-white mr-2">{reduxUser.email}</label>}
-                {reduxUser.user_image && <img name='user' className="w-10 h-10 rounded-full" src={reduxUser.user_image} />}
+                {reduxUser.username && <label htmlFor="user" className="text-white mr-2">{reduxUser.username}</label>}
+                {reduxUser.user_image && <Image name='user' className="w-10 h-10 rounded-full" src={reduxUser.user_image} height={100} width={100} />}
 
               <FontAwesomeIcon
-                className="text-white max-h-5"
+                className="text-white max-h-5 bg-slate-400	 p-2 rounded"
                 icon={faMagnifyingGlass}
               ></FontAwesomeIcon>
               <div className="md:hidden">

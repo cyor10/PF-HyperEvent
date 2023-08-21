@@ -1,10 +1,10 @@
 import React from "react";
 import Link from "next/link";
-import axios from "axios";
 import Image from "next/image";
+import axiosInstance from '../../utils/axiosInstance';
 
 export default async function FetchEvents({ params }) {
-  const { data } = await axios.get("https://hyperevent-be.up.railway.app/events");
+  const { data } = await axiosInstance("/events")
 
   return (
     <div className="p-8">
@@ -13,7 +13,7 @@ export default async function FetchEvents({ params }) {
           <Link href="/detail/[name]" as={`/detail/${event.event_name}`}>
             <h2>{event.event_name}</h2>
           </Link>
-          <Image height={100} width={100} src={event.event_image} alt={event.start_at} />
+          <Image key={event.event_image} height={100} width={100} src={event.event_image} alt={event.start_at} />
           <p>
             {event.city}, {event.country}
           </p>
@@ -22,3 +22,6 @@ export default async function FetchEvents({ params }) {
     </div>
   );
 }
+
+
+

@@ -1,4 +1,3 @@
-require("dotenv").config();
 const { Event } = require("../db");
 
 async function getEvents(req, res) {

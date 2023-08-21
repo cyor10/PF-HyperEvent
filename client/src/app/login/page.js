@@ -1,5 +1,5 @@
-"use client";
-import axios from "axios";
+'use client';
+import axiosInstance from '../../utils/axiosInstance';
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { validateUser } from "../../validate/validate";
@@ -38,13 +38,13 @@ export default function Login() {
     event.preventDefault();
     async function submit() {
       try {
-        const { data } = await axios.post(
-          "http://localhost:3001/login",
+        const { data } = await axiosInstance.post(
+          "/login",
           inputs
         );
         if (data.token) {
           localStorage.setItem("token", data.token);
-          const response = await axios("http://localhost:3001/protected", {
+          const response = await axiosInstance("/protected", {
             headers: {
               Authorization: `Bearer ${data.token}`,
             },
@@ -79,7 +79,7 @@ export default function Login() {
             Email
           </label>
           <input
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500 text-gray-700"
             key="email"
             type="email"
             name="email"
@@ -87,14 +87,14 @@ export default function Login() {
             value={inputs.email}
           ></input>
         </div>
-        {errros && <p>{errros.email}</p>}
+        {errros && <p className=' text-red-700'>{errros.email}</p>}
 
         <div className="mb-6">
           <label className="block text-gray-700 font-semibold mb-2">
             Password
           </label>
           <input
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500 text-gray-700"
             key="password"
             type="password"
             name="password"
@@ -129,9 +129,3 @@ export default function Login() {
     </div>
   );
 }
-
-/* Solucionar problema al deployar en Vervel:
- 75:6  Error: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
-75:6  Error: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
- info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
- Error: Command "npm run build" exited with 1 */

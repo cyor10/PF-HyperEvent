@@ -1,15 +1,17 @@
-require('dotenv').config();
-const { Sequelize } = require('sequelize');
+require('dotenv').config(); 
 const fs = require('fs');
 const path = require('path');
+const { Sequelize } = require('sequelize');
 const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
 } = process.env;
+const {getEvents, getTaxonomies} = require('./utils/loadDb')
 
-const sequelize = new Sequelize(`postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
     logging: false,
     native: false,
   });
+  
 
 const basename = path.basename(__filename);
 
@@ -46,14 +48,20 @@ const { Ticket, Event, User, Category } = sequelize.models;
 User.belongsToMany(Event, { through: "users_events" });
 Event.belongsToMany(User, { through: "users_events" });
 
-Category.hasMany(Event); 
-Event.belongsTo(Category);
+Category.belongsToMany(Event, { through: "events_categories" }); 
+Event.belongsToMany(Category, { through: "events_categories" });
 
 User.hasMany(Ticket);
 Ticket.belongsTo(User);
 
 Event.hasMany(Ticket)
 Ticket.belongsTo(Event)
+
+
+getEvents(Event).then(res=>console.log(res)).catch((error) => console.error(error))
+getTaxonomies(Category).then(res=>console.log(res)).catch(error=>console.log(error))
+
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

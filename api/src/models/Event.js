@@ -3,80 +3,83 @@ const { DataTypes } = require("sequelize")
 
 module.exports = (sequelize) => {
     sequelize.define("event", {
-        id:{
+        id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
-            primaryKey: true 
-        },        
-        event_name:{
+            primaryKey: true
+        },
+        event_name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        stock:{
+        stock: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         },
-        event_image:{
+        event_image: {
             type: DataTypes.TEXT,
             allowNull: false
         },
-        rating:{
+        rating: {
             type: DataTypes.FLOAT,
-            allowNull: false
+            allowNull: false,
+            defaultValue: 0.0
         },
-        review:{
-            type: DataTypes.TEXT,
-            allowNull: false
-        },
-        org_name:{
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        place_name:{
+        review: {
             type: DataTypes.TEXT,
             allowNull: true
         },
-        adress:{
+        org_name: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        city:{
+        place_name: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        adress: {
+            type: DataTypes.JSON,
+            allowNull: true
+        },
+        city: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        province:{
+        province: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        postal:{
+        postal: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        country:{
+        country: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        start_at:{
+        start_at: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+        end_at: {
             type: DataTypes.DATEONLY,
-            allowNull: false
+            allowNull: true
         },
-        end_at:{
-            type: DataTypes.DATEONLY,
-            allowNull: false
-        },
-        description:{
+        description: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: true
         },
-        intro:{
+        intro: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: true,
+            defaultValue: 'intro'
         },
         social_media: {
-            type: DataTypes.STRING, 
+            type: DataTypes.STRING,
             allowNull: true,
-          },
-    },{
-        timestamps: true
+        },
+    }, {
+        freezeTableName: true,
+        timestamps: false
     })
 }

@@ -1,13 +1,11 @@
 import React from 'react'
-import axios from 'axios';
-const fetchingData = async (p) => {
-  const {data} = await axios.get(`http://localhost:3001/events?name=${p}`);
-  return data
-};
+import axiosInstance from '../../../utils/axiosInstance';
 
 export default async function Detail({ params }) {
   const {name} = params
-  const data = await fetchingData(name)
+  const { data } = await axiosInstance(
+    `/events?name=${name}`
+  );
   const numericDate = new Date(data.start_at)
   const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const monthsOfYear = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
