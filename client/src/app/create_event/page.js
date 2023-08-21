@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from "react";
-import axios from "axios";
+import axiosInstance from '../../utils/axiosInstance';
 
 function EventForm() {
   const [eventData, setEventData] = useState({
@@ -16,7 +16,6 @@ function EventForm() {
     country: "",
     start_at: "",
     end_at: "",
-    rating: 0.0,
     review: "",
     description: "",
     intro: "",
@@ -45,7 +44,7 @@ function EventForm() {
         formData.append(`${key}`, value);
       }
       console.log(formData.get("event_image"))
-      const { data } = await axios.post("https://hyperevent-be.up.railway.app/events", formData, {
+      const { data } = await axiosInstance.post("/events", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -64,7 +63,7 @@ function EventForm() {
     <div className="flex flex-col items-start mt-4">
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto p-4 bg-black rounded shadow-md rounded-md mt-4"
+      className="max-w-md mx-auto p-4 bg-black shadow-md rounded-md mt-4"
     >
         <h1 className="text-2xl font-semibold mb-4 text-gray-700 text-center">Form to create </h1>
       <div>
@@ -183,16 +182,6 @@ function EventForm() {
           type="date"
           name="end_at"
           value={eventData.end_at}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label className="block text-gray-700 font-semibold mb-2">Rating:</label>
-        <input
-          className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          type="number"
-          name="rating"
-          value={eventData.rating}
           onChange={handleInputChange}
         />
       </div>

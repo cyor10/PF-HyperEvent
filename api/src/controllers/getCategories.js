@@ -11,14 +11,14 @@ async function getCategories(req, res) {
 
         const saveCategories = filteredTaxonomies.map(async tax => {
             await Category.findOrCreate({
-                where: { name: tax.name, image: tax.images["500_700"] || "https://s.france24.com/media/display/6aca8d1a-7783-11ea-9cf2-005056bf87d6/w:980/p:16x9/WEB%2005ABR%20DEPORTES%20PORTADA%20FOTO.webp"} 
+                where: { name: tax.name, image: tax.images["500_700"] || "https://seatgeek.com/images/performers-landscape/generic-club-passes-3c1159/677148/500_700.jpg"} 
             })
         });
 
         await Promise.all(saveCategories);
 
         const totalCategories = await Category.findAll({
-            order: [['id', 'ASC']] // Order by ID in ascending order
+            order: [['name', 'ASC']] // Order by name in ascending order
         });
         res.status(200).json(totalCategories);
     } catch (error) {

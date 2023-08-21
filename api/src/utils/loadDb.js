@@ -1,6 +1,6 @@
-require("dotenv").config();
 const { API_KEY, API_URL } = process.env;
 const axios = require("axios");
+
 const { v4: uuidv4 } = require('uuid');
 /* [
     {
@@ -55,8 +55,14 @@ async function getEvents(model) {
     let { data } = await axios.get(`${API_URL}/events?client_id=${API_KEY}`);
     console.log(data.events.map(event=> event.performers[0].taxonomies.map(tax=>tax.id)))
     /* const events = data.events.map( (event) => {
+
+
+async function getEvents(model) {
+  try {
+    let { data } = await axios.get(`${API_URL}/events?client_id=${API_KEY}`);
+
+    const events = data.events.map((event) => {
       const eventsBoilerPlate = {
-        id: uuidv4(),
         event_name: event.performers[0].name,
         event_image: event.performers[0].image,
         start_at: event.announce_date,
@@ -65,6 +71,7 @@ async function getEvents(model) {
         postal: event.venue.postal_code,
         adress: event.venue.location,
       };
+
       
     return eventsBoilerPlate
     }); */
@@ -88,6 +95,13 @@ async function getEvents(model) {
     }
    
     //await model.bulkCreate(events)
+
+
+      return eventsBoilerPlate
+    });
+
+    await model.bulkCreate(events)
+
 
     return 'Eventos cargados en la DB'
   } catch (error) {
