@@ -30,7 +30,7 @@ export default function NavBar() {
               Authorization: `Bearer ${token}`
             }
           })
-          console.log(data)
+         
             dispatch(getUser(data.user))
         } catch (error) {
           console.log(error)
@@ -85,11 +85,11 @@ export default function NavBar() {
                     Home
                   </Link>
                 </li>
-                <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                {reduxUser ? null :  <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                   <Link href="/login" onClick={() => setNavbar(!navbar)}>
                     Login
                   </Link>
-                </li>
+                </li>}
                 <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                   <Link href="/events" onClick={() => setNavbar(!navbar)}>
                     Events

@@ -19,7 +19,7 @@ export default function Categories( {children :  categories}) {
   return (
     <div className='overflow-hidden relative'>
       <div
-        className="flex flex-row transition-transform ease-out duration-500"
+        className="flex flex-row absolute transition-transform ease-out duration-500 "
         style={{ transform: `translateX(-${pag * 100}%)` }}
       >
         {categories} {/* Renderiza los elementos categories aquí */}
@@ -27,7 +27,7 @@ export default function Categories( {children :  categories}) {
 
       <div className='overflow-hidden flex flex-row justify-evenly pb-20 gap-1'></div>
 
-      <div className="w-screen absolute inset-0 flex items-center justify-between bottom-20 p-1">
+      <div className="w-screen  inset-0 flex items-center justify-between bottom-20 p-1">
         <button
           onClick={prev}
           className="p-1 rounded shadow bg-white/80 text-gray-800 hover:bg-white"

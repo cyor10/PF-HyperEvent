@@ -4,7 +4,7 @@ const { Category } = require('../db');
 
 async function getCategories(req, res) {
     try {
-        const { data } = await axios.get(`${API_URL}/taxonomies?client_id=${API_KEY}`)
+       /*  const { data } = await axios.get(`${API_URL}/taxonomies?client_id=${API_KEY}`)
         const filteredTaxonomies = data?.taxonomies.filter(obj => {
             return obj.is_visible === true;
         });
@@ -15,7 +15,7 @@ async function getCategories(req, res) {
             })
         });
 
-        await Promise.all(saveCategories);
+        await Promise.all(saveCategories); */
 
         const totalCategories = await Category.findAll({
             order: [['name', 'ASC']] // Order by name in ascending order
