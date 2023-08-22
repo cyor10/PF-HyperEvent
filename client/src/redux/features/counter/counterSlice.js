@@ -15,6 +15,7 @@ export const counterSlice = createSlice({
         decrement: (state) => {state.value -= 1},
         incrementByAmount: (state, action) => {state.value += action.payload},
         getUser: (state, action) => {state.username = action.payload.username, state.user_image = action.payload.user_image}
+
     }
 }) 
 
