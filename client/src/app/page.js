@@ -20,9 +20,8 @@ export default async function LandingPage() {
       </div>
 
       <Carousel>
-      {data.events && data.events.map((ev) => (
-          <Image className='w-[42rem] h-96 object-cover' src={ev.event_image} alt="Descripción de la imagen" width={1200} height={300} key={ev} />
-
+      {events && events.map((ev) => (
+          <img className='w-96 h-96 object-cover' src={ev} alt="Descripción de la imagen" width={900} height={300} key={ev} />
       ))}
     </Carousel>
 
@@ -30,8 +29,8 @@ export default async function LandingPage() {
       <div className='flex flex-col justify-start w-full pt-3'> 
       <h2 className='text-xl pl-3 pb-4 pt-8'>Categories</h2>
         <Categories>
-          {categories.data && categories.data.map((sl) => (
-            <img loading='lazy' className='w-50 h-[6rem] mx-5 rounded-md' src={sl.image} key={sl.image}/>
+          {slides && slides.map((sl) => (
+            <img className='w-[5.3rem] h-[5.3rem] rounded-md' src={sl} width={400} height={200} key={sl} />
           ))}
         </Categories>
 
