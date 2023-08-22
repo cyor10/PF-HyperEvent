@@ -22,7 +22,7 @@ export default function SignUp() {
       file: null
     })
 
-    const [errors, setErros] = useState({
+    const [errors, setErrors] = useState({
       username: "",
       email: "",
       name: "",
@@ -41,11 +41,17 @@ export default function SignUp() {
           ...inputs,
           [event.target.name]: event.target.value
         })
-        setErros(validateUser({
+        setErrors(validateUser({
           ...inputs,
           [event.target.name]: event.target.value
         }))
       }
+    }
+
+    function handleFileInput(event) {
+      const selectedFile = event.target.files[0];
+      setInputs({ ...inputs, file: selectedFile });
+      setErrors({ ...errors, file: null }); // Clear the file error
     }
   
     
@@ -149,15 +155,13 @@ export default function SignUp() {
       <div className="mb-6">
         <label className="block text-gray-700 font-semibold mb-2">User Image</label>
         <input
-          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500 "
-          type="file"
-          name="file"
-          onChange={handleInputs}
-        />
+  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500 "
+  type="file"
+  name="file"
+  onChange={handleFileInput} 
+/>
+{errors.file && <p className="text-red-700">{errors.file}</p>}
       </div>
-
-     
-
       <button
         className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md "
         type="submit"

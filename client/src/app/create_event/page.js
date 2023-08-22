@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from "react";
 import axiosInstance from '../../utils/axiosInstance';
+import { validateEventField } from '@/validate/validate'
 
 function EventForm() {
   const [eventData, setEventData] = useState({
@@ -22,18 +23,48 @@ function EventForm() {
     social_media: [""],
   });
 
+  const [errors, setErrors] = useState({
+    stock: 0,
+    event_image: "",
+    event_name: "",
+    org_name: "",
+    place_name: "",
+    adress: [""],
+    city: "",
+    province: "",
+    postal: "",
+    country: "",
+    start_at: "",
+    end_at: "",
+    review: "",
+    description: "",
+    intro: "",
+    social_media: [""],
+  })
+
   function handleInputChange(event) {
     const { name, value, type } = event.target;
 
+    let truncatedValue = value;
+
+    if(name === "intro"){
+     truncatedValue = value.slice(0, 140)
+    }
+    
     if (type === "file") {
       setEventData({ ...eventData, [name]: event.target.files[0] });
+      setErrors({ ...errors, [name]: "" }); 
     } else {
       setEventData({
         ...eventData,
-        [name]: value,
+        [name]: truncatedValue,
       });
+      
+      const inputErrors = validateEventField(name, value);
+      setErrors({ ...errors, ...inputErrors });
     }
   }
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -76,6 +107,7 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
+      {errors.stock && <p className=' text-red-700'>{errors.stock}</p>}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">Upload image:</label>
         <input
@@ -85,6 +117,7 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
+      {errors.event_image && <p className=' text-red-700'>{errors.event_image}</p>}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">Event Name:</label>
         <input
@@ -95,6 +128,7 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
+      {errors.event_name && <p className=' text-red-700'>{errors.event_name}</p>}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">Organization Name:</label>
         <input
@@ -105,6 +139,7 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
+      {errors.org_name && <p className=' text-red-700'>{errors.org_name}</p>}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">Place Name:</label>
         <input
@@ -115,6 +150,7 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
+      {errors.place_name && <p className=' text-red-700'>{errors.place_name}</p>}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">Address:</label>
         <input
@@ -125,6 +161,7 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
+      {errors.adress && <p className=' text-red-700'>{errors.adress}</p>}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">City:</label>
         <input
@@ -135,6 +172,7 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
+      {errors.city && <p className=' text-red-700'>{errors.city}</p>}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">Province:</label>
         <input
@@ -155,6 +193,7 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
+      {errors.postal && <p className=' text-red-700'>{errors.postal}</p>}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">Country:</label>
         <input
@@ -165,6 +204,7 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
+      {errors.country && <p className=' text-red-700'>{errors.country}</p>}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">Start Date:</label>
         <input
@@ -175,6 +215,7 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
+      {errors.start_at && <p className=' text-red-700'>{errors.start_at}</p>}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">End Date:</label>
         <input
@@ -185,6 +226,7 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
+      {errors.end_at && <p className=' text-red-700'>{errors.end_at}</p>}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">Review:</label>
         <textarea
@@ -203,8 +245,9 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
+      {errors.description && <p className=' text-red-700'>{errors.description}</p>}
       <div>
-        <label className="block text-gray-700 font-semibold mb-2">Introduction:</label>
+        <label className="block text-gray-700 font-semibold mb-2">Summary(max 140 characters):</label>
         <textarea
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           name="intro"
@@ -212,6 +255,7 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
+      {errors.intro && <p className=' text-red-700'>{errors.intro}</p>}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">Social Media:</label>
         <input
