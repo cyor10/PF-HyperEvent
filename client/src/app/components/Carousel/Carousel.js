@@ -46,7 +46,7 @@ export default function Carousel({ children: events }) {
       </div>
 
       <div className="absolute bottom-4 right-0 left-0">
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-2 absolute bottom-3 left-0 right-0">
           {events.map((_, i) => (
             <div
               key={i}
