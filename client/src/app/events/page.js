@@ -24,10 +24,10 @@ export default  function FetchEvents({ params }) {
     <div className="p-8 bg-white">
       {events.map((event, index) => (
         <Link key={index} href="/detail/[name]" as={`/detail/${event.event_name}`}>
-            <div  className="mb-4 p-4 bg-gray-700 rounded-lg shadow-md flex flex-col text-center">
+            <div  className="mb-4 p-4 bg-white border-2 border-neutral-950 rounded-lg shadow-md flex flex-col text-center">
             <h2 className="text-2xl pb-4">{event.event_name}</h2>
-          <img className="rounded-lg" key={event.event_image}  src={event.event_image} alt={event.start_at} />
-          <p className="text-1xl pt-4">
+          <img className="rounded-lg w-[20rem] h-[13rem]" key={event.event_image}  src={event.event_image} alt={event.start_at} />
+          <p className="text-[1.2rem] pt-2">
             {event.city}, {event.country}
           </p>
         </div>

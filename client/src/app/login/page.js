@@ -68,8 +68,8 @@ export default function Login() {
   }, []);
 
   return (
-    <div className="flex flex-col align-start">
-      <div className="text-center text-2xl font-semibold mt-8">Login</div>
+    <div className="flex flex-col align-start h-[82.4vh]">
+      <div className="text-center text-3xl font-semibold my-10">Login</div>
       <form
         className="max-w-sm mx-auto p-6 bg-white shadow-md rounded-md"
         onSubmit={onSubmit}

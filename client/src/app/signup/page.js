@@ -83,6 +83,36 @@ export default function SignUp() {
     }
   }
   return (
+
+    <div className="flex flex-col items-start my-8">
+    <form onSubmit={onSubmit} className="max-w-[90%] mx-auto p-6 bg-white shadow-md rounded-md">
+      <h1 className="text-2xl font-semibold mb-4 text-center">Create Account</h1>
+     
+      <div className="mb-4">
+        <label className="block text-gray-700 font-semibold mb-2">Nickname</label>
+        <input
+          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500 text-gray-700"
+          key="username"
+          type="username"
+          name="username"
+          onChange={handleInputs}
+          value={inputs.username}
+        />
+      </div>
+      {errors.username && <p className=' text-red-700'>{errors.username}</p>}
+      <div className="mb-4">
+        <label className="block text-gray-700 font-semibold mb-2">Email</label>
+        <input
+          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500 text-gray-700"
+          key="email"
+          type="email"
+          name="email"
+          onChange={handleInputs}
+          value={inputs.email}
+        />
+      </div>
+      {errors.email && <p className=' text-red-700'>{errors.email}</p>}
+
     <div className="flex flex-col items-start mt-4 p-4">
       <form
         onSubmit={onSubmit}
@@ -91,6 +121,7 @@ export default function SignUp() {
         <h1 className="text-2xl font-semibold mb-4 text-center">
           Create Account
         </h1>
+
 
         <div className="mb-4 ">
           <label className="block text-gray-700 font-semibold mb-2">

@@ -76,8 +76,8 @@ export default async function LandingPage() {
               href="/detail/[name]"
               as={`/detail/${ev.event_name}`}
             >
-              <div className="bg-gray-700 w-[22rem] h-[23rem] rounded flex flex-col justify-center items-center">
-                <h2 className="text-white p-2">{ev.event_name}</h2>
+              <div className="bg-white border-2 border-neutral-950 w-[22rem] h-[23rem] rounded flex flex-col justify-center items-center">
+                <h2 className="text-black text-[1.2rem] p-2">{ev.event_name}</h2>
                 <img
                   className="w-[21rem] h-80 object-cover rounded z-100"
                   src={ev.event_image}
@@ -86,7 +86,7 @@ export default async function LandingPage() {
                   height={300}
                   key={index}
                 />
-                <p className="text-white mt-2 pb-2.5">{ev.city}</p>
+                <p className="text-black text-xl mt-2 pb-2.5">{ev.city}</p>
               </div>
             </Link>
           ))}

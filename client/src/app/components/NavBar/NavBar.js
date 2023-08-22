@@ -45,7 +45,7 @@ export default function NavBar() {
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
-              <Link href="/">
+              <Link href="/" onClick={() => setNavbar(!navbar)}>
                 <h2 className="text-2xl text-white font-bold">H</h2>
               </Link>
 
@@ -90,11 +90,6 @@ export default function NavBar() {
                     Login
                   </Link>
                 </li>}
-                <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
-                  <Link href="/events" onClick={() => setNavbar(!navbar)}>
-                    Events
-                  </Link>
-                </li>
                 <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                   <Link href="/create_event" onClick={() => setNavbar(!navbar)}>
                     Create Events
