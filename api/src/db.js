@@ -58,12 +58,13 @@ Event.hasMany(Ticket)
 Ticket.belongsTo(Event)
 
 
-getEvents(Event).then(res=>console.log(res)).catch((error) => console.error(error))
-getTaxonomies(Category).then(res=>console.log(res)).catch(error=>console.log(error))
-
-
+const initializeDatabase = async () => {
+  await getTaxonomies(Category); // Cargar categorías
+  await getEvents(Event); // Cargar eventos
+}
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-  conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+  conn: sequelize,
+  initializeDatabase // para importart la conexión { conn } = require('./db.js');
 };
