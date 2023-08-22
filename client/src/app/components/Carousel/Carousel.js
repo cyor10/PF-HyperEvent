@@ -26,7 +26,6 @@ export default function Carousel({ children: events }) {
       <div className="w-screen absolute inset-0 flex items-center justify-between p-4">
         <button
           onClick={prev}
-          disabled={pag === 0}
           className="p-1 rounded shadow bg-white/80 text-gray-800 hover:bg-white"
         >
           <FontAwesomeIcon
@@ -37,7 +36,6 @@ export default function Carousel({ children: events }) {
 
         <button
           onClick={next}
-          disabled={pag === events.length - 1}
           className="p-1 rounded shadow bg-white/80 text-gray-800 hover:bg-white"
         >
           <FontAwesomeIcon

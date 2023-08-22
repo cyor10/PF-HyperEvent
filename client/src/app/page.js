@@ -1,63 +1,57 @@
-'use client'
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux/'
 import Carousel from './components/Carousel/Carousel'
 import Categories from './components/Categories/Categories'
-import { useState, useEffect } from 'react'
+import axiosInstance from '../utils/axiosInstance';
 import axios from 'axios'
 import Link from 'next/link'
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const { data } = await axiosInstance("/events")
 
-  //const count  = useSelector(state => state.counter.value)
-  //const dispatch = useDispatch()
+  let categories = await axiosInstance("/categories")
+  categories.data = categories.data.slice(0,15)
 
-
-  const slides = [
-    "https://seatgeek.com/images/performers-landscape/generic-theater-ba8841/677168/500_700.jpg",
-    "https://seatgeek.com/images/performers-landscape/generic-sports-5362fd/677214/500_700.jpg",
-    "https://seatgeek.com/images/performers-landscape/generic-ncaa-baseball-c5ab29/677212/500_700.jpg"
-  ]
-
-  const events = [
-    "https://seatgeek.com/images/performers-landscape/the-tribes-of-da-moon-fest-72bd85/803907/huge.jpg",
-    "https://seatgeek.com/images/performers-landscape/soul-glo-1f0271/512990/huge.jpg",
-    "https://seatgeek.com/images/performers-landscape/fontaines-d-c-862bb0/663776/1200x525.jpg",
-    "https://seatgeek.com/images/performers-landscape/william-tyler-a50c41/63653/huge.jpg",
-    "https://seatgeek.com/images/performers-landscape/john-mayer-70d9e4/978/1200x525.jpg",
-  ]
-  
   return (
-    <div className="flex min-h-screen w-full flex-col items-center">
+    <div className="flex min-h-screen w-full flex-col items-center bg-white">
 
       <div className='pb-10 bg-white w-full flex justify-center min-h-ful'>
         <h1 className='text-6xl pt-7 text-black'>Hyper Events</h1>
       </div>
 
       <Carousel>
-      {events && events.map((ev) => (
-          <Image className='w-96 h-96 object-cover' src={ev} alt="Descripción de la imagen" width={900} height={300} key={ev} />
+      {data.events && data.events.map((ev) => (
+          <Image className='w-[42rem] h-96 object-cover' src={ev.event_image} alt="Descripción de la imagen" width={1200} height={300} key={ev} />
+
       ))}
     </Carousel>
 
 
       <div className='flex flex-col justify-start w-full pt-3'> 
-      <h2 className='text-xl pl-3 pb-3'>Categories</h2>
+      <h2 className='text-xl pl-3 pb-4 pt-8'>Categories</h2>
         <Categories>
-          {slides && slides.map((sl) => (
-            <Image className='w-[5.3rem] h-[5.3rem] rounded-md' src={sl} width={400} height={200} key={sl}></Image>
+          {categories.data && categories.data.map((sl) => (
+            <img loading='lazy' className='w-50 h-[6rem] mx-5 rounded-md' src={sl.image} key={sl.image}/>
           ))}
         </Categories>
+
       </div>
 
-      <div>
-        
+
+      <div className='flex flex-col gap-5 w-[22rem] justify-center pb-5'>
+        {data.events && data.events.map((ev) => (
+        <Link href="/detail/[name]" as={`/detail/${ev.event_name}`}>
+          <div className='bg-gray-700 w-[22rem] h-[23rem] rounded flex flex-col justify-center items-center'>
+            <h2 className='text-white p-2'>{ev.event_name}</h2>
+            <Image className='w-[21rem] h-80 object-cover rounded' src={ev.event_image} alt="Descripción de la imagen" width={1200} height={300} key={ev} />
+            <p className='text-white mt-2 pb-2.5'>{ev.city}</p>
+          </div>
+        </Link>
+        ))}
       </div>
 
-    
-      <div className='"mt-8 flex flex-col justify-center "'>
-      </div>
-    </div>
+        </div>
+
     
   )
 }
