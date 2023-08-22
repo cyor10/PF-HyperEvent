@@ -1,5 +1,5 @@
 const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-const regexPasword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+const regexPasword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~]).{8,}$/
 const regexImage = /\.(jpg|jpeg|png)$/;
 
 export function validateUser(inputs){
@@ -15,8 +15,7 @@ export function validateUser(inputs){
       if (!inputs.password) {
         errors.password = "The password is required";
       } else if (!regexPasword.test(inputs.password)) {
-        errors.password = "Minimum eight characters, at least one uppercase letter, one lowercase letter and one number";
-    
+        errors.password = "The password entered is not valid";
       }
           if (!inputs.username) {
         errors.username = "The username is required";
@@ -24,10 +23,10 @@ export function validateUser(inputs){
         errors .username = "The username length is not valid";
       }
       
-      if (!/^[a-zA-Z\s]*$/.test(inputs.name)) {
+      if (!/^[a-zA-Z]*$/.test(inputs.name)) {
         errors.name = "The name can only contain letters";
       }
-      if (!/^[a-zA-Z\s]*$/.test(inputs.last_name)) {
+      if (!/^[a-zA-Z]*$/.test(inputs.last_name)) {
         errors.last_name = "The name can only contain letters";
       }
       if(!inputs.file){
