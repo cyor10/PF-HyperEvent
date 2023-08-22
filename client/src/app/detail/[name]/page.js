@@ -15,9 +15,9 @@ export default async function Detail({ params }) {
   const month = monthsOfYear[numericDate.getMonth()]
   return (
     <div className='p-5 bg-white'>
-      <div className='bg-white border-2 border-neutral-950'>
+      <div className='bg-white border-2 border-neutral-950 text-black'>
       <img src={data.event_image} alt={data.event_name} className='w-full h-30vh'/>
-              <h2 className='text-3xl mt-2 text-center'>{data && data.event_name}</h2>
+              <h2 className='text-3xl mt-2 text-center '>{data && data.event_name}</h2>
       <div className="flex mt-8 justify-between">
         <h3 className='ml-6'>{`${dayName}, ${month} ${dayNum}nd`}</h3>
         <div className="flex mr-11">
