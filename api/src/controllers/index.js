@@ -2,6 +2,7 @@ const getEvents = require('./getEvents')
 const {signupUser, loginUser, protectedUser,} = require('./user')
 const {createEvent} = require('./createEvent')
 const getCategories = require('./getCategories')
+const {getEventsByCategory} = require('./getEventsByCategory')
 
 module.exports = {
     getEvents,
@@ -10,4 +11,5 @@ module.exports = {
     signupUser,
     loginUser,
     protectedUser,
+    getEventsByCategory
 }
