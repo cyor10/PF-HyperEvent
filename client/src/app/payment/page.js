@@ -44,7 +44,7 @@ export default function Payment() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-blue-200">
+    <div className="flex flex-col items-center justify-center min-h-[50%] bg-white">
   <h2 className="text-2xl font-semibold mb-4 text-green-600">Test de Pago</h2>
 
   <form className="w-1/2 p-6 bg-white rounded-lg shadow-md" onSubmit={pay}>

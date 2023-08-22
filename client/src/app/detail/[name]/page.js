@@ -1,5 +1,6 @@
 import React from 'react'
 import axiosInstance from '../../../utils/axiosInstance';
+import Link from 'next/link';
 
 export default async function Detail({ params }) {
   const {name} = params
@@ -77,7 +78,7 @@ export default async function Detail({ params }) {
       <div className='flex flex-col justify-center mt-8 h-40 items-center bg-black bg-opacity-20'>
         <h3 className='text-lg'>Starts in: $1111</h3>
         <div className='flex justify-center w-10/12 bg-black mt-10 h-14 items-center rounded-md relative cursor-pointer'>
-          <div>Next</div>
+          <Link href='/payment' >Buy Tickets</Link>
           <svg className='absolute right-4' xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M3 12.5C3 12.0858 3.33579 11.75 3.75 11.75H20.25C20.6642 11.75 21 12.0858 21 12.5C21 12.9142 20.6642 13.25 20.25 13.25H3.75C3.33579 13.25 3 12.9142 3 12.5Z" fill="#FDFDFD"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9697 5.21967C13.2626 4.92678 13.7374 4.92678 14.0303 5.21967L20.7803 11.9697C21.0732 12.2626 21.0732 12.7374 20.7803 13.0303L14.0303 19.7803C13.7374 20.0732 13.2626 20.0732 12.9697 19.7803C12.6768 19.4874 12.6768 19.0126 12.9697 18.7197L19.1893 12.5L12.9697 6.28033C12.6768 5.98744 12.6768 5.51256 12.9697 5.21967Z" fill="#FDFDFD"/>
