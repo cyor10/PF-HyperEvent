@@ -91,14 +91,14 @@ function EventForm() {
   };
 
   return (
-    <div className="flex flex-col items-start mt-4">
+    <div className="flex flex-col items-start my-10">
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto p-4 bg-black shadow-md rounded-md mt-4"
+      className="max-w-[90%] mx-auto p-4 bg-white shadow-md rounded-md mt-4"
     >
         <h1 className="text-2xl font-semibold mb-4 text-gray-700 text-center">Form to create </h1>
-      <div>
-        <label className="block text-gray-700 font-semibold mb-2">Stock:</label>
+      <div className="mb-4">
+        <label className="block text-gray-700 font-semibold">Stock:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="number"
@@ -107,8 +107,8 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
-      {errors.stock && <p className=' text-red-700'>{errors.stock}</p>}
-      <div>
+      {errors.stock && <p className=' text-red-700 mb-4'>{errors.stock}</p>}
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Upload image:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -118,7 +118,7 @@ function EventForm() {
         />
       </div>
       {errors.event_image && <p className=' text-red-700'>{errors.event_image}</p>}
-      <div>
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Event Name:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -129,7 +129,7 @@ function EventForm() {
         />
       </div>
       {errors.event_name && <p className=' text-red-700'>{errors.event_name}</p>}
-      <div>
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Organization Name:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -140,7 +140,7 @@ function EventForm() {
         />
       </div>
       {errors.org_name && <p className=' text-red-700'>{errors.org_name}</p>}
-      <div>
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Place Name:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -151,7 +151,7 @@ function EventForm() {
         />
       </div>
       {errors.place_name && <p className=' text-red-700'>{errors.place_name}</p>}
-      <div>
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Address:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -162,7 +162,7 @@ function EventForm() {
         />
       </div>
       {errors.adress && <p className=' text-red-700'>{errors.adress}</p>}
-      <div>
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">City:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -173,7 +173,7 @@ function EventForm() {
         />
       </div>
       {errors.city && <p className=' text-red-700'>{errors.city}</p>}
-      <div>
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Province:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -183,7 +183,7 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
-      <div>
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Postal Code:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -194,7 +194,7 @@ function EventForm() {
         />
       </div>
       {errors.postal && <p className=' text-red-700'>{errors.postal}</p>}
-      <div>
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Country:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -205,7 +205,7 @@ function EventForm() {
         />
       </div>
       {errors.country && <p className=' text-red-700'>{errors.country}</p>}
-      <div>
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Start Date:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -216,7 +216,7 @@ function EventForm() {
         />
       </div>
       {errors.start_at && <p className=' text-red-700'>{errors.start_at}</p>}
-      <div>
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">End Date:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -227,7 +227,7 @@ function EventForm() {
         />
       </div>
       {errors.end_at && <p className=' text-red-700'>{errors.end_at}</p>}
-      <div>
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Review:</label>
         <textarea
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -236,7 +236,7 @@ function EventForm() {
           onChange={handleInputChange}
         />
       </div>
-      <div>
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Description:</label>
         <textarea
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -246,7 +246,7 @@ function EventForm() {
         />
       </div>
       {errors.description && <p className=' text-red-700'>{errors.description}</p>}
-      <div>
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Summary(max 140 characters):</label>
         <textarea
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -256,7 +256,7 @@ function EventForm() {
         />
       </div>
       {errors.intro && <p className=' text-red-700'>{errors.intro}</p>}
-      <div>
+      <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Social Media:</label>
         <input
           className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"

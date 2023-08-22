@@ -14,8 +14,10 @@ export default async function Detail({ params }) {
   const dayNum = numericDate.getDate() + 1
   const month = monthsOfYear[numericDate.getMonth()]
   return (
-    <div>
-      <img src={data.event_image} alt={data.event_name} className='w-full rounded-bl-2xl rounded-br-2xl h-30vh'/>
+    <div className='p-5 bg-white'>
+      <div className='bg-white border-2 border-neutral-950'>
+      <img src={data.event_image} alt={data.event_name} className='w-full h-30vh'/>
+              <h2 className='text-3xl mt-2 text-center'>{data && data.event_name}</h2>
       <div className="flex mt-8 justify-between">
         <h3 className='ml-6'>{`${dayName}, ${month} ${dayNum}nd`}</h3>
         <div className="flex mr-11">
@@ -27,17 +29,17 @@ export default async function Detail({ params }) {
           </svg>
         </div>
       </div>
-        <h4 className='text-xs ml-6 mt-2'>Stock:  {data && data.stock}</h4>
-      <h2 className='text-3xl ml-6 mt-2'>Name: {data && data.event_name}</h2>
+        <h4 className='text-lg ml-6 mt-2'>Stock:  {data && data.stock}</h4>
       <h3 className='text-lg ml-6 mt-2'>Review: {data && data.review}</h3>
-      <h2 className='text-xl ml-6 mt-4'>When and where</h2>
+    <div>
+      <h2 className='text-2xl ml-6 mt-4'>When and where</h2>
       <div className='flex ml-6 mt-4'>
         <svg className='mt-4' xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
           <path fillRule="evenodd" clipRule="evenodd" d="M6.5625 1.3125C6.92494 1.3125 7.21875 1.60631 7.21875 1.96875V2.625H13.7812V1.96875C13.7812 1.60631 14.0751 1.3125 14.4375 1.3125C14.7999 1.3125 15.0938 1.60631 15.0938 1.96875V2.625H17.0625C17.7874 2.625 18.375 3.21263 18.375 3.9375V17.0625C18.375 17.7874 17.7874 18.375 17.0625 18.375H3.9375C3.21263 18.375 2.625 17.7874 2.625 17.0625V3.9375C2.625 3.21263 3.21263 2.625 3.9375 2.625H5.90625V1.96875C5.90625 1.60631 6.20006 1.3125 6.5625 1.3125ZM5.90625 3.9375H3.9375V6.5625H17.0625V3.9375H15.0938V4.59375C15.0938 4.95619 14.7999 5.25 14.4375 5.25C14.0751 5.25 13.7812 4.95619 13.7812 4.59375V3.9375H7.21875V4.59375C7.21875 4.95619 6.92494 5.25 6.5625 5.25C6.20006 5.25 5.90625 4.95619 5.90625 4.59375V3.9375ZM17.0625 7.875H3.9375V17.0625H17.0625V7.875Z" fill="#000022"/>
         </svg>
         <div>
           <h3 className='text-lg ml-4'>Date and time</h3>
-          <h3 className='ml-4'>{data.start_at} - {data.end_at}</h3>
+          <h3 className='ml-4'>{data.start_at.split('T')[0]}</h3>
         </div>
       </div>
       <div className='flex ml-6 mt-4'>
@@ -57,6 +59,7 @@ export default async function Detail({ params }) {
           <h3 className='text-lg ml-4'>Location</h3>
           <h3 className='ml-4 mt-1'>{data && data.city} ({data.province})</h3>
         </div>
+        </div>
       </div>
       <h2 className='text-xl ml-6 mt-6'>About this event</h2>
       <h3 className='text-lg ml-6 mt-2'>{data && data.description}</h3>
@@ -75,15 +78,16 @@ export default async function Detail({ params }) {
           <path d="M41.568 16.4999C41.5934 16.8672 41.5934 17.2345 41.5934 17.6052C41.5934 28.9008 32.9943 41.9281 17.2705 41.9281V41.9213C12.6256 41.9281 8.07721 40.5976 4.16699 38.089C4.84239 38.1702 5.52118 38.2109 6.20166 38.2126C10.0509 38.2159 13.7902 36.9244 16.8185 34.5461C13.1605 34.4767 9.95276 32.0916 8.83217 28.6097C10.1136 28.8568 11.4339 28.806 12.6916 28.4624C8.70352 27.6567 5.83434 24.1527 5.83434 20.0834C5.83434 20.0461 5.83434 20.0106 5.83434 19.975C7.02264 20.6369 8.35313 21.0042 9.71408 21.0449C5.95791 18.5345 4.80007 13.5376 7.06834 9.63074C11.4085 14.9713 17.8121 18.218 24.6863 18.5616C23.9974 15.5926 24.9385 12.4813 27.1594 10.3942C30.6024 7.15766 36.0175 7.32354 39.254 10.7649C41.1685 10.3874 43.0034 9.68491 44.6826 8.68958C44.0444 10.6684 42.7089 12.3493 40.9247 13.4174C42.6192 13.2176 44.2746 12.764 45.8337 12.0717C44.686 13.7915 43.2404 15.2896 41.568 16.4999Z" fill="black"/>
         </svg>
       </div>
-      <div className='flex flex-col justify-center mt-8 h-40 items-center bg-black bg-opacity-20'>
+      <div className='flex flex-col justify-center mt-8 h-40 items-center bg-white bg-opacity-20'>
         <h3 className='text-lg'>Starts in: $1111</h3>
         <div className='flex justify-center w-10/12 bg-black mt-10 h-14 items-center rounded-md relative cursor-pointer'>
-          <Link href='/payment' >Buy Tickets</Link>
+          <Link className='text-white' href='/payment' >Buy Tickets</Link>
           <svg className='absolute right-4' xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
             <path fillRule="evenodd" clipRule="evenodd" d="M3 12.5C3 12.0858 3.33579 11.75 3.75 11.75H20.25C20.6642 11.75 21 12.0858 21 12.5C21 12.9142 20.6642 13.25 20.25 13.25H3.75C3.33579 13.25 3 12.9142 3 12.5Z" fill="#FDFDFD"/>
             <path fillRule="evenodd" clipRule="evenodd" d="M12.9697 5.21967C13.2626 4.92678 13.7374 4.92678 14.0303 5.21967L20.7803 11.9697C21.0732 12.2626 21.0732 12.7374 20.7803 13.0303L14.0303 19.7803C13.7374 20.0732 13.2626 20.0732 12.9697 19.7803C12.6768 19.4874 12.6768 19.0126 12.9697 18.7197L19.1893 12.5L12.9697 6.28033C12.6768 5.98744 12.6768 5.51256 12.9697 5.21967Z" fill="#FDFDFD"/>
           </svg>
         </div>
+      </div>
       </div>
     </div>
   )
