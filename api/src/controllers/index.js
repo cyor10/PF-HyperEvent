@@ -5,6 +5,9 @@ const getCategories = require('./getCategories')
 const {getEventsByCategory} = require('./getEventsByCategory')
 const setCountries = require('./setCountries')
 const getCountries = require('./getCountries')
+const setStates = require('./setStates')
+const getStates = require('./getStatesByCounty')
+
 
 module.exports = {
     getEvents,
@@ -15,5 +18,7 @@ module.exports = {
     protectedUser,
     getEventsByCategory,
     setCountries,
-    getCountries
+    getCountries,
+    setStates,
+    getStates
 }
