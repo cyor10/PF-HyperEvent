@@ -46,10 +46,10 @@ export default async function LandingPage() {
               return (
                 <Link
                   className="w-[5.5rem] h-[6rem] mx-1.5 ml-6"
+                  key={index}
                   href={{
                     pathname: "/events",
-                    query: { name: `${sl.name}` },
-                    key: index,
+                    query: { name: `${sl.name}` }
                   }}
                 >
                   <div className="rounded flex flex-col text-center items-center justify-center w-[6rem] h-[8rem] relative">
