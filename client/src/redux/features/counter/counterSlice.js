@@ -19,6 +19,6 @@ export const counterSlice = createSlice({
     }
 }) 
 
-export const {increment, decrement, incrementByAmount, getUser} = counterSlice.actions
+export const {increment, decrement, incrementByAmount, getUser, getGoogleUser} = counterSlice.actions
 
 export default counterSlice.reducer
