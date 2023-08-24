@@ -5,6 +5,8 @@ const { User } = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("../utils/cloudinaryConfig");
+const sendEmail = require("../email/mandarEmail");
+
 
 const signupUser = async (req, res) => {
   try {
@@ -26,7 +28,7 @@ const signupUser = async (req, res) => {
     // Hashear la contraseña
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-
+    
     // Guardar el correo electrónico y la contraseña hasheada en la base de datos
     const newUser = await User.create({
       username: username,
@@ -37,7 +39,8 @@ const signupUser = async (req, res) => {
       user_image: result.url,
 
     });
-
+    
+   
     const userId = newUser.dataValues.id;
 
     // Crear y firmar un JWT que contenga el ID del usuario
@@ -47,7 +50,7 @@ const signupUser = async (req, res) => {
 
     // const user = result.rows[0];
     // const token = jwt.sign({ id: user.id, name: user.name, email: user.email }, process.env.JWT_SECRET);
-
+    sendEmail(newUser);
     res.json({ token });
   } catch (err) {
     console.error(err);
@@ -120,7 +123,8 @@ module.exports = {
   signupUser,
   loginUser,
   protectedUser,
-};
+  
+};  
 
 /*
 ###
