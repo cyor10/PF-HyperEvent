@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -10,16 +10,15 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
-import axiosInstance from '../../../utils/axiosInstance';
+import axiosInstance from "../../../utils/axiosInstance";
 import { getUser } from "@/redux/features/counter/counterSlice";
 import { setSearchBar } from "@/redux/features/events/counterSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function NavBar() {
-
-  const dispatch = useDispatch()
-  const reduxUser = useSelector(state => state.counter)
-  const events = useSelector(state => state.events)
+  const dispatch = useDispatch();
+  const reduxUser = useSelector((state) => state.counter);
+  const events = useSelector((state) => state.events);
   const [navbar, setNavbar] = useState(false);
 
   useEffect(() => {
@@ -27,15 +26,15 @@ export default function NavBar() {
     if (token) {
       (async () => {
         try {
-          const {data} = await axiosInstance('/protected', {
-            headers:{
-              Authorization: `Bearer ${token}`
-            }
-          })
-         
-            dispatch(getUser(data.user))
+          const { data } = await axiosInstance("/protected", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          dispatch(getUser(data.user));
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
       })();
     }
@@ -43,34 +42,57 @@ export default function NavBar() {
 
   return (
     <div>
-      <nav className="w-full bg-black top-0 left-0 right-0 z-10">
+      <nav className="w-full bg-black top-0 left-0 right-0 z-10 fixed">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
-              <Link href="/" onClick={() => setNavbar(!navbar)}>
-                <h2 className="text-2xl text-white font-bold">H</h2>
+              <Link href="/">
+                <h2
+                  className="text-2xl text-white font-bold"
+                  onClick={() => window.location.href = '/'}
+                >
+                  H
+                </h2>
               </Link>
 
-                {reduxUser.username && <label htmlFor="user" className="text-white mr-2">{reduxUser.username}</label>}
-                {reduxUser.user_image && <img name='user' className="w-10 h-10 rounded-full" src={reduxUser.user_image} height={100} width={100} />}
+              {reduxUser.username && (
+                <label htmlFor="user" className="text-white mr-2">
+                  {reduxUser.username}
+                </label>
+              )}
+              {reduxUser.user_image && (
+                <img
+                  name="user"
+                  className="w-10 h-10 rounded-full"
+                  src={reduxUser.user_image}
+                  height={100}
+                  width={100}
+                />
+              )}
 
               <FontAwesomeIcon
                 className="text-white max-h-5 bg-slate-400 p-2 rounded cursor-pointer"
                 icon={faMagnifyingGlass}
-                onClick={() => {if(navbar === true) {
-                  setNavbar(false) 
-                  
-                  dispatch(setSearchBar(!events.searchBar))
-                } else {dispatch(setSearchBar(!events.searchBar))}
+                onClick={() => {
+                  if (navbar === true) {
+                    setNavbar(false);
+
+                    dispatch(setSearchBar(!events.searchBar));
+                  } else {
+                    dispatch(setSearchBar(!events.searchBar));
+                  }
                 }}
               ></FontAwesomeIcon>
               <div className="md:hidden">
                 <button
                   className="p-2 text-white rounded-md outline-none focus:border-gray-400 focus:border"
-                  onClick={() => {if(events.searchBar === true) {
-                    dispatch(setSearchBar(false)) 
-                    setNavbar(!navbar)
-                  } else {setNavbar(!navbar)}
+                  onClick={() => {
+                    if (events.searchBar === true) {
+                      dispatch(setSearchBar(false));
+                      setNavbar(!navbar);
+                    } else {
+                      setNavbar(!navbar);
+                    }
                   }}
                 >
                   {navbar ? (
@@ -97,11 +119,13 @@ export default function NavBar() {
                     Home
                   </Link>
                 </li>
-                {!reduxUser?.username.length && <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
-                  <Link href="/login" onClick={() => setNavbar(!navbar)}>
-                    Login
-                  </Link>
-                </li>}
+                {!reduxUser?.username.length && (
+                  <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                    <Link href="/login" onClick={() => setNavbar(!navbar)}>
+                      Login
+                    </Link>
+                  </li>
+                )}
                 <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                   <Link href="/create_event" onClick={() => setNavbar(!navbar)}>
                     Create Events
@@ -116,11 +140,13 @@ export default function NavBar() {
               </ul>
             </div>
           </div>
-          <div className={`pl-6 relative h-screen -left-4 w-screen flex-1 bg-slate-50 justify-self-center pb-3 md:block md:pb-0 md:mt-0 ${
-                events.searchBar ? "pt-6 md:p-0 block" : "hidden"
-              }`}>
-                <SearchBar/>
-              </div>
+          <div
+            className={`pl-6 relative h-screen -left-4 w-screen flex-1 bg-slate-50 justify-self-center pb-3 md:block md:pb-0 md:mt-0 ${
+              events.searchBar ? "pt-6 md:p-0 block" : "hidden"
+            }`}
+          >
+            <SearchBar />
+          </div>
         </div>
       </nav>
     </div>

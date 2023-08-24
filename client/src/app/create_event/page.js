@@ -91,7 +91,7 @@ function EventForm() {
   };
 
   return (
-    <div className="flex flex-col items-start my-10">
+    <div className="flex flex-col items-start my-10 pt-16">
     <form
       onSubmit={handleSubmit}
       className="max-w-[90%] mx-auto p-4 bg-white shadow-md rounded-md mt-4"

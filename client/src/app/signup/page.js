@@ -84,7 +84,7 @@ export default function SignUp() {
   }
   return (
 
-    <div className="flex flex-col items-start my-8">
+    <div className="flex flex-col items-start my-8 pt-20">
     <form onSubmit={onSubmit} className="max-w-[90%] mx-auto p-6 bg-white shadow-md rounded-md">
       <h1 className="text-2xl font-semibold mb-4 text-center">Create Account</h1>
            
