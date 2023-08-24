@@ -84,7 +84,7 @@ export default function SignUp() {
   }
   return (
 
-    <div className="flex flex-col items-start my-8">
+    <div className="flex flex-col items-start my-8 pt-20">
     <form onSubmit={onSubmit} className="max-w-[90%] mx-auto p-6 bg-white shadow-md rounded-md">
       <h1 className="text-2xl font-semibold mb-4 text-center">Create Account</h1>
            
@@ -105,7 +105,7 @@ export default function SignUp() {
           <p className=" text-red-700">{errors.username}</p>
         ) : (
           <>
-          <div className="text-transparent">""</div>
+          <div className="text-transparent">`&ldquo;`</div>
         </>
         )}
         <div className="mt-6">
@@ -125,7 +125,7 @@ export default function SignUp() {
           <p className=" text-red-700">{errors.email}</p>
         ) : (
           <>
-          <div className="text-transparent">""</div>
+          <div className="text-transparent">`&ldquo;`</div>
         </>
         )}
 
@@ -146,8 +146,8 @@ export default function SignUp() {
               <p className="text-red-700">{errors.name}</p>
             ) : (
               <>
-              <div className="text-transparent">""</div>
-              <div className="text-transparent">""</div>
+              <div className="text-transparent">`&ldquo;`</div>
+              <div className="text-transparent">`&ldquo;`</div>
             </>
             )}
           </div>
@@ -167,8 +167,8 @@ export default function SignUp() {
               <p className="text-red-700">{errors.last_name}</p>
             ) : (
               <>
-              <div className="text-transparent">""</div>
-              <div className="text-transparent">""</div>
+              <div className="text-transparent">`&ldquo;`</div>
+              <div className="text-transparent">`&ldquo;`</div>
             </>
             )}
           </div>
@@ -191,7 +191,7 @@ export default function SignUp() {
           <p className=" text-red-700">{errors.password}</p>
         ) : (
           <>
-          <div className="text-transparent">""</div>
+          <div className="text-transparent">`&ldquo;`</div>
         </>
         )}
         <div className="mb-6">
@@ -208,7 +208,7 @@ export default function SignUp() {
             <p className="text-red-700">{errors.file}</p>
           ) : (
             <>
-            <div className="text-transparent">""</div>
+            <div className="text-transparent">`&ldquo;`</div>
           </>
           )}
         </div>

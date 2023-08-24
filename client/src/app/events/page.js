@@ -21,7 +21,7 @@ export default  function FetchEvents({ params }) {
   }, [])
   
   return (
-    <div className="p-8 bg-white">
+    <div className="p-8 bg-white pt-24">
       {events.map((event, index) => (
         <Link key={index} href="/detail/[name]" as={`/detail/${event.event_name}`}>
             <div  className="mb-4 p-4 bg-white border-2 border-neutral-950 rounded-lg shadow-md flex flex-col text-center">

@@ -14,7 +14,7 @@ export default async function Detail({ params }) {
   const dayNum = numericDate.getDate() + 1
   const month = monthsOfYear[numericDate.getMonth()]
   return (
-    <div className='p-5 bg-white'>
+    <div className='p-5 bg-white pt-24'>
       <div className='bg-white border-2 border-neutral-950 text-black'>
       <img src={data.event_image} alt={data.event_name} className='w-full h-30vh'/>
               <h2 className='text-3xl mt-2 text-center '>{data && data.event_name}</h2>

@@ -4,7 +4,7 @@ const { BASE_URL } = process.env
 
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3001'
+    baseURL: 'https://hyperevent-be.up.railway.app'
 });
 
 
