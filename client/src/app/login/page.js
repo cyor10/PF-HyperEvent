@@ -117,8 +117,23 @@ export default function Login() {
           >
             Forgot your password?{" "}
           </Link>
-        </h2>
-      </form>
+          </h2>
+    <h2 className="text-gray-600 text-center mt-4">Or</h2>
+    <Link
+      href="/api/auth/signin"
+      className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
+      style={{ backgroundColor: "#3b5998" }}
+    >
+      <img
+        className="pr-2"
+        src="https://cdn-icons-png.flaticon.com/512/2702/2702602.png"
+        alt=""
+        style={{ height: "2rem" }}
+      />
+      Continue with Google
+    </Link>
+  </form>
+      
 
       <h2 className="text-gray-600 text-center mt-4 flex flex-col">
         Don&apos;t have an account?{" "}
