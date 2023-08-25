@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux/";
 import Carousel from "./components/Carousel/Carousel";
 import Categories from "./components/Categories/Categories";
 import axiosInstance from "../utils/axiosInstance";
-import axios from "axios";
 import Link from "next/link";
 
 export default async function LandingPage() {
