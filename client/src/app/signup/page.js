@@ -85,10 +85,10 @@ export default function SignUp() {
   return (
 
     <div className="flex flex-col items-start my-8">
-    <form onSubmit={onSubmit} className="max-w-[90%] mx-auto p-6 bg-white shadow-md rounded-md">
-      <h1 className="text-2xl font-semibold mb-4 text-center">Create Account</h1>
-           
-              <div className="mb-4 ">
+      <form onSubmit={onSubmit} className="max-w-[90%] mx-auto p-6 bg-white shadow-md rounded-md">
+        <h1 className="text-2xl font-semibold mb-4 text-center">Create Account</h1>
+
+        <div className="mb-4 ">
           <label className="block text-gray-700 font-semibold mb-2">
             Nickname
           </label>
@@ -105,8 +105,8 @@ export default function SignUp() {
           <p className=" text-red-700">{errors.username}</p>
         ) : (
           <>
-          <div className="text-transparent">""</div>
-        </>
+            <div className="text-transparent">`&ldquo;`</div>
+          </>
         )}
         <div className="mt-6">
           <label className="block text-gray-700 font-semibold mb-2">
@@ -125,8 +125,8 @@ export default function SignUp() {
           <p className=" text-red-700">{errors.email}</p>
         ) : (
           <>
-          <div className="text-transparent">""</div>
-        </>
+            <div className="text-transparent">`&ldquo;`</div>
+          </>
         )}
 
         <div className="grid grid-cols-2 gap-4">
@@ -146,9 +146,9 @@ export default function SignUp() {
               <p className="text-red-700">{errors.name}</p>
             ) : (
               <>
-              <div className="text-transparent">""</div>
-              <div className="text-transparent">""</div>
-            </>
+                <div className="text-transparent">`&ldquo;`</div>
+                <div className="text-transparent">`&ldquo;`</div>
+              </>
             )}
           </div>
           <div className="mb-2">
@@ -167,9 +167,9 @@ export default function SignUp() {
               <p className="text-red-700">{errors.last_name}</p>
             ) : (
               <>
-              <div className="text-transparent">""</div>
-              <div className="text-transparent">""</div>
-            </>
+                <div className="text-transparent">`&ldquo;`</div>
+                <div className="text-transparent">`&ldquo;`</div>
+              </>
             )}
           </div>
         </div>
@@ -191,8 +191,8 @@ export default function SignUp() {
           <p className=" text-red-700">{errors.password}</p>
         ) : (
           <>
-          <div className="text-transparent">""</div>
-        </>
+            <div className="text-transparent">`&ldquo;`</div>
+          </>
         )}
         <div className="mb-6">
           <label className="block text-gray-700 font-semibold mb-2">
@@ -208,19 +208,19 @@ export default function SignUp() {
             <p className="text-red-700">{errors.file}</p>
           ) : (
             <>
-            <div className="text-transparent">""</div>
-          </>
+              <div className="text-transparent">`&ldquo;`</div>
+            </>
           )}
         </div>
         <button
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md " 
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md "
           type="submit"
         >
           REGISTER
         </button>
       </form>
     </div>
-    
+
   );
 }
 
