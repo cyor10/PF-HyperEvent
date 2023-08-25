@@ -1,5 +1,4 @@
 const { DataTypes } = require("sequelize")
-const Countries = require('./Countries');
 
 module.exports = (sequelize) => {
     sequelize.define("states", {

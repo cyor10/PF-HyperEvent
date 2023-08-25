@@ -7,6 +7,8 @@ const setCountries = require('./setCountries')
 const getCountries = require('./getCountries')
 const setStates = require('./setStates')
 const getStates = require('./getStatesByCounty')
+const setCities = require('./setCities')
+const getCities = require('./getCitiesByState')
 
 
 module.exports = {
@@ -20,5 +22,7 @@ module.exports = {
     setCountries,
     getCountries,
     setStates,
-    getStates
+    getStates,
+    setCities,
+    getCities
 }
