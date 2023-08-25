@@ -1,0 +1,74 @@
+[
+    {
+        "name": "Argentina",
+        "iso2": "AR"
+    },
+    {
+        "name": "Bolivia",
+        "iso2": "BO"
+    },
+    {
+        "name": "Brazil",
+        "iso2": "BR"
+    },
+    {
+        "name": "Canada",
+        "iso2": "CA"
+    },
+    {
+        "name": "Chile",
+        "iso2": "CL"
+    },
+    {
+        "name": "Colombia",
+        "iso2": "CO"
+    },
+    {
+        "name": "Ecuador",
+        "iso2": "EC"
+    },
+    {
+        "name": "Falkland Islands",
+        "iso2": "FK"
+    },
+    {
+        "name": "French Guiana",
+        "iso2": "GF"
+    },
+    {
+        "name": "Guyana",
+        "iso2": "GY"
+    },
+    {
+        "name": "Mexico",
+        "iso2": "MX"
+    },
+    {
+        "name": "Paraguay",
+        "iso2": "PY"
+    },
+    {
+        "name": "Peru",
+        "iso2": "PE"
+    },
+    {
+        "name": "South Georgia",
+        "iso2": "GS"
+    },
+    {
+        "name": "Suriname",
+        "iso2": "SR"
+    },
+    {
+        "name": "United States",
+        "iso2": "US"
+    },
+    {
+        "name": "Uruguay",
+        "iso2": "UY"
+    },
+    {
+        "name": "Venezuela",
+        "iso2": "VE"
+    }
+]
