@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React from "react";
 import { useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
@@ -6,7 +6,6 @@ import { validateUser } from "@/validate/validate";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "@/redux/features/counter/counterSlice";
-console.log(axiosInstance);
 
 export default function SignUp() {
   const dispatch = useDispatch();
@@ -103,6 +102,7 @@ export default function SignUp() {
     }
   }
   return (
+
     <div className="flex flex-col items-start my-8 pt-20">
       <form
         onSubmit={onSubmit}
@@ -237,11 +237,13 @@ export default function SignUp() {
           )}
         </div>
         <button
+
           className={`w-full py-2 px-4 rounded-md font-semibold ${
             enableSubmit
               ? "bg-blue-500 hover:bg-blue-600 text-white"
               : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
+
           type="submit"
           disabled={!enableSubmit}
         >

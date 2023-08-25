@@ -3,6 +3,13 @@ const {signupUser, loginUser, protectedUser,} = require('./user')
 const {createEvent} = require('./createEvent')
 const getCategories = require('./getCategories')
 const {getEventsByCategory} = require('./getEventsByCategory')
+const setCountries = require('./setCountries')
+const getCountries = require('./getCountries')
+const setStates = require('./setStates')
+const getStates = require('./getStatesByCounty')
+const setCities = require('./setCities')
+const getCities = require('./getCitiesByState')
+
 
 module.exports = {
     getEvents,
@@ -11,5 +18,11 @@ module.exports = {
     signupUser,
     loginUser,
     protectedUser,
-    getEventsByCategory
+    getEventsByCategory,
+    setCountries,
+    getCountries,
+    setStates,
+    getStates,
+    setCities,
+    getCities
 }
