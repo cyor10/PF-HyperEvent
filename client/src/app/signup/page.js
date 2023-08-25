@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React from "react";
 import { useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
@@ -6,7 +6,7 @@ import { validateUser } from "@/validate/validate";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "@/redux/features/counter/counterSlice";
-console.log(axiosInstance);
+
 export default function SignUp() {
   const dispatch = useDispatch();
 
@@ -220,7 +220,5 @@ export default function SignUp() {
         </button>
       </form>
     </div>
-
   );
 }
-

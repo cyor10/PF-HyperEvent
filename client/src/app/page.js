@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux/";
 import Carousel from "./components/Carousel/Carousel";
 import Categories from "./components/Categories/Categories";
 import axiosInstance from "../utils/axiosInstance";
@@ -14,7 +13,6 @@ export default async function LandingPage() {
   let dataCarousel = data.events.slice(0, 5);
   let categories = await axiosInstance("/categories");
   categories.data = categories.data.slice(8, 15);
-  //console.log(categories.data)
   return (
     <div className="flex min-h-screen w-full flex-col items-center bg-white">
       <div className="pb-10 bg-white w-full flex justify-center min-h-ful">
@@ -49,12 +47,10 @@ export default async function LandingPage() {
                   href={{
                     pathname: "/events",
                     query: { name: `${sl.name}` },
-                    key: index,
                   }}
                 >
                   <div className="rounded flex flex-col text-center items-center justify-center w-[6rem] h-[8rem] relative">
                     <p className="pb-2 text-white absolute z-2">{sl.name}</p>
-
                     <img
                       loading="lazy"
                       className="w-[10rem] h-[6rem] rounded-md text-xs"
@@ -69,7 +65,7 @@ export default async function LandingPage() {
       </div>
 
       <div className="flex flex-col gap-5 w-[22rem] justify-center pb-5 pt-10">
-      <h2 className="text-2xl pl-3 pb-2">Events</h2>
+        <h2 className="text-2xl pl-3 pb-2">Events</h2>
         {data.events &&
           data.events.map((ev, index) => (
             <Link
