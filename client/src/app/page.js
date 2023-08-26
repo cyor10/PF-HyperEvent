@@ -1,123 +1,147 @@
-import Image from "next/image";
+'use client'
+import React, { useState, useEffect } from "react";
 import Carousel from "./components/Carousel/Carousel";
 import Categories from "./components/Categories/Categories";
 import axiosInstance from "../utils/axiosInstance";
 import Link from "next/link";
+import { IconFavWhite, IconFavRed } from "@/utils/svg/svg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 
-export default async function LandingPage() {    
-  const session=await getServerSession(authOptions)
-  if(session){
-    try {  
-    let cloud = new FormData();
-    cloud.set("username", session.user.username);
-    cloud.set("email", session.user.email);
-    cloud.set("name", session.user.name);
-    cloud.set("last_name", session.user.last_name);
-    cloud.set("password", session.user.password);
-    cloud.set("user_image", session.user.user_image);
-    const { data } = await axiosInstance.post("/signup", cloud, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    if (data.token) {
-      localStorage.setItem("token", data.token);
-      await axiosInstance("/protected", {
-        headers: {
-          Authorization: `Bearer ${data.token}`,
-        },
-      });
-    }
-  } catch (error) {
-    console.log(error);
-  }
-}
+export default function LandingPage() {
+  const [isFav, setIsFav] = useState([]);
+  const [dataCarousel, setDataCarousel] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [events, setEvents] = useState([]);
   
-  let { data } = await axiosInstance("/events");
-  {
-    data.events = data.events.slice(0, 100);
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const eventData = await axiosInstance("/events");
+        const slicedEvents = eventData.data.events.slice(0, 20);
+        setEvents(slicedEvents);
+        setDataCarousel(slicedEvents.slice(0, 5));
+        const categoriesResponse = await axiosInstance("/categories");
+        const slicedCategories = categoriesResponse.data.slice(8, 15);
+        setCategories(slicedCategories);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+  
+  useEffect(() => {
+    async function fetchSessionData() {
+      try {
+        const session = await getServerSession(authOptions);
+        if (session) {
+          const cloud = new FormData();
+          cloud.set("username", session.user.username);
+          cloud.set("email", session.user.email);
+          cloud.set("name", session.user.name);
+          cloud.set("last_name", session.user.last_name);
+          cloud.set("password", session.user.password);
+          cloud.set("user_image", session.user.user_image);
+          const response = await axiosInstance.post("/signup", cloud, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+          if (response.data.token) {
+            localStorage.setItem("token", response.data.token);
+            await axiosInstance("/protected", {
+              headers: {
+                Authorization: `Bearer ${response.data.token}`,
+              },
+            });
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchSessionData();
+  }, []);
 
-  let dataCarousel = data.events.slice(0, 5);
-  let categories = await axiosInstance("/categories");
-  categories.data = categories.data.slice(8, 15);
+  const handleFavorite = (index) => {
+    setIsFav((prevState) => {
+      const updatedState = [...prevState];
+      updatedState[index] = !prevState[index];
+      return updatedState;
+    });
+  };
+
   return (
     <div className="flex min-h-screen w-full flex-col items-center bg-white">
-      <div className="pb-10 bg-white w-full flex justify-center min-h-ful">
-        <h1 className="text-6xl pt-7 text-black">Hyper Events</h1>
-      </div>
-
       <Carousel>
-        {dataCarousel &&
-          dataCarousel.map((ev, index) => {
-            return (
-              <img
-                className="w-96 h-96 object-cover"
-                src={ev.event_image}
-                alt="Descripción de la imagen"
-                width={900}
-                height={300}
-                key={index}
-              />
-            );
-          })}
+        {dataCarousel.map((event, index) => (
+          <img
+            className="w-[100%] h-80 object-cover"
+            src={event.event_image}
+            alt="Descripción de la imagen"
+            width={900}
+            height={300}
+            key={index}
+          />
+        ))}
       </Carousel>
-
-      <div className="flex flex-col justify-start w-full pt-3">
-        <h2 className="text-2xl pl-3 pb-4 pt-8">Categories</h2>
-        <Categories>
-          {categories.data &&
-            categories.data.map((sl, index) => {
-              return (
-                <Link
-                  className="w-[5.5rem] h-[6rem] mx-2 ml-6"
-                  key={index}
-                  href={{
-                    pathname: "/events",
-                    query: { name: `${sl.name}` },
-                  }}
-                >
-                  <div className="rounded flex flex-col text-center items-center justify-center w-[6rem] h-[8rem] relative">
-                    <p className="pb-2 text-white absolute z-2">{sl.name}</p>
-                    <img
-                      loading="lazy"
-                      className="w-[10rem] h-[6rem] rounded-md text-xs"
-                      src={sl.image}
-                      key={index}
-                    />
-                  </div>
-                </Link>
-              );
-            })}
-        </Categories>
+      <div className="pt-10">
+        <h1 className="text-5xl text-center pb-3 font-black leading-10">FIND YOUR EXPERIENCE</h1>
+        <div className="w-[76%] mx-auto h-3 bg-black"></div>
       </div>
-
-      <div className="flex flex-col gap-5 w-[22rem] justify-center pb-5 pt-10">
-        <h2 className="text-2xl pl-3 pb-2">Events</h2>
-        {data.events &&
-          data.events.map((ev, index) => (
+      <div className="flex flex-col text-start justify-center w-full pt-3 pb-14">
+        <h2 className="text-1xl pl-6 pt-8 font-bold">CATEGORIES:</h2>
+        <Categories>
+          {categories.map((category, index) => (
             <Link
-              className="z-100"
-              href="/detail/[name]"
-              as={`/detail/${ev.event_name}`}
+              className="w-[5rem] h-[6rem] mx-1.5 ml-5 mr-6"
               key={index}
+              href={{
+                pathname: "/events",
+                query: { name: `${category.name}` },
+              }}
             >
-              <div className="bg-white border-2 border-neutral-950 w-[22rem] h-[23rem] rounded flex flex-col justify-center items-center">
-                <h2 className="text-black text-[1.2rem] p-2">{ev.event_name}</h2>
+              <div className="rounded flex flex-col text-center items-center justify-center w-[6rem] h-[1rem] pt-20">
                 <img
-                  className="w-[21rem] h-80 object-cover rounded z-100"
-                  src={ev.event_image}
-                  alt="Descripción de la imagen"
-                  width={1200}
-                  height={300}
-                  key={index}
+                  loading="lazy"
+                  className="w-[10rem] h-[5rem] rounded-md text-xs object-cover"
+                  src={category.image}
                 />
-                <p className="text-black text-xl mt-2 pb-2.5">{ev.city}</p>
+                <p className="pb-7 text-black">{category.name}</p>
               </div>
             </Link>
           ))}
+        </Categories>
+      </div>
+      <div className="flex flex-col gap-6 w-[22rem] justify-center pb-10 pt-3">
+        {events.map((event, index) => (
+          <div className="bg-white shadow-md mx-auto w-[21rem] h-[19.5rem] rounded-lg flex flex-col relative" key={index}>
+            <img
+              className="w-[100%] h-[45%] object-cover rounded-t-lg z-100 relative"
+              src={event.event_image}
+              alt="Descripción de la imagen"
+              width={1200}
+              height={300}
+            />
+            <div className="absolute flex justify-center rounded-full w-9 h-9 z-100 right-[1rem] bottom-[11.5rem] bg-white">
+              <button className="" onClick={() => handleFavorite(index)}>
+                {isFav[index] ? <IconFavRed /> : <IconFavWhite />}
+              </button>
+            </div>
+            <Link className="z-0" href="/detail/[name]" as={`/detail/${event.event_name}`}>
+              <div>
+                <h2 className="text-black text-[1.3rem] pt-2 pl-5 font-normal">{event.event_name}</h2>
+                <p className="text-[#784DC7] text-[1rem] pt-2 pl-5 font-normal">{event.start_at.split("T")[0]}</p>
+                <p className="text-black text-[.9rem] mt-2 pb-2.5 pl-5 font-light">{event.city}</p>
+                <p className="text-black text-[1rem] pb-2.5 pl-5 font-normal">From $3,000.00</p>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
+      <div className="text-purpleOscuro flex items-center justify-center w-[40%] h-[3.4rem] rounded-md bg-[#E9DFFC] mb-10">
+        <h4 className="font-medium">See More</h4>
       </div>
     </div>
   );

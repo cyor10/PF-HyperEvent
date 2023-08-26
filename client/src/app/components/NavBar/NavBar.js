@@ -3,18 +3,17 @@
 import React from "react";
 import Link from "next/link";
 import SearchBar from "../SearchBar/SearchBar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faMagnifyingGlass,
-  faX,
-} from "@fortawesome/free-solid-svg-icons";
+
 import { useSession, signOut } from "next-auth/react";
+
 import { useState, useEffect } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
 import { getUser } from "@/redux/features/counter/counterSlice";
 import { setSearchBar } from "@/redux/features/events/counterSlice";
 import { useSelector, useDispatch } from "react-redux";
+
+import { IconHambuger, IconSearch, IconX } from "@/utils/svg/svg";
+
 export default function NavBar() {
   const { data: session } = useSession({
     required: false
@@ -43,15 +42,28 @@ export default function NavBar() {
     }
   }, []);
 
+  const handleSearch = ()=>{
+      if (navbar === true) {
+        setNavbar(false);
+
+        dispatch(setSearchBar(!events.searchBar));
+      } else {
+        dispatch(setSearchBar(!events.searchBar));
+      }
+    }
+
   return (
     <div>
-      <nav className="w-full bg-black top-0 left-0 right-0 z-10 fixed">
+      <nav className="w-full bg-purpleNav top-0 left-0 right-0 z-10 fixed h-18">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
               <Link href="/">
                 <h2
-                  className="text-2xl text-white font-bold"
+    
+                  className="text-2xl text-black font-bold"
+                  onClick={() => window.location.href = '/'}
+
                 >
                   H
                 </h2>
@@ -87,19 +99,11 @@ export default function NavBar() {
                 />
               )}
 
-              <FontAwesomeIcon
-                className="text-white max-h-5 bg-slate-400 p-2 rounded cursor-pointer"
-                icon={faMagnifyingGlass}
-                onClick={() => {
-                  if (navbar === true) {
-                    setNavbar(false);
+            <div className="w-10  h-10 bg-[#F4EFFD] flex justify-center items-center rounded-full" onClick={handleSearch}>
+            <IconSearch className="cursor-pointer z-10"
+              ></IconSearch>
 
-                    dispatch(setSearchBar(!events.searchBar));
-                  } else {
-                    dispatch(setSearchBar(!events.searchBar));
-                  }
-                }}
-              ></FontAwesomeIcon>
+            </div>
               <div className="md:hidden">
                 <button
                   className="p-2 text-white rounded-md outline-none focus:border-gray-400 focus:border"
@@ -113,11 +117,10 @@ export default function NavBar() {
                   }}
                 >
                   {navbar ? (
-                    <FontAwesomeIcon className="min-h-5 max-h-6" icon={faX} />
+                    <IconX className="min-h-5 max-h-6"/>
                   ) : (
-                    <FontAwesomeIcon
+                    <IconHambuger
                       className="min-h-5 max-h-6"
-                      icon={faBars}
                     />
                   )}
                 </button>
