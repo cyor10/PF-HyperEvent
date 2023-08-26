@@ -17,7 +17,7 @@ export default function Categories( {children :  categories}) {
   };
 
   return (
-    <div className='overflow-hidden relative h-28'>
+    <div className='overflow-hidden relative h-28 flex justify-center pt-3'>
       <div
         className="flex flex-row absolute transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${pag * 100}%)` }}
