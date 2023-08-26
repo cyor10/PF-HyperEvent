@@ -8,7 +8,7 @@ const cloudinary = require("../utils/cloudinaryConfig");
 const sendEmail = require("../email/mandarEmail");
 const signupUser = async (req, res) => {
   try {
-    const { username, email, name, last_name, password,user_image } = req.body;
+    const { email, name, last_name, password,user_image } = req.body;
 
     // Trae desde req.file el oobjeto imagen y pasa su buffer a string, ademas de formatearlo para que cloudinary lo acepte
     let imageUrl = "";
@@ -39,7 +39,6 @@ const signupUser = async (req, res) => {
     
     // Guardar el correo electrónico y la contraseña hasheada en la base de datos
     const newUser = await User.create({
-      username: username,
       email: email,
       name: name,
       last_name: last_name,

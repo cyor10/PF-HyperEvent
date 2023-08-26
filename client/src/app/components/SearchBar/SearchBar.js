@@ -67,7 +67,7 @@ export default function SearchBar() {
                 </select>
             </div>
             <div>
-                <div className='flex mt-5'>f
+                <div className='flex mt-5'>
                     <div onClick={() => handleChange('filterDay', 7)} className='bg-slate-500 cursor-pointer ml-4 pl-2 pr-2 rounded-lg'>7 Days</div>
                     <div onClick={() => handleChange('filterDay', 152)} className='bg-slate-500 cursor-pointer ml-2 pl-2 pr-2 rounded-lg'>5 Months</div>
                     <div onClick={() => handleChange('filterDay', 356)} className='bg-slate-500 cursor-pointer ml-2 pl-2 pr-2 rounded-lg'>1 Year</div>
@@ -96,8 +96,8 @@ export default function SearchBar() {
                 {recentSearch.reverse().map((search, index) => index >= recentSearch.length - 3 ? 
                 <div key={index} className='flex ml-4 items-center mt-2'>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M14.6667 8.00001C14.6667 11.68 11.68 14.6667 8.00004 14.6667C4.32004 14.6667 1.33337 11.68 1.33337 8.00001C1.33337 4.32001 4.32004 1.33334 8.00004 1.33334C11.68 1.33334 14.6667 4.32001 14.6667 8.00001Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M10.4733 10.12L8.40663 8.88665C8.04663 8.67332 7.7533 8.15999 7.7533 7.73999V5.00665" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14.6667 8.00001C14.6667 11.68 11.68 14.6667 8.00004 14.6667C4.32004 14.6667 1.33337 11.68 1.33337 8.00001C1.33337 4.32001 4.32004 1.33334 8.00004 1.33334C11.68 1.33334 14.6667 4.32001 14.6667 8.00001Z" stroke="#292D32" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M10.4733 10.12L8.40663 8.88665C8.04663 8.67332 7.7533 8.15999 7.7533 7.73999V5.00665" stroke="#292D32" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <h4 className='ml-2'>{search}</h4>
                 </div>: null)}

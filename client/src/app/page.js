@@ -37,7 +37,6 @@ export default function LandingPage() {
         const session = await getServerSession(authOptions);
         if (session) {
           const cloud = new FormData();
-          cloud.set("username", session.user.username);
           cloud.set("email", session.user.email);
           cloud.set("name", session.user.name);
           cloud.set("last_name", session.user.last_name);

@@ -12,7 +12,6 @@ const authOptions= {
     callbacks: {
         async session({ session }) {
           // Send properties to the client, like an access_token and user id from a provider.
-          session.user.username=""
           session.user.user_image=session.user.image
           session.user.last_name=""
           session.user.password=""
