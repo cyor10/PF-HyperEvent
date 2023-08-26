@@ -13,7 +13,7 @@ export default async function LandingPage() {
   const [isFav, setIsFav] = useState([]);
   const [dataCarousel, setDataCarousel] = useState([]);
   const [categories, setCategories] = useState({ data: [] });
-  const [data, setData] = useState({ events: [] });
+  const [eventsData, setEventsData] = useState({ events: [] });
   const session = await getServerSession(authOptions)
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default async function LandingPage() {
       try {
         const { data } = await axiosInstance("/events");
         const slicedEvents = data.events.slice(0, 20);
-        setData({ events: slicedEvents });
+        setEventsData({ events: slicedEvents });
 
         const carouselData = slicedEvents.slice(0, 5);
         setDataCarousel(carouselData);
