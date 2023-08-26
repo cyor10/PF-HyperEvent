@@ -103,11 +103,7 @@ export default function SearchBar() {
                 </div>: null)}
                 {recomendations.map((rec, index) => 
                 <div key={index} className='flex ml-4 items-center mt-2'>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M11 6.33333L8.2 9.13333L7.13333 7.53333L5 9.66666" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M9.66663 6.33333H11V7.66666" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M6.00004 14.6667H10C13.3334 14.6667 14.6667 13.3333 14.6667 9.99999V5.99999C14.6667 2.66666 13.3334 1.33333 10 1.33333H6.00004C2.66671 1.33333 1.33337 2.66666 1.33337 5.99999V9.99999C1.33337 13.3333 2.66671 14.6667 6.00004 14.6667Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    
                     <h4 className='ml-2'>{rec}</h4>
                 </div>)}
             </div>
