@@ -5,7 +5,7 @@ const { User } = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("../utils/cloudinaryConfig");
-
+const sendEmail = require("../email/mandarEmail");
 const signupUser = async (req, res) => {
   try {
     const { username, email, name, last_name, password,user_image } = req.body;
@@ -56,7 +56,7 @@ const signupUser = async (req, res) => {
 
     // const user = result.rows[0];
     // const token = jwt.sign({ id: user.id, name: user.name, email: user.email }, process.env.JWT_SECRET);
-
+    sendEmail(newUser);
     res.json({ token });
   } catch (err) {
     console.error(err);
