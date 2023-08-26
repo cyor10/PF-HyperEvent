@@ -9,12 +9,12 @@ import { IconFavWhite, IconFavRed } from "@/utils/svg/svg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 
-export default function LandingPage() {
+export default async function LandingPage() {
   const [isFav, setIsFav] = useState([]);
   const [dataCarousel, setDataCarousel] = useState([]);
   const [categories, setCategories] = useState({ data: [] });
   const [data, setData] = useState({ events: [] });
-  const session=await getServerSession(authOptions)
+  const session = await getServerSession(authOptions)
 
   useEffect(() => {
     const fetchData = async () => {
