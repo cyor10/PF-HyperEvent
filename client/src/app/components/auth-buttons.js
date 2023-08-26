@@ -7,7 +7,6 @@ import { getServerSession } from "next-auth";
 export function GoogleSignInButton() {
   const handleClick = () => {
     signIn("google");
-    redirect("/");
   };
 
   return (
