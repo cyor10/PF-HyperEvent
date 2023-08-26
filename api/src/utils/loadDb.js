@@ -22,61 +22,26 @@ async function getTaxonomies(model) {
   }
 }
 
+
 async function getEvents(model) {
   try {
-    let response = []
-    let allResponse = []
-    response = await Promise.all([
-      await axios.get(`${API_URL}/events?per_page=25&page=1&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=2&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=3&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=4&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=5&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=6&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=7&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=8&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=9&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=10&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=11&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=12&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=13&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=14&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=15&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=16&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=17&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=18&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=19&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=20&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=21&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=22&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=23&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=24&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=25&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=26&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=27&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=28&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=29&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=30&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=31&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=32&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=33&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=34&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=35&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=36&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=37&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=38&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=39&client_id=${API_KEY}`),
-      await axios.get(`${API_URL}/events?per_page=25&page=40&client_id=${API_KEY}`),
+    const allResponse = [];
+    const numPages = 40; // Total number of pages
 
-    ])
-    
-    response.forEach(element => {
-      allResponse = allResponse.concat(element.data.events);
+    // Create an array of promises for fetching events
+    const fetchPromises = [];
+    for (let page = 1; page <= numPages; page++) {
+      const fetchPromise = axios.get(`${API_URL}/events?per_page=25&page=${page}&client_id=${API_KEY}`);
+      fetchPromises.push(fetchPromise);
+    }
+
+    // Fetch events concurrently and concatenate responses
+    const responses = await Promise.all(fetchPromises);
+    responses.forEach(response => {
+      allResponse.push(...response.data.events);
     });
-    console.log(allResponse.length)
-    //let { data } = await axios.get(`${API_URL}/events?per_page=25&page=2&client_id=${API_KEY}`);
-    for (let i = 0; i < allResponse.length; i++) {
-      const element = allResponse[i];
+
+    for (const element of allResponse) {
       const eventsBoilerPlate = {
         event_name: element.performers[0].name,
         event_image: element.performers[0].image,
@@ -86,52 +51,19 @@ async function getEvents(model) {
         postal: element.venue.postal_code,
         adress: element.venue.location,
       };
-      const event = await model.create(eventsBoilerPlate)
-      const category = element.performers[0].taxonomies.map(tax=>tax.id)
-      await event.addCategories(category)
+      const event = await model.create(eventsBoilerPlate);
+      const category = element.performers[0].taxonomies.map(tax => tax.id);
+      await event.addCategories(category);
     }
-      return "Eventos cargados correctamente"
+
+    return "Eventos cargados correctamente";
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return 'Error al cargar Eventos-----!';
   }
 }
-
 
 module.exports ={
   getEvents,
   getTaxonomies
 };
-
-/* Events.__proto__:
-_isAttribute: [Function (anonymous)],
-  getUsers: [Function (anonymous)],
-  countUsers: [Function (anonymous)],
-  hasUser: [Function (anonymous)],
-  hasUsers: [Function (anonymous)],
-  setUsers: [Function (anonymous)],
-  addUser: [Function (anonymous)],
-  addUsers: [Function (anonymous)],
-  removeUser: [Function (anonymous)],
-  removeUsers: [Function (anonymous)],
-  createUser: [Function (anonymous)],
-  getCategories: [Function (anonymous)],
-  countCategories: [Function (anonymous)],
-  hasCategory: [Function (anonymous)],
-  hasCategories: [Function (anonymous)],
-  setCategories: [Function (anonymous)],
-  addCategory: [Function (anonymous)],
-  addCategories: [Function (anonymous)],
-  removeCategory: [Function (anonymous)],
-  removeCategories: [Function (anonymous)],
-  createCategory: [Function (anonymous)],
-  getTickets: [Function (anonymous)],
-  countTickets: [Function (anonymous)],
-  hasTicket: [Function (anonymous)],
-  hasTickets: [Function (anonymous)],
-  setTickets: [Function (anonymous)],
-  addTicket: [Function (anonymous)],
-  addTickets: [Function (anonymous)],
-  removeTicket: [Function (anonymous)],
-  removeTickets: [Function (anonymous)],
-  createTicket: [Function (anonymous)] */
