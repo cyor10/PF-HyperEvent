@@ -5,15 +5,25 @@ const { User } = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("../utils/cloudinaryConfig");
-const sendEmail = require("../email/mandarEmail");
-
 
 const signupUser = async (req, res) => {
   try {
-    const { username, email, name, last_name, password } = req.body;
+    const { username, email, name, last_name, password,user_image } = req.body;
+
     // Trae desde req.file el oobjeto imagen y pasa su buffer a string, ademas de formatearlo para que cloudinary lo acepte
-    let bufferString = Buffer.from(req.file.buffer).toString("base64");
-    let obj2 = "data:" + req.file.mimetype + ";base64," + bufferString;
+    let imageUrl = "";
+
+    if (!user_image) {
+      const bufferString = Buffer.from(req.file.buffer).toString("base64");
+      const obj2 = "data:" + req.file.mimetype + ";base64," + bufferString;
+      const result = await cloudinary.uploader.upload(obj2, {
+        public_id: req.file.originalname,
+      });
+      imageUrl = result.url;
+    } else {
+      imageUrl = user_image;
+    }
+  
     // Verificar que el correo electrónico no existe en la base de datos
     const emailExist = await User.findOne({ where: { email: email } });
     if (emailExist) {
@@ -22,9 +32,7 @@ const signupUser = async (req, res) => {
         .send({ alert: "El correo electrónico ya está registrado." });
     }
     // Se le pasa el buffer ya formateado a cloudinary para que suba la imagen al la nube y result es un objeto con la propiedad url de la imagen ya subida
-    const result = await cloudinary.uploader.upload(obj2, {
-      public_id: req.file.originalname,
-    });
+
     // Hashear la contraseña
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -36,11 +44,9 @@ const signupUser = async (req, res) => {
       name: name,
       last_name: last_name,
       password: hashedPassword,
-      user_image: result.url,
-
+      user_image: imageUrl,
     });
     
-   
     const userId = newUser.dataValues.id;
 
     // Crear y firmar un JWT que contenga el ID del usuario
@@ -50,7 +56,7 @@ const signupUser = async (req, res) => {
 
     // const user = result.rows[0];
     // const token = jwt.sign({ id: user.id, name: user.name, email: user.email }, process.env.JWT_SECRET);
-    sendEmail(newUser);
+
     res.json({ token });
   } catch (err) {
     console.error(err);
@@ -123,8 +129,7 @@ module.exports = {
   signupUser,
   loginUser,
   protectedUser,
-  
-};  
+};
 
 /*
 ###

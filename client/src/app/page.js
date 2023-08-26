@@ -3,8 +3,38 @@ import Carousel from "./components/Carousel/Carousel";
 import Categories from "./components/Categories/Categories";
 import axiosInstance from "../utils/axiosInstance";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
-export default async function LandingPage() {
+export default async function LandingPage() {    
+  const session=await getServerSession(authOptions)
+  if(session){
+    try {  
+    let cloud = new FormData();
+    cloud.set("username", session.user.username);
+    cloud.set("email", session.user.email);
+    cloud.set("name", session.user.name);
+    cloud.set("last_name", session.user.last_name);
+    cloud.set("password", session.user.password);
+    cloud.set("user_image", session.user.user_image);
+    const { data } = await axiosInstance.post("/signup", cloud, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+      await axiosInstance("/protected", {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+  
   let { data } = await axiosInstance("/events");
   {
     data.events = data.events.slice(0, 100);
