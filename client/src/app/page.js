@@ -1,12 +1,40 @@
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux/";
 import Carousel from "./components/Carousel/Carousel";
 import Categories from "./components/Categories/Categories";
 import axiosInstance from "../utils/axiosInstance";
-import axios from "axios";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
-export default async function LandingPage() {
+export default async function LandingPage() {    
+  const session=await getServerSession(authOptions)
+  if(session){
+    try {  
+    let cloud = new FormData();
+    cloud.set("username", session.user.username);
+    cloud.set("email", session.user.email);
+    cloud.set("name", session.user.name);
+    cloud.set("last_name", session.user.last_name);
+    cloud.set("password", session.user.password);
+    cloud.set("user_image", session.user.user_image);
+    const { data } = await axiosInstance.post("/signup", cloud, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+      await axiosInstance("/protected", {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+  
   let { data } = await axiosInstance("/events");
   {
     data.events = data.events.slice(0, 100);
@@ -15,11 +43,10 @@ export default async function LandingPage() {
   let dataCarousel = data.events.slice(0, 5);
   let categories = await axiosInstance("/categories");
   categories.data = categories.data.slice(8, 15);
-  //console.log(categories.data)
   return (
     <div className="flex min-h-screen w-full flex-col items-center bg-white">
       <div className="pb-10 bg-white w-full flex justify-center min-h-ful">
-        <h1 className="text-6xl pt-20 text-black">Hyper Events</h1>
+        <h1 className="text-6xl pt-7 text-black">Hyper Events</h1>
       </div>
 
       <Carousel>
@@ -27,7 +54,7 @@ export default async function LandingPage() {
           dataCarousel.map((ev, index) => {
             return (
               <img
-                className="w-[100%] h-96 object-cover"
+                className="w-96 h-96 object-cover"
                 src={ev.event_image}
                 alt="Descripción de la imagen"
                 width={900}
@@ -45,20 +72,20 @@ export default async function LandingPage() {
             categories.data.map((sl, index) => {
               return (
                 <Link
-                  className="w-[5.5rem] h-[6rem] mx-1.5 ml-6"
+                  className="w-[5.5rem] h-[6rem] mx-2 ml-6"
                   key={index}
                   href={{
                     pathname: "/events",
-                    query: { name: `${sl.name}` }
+                    query: { name: `${sl.name}` },
                   }}
                 >
                   <div className="rounded flex flex-col text-center items-center justify-center w-[6rem] h-[8rem] relative">
                     <p className="pb-2 text-white absolute z-2">{sl.name}</p>
-
                     <img
                       loading="lazy"
                       className="w-[10rem] h-[6rem] rounded-md text-xs"
                       src={sl.image}
+                      key={index}
                     />
                   </div>
                 </Link>
@@ -68,7 +95,7 @@ export default async function LandingPage() {
       </div>
 
       <div className="flex flex-col gap-5 w-[22rem] justify-center pb-5 pt-10">
-      <h2 className="text-2xl pl-3 pb-2">Events</h2>
+        <h2 className="text-2xl pl-3 pb-2">Events</h2>
         {data.events &&
           data.events.map((ev, index) => (
             <Link
@@ -85,6 +112,7 @@ export default async function LandingPage() {
                   alt="Descripción de la imagen"
                   width={1200}
                   height={300}
+                  key={index}
                 />
                 <p className="text-black text-xl mt-2 pb-2.5">{ev.city}</p>
               </div>

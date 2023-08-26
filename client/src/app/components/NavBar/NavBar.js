@@ -67,11 +67,11 @@ export default function NavBar() {
                   {session.user.name}
                 </label>
               )}
-              {session?.user.image && (
+              {session?.user.user_image && (
                 <img 
                   name="user" 
                   className="w-10 h-10 rounded-full" 
-                  src={session.user.image} 
+                  src={session.user.user_image} 
                   height={100} 
                   width={100} 
                 />

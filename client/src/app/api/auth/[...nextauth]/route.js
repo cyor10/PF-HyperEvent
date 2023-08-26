@@ -1,7 +1,6 @@
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 
-const { v4: uuidv4 } = require('uuid');
 const authOptions= {
     
     providers: [         
@@ -11,12 +10,14 @@ const authOptions= {
         }),
     ],
     callbacks: {
-        async session({ session, token, user }) {
+        async session({ session }) {
           // Send properties to the client, like an access_token and user id from a provider.
-          session.user.id = uuidv4()
-          session.user.last_name=""
-          session.user.user_image=session.user.image
           session.user.username=""
+          session.user.user_image=session.user.image
+          session.user.last_name=""
+          session.user.password=""
+          delete session.user.image
+          delete session.expires
           return session
         }
       },
