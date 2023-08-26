@@ -40,7 +40,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const { Ticket, Event, User, Category } = sequelize.models;
+const { Ticket, Event, User, Category, Countries, States, Cities } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -57,6 +57,8 @@ Ticket.belongsTo(User);
 Event.hasMany(Ticket)
 Ticket.belongsTo(Event)
 
+States.belongsTo(Countries, { foreignKey: 'country_id' });
+Cities.belongsTo(States, { foreignKey: 'state_id' });
 
 const initializeDatabase = async () => {
   await getTaxonomies(Category); // Cargar categorías

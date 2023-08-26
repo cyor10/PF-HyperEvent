@@ -3,13 +3,18 @@ import axiosInstance from "../../utils/axiosInstance";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { validateLogin } from "../../validate/validate";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { getUser } from "@/redux/features/counter/counterSlice";
+
 import { GoogleSignInButton } from "../components/auth-buttons";
 
 
 export default function Login() {
+  const { data: session } = useSession({
+    required: false
+  })
+  if(session){redirect("/")}
   const dispatch = useDispatch();
   const router = useRouter();
   
@@ -131,8 +136,10 @@ export default function Login() {
           </Link>
         </h2>
         <h2 className="text-gray-600 text-center mt-4">Or</h2>
+
         
         <GoogleSignInButton />
+
       </form>
 
       <h2 className="text-gray-600 text-center mt-4 flex flex-col">
