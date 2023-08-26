@@ -1,5 +1,4 @@
-
-"use client"
+'use client'
 import React, { useState, useEffect } from "react";
 import Carousel from "./components/Carousel/Carousel";
 import Categories from "./components/Categories/Categories";
@@ -13,15 +12,15 @@ export default async function LandingPage() {
   const [isFav, setIsFav] = useState([]);
   const [dataCarousel, setDataCarousel] = useState([]);
   const [categories, setCategories] = useState({ data: [] });
-  const [eventsData, setEventsData] = useState({ events: [] });
+  const [eventData, setEventData] = useState({ events: [] });
   const session = await getServerSession(authOptions)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axiosInstance("/events");
-        const slicedEvents = data.events.slice(0, 20);
-        setEventsData({ events: slicedEvents });
+        const eventsResponse = await axiosInstance("/events");
+        const slicedEvents = eventsResponse.events.slice(0, 20);
+        setEventData({ events: slicedEvents });
 
         const carouselData = slicedEvents.slice(0, 5);
         setDataCarousel(carouselData);
@@ -54,16 +53,16 @@ export default async function LandingPage() {
     cloud.set("last_name", session.user.last_name);
     cloud.set("password", session.user.password);
     cloud.set("user_image", session.user.user_image);
-    const { data } = await axiosInstance.post("/signup", cloud, {
+    const { data: signupData } = await axiosInstance.post("/signup", cloud, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
-    if (data.token) {
-      localStorage.setItem("token", data.token);
+    if (signupData.token) {
+      localStorage.setItem("token", signupData.token);
       await axiosInstance("/protected", {
         headers: {
-          Authorization: `Bearer ${data.token}`,
+          Authorization: `Bearer ${signupData.token}`,
         },
       });
     }
@@ -72,8 +71,8 @@ export default async function LandingPage() {
   }
 }
   
-  let { data } = await axiosInstance("/events");
-  data.events = data.events.slice(0, 100);
+  let eventsData = await axiosInstance("/events");
+  const slicedEventsData = eventsData.data.events.slice(0, 100);
   
   return (
     <div className="flex min-h-screen w-full flex-col items-center bg-white">
