@@ -1,11 +1,7 @@
 import axios from 'axios';
-const { BASE_URL } = process.env
-
-
 
 const instance = axios.create({
-    baseURL: 'https://hyperevent-be.up.railway.app'
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL
 });
-
 
 export default instance;

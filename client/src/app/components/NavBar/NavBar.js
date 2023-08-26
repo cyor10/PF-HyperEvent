@@ -3,14 +3,21 @@
 import React from "react";
 import Link from "next/link";
 import SearchBar from "../SearchBar/SearchBar";
+
+import { useSession, signOut } from "next-auth/react";
+
 import { useState, useEffect } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
 import { getUser } from "@/redux/features/counter/counterSlice";
 import { setSearchBar } from "@/redux/features/events/counterSlice";
 import { useSelector, useDispatch } from "react-redux";
+
 import { IconHambuger, IconSearch, IconX } from "@/utils/svg/svg";
 
 export default function NavBar() {
+  const { data: session } = useSession({
+    required: false
+  })
   const dispatch = useDispatch();
   const reduxUser = useSelector((state) => state.counter);
   const events = useSelector((state) => state.events);
@@ -65,6 +72,21 @@ export default function NavBar() {
                   {reduxUser.username}
                 </label>
               )}
+              {session?.user.name && (
+                <label htmlFor="user" className="text-white mr-2">
+                  {session.user.name}
+                </label>
+              )}
+              {session?.user.image && (
+                <img 
+                  name="user" 
+                  className="w-10 h-10 rounded-full" 
+                  src={session.user.image} 
+                  height={100} 
+                  width={100} 
+                />
+              )}
+
               {reduxUser.user_image && (
                 <img
                   name="user"
@@ -115,7 +137,7 @@ export default function NavBar() {
                     Home
                   </Link>
                 </li>
-                {!reduxUser?.username.length && (
+                {(!reduxUser?.username.length && !session) && (
                   <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                     <Link href="/login" onClick={() => setNavbar(!navbar)}>
                       Login
@@ -127,12 +149,18 @@ export default function NavBar() {
                     Create Events
                   </Link>
                 </li>
-
+                {session && (                
                 <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
-                  <Link href="#projects" onClick={() => setNavbar(!navbar)}>
+                  <Link href="/" onClick={() => {setNavbar(!navbar);signOut()}}>
                     Logout
                   </Link>
-                </li>
+                </li>)}
+                {reduxUser?.username.length &&                 
+                <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                  <button onClick={() => {setNavbar(!navbar); localStorage.removeItem('token'); dispatch(getUser({username: "", password: ""}))}}>
+                    Logout
+                  </button>
+                </li>}
               </ul>
             </div>
           </div>
