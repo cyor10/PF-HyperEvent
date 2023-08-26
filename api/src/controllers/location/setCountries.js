@@ -11,7 +11,7 @@ async function readCountries(filePath) {
             await Countries.findOrCreate({
                 where: {
                     name: country.name
-                }, 
+                },
                 defaults: {
                     iso: country.iso2
                 }
@@ -26,7 +26,7 @@ async function setCountries(req, res) {
     try {
         const filePath = path.join(__dirname, '../../utils/countries.json')
         await readCountries(filePath);
-        res.status(200).json("Countries saved successfully")
+        res.status(200).json({ message: "Countries saved successfully" })
     } catch (error) {
         return res.status(500).json({ error: error.message })
     }

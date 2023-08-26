@@ -19,8 +19,6 @@ async function readStates(filePath) {
                         iso: iso
                     }
                 });
-            } else {
-                console.log(`County not found for ${name}`);
             }
         }
     } catch (error) {
@@ -32,7 +30,7 @@ async function setStates(req, res) {
     try {
         const filePath = path.join(__dirname, '../../utils/states.json')
         await readStates(filePath);
-        res.status(200).json("States saved and relationship successfully")
+        res.status(200).json({ message: "States saved and relationship successfully" })
     } catch (error) {
         return res.status(500).json({ error: error.message })
     }
