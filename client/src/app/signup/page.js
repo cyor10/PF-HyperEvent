@@ -27,31 +27,50 @@ export default function SignUp() {
     name: "",
     last_name: "",
     password: "",
-    file: null,
+    file: "",
   });
+  console.log(errors)
+  const [enableSubmit, setEnableSubmit] = useState(false);
 
   function handleInputs(event) {
     if (event.target.type === "file") {
       setInputs({ ...inputs, file: event.target.files[0] });
+      
+      const checkingErrors = validateUser({
+        ...inputs,
+        [event.target.type]: event.target.files[0],
+      });
+  
+      setErrors(checkingErrors);
+  
+      const hasErrors = Object.values(checkingErrors).some(
+        (error) => error !== ""
+      );
+      setEnableSubmit(!hasErrors);
     } else {
       setInputs({
         ...inputs,
         [event.target.name]: event.target.value,
       });
-      setErrors(
-        validateUser({
-          ...inputs,
-          [event.target.name]: event.target.value,
-        })
-      );
     }
+    const checkingErrors = validateUser({
+      ...inputs,
+      [event.target.name]: event.target.value,
+    });
+
+    setErrors(checkingErrors);
+
+    const hasErrors = Object.values(checkingErrors).some(
+      (error) => error !== ""
+    );
+    setEnableSubmit(!hasErrors);
   }
 
-  function handleFileInput(event) {
+  /* function handleFileInput(event) {
     const selectedFile = event.target.files[0];
     setInputs({ ...inputs, file: selectedFile });
     setErrors({ ...errors, file: null }); // Clear the file error
-  }
+  } */
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -84,9 +103,14 @@ export default function SignUp() {
   }
   return (
 
-    <div className="flex flex-col items-start my-8">
-      <form onSubmit={onSubmit} className="max-w-[90%] mx-auto p-6 bg-white shadow-md rounded-md">
-        <h1 className="text-2xl font-semibold mb-4 text-center">Create Account</h1>
+    <div className="flex flex-col items-start my-8 pt-20">
+      <form
+        onSubmit={onSubmit}
+        className="max-w-[90%] mx-auto p-6 bg-white shadow-md rounded-md"
+      >
+        <h1 className="text-2xl font-semibold mb-4 text-center">
+          Create Account
+        </h1>
 
         <div className="mb-4 ">
           <label className="block text-gray-700 font-semibold mb-2">
@@ -202,7 +226,7 @@ export default function SignUp() {
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500 "
             type="file"
             name="file"
-            onChange={handleFileInput}
+            onChange={handleInputs}
           />
           {errors.file ? (
             <p className="text-red-700">{errors.file}</p>
@@ -213,8 +237,15 @@ export default function SignUp() {
           )}
         </div>
         <button
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md "
+
+          className={`w-full py-2 px-4 rounded-md font-semibold ${
+            enableSubmit
+              ? "bg-blue-500 hover:bg-blue-600 text-white"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+          }`}
+
           type="submit"
+          disabled={!enableSubmit}
         >
           REGISTER
         </button>
