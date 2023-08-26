@@ -1,4 +1,4 @@
-const { States, Cities } = require('../db');
+const { States, Cities } = require('../../db');
 
 async function getCities(req, res) {
     const stateName = req.query.state;
@@ -8,7 +8,7 @@ async function getCities(req, res) {
         });
 
         if (!state) {
-            return res.status(400).json({ error: ' State not found' });
+            return res.status(400).json({ error: 'State not found' });
         }
 
         const cities = await Cities.findAll({ where: {state_id: state.id }, order: [['name', 'ASC']] });

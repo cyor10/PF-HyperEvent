@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { Countries, States } = require('../db');
+const { Countries, States } = require('../../db');
 
 async function readStates(filePath) {
     try {
@@ -8,13 +8,16 @@ async function readStates(filePath) {
         const data = JSON.parse(content)
 
         for (const item of data) {
-            const { name, country } = item;
+            const { name, country, iso } = item;
 
             const countryRecord = await Countries.findOne({ where: { name: country } });
 
             if (countryRecord) {
                 await States.findOrCreate({
-                    where: { name: name, country_id: countryRecord.id }
+                    where: { name: name, country_id: countryRecord.id },
+                    defaults: {
+                        iso: iso
+                    }
                 });
             } else {
                 console.log(`County not found for ${name}`);
@@ -27,7 +30,7 @@ async function readStates(filePath) {
 
 async function setStates(req, res) {
     try {
-        const filePath = path.join(__dirname, '../utils/states.json')
+        const filePath = path.join(__dirname, '../../utils/states.json')
         await readStates(filePath);
         res.status(200).json("States saved and relationship successfully")
     } catch (error) {

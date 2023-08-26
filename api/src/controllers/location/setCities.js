@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { States, Cities} = require('../db');
+const { States, Cities} = require('../../db');
 
 async function readCities(filePath) {
     try {
@@ -27,7 +27,7 @@ async function readCities(filePath) {
 
 async function setCities(req, res) {
     try {
-        const filePath = path.join(__dirname, '../utils/cities.json')
+        const filePath = path.join(__dirname, '../../utils/cities.json')
         await readCities(filePath);
         res.status(200).json("Cities saved and relationship successfully")
     } catch (error) {
