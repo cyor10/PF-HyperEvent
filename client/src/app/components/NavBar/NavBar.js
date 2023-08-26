@@ -52,7 +52,6 @@ export default function NavBar() {
               <Link href="/">
                 <h2
                   className="text-2xl text-white font-bold"
-                  onClick={() => window.location.href = '/'}
                 >
                   H
                 </h2>
@@ -137,7 +136,7 @@ export default function NavBar() {
                     Home
                   </Link>
                 </li>
-                {(!reduxUser?.username.length && !session) && (
+                {(!reduxUser.username || !session) && (
                   <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                     <Link href="/login" onClick={() => setNavbar(!navbar)}>
                       Login
@@ -155,7 +154,7 @@ export default function NavBar() {
                     Logout
                   </Link>
                 </li>)}
-                {reduxUser?.username.length &&                 
+                {reduxUser.username &&                 
                 <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                   <button onClick={() => {setNavbar(!navbar); localStorage.removeItem('token'); dispatch(getUser({username: "", password: ""}))}}>
                     Logout
