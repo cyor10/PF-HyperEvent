@@ -6,12 +6,15 @@ import Categories from "./components/Categories/Categories";
 import axiosInstance from "../utils/axiosInstance";
 import Link from "next/link";
 import { IconFavWhite, IconFavRed } from "@/utils/svg/svg";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
 export default function LandingPage() {
   const [isFav, setIsFav] = useState([]);
   const [dataCarousel, setDataCarousel] = useState([]);
   const [categories, setCategories] = useState({ data: [] });
   const [data, setData] = useState({ events: [] });
+  const session=await getServerSession(authOptions)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +44,37 @@ export default function LandingPage() {
       return updatedState;
     });
   };
-
+  
+  if(session){
+    try {  
+    let cloud = new FormData();
+    cloud.set("username", session.user.username);
+    cloud.set("email", session.user.email);
+    cloud.set("name", session.user.name);
+    cloud.set("last_name", session.user.last_name);
+    cloud.set("password", session.user.password);
+    cloud.set("user_image", session.user.user_image);
+    const { data } = await axiosInstance.post("/signup", cloud, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+      await axiosInstance("/protected", {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+  
+  let { data } = await axiosInstance("/events");
+  data.events = data.events.slice(0, 100);
+  
   return (
     <div className="flex min-h-screen w-full flex-col items-center bg-white">
       <Carousel>

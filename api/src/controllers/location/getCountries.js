@@ -1,4 +1,4 @@
-const { Countries } = require('../db');
+const { Countries } = require('../../db');
 
 async function getCountries(req, res) {
     try {

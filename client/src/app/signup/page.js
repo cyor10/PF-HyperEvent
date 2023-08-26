@@ -79,7 +79,7 @@ export default function SignUp() {
       cloud.set("username", inputs.username);
       cloud.set("email", inputs.email);
       cloud.set("name", inputs.name);
-      cloud.set("last name", inputs.last_name);
+      cloud.set("last_name", inputs.last_name);
       cloud.set("password", inputs.password);
       cloud.set("file", inputs.file);
       const { data } = await axiosInstance.post("/signup", cloud, {
