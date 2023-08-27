@@ -107,9 +107,9 @@ export default function SignUp() {
     <img className="w-40 mx-auto" src="https://res.cloudinary.com/hyperevents/image/upload/v1693102330/fc69a7cd877a754674613136a28b00ed_ghlch4.png"></img>
 
       <div className="w-full flex flex-row items-center justify-between">
-        <h1 className="text-3xl pl-10 w-[60%] font-black">
+        <h2 className="text-3xl pl-10 w-[60%] font-black text-black">
           CREATE AN ACCOUNT 
-        </h1>
+        </h2>
 
           <Link href="/login" className="pr-10 text-purpleOscuro">
         Log in
@@ -204,7 +204,7 @@ export default function SignUp() {
             value={inputs.password}
             placeholder="Password"
           />
-          <button className="relative top-[-1.9rem] left-[16.5rem]">
+          <button type='button' className="relative top-[-1.9rem] left-[16.5rem]">
           <IconEyes/>
           </button>
         {errors.password ? (

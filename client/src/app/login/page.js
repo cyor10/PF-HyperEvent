@@ -14,12 +14,14 @@ import { IconEyes } from "@/utils/svg/svg";
 
 export default function Login() {
   const { data: session } = useSession({
-    required: false
-  })
-  if(session){redirect("/")}
+    required: false,
+  });
+  if (session) {
+    redirect("/");
+  }
   const dispatch = useDispatch();
   const router = useRouter();
-  
+
   const [enableSubmit, setEnableSubmit] = useState(false);
 
   const [inputs, setInputs] = useState({
@@ -31,7 +33,7 @@ export default function Login() {
     email: "",
     password: "",
   });
-  
+
   function handleInputs(event) {
     setInputs({
       ...inputs,
@@ -68,7 +70,7 @@ export default function Login() {
       } catch (error) {
         console.log(error);
       }
-    })()
+    })();
   }
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -81,26 +83,23 @@ export default function Login() {
 
   return (
     <div className="flex flex-col align-start h-[100%] pb-5">
-
-      <img className="w-40 mx-auto" src="https://res.cloudinary.com/hyperevents/image/upload/v1693102330/fc69a7cd877a754674613136a28b00ed_ghlch4.png"></img>
+      <img
+        className="w-40 mx-auto"
+        src="https://res.cloudinary.com/hyperevents/image/upload/v1693102330/fc69a7cd877a754674613136a28b00ed_ghlch4.png"
+      ></img>
 
       <div className="flex flex-row items-center justify-between px-8 ">
-        <h2 className="text-4xl font-black leading-9">LOG IN</h2>
+        <h2 className="text-4xl font-black leading-9 text-black">LOG IN</h2>
 
         <h2 className="text-grey text-center flex flex-col">
-        <Link className="text-purpleOscuro hover:underline" href="/signup">
-          SignUp
-        </Link>
-      </h2>
+          <Link className="text-purpleOscuro hover:underline" href="/signup">
+            SignUp
+          </Link>
+        </h2>
       </div>
-      <form
-        className="max-w-sm mx-auto p-6 font-[figtree]"
-        onSubmit={onSubmit}
-      >
+      <form className="max-w-sm mx-auto p-6 font-[figtree]" onSubmit={onSubmit}>
         <div className="mt-4">
-          <label className="block text-grey font-normal	 mb-2 ml-1">
-            Email
-          </label>
+          <label className="block text-grey font-normal	 mb-2 ml-1">Email</label>
           <input
             className="w-full px-3 py-2 rounded-md text-[grey] border-[grey] border-2 focus:outline-none focus:ring focus:border-blue-500  font-normal"
             key="email"
@@ -132,8 +131,8 @@ export default function Login() {
             value={inputs.password}
             placeholder="Password"
           ></input>
-          <button className="relative top-[-2rem] left-[16.7rem]">
-          <IconEyes/>
+          <button type="button" className="relative top-[-2rem] left-[16.7rem]">
+            <IconEyes />
           </button>
         </div>
         <h2 className="text-gray-600 flex flex-col">
@@ -164,11 +163,8 @@ export default function Login() {
           LOG-IN
         </button>
         <div className="w-[85%] h-2 bg-black mx-auto my-10 rounded-md"></div>
-
-        
-        <GoogleSignInButton />
-
       </form>
+      <GoogleSignInButton />
     </div>
   );
 }

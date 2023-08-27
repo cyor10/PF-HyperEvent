@@ -5,7 +5,7 @@ import Link from "next/link";
 import SearchBar from "../SearchBar/SearchBar";
 
 import { useSession, signOut } from "next-auth/react";
-
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
 import { getUser } from "@/redux/features/counter/counterSlice";
@@ -14,11 +14,13 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { IconHambuger, IconSearch, IconX } from "@/utils/svg/svg";
 
+
 export default function NavBar() {
   const { data: session } = useSession({
     required: false
   })
   const dispatch = useDispatch();
+  const pathname = usePathname()
   const reduxUser = useSelector((state) => state.counter);
   const events = useSelector((state) => state.events);
   const [navbar, setNavbar] = useState(false);
@@ -51,8 +53,8 @@ export default function NavBar() {
         dispatch(setSearchBar(!events.searchBar));
       }
     }
-
-  return (
+    
+  return (pathname === '/signup' || pathname === '/login') ? null : (
     <div>
       <nav className="w-full bg-purpleNav top-0 left-0 right-0 z-10 fixed h-18">
   <div className="justify-between px-2 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
