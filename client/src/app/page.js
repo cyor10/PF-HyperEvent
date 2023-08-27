@@ -7,6 +7,7 @@ import Link from "next/link";
 import { IconFavWhite, IconFavRed } from "@/utils/svg/svg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import Image from "next/image";
 
 export default function LandingPage() {
   const [isFav, setIsFav] = useState([]);
@@ -76,7 +77,7 @@ export default function LandingPage() {
     <div className="flex min-h-screen w-full flex-col items-center bg-white">
       <Carousel>
         {dataCarousel.map((event, index) => (
-          <img
+          <Image
             className="w-[100%] h-80 object-cover"
             src={event.event_image}
             alt="Descripción de la imagen"
@@ -103,10 +104,13 @@ export default function LandingPage() {
               }}
             >
               <div className="rounded flex flex-col text-center items-center justify-center w-[6rem] h-[1rem] pt-20">
-                <img
+                <Image
                   loading="lazy"
                   className="w-[10rem] h-[5rem] rounded-md text-xs object-cover"
                   src={category.image}
+                  width={100}
+                  height={100}
+                  alt="Category"
                 />
                 <p className="pb-7 text-black">{category.name}</p>
               </div>
@@ -117,7 +121,7 @@ export default function LandingPage() {
       <div className="flex flex-col gap-6 w-[22rem] justify-center pb-10 pt-3">
         {events.map((event, index) => (
           <div className="bg-white shadow-md mx-auto w-[21rem] h-[19.5rem] rounded-lg flex flex-col relative" key={index}>
-            <img
+            <Image
               className="w-[100%] h-[45%] object-cover rounded-t-lg z-100 relative"
               src={event.event_image}
               alt="Descripción de la imagen"
