@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import SearchBar from "../SearchBar/SearchBar";
-
+import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 
 import { useState, useEffect } from "react";
@@ -80,22 +80,24 @@ export default function NavBar() {
                 </label>
               )}
               {session?.user.user_image && (
-                <img 
+                <Image 
                   name="user" 
                   className="w-10 h-10 rounded-full" 
                   src={session.user.user_image} 
                   height={100} 
-                  width={100} 
+                  width={100}
+                  alt="user-session"
                 />
               )}
 
               {reduxUser.user_image && (
-                <img
+                <Image
                   name="user"
                   className="w-10 h-10 rounded-full"
                   src={reduxUser.user_image}
                   height={100}
                   width={100}
+                  alt="user-image"
                 />
               )}
 
