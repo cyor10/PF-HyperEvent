@@ -69,22 +69,17 @@ export default function Login() {
       }
     })()
   }
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      console.log("Estoy logueado:", token);
-    } else {
-      console.log("Token no encontrado en el LocalStorage");
-    }
-  }, []);
 
+  
   return (
     <div className="flex flex-col align-start h-[91.6vh]">
       <div className="text-center text-3xl font-semibold my-10 pt-14">
         Login
       </div>
+
+      <div className="max-w-sm mx-auto p-6 bg-white shadow-md rounded-md">
       <form
-        className="max-w-sm mx-auto p-6 bg-white shadow-md rounded-md"
+        //className="max-w-sm mx-auto p-6 bg-white shadow-md rounded-md"
         onSubmit={onSubmit}
       >
         <div className="mb-4">
@@ -139,9 +134,10 @@ export default function Login() {
         <h2 className="text-gray-600 text-center mt-4">Or</h2>
 
         
-        <GoogleSignInButton />
 
       </form>
+        <GoogleSignInButton />
+      </div>
 
       <h2 className="text-gray-600 text-center mt-4 flex flex-col">
         Don&apos;t have an account?{" "}
