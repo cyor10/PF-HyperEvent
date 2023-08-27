@@ -50,15 +50,29 @@ export default function Detail({ params }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
   });
+
   function Map() {
     if (event.adress) {
+      const center = useMemo(
+        () => ({ lat: event.adress.lat, lng: event?.adress.lon }),
+        []
+      );
+      const options = useMemo(
+        () => ({
+          mapId: "5a77ea9001288394",
+          disableDefaultUI: true,
+          clickableIcons: false,
+        }),
+        []
+      );
       return (
         <GoogleMap
           zoom={15}
-          center={{ lat: +event?.adress.lat, lng: +event?.adress.lon }}
-          mapContainerClassName="w-full h-[200px]"
+          center={center}
+          mapContainerClassName="w-full h-[230px]"
+          options={options}
         >
-          <Marker position={{ lat: event.adress.lat, lng: event.adress.lon }} />
+          <Marker position={center} />
         </GoogleMap>
       );
     }
