@@ -92,7 +92,7 @@ async function getEvents(model) {
     return "Eventos cargados correctamente";
   } catch (error) {
     console.log(error);
-    return 'Error al cargar Ersventos-----!';
+    return 'Error al cargar Eventos-----!';
   }
 }
 

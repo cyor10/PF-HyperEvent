@@ -42,7 +42,7 @@ async function createEvent(req, res) {
             return res.status(404).json({ error: 'State not found' });
         }
 
-        const cityExist = await States.findOne({ where: { name: city } });
+        const cityExist = await Cities.findOne({ where: { name: city } });
 
         if (!cityExist) {
             return res.status(404).json({ error: 'City not found' });
