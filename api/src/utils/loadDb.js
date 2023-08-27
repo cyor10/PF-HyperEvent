@@ -1,22 +1,32 @@
 require('dotenv').config()
 const { API_KEY, API_URL } = process.env;
 const axios = require("axios");
+const sequelize = require('sequelize');
 
 async function getTaxonomies(model) {
-  try { const { data } = await axios.get(`${API_URL}/taxonomies?client_id=${API_KEY}`)
-  const filteredTaxonomies = data?.taxonomies.filter(obj => {
+  try {
+    const { data } = await axios.get(`${API_URL}/taxonomies?client_id=${API_KEY}`)
+    const filteredTaxonomies = data?.taxonomies.filter(obj => {
       return obj.is_visible === true;
-  });
+    });
 
-  const saveCategories = filteredTaxonomies.map(async tax => {
+    await model.findOrCreate({
+      where: { name: "Mixed" },
+      defaults: {
+        name: "Mixed",
+        image: "https://seatgeek.com/images/performers-landscape/generic-club-passes-3c1159/677148/500_700.jpg"
+      }
+    });
+
+    const saveCategories = filteredTaxonomies.map(async tax => {
       await model.findOrCreate({
-          where: {id: tax.id, name: tax.name, image: tax.images["500_700"] || "https://s.france24.com/media/display/6aca8d1a-7783-11ea-9cf2-005056bf87d6/w:980/p:16x9/WEB%2005ABR%20DEPORTES%20PORTADA%20FOTO.webp%22%7D"}
+        where: { name: tax.name, image: tax.images["500_700"] || "https://seatgeek.com/images/performers-landscape/generic-club-passes-3c1159/677148/500_700.jpg" }
       })
-  }); 
+    });
 
-  await Promise.all(saveCategories);
+    await Promise.all(saveCategories);
 
-  return 'categories loaded in DB'
+    return 'Categories loaded in DB'
   } catch (error) {
     console.log(error)
   }
@@ -24,6 +34,7 @@ async function getTaxonomies(model) {
 
 
 async function getEvents(model) {
+  const { Category } = require('../db')
   try {
     const allResponse = [];
     const numPages = 40; // Total number of pages
@@ -42,28 +53,50 @@ async function getEvents(model) {
     });
 
     for (const element of allResponse) {
+      let categoryId = null;
+
+      if (element.performers && element.performers.length > 0 && element.performers[0].taxonomies) {
+        const taxonomyName = element.performers[0].taxonomies[0]?.name;
+    
+        const category = await Category.findOne({ 
+          where: sequelize.where(sequelize.fn('lower', sequelize.col('name')), taxonomyName)
+        });
+    
+        if (category) {
+          categoryId = category.id;
+        } else {
+          // If no matching category is found, use the "Mixed" category
+          const mixedCategory = await Category.findOne({ where: { name: "Mixed" } });
+          if (mixedCategory) {
+            categoryId = mixedCategory.id;
+          }
+        }
+      }
+
       const eventsBoilerPlate = {
         event_name: element.performers[0].name,
         event_image: element.performers[0].image,
-        start_at: element.announce_date,
-        country: element.venue.country,
+        location: element.venue.location,
+        place_name: element.venue.extended_address,
+        address: element.venue.address,
         city: element.venue.city,
+        country: element.venue.country,
+        start_at: element.datetime_utc,
         postal: element.venue.postal_code,
-        adress: element.venue.location,
+        rating: element.venue.score,
+        category_id: categoryId,
       };
       const event = await model.create(eventsBoilerPlate);
-      const category = element.performers[0].taxonomies.map(tax => tax.id);
-      await event.addCategories(category);
     }
 
     return "Eventos cargados correctamente";
   } catch (error) {
     console.log(error);
-    return 'Error al cargar Eventos-----!';
+    return 'Error al cargar Ersventos-----!';
   }
 }
 
-module.exports ={
+module.exports = {
   getEvents,
   getTaxonomies
 };

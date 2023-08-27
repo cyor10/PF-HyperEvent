@@ -1,6 +1,6 @@
-const getEvents = require('./getEvents')
+const getEvents = require('./event/getEvents')
 const { signupUser, loginUser, protectedUser, } = require('./user')
-const { createEvent } = require('./createEvent')
+const { createEvent } = require('./event/createEvent')
 const getCategories = require('./getCategories')
 const { getEventsByCategory } = require('./getEventsByCategory')
 const setCountries = require('./location/setCountries')

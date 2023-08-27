@@ -48,8 +48,7 @@ const { Ticket, Event, User, Category, Countries, States, Cities } = sequelize.m
 User.belongsToMany(Event, { through: "users_events" });
 Event.belongsToMany(User, { through: "users_events" });
 
-Category.belongsToMany(Event, { through: "events_categories" }); 
-Event.belongsToMany(Category, { through: "events_categories" });
+Event.belongsTo(Category, { foreignKey: 'category_id' });
 
 User.hasMany(Ticket);
 Ticket.belongsTo(User);
