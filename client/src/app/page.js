@@ -32,7 +32,6 @@ export default function LandingPage() {
   }, []);
   
   const session = async () => await getServerSession(authOptions);
-  //console.log(session)
   useEffect(() => {
     async function fetchSessionData() {
       try {
@@ -88,7 +87,7 @@ export default function LandingPage() {
         ))}
       </Carousel>
       <div className="pt-10">
-        <h1 className="text-5xl text-center pb-3 font-black leading-10">FIND YOUR EXPERIENCE</h1>
+        <h1 className="text-5xl text-center pb-3 font-black leading-10 text-black">FIND YOUR EXPERIENCE</h1>
         <div className="w-[76%] mx-auto h-3 bg-black"></div>
       </div>
       <div className="flex flex-col text-start justify-center w-full pt-3 pb-14">
