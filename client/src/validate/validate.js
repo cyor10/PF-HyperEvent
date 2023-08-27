@@ -37,12 +37,13 @@ export function validateUser(inputs){
       }
 
       
-      if (!/^[a-zA-Z]*$/.test(inputs.name)) {
-        errors.name = "The name can only contain letters";
+      if (!/^[a-zA-Z]{3,}$/.test(inputs.name)) {
+        errors.name = "Your name is invalid";
       }
-      if (!/^[a-zA-Z]*$/.test(inputs.last_name)) {
-        errors.last_name = "The name can only contain letters";
+      if (!/^[a-zA-Z]{3,}$/.test(inputs.last_name)) {
+        errors.last_name = "Your name is invalid";
       }
+      
       if(!inputs.file){
         errors.file = "You must upload an image"
       } /* else if(!regexImage.test(inputs.file.name)){

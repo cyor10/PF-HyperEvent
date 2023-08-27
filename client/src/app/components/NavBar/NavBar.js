@@ -55,18 +55,18 @@ export default function NavBar() {
   return (
     <div>
       <nav className="w-full bg-purpleNav top-0 left-0 right-0 z-10 fixed h-18">
-        <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+        <div className="justify-between px-2 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
               <Link href="/">
-                <h2
-    
-                  className="text-2xl text-black font-bold"
+                <img
+                  src="https://res.cloudinary.com/hyperevents/image/upload/v1693104043/2f79163d9c2b01b94bee3fbfe55cf941_ifonjr.png"
+                  className="text-2xl text-black font-bold w-12 h-10"
                   onClick={() => window.location.href = '/'}
 
                 >
-                  H
-                </h2>
+                  
+                </img>
               </Link>
 
               {reduxUser.name && (

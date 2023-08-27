@@ -21,6 +21,7 @@ module.exports = {
         purpleNav: "#BE9FF6",
         black : "#000",
         purpleOscuro: "#925FF0",
+        grey : "#646464"
       },
       height: {
         "30vh": "30vh",
