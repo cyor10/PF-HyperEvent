@@ -17,7 +17,7 @@ export const counterSlice = createSlice({
     initialState,
     reducers: {
         getEvents: (state, action) => {
-            state.events = action.payload.events, state.allEvents = action.payload.events, state.searchedEvents = action.payload.events, console.log(state.searchedEvents)},
+            state.events = action.payload.events, state.allEvents = action.payload.events, state.searchedEvents = action.payload.events},
         searchEvents: (state, action) =>
         {const {payload} = action 
         state.searchedEvents = state.allEvents

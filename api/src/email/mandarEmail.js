@@ -16,11 +16,11 @@ async function sendEmail(newUser) { // Pasar los datos del usuario como argument
     <div style="background-color: #f2f2f2; padding: 20px;">
       <div style="background-color: #ffffff; border-radius: 10px; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
         <h2 style="color: #333;">¡Bienvenido a  HYPER EVENTS!</h2>
-        <p>Hola ${newUser.username},</p>
+        <p>Hola ${newUser.name + newUser.last_name},</p>
         <p>Gracias por registrarte en HYPER EVENTS. ¡Te damos la bienvenida a nuestra comunidad!...</p>
         <p>Tus detalles de cuenta:</p>
         <ul>
-          <li>Nombre de usuario: ${newUser.username}</li>
+          <li>Nombre de usuario: ${newUser.name + newUser.last_name}</li>
           <li>Correo electrónico: ${newUser.email}</li>
         </ul>
         <p>Recuerda que puedes acceder a tu cuenta en cualquier momento para explorar y participar en los eventos que más te interesen...</p>

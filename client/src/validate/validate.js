@@ -35,11 +35,7 @@ export function validateUser(inputs){
       } else if (!regexPasword.test(inputs.password)) {
         errors.password = "The password entered is not valid";
       }
-          if (!inputs.username) {
-        errors.username = "The username is required";
-      } else if (inputs.username.length < 4 || inputs.username.length > 20) {
-        errors .username = "The username length is not valid";
-      }
+
       
       if (!/^[a-zA-Z]*$/.test(inputs.name)) {
         errors.name = "The name can only contain letters";

@@ -47,6 +47,7 @@ export default function LandingPage() {
               "Content-Type": "multipart/form-data",
             },
           });
+          console.log(response)
           if (response.data.token) {
             localStorage.setItem("token", response.data.token);
             await axiosInstance("/protected", {

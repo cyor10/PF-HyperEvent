@@ -13,7 +13,6 @@ export default function SignUp() {
   const router = useRouter();
 
   const [inputs, setInputs] = useState({
-    username: "",
     email: "",
     name: "",
     last_name: "",
@@ -22,7 +21,6 @@ export default function SignUp() {
   });
 
   const [errors, setErrors] = useState({
-    username: "",
     email: "",
     name: "",
     last_name: "",
@@ -76,7 +74,6 @@ export default function SignUp() {
     event.preventDefault();
     try {
       let cloud = new FormData();
-      cloud.set("username", inputs.username);
       cloud.set("email", inputs.email);
       cloud.set("name", inputs.name);
       cloud.set("last_name", inputs.last_name);
@@ -112,26 +109,6 @@ export default function SignUp() {
           Create Account
         </h1>
 
-        <div className="mb-4 ">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Nickname
-          </label>
-          <input
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500 text-gray-700"
-            key="username"
-            type="username"
-            name="username"
-            onChange={handleInputs}
-            value={inputs.username}
-          />
-        </div>
-        {errors.username ? (
-          <p className=" text-red-700">{errors.username}</p>
-        ) : (
-          <>
-            <div className="text-transparent">`&ldquo;`</div>
-          </>
-        )}
         <div className="mt-6">
           <label className="block text-gray-700 font-semibold mb-2">
             Email

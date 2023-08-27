@@ -4,7 +4,7 @@ import axiosInstance from '../../utils/axiosInstance';
 
 export default function Payment() {
   const [inputs, setInputs] = useState({
-    amount: "1111",
+    amount: "1",
     description: "Ticket",
   });
 
@@ -14,6 +14,9 @@ export default function Payment() {
       [event.target.name]: event.target.value,
     });
   }
+  const paymentInfo = {
+    amount: inputs.amount
+  };
 
   console.log(inputs);
 
@@ -22,7 +25,6 @@ export default function Payment() {
     try {
       const token = localStorage.getItem("token");
       if (!token) alert("Must have an account to buy tickets");
-    
       const requestData = {
         monto: inputs.amount,
         descripcion: inputs.description,
@@ -36,7 +38,8 @@ export default function Payment() {
         }
       })
 
-      console.log(data);
+      console.log(data);  
+      localStorage.setItem("paymentInfo", JSON.stringify(paymentInfo));
       window.location.href = data.init_point;
     } catch (error) {
       console.log(error);

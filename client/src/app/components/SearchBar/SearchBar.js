@@ -72,6 +72,7 @@ export default function SearchBar() {
                     {locations.map((loc, index) => <option key={index}>{loc}</option>)}
                 </select>
             </div>
+
             <div className='w-32 h-1 bg-black ml-10'></div>
             <div className=' mt-10'>
                 <div className='flex mt-5'>
