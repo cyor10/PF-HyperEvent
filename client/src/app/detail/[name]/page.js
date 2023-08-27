@@ -7,34 +7,18 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 export default function Detail({ params }) {
   const { name } = params;
   const [event, setEvent] = useState({});
-  
-  function Map() {
-    const { isLoaded } = useLoadScript({
-      googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    });
 
-    if(isLoaded) {
-      return (
-        <GoogleMap
-        zoom={15}
-        center={{ lat: event.adress.lat, lng: event.adress.lon }}
-        mapContainerClassName='w-full h-[200px]'
-        >
-          <Marker position={{ lat: event.adress.lat, lng: event.adress.lon }} />
-        </GoogleMap>
-      );
-
-    }
-  }
-  
   useEffect(() => {
     (async () => {
       try {
         const { data } = await axiosInstance(`/events?name=${name}`);
         setEvent(data);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     })();
   }, []);
+
   const numericDate = new Date(event.start_at);
   const week = [
     "Sunday",
@@ -62,6 +46,24 @@ export default function Detail({ params }) {
   const dayName = week[numericDate.getDay() + 1];
   const dayNum = numericDate.getDate() + 1;
   const month = monthsOfYear[numericDate.getMonth()];
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+  });
+  function Map() {
+    if (event.adress) {
+      return (
+        <GoogleMap
+          zoom={15}
+          center={{ lat: +event?.adress.lat, lng: +event?.adress.lon }}
+          mapContainerClassName="w-full h-[200px]"
+        >
+          <Marker position={{ lat: event.adress.lat, lng: event.adress.lon }} />
+        </GoogleMap>
+      );
+    }
+  }
+
   return (
     <div className="p-5 bg-white pt-24">
       <div className="bg-white border-2 border-neutral-950 text-black">
@@ -112,7 +114,7 @@ export default function Detail({ params }) {
         <h3 className="text-lg ml-6 mt-2">Review: {event && event.review}</h3>
         <div>
           <h2 className="text-2xl ml-6 mt-4">When and where</h2>
-          <Map />
+
           <div className="flex ml-6 mt-4">
             <svg
               className="mt-4"
@@ -134,34 +136,10 @@ export default function Detail({ params }) {
               <h3 className="ml-4">{event.start_at?.split("T")[0]}</h3>
             </div>
           </div>
-          <div className="flex ml-6 mt-4">
-            <div>
-              <svg
-                className="mt-8"
-                xmlns="http://www.w3.org/2000/svg"
-                width="21"
-                height="21"
-                viewBox="0 0 21 21"
-                fill="none"
-              >
-                <g clipPath="url(#clip0_673_1133)">
-                  <path
-                    d="M10.4993 0C6.48097 0 3.21191 3.26954 3.21191 7.28793C3.21191 11.156 9.82385 20.1931 10.1054 20.5758L10.3681 20.9334C10.3989 20.9754 10.4478 21 10.4993 21C10.5515 21 10.6002 20.9754 10.6312 20.9334L10.8938 20.5758C11.1755 20.1931 17.7873 11.156 17.7873 7.28793C17.7873 3.26954 14.5177 0 10.4993 0ZM10.4993 4.67741C11.939 4.67741 13.1098 5.84822 13.1098 7.28793C13.1098 8.7269 11.939 9.89846 10.4993 9.89846C9.06035 9.89846 7.88874 8.7269 7.88874 7.28793C7.88874 5.84822 9.0603 4.67741 10.4993 4.67741Z"
-                    fill="black"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_673_1133">
-                    <rect width="21" height="21" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
-            </div>
-            <div>
+          <div className="flex m-2 mt-4 ">
+            <div className="w-full flex flex-col">
               <h3 className="text-lg ml-4">Location</h3>
-              <h3 className="ml-4 mt-1">
-                {event && event.city} ({event.province})
-              </h3>
+              {!isLoaded ? <div>Loading...</div> : <Map />}
             </div>
           </div>
         </div>
