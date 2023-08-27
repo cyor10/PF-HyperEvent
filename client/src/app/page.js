@@ -31,13 +31,12 @@ export default function LandingPage() {
     fetchData();
   }, []);
   
+  const session = async () => await getServerSession(authOptions);
   useEffect(() => {
     async function fetchSessionData() {
       try {
-        const session = await getServerSession(authOptions);
-        if (session) {
+        if (session?.email) {
           const cloud = new FormData();
-          cloud.set("username", session.user.username);
           cloud.set("email", session.user.email);
           cloud.set("name", session.user.name);
           cloud.set("last_name", session.user.last_name);
@@ -62,7 +61,7 @@ export default function LandingPage() {
       }
     }
     fetchSessionData();
-  }, []);
+  }, [session]);
 
   const handleFavorite = (index) => {
     setIsFav((prevState) => {
@@ -87,7 +86,7 @@ export default function LandingPage() {
         ))}
       </Carousel>
       <div className="pt-10">
-        <h1 className="text-5xl text-center pb-3 font-black leading-10">FIND YOUR EXPERIENCE</h1>
+        <h1 className="text-5xl text-center pb-3 font-black leading-10 text-black">FIND YOUR EXPERIENCE</h1>
         <div className="w-[76%] mx-auto h-3 bg-black"></div>
       </div>
       <div className="flex flex-col text-start justify-center w-full pt-3 pb-14">
