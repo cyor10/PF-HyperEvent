@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { pagination } from '../../../redux/features/events/counterSlice'
-import Link from 'next/link'
+import Cards from '../Cards/Cards'
 
 export default function Pagination( params ) {
     const dispatch = useDispatch()
@@ -10,7 +10,7 @@ export default function Pagination( params ) {
     const cardsPerPage = pageCant
     const pages = Math.ceil(reduxEvents[stateRoute].length / cardsPerPage)
     const buttonPages = Array.from({length: pages}, (_,i) => i)
-    const cardsSliced = reduxEvents[stateRoute]?.slice((reduxEvents[pageRoute]*cardsPerPage), (reduxEvents[pageRoute]+1)*cardsPerPage)
+    const events = reduxEvents[stateRoute]?.slice((reduxEvents[pageRoute]*cardsPerPage), (reduxEvents[pageRoute]+1)*cardsPerPage)
 
     const handlePagination = (pag) => {
         dispatch(pagination({pag, pageRoute}))
@@ -36,16 +36,7 @@ export default function Pagination( params ) {
                 </svg>
             </div> : null}
         </div>
-        <div className='flex flex-wrap justify-center'>
-            {cardsSliced.map(element => (
-                <Link href="/detail/[name]" as={`/detail/${element.event_name}`} key={element.id} onClick={() => dispatch(setSearchBar(false))}>
-                    <div className='mt-10 w-36 ml-2 mr-2'>
-                        <img src={element.event_image} alt={element.event_name}></img>
-                        <h3 className='text-slate-800'>{element.event_name}</h3>
-                    </div>
-                </Link> ))
-            }
-        </div>
+        <Cards props={events}/>
     </>
   )
 }

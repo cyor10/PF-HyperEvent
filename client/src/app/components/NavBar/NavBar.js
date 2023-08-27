@@ -55,7 +55,7 @@ export default function NavBar() {
   return (
     <div>
       <nav className="w-full bg-purpleNav top-0 left-0 right-0 z-10 fixed h-18">
-        <div className="justify-between px-2 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+  <div className="justify-between px-2 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
               <Link href="/">
@@ -106,7 +106,7 @@ export default function NavBar() {
             </div>
               <div className="md:hidden">
                 <button
-                  className="p-2 text-white rounded-md outline-none focus:border-gray-400 focus:border"
+                  className="p-2 text-white rounded-md outline-none focus:border-gray-400 focus:border mr-4"
                   onClick={() => {
                     if (events.searchBar === true) {
                       dispatch(setSearchBar(false));
@@ -167,7 +167,7 @@ export default function NavBar() {
             </div>
           </div>
           <div
-            className={`pl-6 relative h-screen -left-4 w-screen flex-1 bg-slate-50 justify-self-center pb-3 md:block md:pb-0 md:mt-0 ${
+            className={`h-screen w-screen flex-1 bg-slate-50 justify-self-center pb-3 md:block md:pb-0 md:mt-0 ${
               events.searchBar ? "pt-6 md:p-0 block" : "hidden"
             }`}
           >
