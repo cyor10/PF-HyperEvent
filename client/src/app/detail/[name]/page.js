@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
 import Link from "next/link";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import Image from "next/image";
 
 export default function Detail({ params }) {
   const { name } = params;
@@ -50,15 +51,18 @@ export default function Detail({ params }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
   });
+
+ 
   function Map() {
     if (event.adress) {
       return (
         <GoogleMap
           zoom={15}
-          center={{ lat: +event?.adress.lat, lng: +event?.adress.lon }}
-          mapContainerClassName="w-full h-[200px]"
+          center={{ lat: event.adress.lat, lng: event?.adress.lon }}
+          mapContainerClassName="w-full h-[230px]"
+          options={{mapId: "5a77ea9001288394",disableDefaultUI: true,clickableIcons: false,}}
         >
-          <Marker position={{ lat: event.adress.lat, lng: event.adress.lon }} />
+          <Marker position={{ lat: event.adress.lat, lng: event?.adress.lon }} />
         </GoogleMap>
       );
     }
@@ -67,10 +71,13 @@ export default function Detail({ params }) {
   return (
     <div className="p-5 bg-white pt-24">
       <div className="bg-white border-2 border-neutral-950 text-black">
-        <img
-          src={event.event_image}
-          alt={event.event_name}
+        <Image
+          src={event?.event_image}
           className="w-full h-30vh"
+          height={200}
+          width={200}
+          alt="event-image"
+          loading="lazy"
         />
         <h2 className="text-3xl mt-2 text-center ">
           {event && event.event_name}

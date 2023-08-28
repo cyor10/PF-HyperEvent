@@ -20,8 +20,8 @@ export const counterSlice = createSlice({
             state.events = action.payload.events, state.allEvents = action.payload.events, state.searchedEvents = action.payload.events},
         searchEvents: (state, action) =>
         {const {payload} = action 
-        state.searchedEvents = state.allEvents 
-            .sort((a, b) => {
+        state.searchedEvents = state.allEvents
+                .sort((a, b) => {
                 if (payload.order === "alphaA") {
                     return a.event_name.localeCompare(b.event_name);
                 } else if (payload.order === "alphaB") {

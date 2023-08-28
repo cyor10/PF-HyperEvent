@@ -8,12 +8,15 @@ module.exports = {
   theme: {
     extend: {
       minWidth: {
-        "60": "60px"
+        "60": "60px",
+        "70": "70px",
       },
       borderRadius: {
         "2xl": "1.8rem",
       },
-
+      letterSpacing: {
+        custom: "-1.2px"
+      },
       fontFamily: {
         figtree: ['Figtree', 'sans-serif'],
       },
@@ -21,6 +24,9 @@ module.exports = {
         purpleNav: "#BE9FF6",
         black : "#000",
         purpleOscuro: "#925FF0",
+        grey : "#646464",
+        pinkChip: "#E9DFFC",
+        fontColorChip: "#784DC7",
       },
       height: {
         "30vh": "30vh",

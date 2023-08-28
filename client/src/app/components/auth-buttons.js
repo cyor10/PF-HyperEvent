@@ -12,7 +12,7 @@ export function GoogleSignInButton() {
   return (
     <button
       onClick={handleClick}
-      className="w-full flex items-center font-semibold justify-center h-14 px-6 mt-4 text-xl transition-colors duration-300 bg-white border-2 border-black text-black rounded-lg focus:shadow-md hover:bg-slate-200 "
+      className="w-full flex items-center font-semibold justify-center h-14 px-6 mt-4 text-xl transition-colors duration-300 bg-white border-2 border-purpleNav text-black rounded-lg focus:shadow-md hover:bg-slate-200"
     >
       <Image src={googleLogo} alt="Google Logo" width={40} height={40} />
       <span className="ml-4">Continue with Google</span>
