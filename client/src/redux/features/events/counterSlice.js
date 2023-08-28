@@ -34,10 +34,13 @@ export const counterSlice = createSlice({
             })
             .filter(event => {
                 const actualDate = new Date();
-                const filterDate = actualDate.setDate(actualDate.getDate() + payload.filterDay)
+                const filterDate = new Date(actualDate);
+                if (payload.filterDay) {
+                    filterDate.setDate(filterDate.getDate() + payload.filterDay);
+                }       
+                const timeEvent = new Date(event.start_at).getTime()
                 return (
-                new Date(event.start_at) >= actualDate &&
-                new Date(event.start_at) <= filterDate &&
+                (!payload.filterDay || (timeEvent >= actualDate && timeEvent <= filterDate)) &&
                 event.event_name.toLowerCase().includes(payload.search.toLowerCase()) &&
                 (!payload.city || event.city === payload.city)
                 )

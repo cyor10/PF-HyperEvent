@@ -14,7 +14,7 @@ export default function Search() {
     const [orderFilters, setOrderFilters] = useState({
         city: "",
         search: "",
-        filterDay: 0,
+        filterDay: "",
         price: null,
         order: ""
     })
@@ -33,7 +33,7 @@ export default function Search() {
         recentSearch.push(orderFilters.search)
         localStorage.setItem("recentSearch", JSON.stringify(recentSearch))
     }
-  return (
+  return console.log(reduxState.searchedEvents), (
     <div className='pt-20 min-h-screen ml-5 bg-slate-50 font-figtree'>
         <div className='pt-3 flex h-10 bg-slate-50  items-center mb-4'>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
