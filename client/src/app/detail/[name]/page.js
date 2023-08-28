@@ -82,9 +82,9 @@ export default function Detail({ params }) {
         />
         <h3 className="ml-4 pt-5 text-black font-medium">{`${dayName}, ${month} ${dayNum}nd`}</h3>
         <h2 className="text-4xl mt-2 ml-4 font-bold	">
-          "{event && event.event_name}"
+          &quot;{event && event.event_name}&quot;
         </h2>
-        <p className="px-5 pt-2 text-[.95rem] font-normal">Dive into "JODOROWSKY'S DUNE" at our LUNES MÍSTICOS event – an exclusive tribute to visionary filmmaker Alejandro Jodorowsky.🎬✨</p>
+        <p className="px-5 pt-2 text-[.95rem] font-normal">Dive into &quot;JODOROWSKY&apos;S DUNE&quot; at our LUNES MÍSTICOS event – an exclusive tribute to visionary filmmaker Alejandro Jodorowsky.🎬✨</p>
         <div className="flex mt-8 justify-between">
           <div className="flex mr-11">
           </div>
@@ -107,8 +107,8 @@ export default function Detail({ params }) {
           </div>
         </div>
         <h2 className="text-2xl ml-6 mt-6 text-black font-medium">About this event</h2>
-        <p className="px-5 pt-2 text-[.95rem] text-black font-normal	">On Monday, August 28th, at 7 pm, in our movie theater, we will screen the award-winning documentary "JODOROWSKY'S DUNE" by Frank Pavich.
-        <br/><br/> In 1975, the versatile artist and cult director Alejandro Jodorowsky dreamed of a project: the adaptation of the classic science fiction novel "Dune" by Frank Herbert. Alongside Hollywood screenwriter and master of special effects Dan O'Bannon, the (future) designer of "Alien" H.R. Giger, and comic artist Jean “Moebius” Giraud, all under Jodorowsky's direction, "Dune" would be an all-out blockbuster.<br/><br/> We'll enhance the evening with tarot readings by Yanina Faccio. Tickets can be reserved by clicking the link in our bio. With your reservation, you'll have access to a seat in our movie theater, a pair of wireless headphones for watching the film, and a glass of wine or beer.</p>
+        <p className="px-5 pt-2 text-[.95rem] text-black font-normal	">On Monday, August 28th, at 7 pm, in our movie theater, we will screen the award-winning documentary &quot;JODOROWSKY&apos;S DUNE&quot; by Frank Pavich.
+        <br/><br/> In 1975, the versatile artist and cult director Alejandro Jodorowsky dreamed of a project: the adaptation of the classic science fiction novel &quot;Dune&quot; by Frank Herbert. Alongside Hollywood screenwriter and master of special effects Dan O&apos;Bannon, the (future) designer of &quot;Alien&quot; H.R. Giger, and comic artist Jean “Moebius” Giraud, all under Jodorowsky&apos;s direction, &quot;Dune&quot; would be an all-out blockbuster.<br/><br/> We&apos;ll enhance the evening with tarot readings by Yanina Faccio. Tickets can be reserved by clicking the link in our bio. With your reservation, you&apos;ll have access to a seat in our movie theater, a pair of wireless headphones for watching the film, and a glass of wine or beer.</p>
         <h3 className="text-lg ml-6 mt-2">{event && event.description}</h3>
         <h3 className="text-2xl ml-6 mt-6 text-black font-medium">Follow this event</h3>
         <div className="flex mt-6 justify-center gap-10">
