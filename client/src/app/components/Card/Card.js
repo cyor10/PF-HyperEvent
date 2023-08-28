@@ -29,7 +29,7 @@ export default function Card({props}) {
             <h2 className="text-black text-[1.3rem] pt-2 pl-5 font-normal">{event.event_name}</h2>
             <p className="text-[#784DC7] text-[1rem] pt-2 pl-5 font-normal">{event.start_at.split("T")[0]}</p>
             <p className="text-black text-[.9rem] mt-2 pb-2.5 pl-5 font-light">{event.city}</p>
-            <p className="text-black text-[1rem] pb-2.5 pl-5 font-normal">From $3,000.00</p>
+            <p className="text-black text-[1rem] pb-2.5 pl-5 font-normal">From ${event.price}</p>
           </div>
         </Link>
       </div>

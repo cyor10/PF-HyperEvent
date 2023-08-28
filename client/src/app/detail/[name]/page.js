@@ -53,7 +53,6 @@ export default function Detail({ params }) {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
   });
 
- 
   function Map() {
     if (event.location) {
       return (
@@ -123,8 +122,7 @@ export default function Detail({ params }) {
           <div className="flex flex-row w-[90%] justify-between h-40 p-5 bg-white border-2 border-purpleOscuro rounded mt-5">
           <div>
           <h3 className="text-lg">&quot;{event && event.event_name}&quot;</h3>
-
-          <p>$ 500,00</p>
+          <p>${event.price}</p>
           </div>
           <div className="flex flex-row gap-3">
             <div className="w-5 h-5 bg-purpleOscuro flex justify-center items-center rounded-full">
@@ -138,7 +136,7 @@ export default function Detail({ params }) {
           </div>
           <div className="flex justify-center w-[90%] bg-purpleOscuro mt-10 h-20 mb-5 items-center rounded-md relative cursor-pointer">
             <Link className="text-white" href="/payment">
-              Buy Tickets for $ 500,00
+              Buy Tickets for ${event.price}
             </Link>
           </div>
         </div>
@@ -146,4 +144,3 @@ export default function Detail({ params }) {
     </div>
   );
 }
-
