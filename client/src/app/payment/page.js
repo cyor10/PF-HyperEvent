@@ -30,7 +30,7 @@ export default function Payment() {
         descripcion: inputs.description,
       };
       
-      const {data} = await axiosInstance.post('/protected/pagar', requestData, {
+      const {data} = await axiosInstance.post('/pagar', requestData, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
