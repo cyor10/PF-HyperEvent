@@ -22,8 +22,11 @@ export default function Footer() {
         <h3 className='font-bold'>SEARCH</h3>
       </div>
 
-      <div className='flex flex-col gap-4 text-center items-center'>
-        <h3>LOGO</h3>
+      <div className='flex flex-col gap-4 text-center items-center relative bottom-5'>
+        <div className='w-28 h-[4rem]'>
+
+        <img className='w-28 h-20' src='https://res.cloudinary.com/hyperevents/image/upload/v1693173297/eaa18030c4d08143afa9c965bd38bff8_zud8ee.png'></img>
+        </div>
         <div className='flex justify-evenly gap-2'>
           <IconFacebook/>
           <IconIg/>

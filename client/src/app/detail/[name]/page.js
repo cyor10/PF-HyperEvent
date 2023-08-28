@@ -95,7 +95,7 @@ export default function Detail({ params }) {
           <div className="flex ml-6 mt-4 items-center">
             <IconCalendar/>
             <div>
-              <h3 className="text-lg ml-4 font-[1.2x  rem]">Date and time</h3>
+              <h3 className="text-lg ml-4 font-[1.2x  rem] font-medium">Date and time</h3>
               <h3 className="ml-4">{event.start_at?.split("T")[0]}</h3>
             </div>
           </div>
@@ -106,11 +106,11 @@ export default function Detail({ params }) {
             </div>
           </div>
         </div>
-        <h2 className="text-2xl ml-6 mt-6 text-black font-medium">About this event</h2>
+        <h2 className="text-2xl ml-6 mt-8 mb-2 text-black font-medium">About this event</h2>
         <p className="px-5 pt-2 text-[.95rem] text-black font-normal	">On Monday, August 28th, at 7 pm, in our movie theater, we will screen the award-winning documentary &quot;JODOROWSKY&apos;S DUNE&quot; by Frank Pavich.
         <br/><br/> In 1975, the versatile artist and cult director Alejandro Jodorowsky dreamed of a project: the adaptation of the classic science fiction novel &quot;Dune&quot; by Frank Herbert. Alongside Hollywood screenwriter and master of special effects Dan O&apos;Bannon, the (future) designer of &quot;Alien&quot; H.R. Giger, and comic artist Jean “Moebius” Giraud, all under Jodorowsky&apos;s direction, &quot;Dune&quot; would be an all-out blockbuster.<br/><br/> We&apos;ll enhance the evening with tarot readings by Yanina Faccio. Tickets can be reserved by clicking the link in our bio. With your reservation, you&apos;ll have access to a seat in our movie theater, a pair of wireless headphones for watching the film, and a glass of wine or beer.</p>
         <h3 className="text-lg ml-6 mt-2">{event && event.description}</h3>
-        <h3 className="text-2xl ml-6 mt-6 text-black font-medium">Follow this event</h3>
+        <h3 className="text-2xl ml-6 mt-10 text-black font-medium">Follow this event</h3>
         <div className="flex mt-6 justify-center gap-10">
         <IconFacePurple/>
 
@@ -119,10 +119,22 @@ export default function Detail({ params }) {
         <IconTwitterPurple/>
 
         </div>
-        <div className="flex flex-col justify-center mt-8 h-56 items-center bg-purpleNav bg-opacity-20 border-2 border-purpleOscuro">
-          <div className="w-[90%] h-40 p-5 bg-white border-2 border-purpleOscuro rounded mt-5">
-          <h3 className="text-lg">{event && event.event_name}</h3>
+        <div className="flex flex-col justify-center mt-8 h-56 items-center bg-purpleNav bg-opacity-20">
+          <div className="flex flex-row w-[90%] justify-between h-40 p-5 bg-white border-2 border-purpleOscuro rounded mt-5">
+          <div>
+          <h3 className="text-lg">&quot;{event && event.event_name}&quot;</h3>
+
           <p>$ 500,00</p>
+          </div>
+          <div className="flex flex-row gap-3">
+            <div className="w-5 h-5 bg-purpleOscuro flex justify-center items-center rounded-full">
+            <p className="text-[1.2rem] mb-1 text-white">-</p>
+            </div>
+            <p>1</p>
+            <div className="w-5 h-5 bg-purpleOscuro flex justify-center items-center rounded-full">
+            <p className="text-[1.2rem] mb-1 text-white">+</p>
+            </div>
+          </div>
           </div>
           <div className="flex justify-center w-[90%] bg-purpleOscuro mt-10 h-20 mb-5 items-center rounded-md relative cursor-pointer">
             <Link className="text-white" href="/payment">
