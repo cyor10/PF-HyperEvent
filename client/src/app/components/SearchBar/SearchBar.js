@@ -1,8 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getEvents, searchEvents} from '@/redux/features/events/counterSlice'
-import Pagination from './Pagination'
+import { getEvents, searchEvents, setSearchBar} from '@/redux/features/events/counterSlice'
 import AxiosInstance from '../../../utils/axiosInstance'
 import Link from 'next/link'
 
@@ -11,12 +10,12 @@ export default function SearchBar() {
     const [recentSearch, setRecentSearch] = useState([])
     const recomendations = ["The tour championship", "Bootcamp", "Conference"]
     const userLocation = "Buenos Aires"
-    const locations = ["Bs As", "Cordoba", "Neuquen"]
-    const categorys = ["Sports", "Party", "Music"]
+    const locations = ["Las Vegas", "Minneapolis", "Nashville"]
+    const categories = ["Sports", "Party", "Music"]
     const [orderFilters, setOrderFilters] = useState({
         search: "",
         category: "",
-        location: "",
+        city: "",
         filterDay: 0,
         order: ""
     })
@@ -41,6 +40,7 @@ export default function SearchBar() {
         dispatch(searchEvents(orderFilters))
         recentSearch.push(orderFilters.search)
         localStorage.setItem("recentSearch", JSON.stringify(recentSearch))
+        dispatch(setSearchBar(false))
     }
     return (
         <div className='font-figtree ml-6'>
@@ -66,7 +66,7 @@ export default function SearchBar() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M17.1833 7.04165C16.3083 3.19165 12.95 1.45831 9.99996 1.45831C9.99996 1.45831 9.99996 1.45831 9.99162 1.45831C7.04996 1.45831 3.68329 3.18331 2.80829 7.03331C1.83329 11.3333 4.46662 14.975 6.84996 17.2666C7.73329 18.1166 8.86662 18.5416 9.99996 18.5416C11.1333 18.5416 12.2666 18.1166 13.1416 17.2666C15.525 14.975 18.1583 11.3416 17.1833 7.04165ZM9.99996 11.2166C8.54996 11.2166 7.37496 10.0416 7.37496 8.59165C7.37496 7.14165 8.54996 5.96665 9.99996 5.96665C11.45 5.96665 12.625 7.14165 12.625 8.59165C12.625 10.0416 11.45 11.2166 9.99996 11.2166Z" fill="#292D32"/>
                 </svg>
-                <select className='appearance-none font-bold leading-6 tracking-custom text-black ml-5 w-64 h-10 text-2xl rounded' onChange={(event) => handleChange('location', event.target.value)}>
+                <select className='appearance-none font-bold leading-6 tracking-custom text-black ml-5 w-64 h-10 text-2xl rounded' onChange={(event) => handleChange('city', event.target.value)}>
                     <option key="userLocation">{userLocation}</option>
                     <option value="" key="All">All locations</option>
                     {locations.map((loc, index) => <option key={index}>{loc}</option>)}
@@ -76,12 +76,12 @@ export default function SearchBar() {
             <div className='w-32 h-1 bg-black ml-10'></div>
             <div className=' mt-10'>
                 <div className='flex mt-5'>
-                    <div onClick={() => handleChange('filterDay', 1)} className={`bg-pinkChip text-fontColorChip ${orderFilters.filterDay === 1 ? " border-[1px] border-purpleOscuro": null} flex justify-center font-normal text-sm items-center h-8 cursor-pointer min-w-70 ml-2 pl-2 pr-2 rounded-2xl`}>Today</div>
+                    <div onClick={() => handleChange('filterDay', 1)} className={`bg-pinkChip text-fontColorChip ${orderFilters.filterDay === 1 ? " border-[1px] border-purpleOscuro": null} flex justify-center font-normal text-sm items-center h-8 cursor-pointer min-w-70 pl-2 pr-2 rounded-2xl`}>Today</div>
                     <div onClick={() => handleChange('filterDay', 2)} className={`bg-pinkChip text-fontColorChip ${orderFilters.filterDay === 2 ? " border-[1px] border-purpleOscuro": null} flex justify-center font-normal text-sm items-center h-8 cursor-pointer min-w-70 ml-2 pl-2 pr-2 rounded-2xl`}>Tomorrow</div>
                     <div onClick={() => handleChange('filterDay', 7)} className={`bg-pinkChip text-fontColorChip ${orderFilters.filterDay === 7 ? " border-[1px] border-purpleOscuro": null} flex justify-center font-normal text-sm items-center h-8 cursor-pointer min-w-70 ml-2 pl-2 pr-2 rounded-2xl`}>This weekend</div>
                 </div>
                 <div className='flex mt-4'>
-                    {categorys.map((cat, index) => <div value={orderFilters.category} onClick={() => handleChange('category', cat)} key={index} className={`bg-pinkChip ${orderFilters.category === cat ? " border-[1px] border-purpleOscuro": null} font-normal text-sm text-fontColorChip h-8 items-center cursor-pointer min-w-70 flex justify-center mr-2 pl-2 pr-2 rounded-2xl`}>{cat}</div>)}
+                    {categories.map((cat, index) => <div value={orderFilters.category} onClick={() => handleChange('category', cat)} key={index} className={`bg-pinkChip ${orderFilters.category === cat ? " border-[1px] border-purpleOscuro": null} font-normal text-sm text-fontColorChip h-8 items-center cursor-pointer min-w-70 flex justify-center mr-2 pl-2 pr-2 rounded-2xl`}>{cat}</div>)}
                 </div>
             </div>
             <div className='text-black mt-10'>
