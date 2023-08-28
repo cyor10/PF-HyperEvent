@@ -17,26 +17,30 @@ export const counterSlice = createSlice({
     initialState,
     reducers: {
         getEvents: (state, action) => {
-            state.events = action.payload.events, state.allEvents = action.payload.events, state.searchedEvents = action.payload.events},
+            state.events = action.payload.events, state.allEvents = action.payload.events, state.searchedEvents = action.payload.events, console.log(state.searchedEvents)},
         searchEvents: (state, action) =>
         {const {payload} = action 
         state.searchedEvents = state.allEvents
                 .sort((a, b) => {
                 if (payload.order === "alphaA") {
                     return a.event_name.localeCompare(b.event_name);
-                } else if (payload.order === "alphaB") {
+                } else if (payload.order === "alphaD") {
                     return b.event_name.localeCompare(a.event_name);
-                } else if (payload.order === "dateA") {
+                } else if (payload.order === "DateA") {
                     return new Date(a.start_at) - new Date(b.start_at);
-                } else  if(payload.order === "dateB"){
+                } else  if(payload.order === "DateD") {
                     return new Date(b.start_at) - new Date(a.start_at);
                 } else return 0
             })
             .filter(event => {
                 const actualDate = new Date();
-                const filterDate = actualDate.setDate(actualDate.getDate() - payload.filterDay)
-                return (payload.filterDay <= 0 || new Date(event.start_at) >= new Date(filterDate)) &&
-                event.event_name.toLowerCase().includes(payload.search.toLowerCase())
+                const filterDate = actualDate.setDate(actualDate.getDate() + payload.filterDay)
+                return (
+                new Date(event.start_at) >= actualDate &&
+                new Date(event.start_at) <= filterDate &&
+                event.event_name.toLowerCase().includes(payload.search.toLowerCase()) &&
+                (!payload.city || event.city === payload.city)
+                )
             });
         },
         

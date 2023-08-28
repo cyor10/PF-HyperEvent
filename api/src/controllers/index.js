@@ -11,6 +11,7 @@ const setCities = require('./location/setCities')
 const getCities = require('./location/getCitiesByState')
 const createCategory = require('./category/createCategory')
 const setTopEvent = require('./event/setTopEvent')
+const { getSales, postSales} = require('./getSales')
 
 module.exports = {
     getEvents,
@@ -27,5 +28,7 @@ module.exports = {
     setCities,
     getCities,
     createCategory,
-    setTopEvent
+    setTopEvent,
+    getSales,
+    postSales
 }

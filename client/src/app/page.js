@@ -147,7 +147,7 @@ export default function LandingPage() {
           </div>
         ))}
       </div>
-      <div className="text-purpleOscuro flex items-center justify-center w-[40%] h-[3.4rem] rounded-md bg-[#E9DFFC] mb-10">
+      <div className="text-purpleOscuro flex items-center justify-center w-[40%] h-[3.4rem] rounded-md bg-pinkChip mb-10">
         <h4 className="font-medium">See More</h4>
       </div>
     </div>
