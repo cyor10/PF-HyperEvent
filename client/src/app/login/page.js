@@ -85,10 +85,12 @@ export default function Login() {
 
   return (
     <div className="flex flex-col align-start h-[100%] pb-5">
-      <img
-        className="w-40 mx-auto"
-        src="https://res.cloudinary.com/hyperevents/image/upload/v1693102330/fc69a7cd877a754674613136a28b00ed_ghlch4.png"
-      ></img>
+       <Link className="w-40 mx-auto" href="/">
+                  <img
+            className="w-40 mx-auto"
+            src="https://res.cloudinary.com/hyperevents/image/upload/v1693102330/fc69a7cd877a754674613136a28b00ed_ghlch4.png"
+          ></img>
+              </Link>
 
       <div className="flex flex-row items-center justify-between px-8 ">
         <h2 className="text-4xl font-black leading-9 text-black">LOG IN</h2>

@@ -30,22 +30,18 @@ export default function Payment() {
   async function pay(event) {
     event.preventDefault();
     try {
-      const token = localStorage.getItem("token");
-      if (!token) alert("Must have an account to buy tickets");
+/*       const token = localStorage.getItem("token");
+      if (!token) alert("Must have an account to buy tickets"); */
       const requestData = {
         monto: inputs.amount,
         descripcion: inputs.description,
       };
-
-      const { data } = await axiosInstance.post(
-        "/protected/pagar",
-        requestData,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
+      
+      const {data} = await axiosInstance.post('/pagar', requestData, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer "+ localStorage.getItem("token"),
         }
       );
 
