@@ -24,7 +24,7 @@ export default function Card({props}) {
             {isFav ? <IconFavRed /> : <IconFavWhite />}
           </button>
         </div>
-        <Link className="z-0" href="/detail/[name]" as={`/detail/${event.event_name}event`}>
+        <Link className="z-0" href="/detail/[name]" as={`/detail/${event.event_name}`}>
           <div>
             <h2 className="text-black text-[1.3rem] pt-2 pl-5 font-normal">{event.event_name}</h2>
             <p className="text-[#784DC7] text-[1rem] pt-2 pl-5 font-normal">{event.start_at.split("T")[0]}</p>
