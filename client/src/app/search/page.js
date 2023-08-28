@@ -9,7 +9,7 @@ export default function Search() {
     const reduxState = useSelector(state => state.events)
     const dispatch = useDispatch()
     const userLocation = "Buenos Aires"
-    const categorys = ["sports", "party", "music"]
+    const categories = ["sports", "party", "music"]
     const locations = ["Las Vegas", "Minneapolis", "Nashville"]
     const [orderFilters, setOrderFilters] = useState({
         city: "",
@@ -63,7 +63,7 @@ export default function Search() {
                 <div onClick={() => handleChange('filterDay', 7)} className={`bg-pinkChip text-fontColorChip ${orderFilters.filterDay === 7 ? " border-[1px] border-purpleOscuro": null} flex justify-center font-normal text-sm items-center h-8 cursor-pointer min-w-70 ml-2 pl-2 pr-2 rounded-2xl`}>This weekend</div>
             </div>
             <div className='flex mt-4'>
-                {categorys.map((cat, index) => <div value={orderFilters.category} onClick={() => handleChange('category', cat)} key={index} className={`bg-pinkChip text-fontColorChip ${orderFilters.category === cat ? " border-[1px] border-purpleOscuro": null} flex justify-center font-normal text-sm items-center h-8 cursor-pointer min-w-70 ml-2 pl-2 pr-2 rounded-2xl`}>{cat}</div>)}
+                {categories.map((cat, index) => <div value={orderFilters.category} onClick={() => handleChange('category', cat)} key={index} className={`bg-pinkChip text-fontColorChip ${orderFilters.category === cat ? " border-[1px] border-purpleOscuro": null} flex justify-center font-normal text-sm items-center h-8 cursor-pointer min-w-70 ml-2 pl-2 pr-2 rounded-2xl`}>{cat}</div>)}
             </div>
         </div>
         <div className='ml-10 w-[266px] h-2 bg-black mt-8'></div>
