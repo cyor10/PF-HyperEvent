@@ -21,7 +21,7 @@ export default function LandingPage() {
         const eventData = await axiosInstance("/events");
         const slicedEvents = eventData.data.events.slice(0, 20);
         setEvents(slicedEvents);
-        setDataCarousel(slicedEvents.slice(0, 5));
+        setDataCarousel(eventData.data.topEvents);
         const categoriesResponse = await axiosInstance("/categories");
         const slicedCategories = categoriesResponse.data.slice(8, 15);
         setCategories(slicedCategories);

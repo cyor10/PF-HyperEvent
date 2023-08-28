@@ -6,22 +6,28 @@ import { validateEventField } from "@/validate/validate";
 function EventForm() {
   const [eventData, setEventData] = useState({
     stock: 0,
-    event_image: "",
+    event_image: null,
     event_name: "",
     org_name: "",
     place_name: "",
-    adress: [""],
+    address: "",
     city: "",
-    province: "",
+    state: "",
     postal: "",
     country: "",
     start_at: "",
     end_at: "",
-    review: "",
+    //review: "",
     description: "",
     intro: "",
-    social_media: [""],
+    social_media: [],
+    price: 0,
+    category: ""
+    //TODO: location: {lat: 0, lon: 0 }
   });
+  //console.log(eventData)
+  /* 
+event_name!, org_name!, category, location, place_name!, address!, city!, state!, country!, postal!, start_at!, end_at!, intro!, description!, social_media!, price!, stock! */
 
   const [errors, setErrors] = useState({
     stock: "",
@@ -29,19 +35,22 @@ function EventForm() {
     event_name: "",
     org_name: "",
     place_name: "",
-    adress: "",
+    address: "",
     city: "",
-    province: "",
+    state: "",
     postal: "",
     country: "",
     start_at: "",
     end_at: "",
-    review: "",
+    //review: "",
     description: "",
     intro: "",
     social_media: "",
+    price: 0,
+    category: ""
+    //TODO: location: {lat: 0, lon: 0 }
   });
-
+  console.log(errors)
   const [enableSubmit, setEnableSubmit] = useState(false);
 
   function handleInputChange(event) {
@@ -85,6 +94,7 @@ function EventForm() {
       setEnableSubmit(!hasErrors);
     }
   }
+  console.log(eventData)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -94,7 +104,7 @@ function EventForm() {
       for (const [key, value] of Object.entries(eventData)) {
         formData.append(`${key}`, value);
       }
-      console.log(formData.get("event_image"));
+      
       const { data } = await axiosInstance.post("/events", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -120,7 +130,9 @@ function EventForm() {
           Form to create{" "}
         </h1>
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold">Stock:</label>
+          <label className="block text-gray-700 font-semibold">
+            Quantity:
+            </label>
           <input
             className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="number"
@@ -194,12 +206,12 @@ function EventForm() {
           <input
             className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="text"
-            name="adress"
-            value={eventData.adress}
+            name="address"
+            value={eventData.address}
             onChange={handleInputChange}
           />
         </div>
-        {errors.adress && <p className=" text-red-700">{errors.adress}</p>}
+        {errors.address && <p className=" text-red-700">{errors.address}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">
             City:
@@ -215,13 +227,13 @@ function EventForm() {
         {errors.city && <p className=" text-red-700">{errors.city}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">
-            Province:
+            State:
           </label>
           <input
             className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="text"
-            name="province"
-            value={eventData.province}
+            name="state"
+            value={eventData.state}
             onChange={handleInputChange}
           />
         </div>
@@ -279,15 +291,28 @@ function EventForm() {
         {errors.end_at && <p className=" text-red-700">{errors.end_at}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">
-            Review:
+            Price:
           </label>
-          <textarea
+          <input
             className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            name="review"
-            value={eventData.review}
+            type="number"
+            name="price"
+            value={eventData.price}
             onChange={handleInputChange}
           />
         </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 font-semibold mb-2">
+            Summary (max 140 characters):
+          </label>
+          <textarea
+            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            name="intro"
+            value={eventData.intro}
+            onChange={handleInputChange}
+          />
+        </div>
+        {errors.intro && <p className=" text-red-700">{errors.intro}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">
             Description:
@@ -304,18 +329,6 @@ function EventForm() {
         )}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">
-            Summary(max 140 characters):
-          </label>
-          <textarea
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            name="intro"
-            value={eventData.intro}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.intro && <p className=" text-red-700">{errors.intro}</p>}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
             Social Media:
           </label>
           <input
@@ -326,6 +339,20 @@ function EventForm() {
             onChange={handleInputChange}
           />
         </div>
+        
+        <div className="mb-4">
+          <label className="block text-gray-700 font-semibold mb-2" htmlFor="category">
+            Category
+          </label>
+          <input
+            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="text"
+            name="category"
+            value={eventData.category}
+            onChange={handleInputChange}
+          />
+        </div>
+        {/* TODO LOCATION CON GOOGLE MAPS PARA OBTENER COORDENADAS */}
         <div className="text-center mt-4">
           <button
             type="submit"

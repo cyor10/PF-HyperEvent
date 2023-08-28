@@ -12,48 +12,35 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        stock: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        event_image: {
-            type: DataTypes.TEXT,
-            allowNull: false
-        },
-        rating: {
-            type: DataTypes.FLOAT,
-            allowNull: false,
-            defaultValue: 0.0
-        },
-        review: {
-            type: DataTypes.TEXT,
-            allowNull: true
-        },
         org_name: {
             type: DataTypes.STRING,
+            allowNull: true
+        },
+        location: {
+            type: DataTypes.JSON,
             allowNull: true
         },
         place_name: {
             type: DataTypes.TEXT,
             allowNull: true
         },
-        adress: {
-            type: DataTypes.JSON,
+        address: {
+            type: DataTypes.STRING,
             allowNull: true
         },
         city: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        province: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        postal: {
+        state: {
             type: DataTypes.STRING,
             allowNull: true
         },
         country: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        postal: {
             type: DataTypes.STRING,
             allowNull: true
         },
@@ -62,21 +49,49 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         end_at: {
-            type: DataTypes.DATEONLY,
-            allowNull: true
-        },
-        description: {
-            type: DataTypes.TEXT,
+            type: DataTypes.DATE,
             allowNull: true
         },
         intro: {
             type: DataTypes.TEXT,
             allowNull: true,
-            defaultValue: 'intro'
+        },
+        description: {
+            type: DataTypes.TEXT,
+            allowNull: true
         },
         social_media: {
-            type: DataTypes.STRING,
+            type: DataTypes.JSON,
             allowNull: true,
+        },
+        event_image: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
+        price: {
+            type: DataTypes.DECIMAL(6, 2),
+            allowNull: true
+        },
+        stock: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        created: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        top_event: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        rating: {
+            type: DataTypes.FLOAT,
+            allowNull: true,
+            defaultValue: 0.0
+        },
+        review: {
+            type: DataTypes.JSON,
+            allowNull: true
         },
     }, {
         freezeTableName: true,

@@ -2,9 +2,8 @@
 const nextConfig = {
 
     images: {
-    domains: ["res.cloudinary.com",'seatgeek.com'],
+    domains: ['seatgeek.com', 'lh3.googleusercontent.com', 'res.cloudinary.com'],
     },
 }
-
 
 module.exports = nextConfig;
