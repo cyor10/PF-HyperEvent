@@ -73,6 +73,17 @@ async function getEvents(model) {
         }
       }
 
+      function generateRandomFutureDate() {
+        const currentDate = new Date();
+        const maxYearDistance = 1;
+        const maxMillisecondsInYear = 31536000000; // 1 año en milisegundos
+      
+        const maxDate = new Date(currentDate.getTime() + maxMillisecondsInYear);
+        const randomTime = Math.random() * (maxDate.getTime() - currentDate.getTime()) + currentDate.getTime();
+      
+        return new Date(randomTime);
+      }
+
       const eventsBoilerPlate = {
         event_name: element.performers[0].name,
         event_image: element.performers[0].image,
@@ -81,10 +92,12 @@ async function getEvents(model) {
         address: element.venue.address,
         city: element.venue.city,
         country: element.venue.country,
-        start_at: element.datetime_utc,
+        start_at: generateRandomFutureDate(),
         postal: element.venue.postal_code,
+        price: parseFloat((Math.random() * (1000 - 1) + 1).toFixed(2)),
+        stock: parseInt((Math.random() * (2000 - 1) + 1)),
         rating: element.venue.score,
-        category_id: categoryId,
+        category_id: categoryId
       };
       const event = await model.create(eventsBoilerPlate);
     }
