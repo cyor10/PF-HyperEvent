@@ -121,7 +121,7 @@ export default function SignUp() {
 
       <form
         onSubmit={onSubmit}
-        className="max-w-[90%] mx-auto p-6 mb-10 font-[figtree] font-normal"
+        className="max-w-[90%] mx-auto p-2 mb-10 font-[figtree] font-normal"
       >
 
         <div className="mt-6">
@@ -204,7 +204,7 @@ export default function SignUp() {
             value={inputs.password}
             placeholder="Password"
           />
-          <button type='button' className="relative top-[-1.9rem] left-[16.5rem]">
+          <button type='button' className="relative top-[-2rem] left-[18rem]">
           <IconEyes/>
           </button>
         {errors.password ? (

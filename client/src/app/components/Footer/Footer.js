@@ -2,16 +2,18 @@
 import React from 'react'
 import { IconArrow, IconFacebook, IconIg, IconTwitter } from '@/utils/svg/svg'
 import { useRouter } from 'next/navigation'
-
+import { usePathname } from 'next/navigation'
+import { useParams } from 'next/navigation'
 export default function Footer() {
-
+  const {name}= useParams()
   const router = useRouter()
+  const pathname = usePathname()
 
   const handleGoToHome = () => {
     router.push('/');
   };
 
-  return (
+  return (pathname === `/detail/${name}` ) ? null : (
     <footer className='bg-[#000] text-white h-[100%] flex flex-row justify-between p-6'>
       <div className='flex flex-col gap-3'>
         <h3 className='font-bold'>ABOUT US</h3>
