@@ -1,8 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import axiosInstance from '../../utils/axiosInstance';
+import axiosInstance from "../../utils/axiosInstance";
+import { IconMercadoPago, IconXPayment } from "@/utils/svg/svg";
+import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 
 export default function Payment() {
+
+  const { price } = useParams()
+  console.log(price)
+
+  const router = useRouter();
+
   const [inputs, setInputs] = useState({
     amount: "1",
     description: "Ticket",
@@ -15,10 +24,8 @@ export default function Payment() {
     });
   }
   const paymentInfo = {
-    amount: inputs.amount
+    amount: inputs.amount,
   };
-
-  console.log(inputs);
 
   async function pay(event) {
     event.preventDefault();
@@ -35,10 +42,10 @@ export default function Payment() {
           Accept: "application/json",
           "Content-Type": "application/json",
           Authorization: "Bearer "+ localStorage.getItem("token"),
-        }
-      })
+        }}
+      );
 
-      console.log(data);  
+      console.log(data);
       localStorage.setItem("paymentInfo", JSON.stringify(paymentInfo));
       window.location.href = data.init_point;
     } catch (error) {
@@ -46,47 +53,96 @@ export default function Payment() {
     }
   }
 
+  const handleGoToHome = () => {
+    router.push(`/`);
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-[83.9vh] bg-white">
-  <h2 className="text-2xl font-semibold mb-4 text-green-600">Pay</h2>
+    <div className="flex flex-col w-[100%] min-h-[100vh] fixed">
+      <div className="w-[100%] flex flex-row justify-center items-center pt-5 relative">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold	">Check-out</h2>
+          <p className="pt-3">Time left 20:00</p>
+        </div>
+        <div className="absolute bottom-5 left-[19.5rem] w-[100%]">
+          <button onClick={handleGoToHome}>
+            <IconXPayment />
+          </button>
+        </div>
+      </div>
 
-  <form className="w-[80%] p-6 bg-[#9c9c9c] rounded-lg shadow-m border-2 border-neutral-950" onSubmit={pay}>
-    <div className="shadow-m border-2 border-neutral-950 p-4 pb-5 rounded-md mb-8 text-center bg-[#457]">
-    <label className="block mb-2 text-white text-[1.2rem]" htmlFor="amount">
-      Amount
-    </label>
-   {/*  <input
-      className="w-full p-2 border rounded focus:outline-none focus:border-blue-500"
-      onChange={handleInputs}
-      type="text"
-      name="amount"
-      value={inputs.amount}
-      placeholder="Add amount"
-    /> */}
-    <h3 className="text-black text-center">${inputs.amount}</h3>
+      <div className="border-[.1rem] border-black mt-6"></div>
 
+      <form className="flex flex-col" onSubmit={pay}>
+        <h3 className="pt-5 ml-5 text-xl font-bold">Billing information</h3>
+
+        <div className="mb-2 flex flex-col">
+          <div className="flex">
+            <div className="flex flex-col pl-5 pt-5">
+              <label className="block text-gray-700 font-semibold mb-2">
+                Name
+              </label>
+              <input
+                className="w-[80%] px-3 py-2 text-[grey] border-[grey] border-2 rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+                key="name"
+                type="name"
+                name="name"
+                placeholder="John"
+              />
+            </div>
+
+            <div className="flex flex-col pt-5">
+            <label className="block text-gray-700 font-semibold mb-2">
+              Last Name
+            </label>
+            <input
+              className="w-[90%] px-3 py-2 text-[grey] border-[grey] border-2 rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+              key="lastName"
+              type="lastName"
+              name="lastName"
+              placeholder="Doe"
+            />
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-4 mx-5">
+          <label className="block text-gray-700 font-semibold	 mb-2 ml-1">Email</label>
+          <input
+            className="w-[100%] px-3 py-2 rounded-md text-[grey] border-[grey] border-2 focus:outline-none focus:ring focus:border-blue-500  font-normal"
+            key="email"
+            type="email"
+            name="email"
+            onChange={handleInputs}
+            value={inputs.email}
+            placeholder="example@gmail.com"
+          ></input>
+        </div>
+
+        <div className="pt-5">
+            <div className="flex flex-row-reverse px-6 gap-5">
+              <label className="text-[.9rem]">I want to stay informed about the events and news 
+              from this organizer.</label>
+              <input type="checkbox"></input>
+            </div>
+        </div>
+
+        <h3 className="text-2xl ml-5 pt-5 font-bold">Pay with</h3>
+
+        <div className="flex justify-center rounded-md mt-5 items-center w-[90%] border-2 border-purpleOscuro h-16 mx-auto">
+        <IconMercadoPago />
+
+        </div>
+
+        <p className="text-end text-xl pr-10 pt-2">Total: $500,00</p>
+
+        <button
+          className="mt-4 px-4 py-2 w-[50%] h-12 text-white text-xl rounded-md bg-purpleOscuro mx-auto" 
+          type="submit"
+        >
+          Place an order
+        </button>
+      </form>
     </div>
-    <div className="shadow-m border-2 border-neutral-950 p-4 pb-5 rounded-md mb-8 text-center bg-[#457]">
-
-    <label className="block mt-4 mb-2 text-white text-center text-[1.2rem]" htmlFor="description">
-      Description
-    </label>
-   {/*  <input
-      className="w-full p-2 border rounded focus:outline-none focus:border-blue-500"
-      onChange={handleInputs}
-      type="text"
-      name="description"
-      value={inputs.description}
-    /> */}
-    <h3 className="text-black text-center">{inputs.description}</h3>
-    </div>
-    <button
-      className="mt-4 px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600 w-[90%] ml-2"
-      type="submit"
-    >
-      Buy
-    </button>
-  </form>
-</div>
   );
 }
