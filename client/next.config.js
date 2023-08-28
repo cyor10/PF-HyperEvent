@@ -2,7 +2,7 @@
 const nextConfig = {
 
     images: {
-    domains: ['seatgeek.com'],
+    domains: ["res.cloudinary.com",'seatgeek.com'],
     },
 }
 

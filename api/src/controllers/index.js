@@ -9,6 +9,7 @@ const setStates = require('./location/setStates')
 const getStates = require('./location/getStatesByCounty')
 const setCities = require('./location/setCities')
 const getCities = require('./location/getCitiesByState')
+const { getSales, postSales} = require('./getSales')
 
 module.exports = {
     getEvents,
@@ -23,5 +24,7 @@ module.exports = {
     setStates,
     getStates,
     setCities,
-    getCities
+    getCities,
+    getSales,
+    postSales
 }
