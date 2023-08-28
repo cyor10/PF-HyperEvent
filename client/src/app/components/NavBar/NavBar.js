@@ -5,7 +5,7 @@ import Link from "next/link";
 import SearchBar from "../SearchBar/SearchBar";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
-
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
 import { getUser } from "@/redux/features/counter/counterSlice";
@@ -14,11 +14,13 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { IconHambuger, IconSearch, IconX } from "@/utils/svg/svg";
 
+
 export default function NavBar() {
   const { data: session } = useSession({
     required: false
   })
   const dispatch = useDispatch();
+  const pathname = usePathname()
   const reduxUser = useSelector((state) => state.counter);
   const events = useSelector((state) => state.events);
   const [navbar, setNavbar] = useState(false);
@@ -51,22 +53,22 @@ export default function NavBar() {
         dispatch(setSearchBar(!events.searchBar));
       }
     }
-
-  return (
+    
+  return (pathname === '/signup' || pathname === '/login') ? null : (
     <div>
       <nav className="w-full bg-purpleNav top-0 left-0 right-0 z-10 fixed h-18">
-        <div className="justify-between mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+  <div className="justify-between px-2 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
               <Link href="/">
-                <h2
-    
-                  className="ml-4 text-2xl text-black font-bold"
+                <img
+                  src="https://res.cloudinary.com/hyperevents/image/upload/v1693104043/2f79163d9c2b01b94bee3fbfe55cf941_ifonjr.png"
+                  className="text-2xl text-black font-bold w-12 h-10"
                   onClick={() => window.location.href = '/'}
 
                 >
-                  H
-                </h2>
+                  
+                </img>
               </Link>
 
               {reduxUser.name && (
