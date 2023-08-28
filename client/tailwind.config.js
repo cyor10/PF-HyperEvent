@@ -24,6 +24,7 @@ module.exports = {
         purpleNav: "#BE9FF6",
         black : "#000",
         purpleOscuro: "#925FF0",
+        grey : "#646464",
         pinkChip: "#E9DFFC",
         fontColorChip: "#784DC7",
       },
