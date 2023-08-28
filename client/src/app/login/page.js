@@ -13,6 +13,7 @@ import { useSession } from "next-auth/react";
 import { IconEyes } from "@/utils/svg/svg";
 
 export default function Login() {
+  const [existAccount, setExistAccount] = useState(true)
   const { data: session } = useSession({
     required: false,
   });
@@ -69,6 +70,7 @@ export default function Login() {
         }
       } catch (error) {
         console.log(error);
+        setExistAccount(false)
       }
     })();
   }
@@ -162,7 +164,8 @@ export default function Login() {
         >
           LOG-IN
         </button>
-        <div className="w-[85%] h-2 bg-black mx-auto my-10 rounded-md"></div>
+        {existAccount === false ? <p className="text-red-700 pb-5 ml-14 pt-5">This account does not exist.</p>: <p className="text-red-700 pb-5 ml-14 pt-5"></p>}
+        <div className={`w-[85%] h-2 bg-black mx-auto my-10 mt-2 rounded-md`}></div>
       </form>
       <div className="w-[90%] mx-auto relative bottom-6"> 
       <GoogleSignInButton />
