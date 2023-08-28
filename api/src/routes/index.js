@@ -14,6 +14,6 @@ router.use('/', categories)
 router.use('/', countries)
 router.use('/', sales)
 router.use('/protected', verifyToken)
-router.use('/protected/pagar', mercadopago); 
+router.use('/pagar', mercadopago); 
 
 module.exports = router;
