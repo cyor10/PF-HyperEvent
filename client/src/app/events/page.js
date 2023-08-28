@@ -43,6 +43,7 @@ export default function FetchEvents({ params }) {
             </p>
           </div>
         </Link>
+
       ))}
     </div>
   );

@@ -71,6 +71,7 @@ export default function Detail({ params }) {
   return (
     <div className="p-5 bg-white pt-24">
       <div className="bg-white border-2 border-neutral-950 text-black">
+      {event?.event_image && (
         <Image
           src={event?.event_image}
           className="w-full h-30vh"
@@ -79,6 +80,7 @@ export default function Detail({ params }) {
           alt="event-image"
           
         />
+      )}
         <h2 className="text-3xl mt-2 text-center ">
           {event && event.event_name}
         </h2>
