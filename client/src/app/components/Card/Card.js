@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { IconFavWhite, IconFavRed } from '@/utils/svg/svg'
+import Image from 'next/image'
 
 export default function Card({props}) {
   const {event, index} = props
@@ -11,7 +12,7 @@ export default function Card({props}) {
   return (
     <div className="flex flex-col gap-6 w-[22rem] justify-center pb-10 pt-3">
       <div className="bg-white shadow-md mx-auto w-[21rem] h-[19.5rem] rounded-lg flex flex-col relative" key={index}>
-        <img
+        <Image
           className="w-[100%] h-[45%] object-cover rounded-t-lg z-100 relative"
           src={event.event_image}
           alt="Descripción de la imagen"

@@ -1,39 +1,29 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
+import "./globals.css";
+import { Inter } from "next/font/google";
 
+const inter = Inter({ subsets: ["latin"] });
 
-const inter = Inter({ subsets: ['latin'] })
-
-import { Providers } from '../redux/provider'
-import NavBar from './components/NavBar/NavBar'
-import Footer from './components/Footer/Footer'
+import { Providers } from "../redux/provider";
+import NavBar from "./components/NavBar/NavBar";
+import Footer from "./components/Footer/Footer";
 
 export const metadata = {
-  title: 'Hyper Events',
-  description: 'In progess',
-}
+  title: "Hyper Events",
+  description: "In progess",
+};
 
 export default function RootLayout({ children }) {
-
   return (
     <html lang="en">
-      <body className='flex flex-col min-h-screen'>
+      <body className="flex flex-col">
         <Providers>
-
           <header>
-            <nav>
-          <NavBar />
-            </nav>
+            <NavBar />
           </header>
-
-        <main>
-          {children}
-        </main>
-
+          <main>{children}</main>
         </Providers>
-        
-        <Footer/>
-        </body>
+        <Footer />
+      </body>
     </html>
-  )
+  );
 }
