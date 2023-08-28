@@ -153,7 +153,7 @@ export default function NavBar() {
                 </li>
                 {session && (                
                 <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
-                  <Link href="/" onClick={() => {setNavbar(!navbar);signOut()}}>
+                  <Link href="/" onClick={() => {setNavbar(!navbar);signOut();localStorage.removeItem('token')}}>
                     Logout
                   </Link>
                 </li>)}
