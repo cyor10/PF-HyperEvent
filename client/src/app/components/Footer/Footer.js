@@ -6,11 +6,10 @@ import { usePathname } from 'next/navigation'
 import { useParams } from 'next/navigation'
 export default function Footer() {
   const {name}= useParams()
-  const router = useRouter()
-  const pathname = usePathname()
+  
 
-  const handleGoToHome = () => {
-    router.push('/');
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazamiento suave al principio
   };
    const shouldShowFooter = !name || name.trim().length === 0;
 
@@ -34,8 +33,11 @@ export default function Footer() {
           <IconIg/>
           <IconTwitter/>
         </div>
-        <div  onClick={handleGoToHome} className='bg-purpleOscuro w-12 h-12 flex justify-center items-center rounded-full'>
-        <IconArrow/>
+        <div
+          className='bg-purpleOscuro w-12 h-12 flex justify-center items-center rounded-full'
+          onClick={handleScrollToTop}
+        >
+          <IconArrow />
 
         </div>
       </div>
