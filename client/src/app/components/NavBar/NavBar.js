@@ -3,15 +3,12 @@
 import React from "react";
 import Link from "next/link";
 import SearchBar from "../SearchBar/SearchBar";
-
 import { useSession, signOut } from "next-auth/react";
-
 import { useState, useEffect } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
 import { getUser } from "@/redux/features/counter/counterSlice";
 import { setSearchBar } from "@/redux/features/events/counterSlice";
 import { useSelector, useDispatch } from "react-redux";
-
 import { IconHambuger, IconSearch, IconX } from "@/utils/svg/svg";
 
 export default function NavBar() {
@@ -102,8 +99,8 @@ export default function NavBar() {
             <div className="w-10  h-10 bg-[#F4EFFD] flex justify-center items-center rounded-full" onClick={handleSearch}>
             <IconSearch className="cursor-pointer z-10"
               ></IconSearch>
-
             </div>
+
               <div className="md:hidden">
                 <button
                   className="p-2 text-white rounded-md outline-none focus:border-gray-400 focus:border mr-4"
