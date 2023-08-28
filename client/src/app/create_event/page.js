@@ -6,24 +6,26 @@ import { validateEventField } from "@/validate/validate";
 function EventForm() {
   const [eventData, setEventData] = useState({
     stock: 0,
-    event_image: "",
+    event_image: null,
     event_name: "",
     org_name: "",
     place_name: "",
-    address: [],
+    address: "",
     city: "",
     state: "",
     postal: "",
     country: "",
     start_at: "",
     end_at: "",
-    review: "",
+    //review: "",
     description: "",
     intro: "",
     social_media: [],
     price: 0,
+    category: ""
     //TODO: location: {lat: 0, lon: 0 }
   });
+  //console.log(eventData)
   /* 
 event_name!, org_name!, category, location, place_name!, address!, city!, state!, country!, postal!, start_at!, end_at!, intro!, description!, social_media!, price!, stock! */
 
@@ -40,14 +42,15 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
     country: "",
     start_at: "",
     end_at: "",
-    review: "",
+    //review: "",
     description: "",
     intro: "",
     social_media: "",
     price: 0,
+    category: ""
     //TODO: location: {lat: 0, lon: 0 }
   });
-
+  console.log(errors)
   const [enableSubmit, setEnableSubmit] = useState(false);
 
   function handleInputChange(event) {
@@ -91,6 +94,7 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
       setEnableSubmit(!hasErrors);
     }
   }
+  console.log(eventData)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -100,7 +104,7 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
       for (const [key, value] of Object.entries(eventData)) {
         formData.append(`${key}`, value);
       }
-      console.log(formData.get("event_image"));
+      
       const { data } = await axiosInstance.post("/events", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -200,12 +204,12 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
           <input
             className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="text"
-            name="adress"
-            value={eventData.adress}
+            name="address"
+            value={eventData.address}
             onChange={handleInputChange}
           />
         </div>
-        {errors.adress && <p className=" text-red-700">{errors.adress}</p>}
+        {errors.address && <p className=" text-red-700">{errors.address}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">
             City:
@@ -221,13 +225,13 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
         {errors.city && <p className=" text-red-700">{errors.city}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">
-            Province:
+            state:
           </label>
           <input
             className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="text"
-            name="province"
-            value={eventData.province}
+            name="state"
+            value={eventData.state}
             onChange={handleInputChange}
           />
         </div>
@@ -329,6 +333,19 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
             type="text"
             name="social_media"
             value={eventData.social_media}
+            onChange={handleInputChange}
+          />
+        </div>
+        
+        <div className="mb-4">
+          <label className="block text-gray-700 font-semibold mb-2" htmlFor="category">
+            Category
+          </label>
+          <input
+            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="text"
+            name="category"
+            value={eventData.category}
             onChange={handleInputChange}
           />
         </div>
