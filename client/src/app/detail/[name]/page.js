@@ -177,7 +177,7 @@ export default function Detail({ params }) {
 
           <IconTwitterPurple />
         </div>
-        <div className="flex flex-col justify-center mt-8 h-56 items-center bg-purpleNav bg-opacity-20">
+        <div className="flex flex-col justify-center mt-8 min-h-[40vh] items-center bg-purpleNav bg-opacity-20 max-h-40">
         <div className="flex flex-row w-[90%] justify-between h-40 p-5 bg-white border-2 border-purpleOscuro rounded mt-5">
         <div>
             <h3 className="text-lg">&quot;{event && event.event_name}&quot;</h3>
@@ -199,8 +199,7 @@ export default function Detail({ params }) {
             </div>
           </div>
         </div>
-          <div className="flex justify-center w-[90%] bg-purpleOscuro mt-10 h-20 mb-5 items-center rounded-md relative cursor-pointer">
-            <Link className="text-white" href="/payment">
+        <div className="flex justify-center w-[90%] bg-purpleOscuro mt-10 h-14 mb-5 items-center rounded-md relative cursor-pointer">            <Link className="text-white" href="/payment">
               Buy Tickets for ${ticketCount * 500}.00
             </Link>
           </div>
