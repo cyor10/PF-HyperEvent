@@ -97,11 +97,11 @@ export default function Login() {
           </Link>
         </h2>
       </div>
-      <form className="max-w-sm mx-auto p-6 font-[figtree]" onSubmit={onSubmit}>
+      <form className="w-[90%] mx-auto p-2 font-[figtree] font-normal" onSubmit={onSubmit}>
         <div className="mt-4">
           <label className="block text-grey font-normal	 mb-2 ml-1">Email</label>
           <input
-            className="w-full px-3 py-2 rounded-md text-[grey] border-[grey] border-2 focus:outline-none focus:ring focus:border-blue-500  font-normal"
+            className="w-[100%] px-3 py-2 rounded-md text-[grey] border-[grey] border-2 focus:outline-none focus:ring focus:border-blue-500  font-normal"
             key="email"
             type="email"
             name="email"
@@ -131,7 +131,7 @@ export default function Login() {
             value={inputs.password}
             placeholder="Password"
           ></input>
-          <button type="button" className="relative top-[-2rem] left-[16.7rem]">
+          <button type="button" className="relative top-[-2rem] left-[18rem]">
             <IconEyes />
           </button>
         </div>
@@ -164,7 +164,10 @@ export default function Login() {
         </button>
         <div className="w-[85%] h-2 bg-black mx-auto my-10 rounded-md"></div>
       </form>
+      <div className="w-[90%] mx-auto relative bottom-6"> 
       <GoogleSignInButton />
+
+      </div>
     </div>
   );
 }
