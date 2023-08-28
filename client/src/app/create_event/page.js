@@ -10,9 +10,9 @@ function EventForm() {
     event_name: "",
     org_name: "",
     place_name: "",
-    adress: [""],
+    address: [],
     city: "",
-    province: "",
+    state: "",
     postal: "",
     country: "",
     start_at: "",
@@ -20,8 +20,12 @@ function EventForm() {
     review: "",
     description: "",
     intro: "",
-    social_media: [""],
+    social_media: [],
+    price: 0,
+    //TODO: location: {lat: 0, lon: 0 }
   });
+  /* 
+event_name!, org_name!, category, location, place_name!, address!, city!, state!, country!, postal!, start_at!, end_at!, intro!, description!, social_media!, price!, stock! */
 
   const [errors, setErrors] = useState({
     stock: "",
@@ -29,9 +33,9 @@ function EventForm() {
     event_name: "",
     org_name: "",
     place_name: "",
-    adress: "",
+    address: "",
     city: "",
-    province: "",
+    state: "",
     postal: "",
     country: "",
     start_at: "",
@@ -40,6 +44,8 @@ function EventForm() {
     description: "",
     intro: "",
     social_media: "",
+    price: 0,
+    //TODO: location: {lat: 0, lon: 0 }
   });
 
   const [enableSubmit, setEnableSubmit] = useState(false);
@@ -326,6 +332,7 @@ function EventForm() {
             onChange={handleInputChange}
           />
         </div>
+        {/* TODO LOCATION CON GOOGLE MAPS PARA OBTENER COORDENADAS */}
         <div className="text-center mt-4">
           <button
             type="submit"

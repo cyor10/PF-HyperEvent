@@ -84,6 +84,7 @@ export default function LandingPage() {
             width={900}
             height={300}
             key={index}
+            priority={true}
           />
         ))}
       </Carousel>

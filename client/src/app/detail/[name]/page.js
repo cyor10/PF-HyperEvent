@@ -54,15 +54,15 @@ export default function Detail({ params }) {
 
  
   function Map() {
-    if (event.adress) {
+    if (event.location) {
       return (
         <GoogleMap
           zoom={15}
-          center={{ lat: event.adress.lat, lng: event?.adress.lon }}
+          center={{ lat: event.location.lat, lng: event?.location.lon }}
           mapContainerClassName="w-full h-[230px]"
           options={{mapId: "5a77ea9001288394",disableDefaultUI: true,clickableIcons: false,}}
         >
-          <Marker position={{ lat: event.adress.lat, lng: event?.adress.lon }} />
+          <Marker position={{ lat: event.location.lat, lng: event?.location.lon }} />
         </GoogleMap>
       );
     }
@@ -77,7 +77,7 @@ export default function Detail({ params }) {
           height={200}
           width={200}
           alt="event-image"
-          loading="lazy"
+          
         />
         <h2 className="text-3xl mt-2 text-center ">
           {event && event.event_name}

@@ -2,7 +2,7 @@
 const nextConfig = {
 
     images: {
-    domains: ['seatgeek.com'],
+    domains: ['seatgeek.com', 'lh3.googleusercontent.com'],
     },
 }
 
