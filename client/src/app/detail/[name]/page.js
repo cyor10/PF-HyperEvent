@@ -134,3 +134,4 @@ export default function Detail({ params }) {
     </div>
   );
 }
+
