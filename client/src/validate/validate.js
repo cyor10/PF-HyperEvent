@@ -72,7 +72,7 @@ export function validateEventField(inputs) {
     errors.place_name === "Place name is required"
   }
   if(!inputs.address){
-    errors.adress = "Adress is required"
+    errors.address = "Address is required"
   }
   if(!inputs.city){
     errors.city = "City is required"
