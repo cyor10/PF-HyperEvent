@@ -130,7 +130,9 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
           Form to create{" "}
         </h1>
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold">Stock:</label>
+          <label className="block text-gray-700 font-semibold">
+            Quantity:
+            </label>
           <input
             className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="number"
@@ -225,7 +227,7 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
         {errors.city && <p className=" text-red-700">{errors.city}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">
-            state:
+            State:
           </label>
           <input
             className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -289,15 +291,28 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
         {errors.end_at && <p className=" text-red-700">{errors.end_at}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">
-            Review:
+            Price:
           </label>
-          <textarea
+          <input
             className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            name="review"
-            value={eventData.review}
+            type="number"
+            name="price"
+            value={eventData.price}
             onChange={handleInputChange}
           />
         </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 font-semibold mb-2">
+            Summary (max 140 characters):
+          </label>
+          <textarea
+            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            name="intro"
+            value={eventData.intro}
+            onChange={handleInputChange}
+          />
+        </div>
+        {errors.intro && <p className=" text-red-700">{errors.intro}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">
             Description:
@@ -312,18 +327,6 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
         {errors.description && (
           <p className=" text-red-700">{errors.description}</p>
         )}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Summary(max 140 characters):
-          </label>
-          <textarea
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            name="intro"
-            value={eventData.intro}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.intro && <p className=" text-red-700">{errors.intro}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">
             Social Media:
