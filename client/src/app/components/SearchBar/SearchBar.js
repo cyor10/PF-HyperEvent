@@ -11,7 +11,7 @@ export default function SearchBar() {
     const recomendations = ["The tour championship", "Bootcamp", "Conference"]
     const userLocation = "Buenos Aires"
     const locations = ["Las Vegas", "Minneapolis", "Nashville"]
-    const categorys = ["Sports", "Party", "Music"]
+    const categories = ["Sports", "Party", "Music"]
     const [orderFilters, setOrderFilters] = useState({
         search: "",
         category: "",
@@ -81,7 +81,7 @@ export default function SearchBar() {
                     <div onClick={() => handleChange('filterDay', 7)} className={`bg-pinkChip text-fontColorChip ${orderFilters.filterDay === 7 ? " border-[1px] border-purpleOscuro": null} flex justify-center font-normal text-sm items-center h-8 cursor-pointer min-w-70 ml-2 pl-2 pr-2 rounded-2xl`}>This weekend</div>
                 </div>
                 <div className='flex mt-4'>
-                    {categorys.map((cat, index) => <div value={orderFilters.category} onClick={() => handleChange('category', cat)} key={index} className={`bg-pinkChip ${orderFilters.category === cat ? " border-[1px] border-purpleOscuro": null} font-normal text-sm text-fontColorChip h-8 items-center cursor-pointer min-w-70 flex justify-center mr-2 pl-2 pr-2 rounded-2xl`}>{cat}</div>)}
+                    {categories.map((cat, index) => <div value={orderFilters.category} onClick={() => handleChange('category', cat)} key={index} className={`bg-pinkChip ${orderFilters.category === cat ? " border-[1px] border-purpleOscuro": null} font-normal text-sm text-fontColorChip h-8 items-center cursor-pointer min-w-70 flex justify-center mr-2 pl-2 pr-2 rounded-2xl`}>{cat}</div>)}
                 </div>
             </div>
             <div className='text-black mt-10'>
