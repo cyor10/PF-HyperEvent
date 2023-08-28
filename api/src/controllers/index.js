@@ -10,6 +10,7 @@ const getStates = require('./location/getStatesByCounty')
 const setCities = require('./location/setCities')
 const getCities = require('./location/getCitiesByState')
 const createCategory = require('./category/createCategory')
+const setTopEvent = require('./event/setTopEvent')
 
 module.exports = {
     getEvents,
@@ -25,5 +26,6 @@ module.exports = {
     getStates,
     setCities,
     getCities,
-    createCategory
+    createCategory,
+    setTopEvent
 }
