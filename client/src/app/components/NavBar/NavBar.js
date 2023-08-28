@@ -53,7 +53,7 @@ export default function NavBar() {
       }
     }
     
-  return (pathname === '/signup' || pathname === '/login') ? null : (
+  return (pathname === '/signup' || pathname === '/login' || pathname === '/payment') ? null : (
     <div>
       <nav className="w-full bg-purpleNav top-0 left-0 right-0 z-10 fixed h-18">
   <div className="justify-between px-2 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
