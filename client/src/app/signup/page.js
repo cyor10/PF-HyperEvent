@@ -103,9 +103,9 @@ export default function SignUp() {
   return (
 
     <div className="flex flex-col items-start">
-
+ <Link className="w-40 mx-auto" href="/">
     <img className="w-40 mx-auto" src="https://res.cloudinary.com/hyperevents/image/upload/v1693102330/fc69a7cd877a754674613136a28b00ed_ghlch4.png"></img>
-
+    </Link>
       <div className="w-full flex flex-row items-center justify-between">
         <h2 className="text-3xl pl-10 w-[60%] font-black text-black">
           CREATE AN ACCOUNT 
