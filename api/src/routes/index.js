@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const events = require('./events')
-const users = require('./users');
+const users = require('./users');   
 const sales = require("./sales")
 const categories = require('./categories')
 const verifyToken = require('../utils/verifyToken');
@@ -14,6 +14,6 @@ router.use('/', categories)
 router.use('/', countries)
 router.use('/', sales)
 router.use('/protected', verifyToken)
-router.use('/protected/pagar', mercadopago); 
+router.use('/pagar', mercadopago); 
 
 module.exports = router;
