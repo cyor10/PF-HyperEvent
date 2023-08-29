@@ -53,7 +53,7 @@ export default function NavBar() {
       }
     }
     
-  return (pathname === '/signup' || pathname === '/login') ? null : (
+  return (pathname === '/signup' || pathname === '/login' || pathname === "/payment") ? null : (
     <div>
       <nav className="w-full bg-purpleNav top-0 left-0 right-0 z-10 fixed h-18">
   <div className="justify-between lg:max-w-7xl md:items-center md:flex md:px-8">
@@ -149,11 +149,20 @@ export default function NavBar() {
                     </Link>
                   </li>
                 )}
+                {(reduxUser.name || session) && (
                 <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                   <Link href="/create_event" onClick={() => setNavbar(!navbar)}>
                     Create Events
                   </Link>
                 </li>
+                )}
+                {(!reduxUser.name && !session) && (
+                <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                  <Link href="/signup" onClick={() => setNavbar(!navbar)}>
+                    Create Events
+                  </Link>
+                </li>
+                )}
                 {session && (                
                 <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                   <Link href="/" onClick={() => {setNavbar(!navbar);signOut();localStorage.removeItem('token')}}>

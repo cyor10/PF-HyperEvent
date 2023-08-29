@@ -20,7 +20,7 @@ export default function Success() {
           },
         });
 
-        if (response.status === 201) {
+        if (response.status === 201 && paymentId) {
           console.log('Payment information sent successfully');
           localStorage.removeItem('paymentInfo');
         } else {

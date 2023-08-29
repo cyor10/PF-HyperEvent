@@ -72,14 +72,17 @@ export default function Detail({ params }) {
   return (
     <div className=" bg-white pt-16">
       <div className="bg-white text-black w-[100%]">
-        <Image
-          src={event?.event_image}
-          className="w-[100%] h-[35vh] rounded-b-3xl"
-          height={200}
-          width={200}
-          alt="event-image"
-          
-        />
+        {event && event.event_image ? (
+          <Image
+            src={event.event_image}
+            className="w-[100%] h-[35vh] rounded-b-3xl"
+            height={200}
+            width={200}
+            alt="event-image"
+          />
+          ) : (
+      <div>Loading event image...</div>
+      )}
         <h3 className="ml-4 pt-5 text-black font-medium">{`${dayName}, ${month} ${dayNum}nd`}</h3>
         <h2 className="text-4xl mt-2 ml-4 font-bold	">
           &quot;{event && event.event_name}&quot;
