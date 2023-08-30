@@ -12,9 +12,13 @@ import { getUser } from "@/redux/features/counter/counterSlice";
 import { setSearchBar } from "@/redux/features/events/counterSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { IconHambuger, IconSearch, IconX } from "@/utils/svg/svg";
+import { useParams } from "next/navigation";
 
 
 export default function NavBar() {
+
+  const { price } = useParams()
+
   const { data: session } = useSession({
     required: false
   })
@@ -53,7 +57,7 @@ export default function NavBar() {
       }
     }
     
-  return (pathname === '/signup' || pathname === '/login' || pathname === '/payment') ? null : (
+  return (price?.length > 0 ||pathname === '/signup' || pathname === '/login' || pathname === '/payment') ? null : (
     <div>
       <nav className="w-full bg-purpleNav top-0 left-0 right-0 z-10 fixed h-18">
   <div className="justify-between lg:max-w-7xl md:items-center md:flex md:px-8">
