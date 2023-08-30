@@ -29,7 +29,7 @@ export default function SearchBar() {
             // data.events = data.events.map(event => {return {...event, start_at: event.start_at.split("T")[0]}})
             dispatch(getEvents(data));
         })(); 
-    }, []);
+    }, [dispatch]);
     const handleChange = (name, value) => {
         console.log(orderFilters)
         setOrderFilters({...orderFilters,
