@@ -95,7 +95,7 @@ export default function Detail({ params }) {
   return (
     <div className=" bg-white pt-16">
       <div className="bg-white text-black w-[100%]">
-        <Image
+        <img
           src={event?.event_image}
           className="w-[100%] h-[35vh] rounded-b-3xl"
           height={200}

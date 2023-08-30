@@ -1,20 +1,14 @@
 "use client"
 import React from 'react'
 import { IconArrow, IconFacebook, IconIg, IconTwitter } from '@/utils/svg/svg'
-import { useRouter } from 'next/navigation'
-import { usePathname } from 'next/navigation'
-import { useParams } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
 export default function Footer() {
-  const {name}= useParams()
-  
-
+  const {name} = useParams()
+  const pathname = usePathname()
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazamiento suave al principio
   };
-   const shouldShowFooter = !name || name.trim().length === 0;
-
-  if (shouldShowFooter) {
-  return (
+  return (name.length > 0 || pathname === "/payment" || pathname === "/create_event") ? null : (
     <footer className='bg-[#000] text-white h-[100%] flex flex-row justify-between p-6'>
       <div className='flex flex-col gap-3'>
         <h3 className='font-bold'>ABOUT US</h3>
@@ -43,7 +37,4 @@ export default function Footer() {
       </div>
     </footer>
    );
-  } else {
-    return null; 
   }
-}
