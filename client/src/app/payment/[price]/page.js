@@ -1,15 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import axiosInstance from "../../utils/axiosInstance";
+import axiosInstance from "../../../utils/axiosInstance";
 import { IconMercadoPago, IconXPayment } from "@/utils/svg/svg";
 import { useRouter } from "next/navigation";
+
 import { useParams } from "next/navigation";
 
-export default function Payment() {
+export default function Payment({params}) {
 
-  const { price } = useParams()
-  console.log(price)
-
+  const { price } =  params 
+  
   const router = useRouter();
 
   const [inputs, setInputs] = useState({
@@ -134,7 +134,7 @@ export default function Payment() {
 
         </div>
 
-        <p className="text-end text-xl pr-10 pt-2">Total: $500,00</p>
+        <p className="text-end text-xl pr-10 pt-2">Total: ${price}</p>
 
         <button
           className="mt-4 px-4 py-2 w-[50%] h-12 text-white text-xl rounded-md bg-purpleOscuro mx-auto" 
