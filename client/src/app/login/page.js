@@ -89,6 +89,7 @@ export default function Login() {
                   <img
             className="w-40 mx-auto"
             src="https://res.cloudinary.com/hyperevents/image/upload/v1693102330/fc69a7cd877a754674613136a28b00ed_ghlch4.png"
+            alt="cloudinary-image"
           ></img>
               </Link>
 

@@ -41,7 +41,7 @@ export default function NavBar() {
         }
       })();
     }
-  }, []);
+  }, [dispatch]);
 
   const handleSearch = ()=>{
       if (navbar === true) {
@@ -64,7 +64,7 @@ export default function NavBar() {
                   src="https://res.cloudinary.com/hyperevents/image/upload/v1693104043/2f79163d9c2b01b94bee3fbfe55cf941_ifonjr.png"
                   className="text-2xl ml-2 text-black font-bold w-12 h-10"
                   onClick={() => window.location.href = '/'}
-
+                  alt="cloudinary-image"
                 >
                   
                 </img>
