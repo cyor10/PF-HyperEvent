@@ -7,7 +7,9 @@ const categories = require('./categories')
 const verifyToken = require('../utils/verifyToken');
 const mercadopago = require('./mercadopago'); 
 const countries = require('./countries')
+const comments = require('./comments')
 
+router.use('/',  comments)
 router.use('/', events)
 router.use('/', users)
 router.use('/', categories)
