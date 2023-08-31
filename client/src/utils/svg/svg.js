@@ -175,3 +175,14 @@ export const IconNav =()=>{
 </svg>
     )
 }
+
+export const Comments =()=>{
+    return(
+
+<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 24 24" style={{ fill: 'purple' }}>
+<path fill="none" stroke="purple" stroke-miterlimit="10" stroke-width="2" d="M21,11c0-4.4-4-8-9-8s-9,3.6-9,8s4,8,9,8c0.7,0,1.4-0.1,2-0.2v2.5c2-1.3,6.5-4.8,7-9.4C21,11.6,21,11.3,21,11z"></path><path d="M21,11c0-4.4-4-8-9-8s-9,3.6-9,8s4,8,9,8c0.7,0,1.4-0.1,2-0.2v2.5c2-1.3,6.5-4.8,7-9.4C21,11.6,21,11.3,21,11z" opacity=".3"></path>
+</svg>
+
+
+
+    )}
