@@ -14,8 +14,12 @@ const setTopEvent = require('./event/setTopEvent')
 const { getSales, postSales} = require('./getSales')
 const deleteComment = require('./comment/deleteComment')
 const getComments = require('./comment/getComments')
-const { editComment, responseComment } = require('./comment/patchComment')
+const editComment = require('./comment/patchComment')
 const postComment = require('./comment/postComment')
+const deleteReply = require('./replys/deleteReply')
+const getReply = require('./replys/getReply')
+const editReply = require('./replys/patchReply')
+const postReply = require('./replys/postReply')
 
 module.exports = {
     getEvents,
@@ -38,6 +42,9 @@ module.exports = {
     deleteComment,
     getComments,
     editComment,
-    responseComment,
-    postComment
+    postComment,
+    deleteReply,
+    getReply,
+    editReply,
+    postReply
 }

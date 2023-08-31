@@ -14,20 +14,4 @@ async function editComment(req, res) {
     }
 }
 
-async function responseComment(req, res) {
-    const {comment, comment_id} = req.body
-    try {
-        const repliedComment = await Comment.findOne({where: {id: comment_id}})
-        if(!repliedComment) res.status(404).json({error: "Comment not found"})
-        repliedComment.dataValues.replys.push(comment)
-        await repliedComment.save()
-        console.log("Comment replied sucessfully")
-        return res.status(200)
-    } catch (error) {
-        return res.status(500).json({error: "Server internal error"})
-    }
-}
-module.exports = {
-    editComment,
-    responseComment
-}
+module.exports = editComment

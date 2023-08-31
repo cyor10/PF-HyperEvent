@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize")
 
 module.exports = (sequelize) => {
-    sequelize.define("comment", {
+    sequelize.define("replys", {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
@@ -10,6 +10,10 @@ module.exports = (sequelize) => {
         user_id: {
             type: DataTypes.UUID,
             allowNull: false
+        },
+        comment_id: {
+            type: DataTypes.UUID,
+            allowNull: false,
         },
         comment: {
             type: DataTypes.STRING,
