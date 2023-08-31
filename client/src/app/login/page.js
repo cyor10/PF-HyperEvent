@@ -1,39 +1,71 @@
-"use client";
-import axiosInstance from "../../utils/axiosInstance";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { validateLogin } from "../../validate/validate";
-import { redirect, useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { getUser } from "@/redux/features/counter/counterSlice";
+'use client'
+  import axiosInstance from "../../utils/axiosInstance";
+  import Link from "next/link";
+  import { useState, useEffect } from "react";
+  import { validateLogin } from "../../validate/validate";
+  import { useRouter } from "next/navigation";
+  import { useDispatch } from "react-redux";
+  import { getUser } from "@/redux/features/counter/counterSlice";
 
-import { GoogleSignInButton } from "../components/auth-buttons";
+  import { GoogleSignInButton } from "../components/auth-buttons";
 
-import { useSession } from "next-auth/react";
-import { IconEyes } from "@/utils/svg/svg";
+  import { useSession } from "next-auth/react";
+  import { IconEyes } from "@/utils/svg/svg";
 
-export default function Login() {
-  const [existAccount, setExistAccount] = useState(true)
-  const { data: session } = useSession({
-    required: false,
-  });
-  if (session) {
-    redirect("/");
-  }
-  const dispatch = useDispatch();
-  const router = useRouter();
+  export default function Login() {
+    const [tokencito,setTokencito]= useState("")
+    const [existAccount, setExistAccount] = useState(true)
+    const session = useSession()
+    const dispatch = useDispatch();
+    const router = useRouter();
+    const [enableSubmit, setEnableSubmit] = useState(false);
 
-  const [enableSubmit, setEnableSubmit] = useState(false);
-
-  const [inputs, setInputs] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-  });
+    const [inputs, setInputs] = useState({
+      email: "",
+      password: "",
+    });
+    const [errors, setErrors] = useState({
+      email: "",
+      password: "",
+    });
+    const googleUser = async () => {
+      try {
+        if (session) {
+          let cloud = new FormData();
+          cloud.set("email", session.data?.user.email);
+          cloud.set("name", session.data?.user.name);
+          cloud.set("last_name", session.data?.user.last_name);
+          cloud.set("password", session.data?.user.password);
+          cloud.set("user_image", session.data?.user.user_image);
+          const { data } = await axiosInstance.post("/signup", cloud, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+          if (data.token) {
+            localStorage.setItem("token", data.token);
+            await axiosInstance("/protected", {
+              headers: {
+                Authorization: `Bearer ${data.token}`,
+              },
+            });
+            router.push("/");
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    useEffect(() => {
+      if(session.data === undefined || session.data === null) {
+      } else {
+        googleUser()
+      }
+    }, [session]);
+    useEffect(() => {
+      console.log(tokencito); // This will log the correct value of tokencito
+      localStorage.setItem("token", tokencito);
+    }, [tokencito]);
 
   function handleInputs(event) {
     setInputs({
@@ -85,13 +117,10 @@ export default function Login() {
 
   return (
     <div className="flex flex-col align-start h-[100%] pb-5">
-       <Link className="w-40 mx-auto" href="/">
-                  <img
-            className="w-40 mx-auto"
-            src="https://res.cloudinary.com/hyperevents/image/upload/v1693102330/fc69a7cd877a754674613136a28b00ed_ghlch4.png"
-            alt="cloudinary-image"
-          ></img>
-              </Link>
+      <img
+        className="w-40 mx-auto"
+        src="https://res.cloudinary.com/hyperevents/image/upload/v1693102330/fc69a7cd877a754674613136a28b00ed_ghlch4.png"
+      ></img>
 
       <div className="flex flex-row items-center justify-between px-8 ">
         <h2 className="text-4xl font-black leading-9 text-black">LOG IN</h2>

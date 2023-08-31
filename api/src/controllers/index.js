@@ -12,6 +12,10 @@ const getCities = require('./location/getCitiesByState')
 const createCategory = require('./category/createCategory')
 const setTopEvent = require('./event/setTopEvent')
 const { getSales, postSales} = require('./getSales')
+const deleteComment = require('./comment/deleteComment')
+const getComments = require('./comment/getComments')
+const { editComment, responseComment } = require('./comment/patchComment')
+const postComment = require('./comment/postComment')
 
 module.exports = {
     getEvents,
@@ -30,5 +34,10 @@ module.exports = {
     createCategory,
     setTopEvent,
     getSales,
-    postSales
+    postSales,
+    deleteComment,
+    getComments,
+    editComment,
+    responseComment,
+    postComment
 }
