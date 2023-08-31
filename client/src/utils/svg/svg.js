@@ -175,3 +175,12 @@ export const IconNav =()=>{
 </svg>
     )
 }
+
+export const IconArrowLeft = ()=>{
+    return(
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+<path d="M15.9499 9.88333L5.83325 20L15.9499 30.1167" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M34.1667 20H6.1167" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+    )
+}

@@ -126,9 +126,9 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
         onSubmit={handleSubmit}
         className="max-w-[90%] mx-auto p-4 bg-white shadow-md rounded-md mt-4"
       >
-        <h1 className="text-2xl font-semibold mb-4 text-gray-700 text-center">
+        <h3 className="text-2xl font-semibold mb-4 text-gray-700 text-center">
           Form to create{" "}
-        </h1>
+        </h3>
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold">
             Quantity:
