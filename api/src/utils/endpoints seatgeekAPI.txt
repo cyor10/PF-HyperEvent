@@ -1,6 +1,0 @@
-/events
-/events/{EVENT_ID}
-/performers
-/performers/{PERFORMER_ID}
-/venues
-/venues/{VENUE_ID}

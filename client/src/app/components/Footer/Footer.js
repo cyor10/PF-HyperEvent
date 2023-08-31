@@ -3,12 +3,12 @@ import React from 'react'
 import { IconArrow, IconFacebook, IconIg, IconTwitter } from '@/utils/svg/svg'
 import { useParams, usePathname } from 'next/navigation'
 export default function Footer() {
-  const {name} = useParams()
+  const {name, price} = useParams()
   const pathname = usePathname()
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazamiento suave al principio
   };
-  return (name?.length > 0 || pathname === "/payment" || pathname === "/create_event") ? null : (
+  return (name?.length > 0 || price?.length > 0 || pathname === "/payment/" || pathname === "/create_event" || pathname === "/create_event/form_step_1" || pathname === "/create_event/form_step_2" || pathname === "/create_event/form_step_3") ? null : (
     <footer className='bg-[#000] text-white h-[100%] flex flex-row justify-between p-6'>
       <div className='flex flex-col gap-3'>
         <h3 className='font-bold'>ABOUT US</h3>

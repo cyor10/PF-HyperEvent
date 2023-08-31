@@ -27,6 +27,7 @@ module.exports = {
         grey : "#646464",
         pinkChip: "#E9DFFC",
         fontColorChip: "#784DC7",
+        textForm: "#29154D"
       },
       height: {
         "30vh": "30vh",

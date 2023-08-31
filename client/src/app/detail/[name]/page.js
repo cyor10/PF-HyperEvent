@@ -17,6 +17,12 @@ export default function Detail({ params }) {
   const [showMap, setShowMap] = useState(false); // Nueva variable de estado
   const [ticketCount, setTicketCount] = useState(1);
 
+
+  const [ totalPrice, setTotalPrice ] = useState(0)
+
+
+  const priceTotal = ticketCount * event.price
+
   useEffect(() => {
     (async () => {
       try {
@@ -180,7 +186,7 @@ export default function Detail({ params }) {
         <div className="flex flex-row w-[90%] justify-between h-40 p-5 bg-white border-2 border-purpleOscuro rounded mt-5">
         <div>
             <h3 className="text-lg">&quot;{event && event.event_name}&quot;</h3>
-            <p>${ticketCount * event.price}</p> {/* Actualizar el precio según el contador */}
+            <p>${Math.floor(priceTotal)}</p> {/* Actualizar el precio según el contador */}
           </div>
           <div className="flex flex-row gap-3">
             <div
@@ -199,8 +205,8 @@ export default function Detail({ params }) {
           </div>
           </div>
           <div className="flex justify-center w-[90%] bg-purpleOscuro mt-10 h-20 mb-5 items-center rounded-md relative cursor-pointer">
-            <Link className="text-white" href="/payment">
-              Buy Tickets for ${ticketCount * event.price}
+            <Link className="text-white" href="/payment/[price]" as={`/payment/${Math.floor(priceTotal)}`}>
+              Buy Tickets for ${Math.floor(priceTotal)}
             </Link>
           </div>
         </div>
