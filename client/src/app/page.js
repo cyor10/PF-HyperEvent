@@ -8,7 +8,11 @@ import { IconFavWhite, IconFavRed } from "@/utils/svg/svg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import Image from "next/image";
+
+import { useSession } from "next-auth/react";
+
 import FloatingCommentBubble from "./components/comentarios/FloatingCommentBubble";
+
 
 export default function LandingPage() {
   const [isFav, setIsFav] = useState([]);
@@ -34,38 +38,6 @@ export default function LandingPage() {
     fetchData();
   }, []);
   
-  const session = async () => await getServerSession(authOptions);
-  useEffect(() => {
-    async function fetchSessionData() {
-      try {
-        if (session?.email) {
-          const cloud = new FormData();
-          cloud.set("email", session.user.email);
-          cloud.set("name", session.user.name);
-          cloud.set("last_name", session.user.last_name);
-          cloud.set("password", session.user.password);
-          cloud.set("user_image", session.user.user_image);
-          const response = await axiosInstance.post("/signup", cloud, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          });
-          console.log(response)
-          if (response.data.token) {
-            localStorage.setItem("token", response.data.token);
-            await axiosInstance("/protected", {
-              headers: {
-                Authorization: `Bearer ${response.data.token}`,
-              },
-            });
-          }
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchSessionData();
-  }, [session]);
 
   const handleFavorite = (index) => {
     setIsFav((prevState) => {
