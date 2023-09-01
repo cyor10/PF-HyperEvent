@@ -8,13 +8,15 @@ import { IconFavWhite, IconFavRed } from "@/utils/svg/svg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import Image from "next/image";
+import FloatingCommentBubble from "./components/comentarios/FloatingCommentBubble";
 
 export default function LandingPage() {
   const [isFav, setIsFav] = useState([]);
   const [dataCarousel, setDataCarousel] = useState([]);
   const [categories, setCategories] = useState([]);
   const [events, setEvents] = useState([]);
-  
+  const comments = ["¡Gran artículo!", "Interesante punto de vista", "Necesitamos más contenido como este"];
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -78,15 +80,15 @@ export default function LandingPage() {
       <Carousel>
         {dataCarousel.map((event, index) => (
           <Image
-            priority={true}
-            className="w-[100%] h-80 object-cover"
-            src={event.event_image}
-            alt="Descripción de la imagen"
-            width={900}
-            height={300}
-            key={index}
+          priority={true}
+          className="w-[100%] h-80 object-cover"
+          src={event.event_image}
+          alt="Descripción de la imagen"
+          width={900}
+          height={300}
+          key={index}
           />
-        ))}
+          ))}
       </Carousel>
       <div className="pt-10">
 
@@ -99,12 +101,12 @@ export default function LandingPage() {
         <Categories>
           {categories.map((category, index) => (
             <Link
-              className="w-[5rem] h-[6rem] mx-1.5 ml-5 mr-6"
-              key={index}
-              href={{
-                pathname: "/events",
-                query: { name: `${category.name}` },
-              }}
+            className="w-[5rem] h-[6rem] mx-1.5 ml-5 mr-6"
+            key={index}
+            href={{
+              pathname: "/events",
+              query: { name: `${category.name}` },
+            }}
             >
               <div className="rounded flex flex-col text-center items-center justify-center w-[6rem] h-[1rem] pt-20">
                 <Image
@@ -144,6 +146,7 @@ export default function LandingPage() {
                 <p className="text-black text-[1rem] pb-2.5 pl-5 font-normal">From ${event.price}</p>
               </div>
             </Link>
+<FloatingCommentBubble comments={comments} />
           </div>
         ))}
       </div>
