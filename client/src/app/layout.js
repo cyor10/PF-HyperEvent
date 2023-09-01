@@ -1,4 +1,3 @@
-"use client"
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -13,12 +12,11 @@ export const metadata = {
   description: "In progess",
 };
 
-export default function RootLayout({ children , params: {session, ...params} }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="flex flex-col">
-        <SessionProvider session={session}>
-          <Providers {...params}>
+          <Providers>
             <header>
               <NavBar />
             </header>
@@ -26,7 +24,6 @@ export default function RootLayout({ children , params: {session, ...params} }) 
               {children}
             </main>
           </Providers>
-        </SessionProvider>
         <Footer />
       </body>
     </html>
