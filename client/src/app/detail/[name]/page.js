@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
 import Link from "next/link";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import Image from "next/image";
 import {
   IconCalendar,
   IconFacePurple,
