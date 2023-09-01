@@ -99,7 +99,28 @@ const loginUser = async (req, res) => {
     res.sendStatus(500);
   }
 };
+const loginGoogleUser = async (req, res) => {
+  try {
+    const { email } = req.body;
 
+    // Verificar que el correo electrónico exista en la base de datos
+    const user = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+
+    // Crear y firmar un JWT que contenga el ID del usuario
+    const token = jwt.sign({ userId: user.dataValues.id }, JWT_SECRET);
+
+    // // Versión usando variable de entorno y mas info
+    // const token = jwt.sign({ id: user.id, name: user.name, email: user.email }, process.env.JWT_SECRET);
+    res.json({ token });
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+};
 // Endpoint protegido que solo puede ser accedido con un token JWT válido
 // ###
 const protectedUser = async (req, res) => {
@@ -128,6 +149,7 @@ module.exports = {
   signupUser,
   loginUser,
   protectedUser,
+  loginGoogleUser
 };
 
 /*
