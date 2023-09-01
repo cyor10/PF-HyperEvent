@@ -2,7 +2,6 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
-import { SessionProvider } from "next-auth/react";
 import { Providers } from "../redux/provider";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
