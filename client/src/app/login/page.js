@@ -3,7 +3,7 @@
   import Link from "next/link";
   import { useState, useEffect } from "react";
   import { validateLogin } from "../../validate/validate";
-  import { useRouter } from "next/navigation";
+  import { redirect, useRouter } from "next/navigation";
   import { useDispatch } from "react-redux";
   import { getUser } from "@/redux/features/counter/counterSlice";
 
@@ -19,7 +19,6 @@
     const dispatch = useDispatch();
     const router = useRouter();
     const [enableSubmit, setEnableSubmit] = useState(false);
-
     const [inputs, setInputs] = useState({
       email: "",
       password: "",
@@ -48,14 +47,27 @@
               headers: {
                 Authorization: `Bearer ${data.token}`,
               },
-            });
-            router.push("/");
+            });  
           }
         }
       } catch (error) {
+        inputs.email=session.data?.user.email
+        const { data } = await axiosInstance.post("/loginGoogle", inputs);
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          await axiosInstance("/protected", {
+            headers: {
+              Authorization: `Bearer ${data.token}`,
+            },
+          });
+        }
         console.log(error);
       }
+      router.push("/");
     }
+    useEffect(()=>{
+      if(localStorage.getItem("token")){router.push("/")}
+    })
     useEffect(() => {
       if(session.data === undefined || session.data === null) {
       } else {

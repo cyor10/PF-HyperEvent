@@ -30,8 +30,8 @@ export default function Payment({params}) {
   async function pay(event) {
     event.preventDefault();
     try {
-/*       const token = localStorage.getItem("token");
-      if (!token) alert("Must have an account to buy tickets"); */
+      const token = localStorage.getItem("token")?localStorage.getItem("token"):sessionStorage.getItem("token")
+      if (!token) alert("Must have an account to buy tickets");
       const requestData = {
         monto: inputs.amount,
         descripcion: inputs.description,
