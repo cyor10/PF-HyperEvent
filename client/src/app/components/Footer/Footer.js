@@ -2,6 +2,7 @@
 import React from 'react'
 import { IconArrow, IconFacebook, IconIg, IconTwitter } from '@/utils/svg/svg'
 import { useParams, usePathname } from 'next/navigation'
+import Link from 'next/link'
 export default function Footer() {
   const {name, price} = useParams()
   const pathname = usePathname()
@@ -11,10 +12,16 @@ export default function Footer() {
   return (name?.length > 0 || price?.length > 0 || pathname === "/payment/" || pathname === "/create_event" || pathname === "/create_event/form_step_1" || pathname === "/create_event/form_step_2" || pathname === "/create_event/form_step_3") ? null : (
     <footer className='bg-[#000] text-white h-[100%] flex flex-row justify-between p-6'>
       <div className='flex flex-col gap-3'>
-        <h3 className='font-bold'>ABOUT US</h3>
+        <Link href='/about'>
+          <h3 className='font-bold'>ABOUT US</h3>
+        </Link>
         <h3 className='font-bold'>CONTACT</h3>
-        <h3 className='font-bold'>CREATE</h3>
-        <h3 className='font-bold'>SEARCH</h3>
+        <Link href='/create_events'>
+          <h3 className='font-bold'>CREATE</h3>
+        </Link>
+        <Link href='/search'>
+          <h3 className='font-bold'>SEARCH</h3>
+        </Link>
       </div>
 
       <div className='flex flex-col gap-4 text-center items-center relative bottom-5'>
