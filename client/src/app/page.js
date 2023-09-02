@@ -6,7 +6,7 @@ import axiosInstance from "../utils/axiosInstance";
 import Link from "next/link";
 import { IconFavWhite, IconFavRed } from "@/utils/svg/svg";
 import Image from "next/image";
-import FloatingCommentBubble from "./components/Comentarios/FloatingCommentBubble";
+import FloatingCommentBubble from "./components/comentarios/FloatingCommentBubble";
 
 
 export default function LandingPage() {
