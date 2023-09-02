@@ -27,7 +27,6 @@ export default function NavBar() {
   const reduxUser = useSelector((state) => state.counter);
   const events = useSelector((state) => state.events);
   const [navbar, setNavbar] = useState(false);
-
   useEffect(() => {
     let token = localStorage?.getItem("token");
     if (token) {
@@ -74,7 +73,7 @@ export default function NavBar() {
                 </img>
               </Link>
 
-              {reduxUser.name && (
+              {(reduxUser.name && !session) && (
                 <label htmlFor="user" className="text-white mr-2">
                   {reduxUser.name}
                 </label>
@@ -95,7 +94,7 @@ export default function NavBar() {
                 />
               )}
 
-              {reduxUser.user_image && (
+              {(reduxUser.user_image && !session) && (
                 <Image
                   name="user"
                   className="w-10 h-10 rounded-full"
@@ -164,7 +163,7 @@ export default function NavBar() {
                     Logout
                   </Link>
                 </li>)}
-                {reduxUser.name &&                 
+                {(reduxUser.name && !session) &&                 
                 <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                   <button onClick={() => {setNavbar(!navbar); localStorage.removeItem('token'); dispatch(getUser({username: "", password: ""}))}}>
                     Logout
