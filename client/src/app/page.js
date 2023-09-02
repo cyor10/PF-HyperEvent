@@ -6,7 +6,7 @@ import axiosInstance from "../utils/axiosInstance";
 import Link from "next/link";
 import { IconFavWhite, IconFavRed } from "@/utils/svg/svg";
 import Image from "next/image";
-import FloatingCommentBubble from "./components/comentarios/FloatingCommentBubble";
+import FloatingCommentBubble from "./components/Comentarios/FloatingCommentBubble";
 
 
 export default function LandingPage() {
@@ -22,7 +22,10 @@ export default function LandingPage() {
         const eventData = await axiosInstance("/events");
         const slicedEvents = eventData.data.events.slice(0, 20);
         setEvents(slicedEvents);
-        setDataCarousel(eventData.data.topEvents);
+
+        const eventTopData = await axiosInstance('/events/top')
+        setDataCarousel(eventTopData.data.topEvents);
+
         const categoriesResponse = await axiosInstance("/categories?withEvent=true");
         const slicedCategories = categoriesResponse.data;
         setCategories(slicedCategories);
