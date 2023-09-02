@@ -19,7 +19,7 @@ const getCities = require('./location/getCitiesByState')
 const { getSales, postSales } = require('./getSales')
 
 const deleteComment = require('./comment/deleteComment')
-const getComments = require('./comment/getComments')
+const { getComments, getAproveComments } = require('./comment/getComments')
 const editComment = require('./comment/patchComment')
 const postComment = require('./comment/postComment')
 
@@ -56,4 +56,6 @@ module.exports = {
     deleteReply,
     getReply,
     editReply,
-    postReply
+    postReply,
+    getAproveComments,
+}
