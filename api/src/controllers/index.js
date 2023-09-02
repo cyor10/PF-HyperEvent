@@ -16,9 +16,7 @@ const setStates = require('./location/setStates')
 const getStates = require('./location/getStatesByCounty')
 const setCities = require('./location/setCities')
 const getCities = require('./location/getCitiesByState')
-const createCategory = require('./category/createCategory')
-const setTopEvent = require('./event/setTopEvent')
-const { getSales, postSales} = require('./getSales')
+const { getSales, postSales } = require('./getSales')
 const deleteComment = require('./comment/deleteComment')
 const getComments = require('./comment/getComments')
 const editComment = require('./comment/patchComment')
@@ -28,25 +26,18 @@ const getReply = require('./replys/getReply')
 const editReply = require('./replys/patchReply')
 const postReply = require('./replys/postReply')
 
-
-const { getSales, postSales } = require('./getSales')
-
-
 module.exports = {
     signupUser,
     loginUser,
     protectedUser,
-
     getEvents,
     createEvent,
     createMasiveEvents,
     setTopEvent,
-
     getCategories,
     getEventsByCategory,
     createCategory,
     setCategories,
-
     setCountries,
     getCountries,
     setStates,
@@ -63,5 +54,4 @@ module.exports = {
     getReply,
     editReply,
     postReply
-
 }
