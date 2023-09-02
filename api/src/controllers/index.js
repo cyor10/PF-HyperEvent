@@ -16,6 +16,7 @@ const setStates = require('./location/setStates')
 const getStates = require('./location/getStatesByCounty')
 const setCities = require('./location/setCities')
 const getCities = require('./location/getCitiesByState')
+
 const { getSales, postSales } = require('./getSales')
 
 const deleteComment = require('./comment/deleteComment')
@@ -57,3 +58,4 @@ module.exports = {
     getReply,
     editReply,
     postReply
+}
