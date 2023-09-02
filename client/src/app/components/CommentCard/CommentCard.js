@@ -7,7 +7,7 @@ export default function CommentCard({ props }) {
             <h4 className='mt-4 font-semibold'>Rating</h4>
             {}
         </div>
-        <p className='ml-4 mt-1 pt-1 font-medium'>"Hyper Events has made event discovery and booking a breeze, and their personalized recommendations have introduced me to some fantastic gatherings I wouldn't have found otherwise."</p>
+        <p className='ml-4 mt-1 pt-1 font-medium'>&quot;Hyper Events has made event discovery and booking a breeze, and their personalized recommendations have introduced me to some fantastic gatherings I wouldn&apos;t have found otherwise.&quot;</p>
         <div className='w-full flex justify-center'>
             <img src='' alt='' className='rounded-full w-[75px] h-[80px] border-2 absolute bottom-[-40px]'/>
             <p className='absolute right-4 text-black text-sm'>-John Doe</p>
