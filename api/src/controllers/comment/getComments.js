@@ -1,9 +1,9 @@
-const { Comment, Replys } = require('../../db')
+const { Comment, User } = require('../../db')
 
 async function getComments(req, res) {
     try {
         const allComments = await Comment.findAll({
-            include: Replys,
+            include: User,
             order: [['createAt', 'DESC']]
         });
         res.status(200).json(allComments);
@@ -12,4 +12,20 @@ async function getComments(req, res) {
     }
 }
 
-module.exports = getComments
+async function getAproveComments(req, res) {
+    try {
+        const allComments = await Comment.findAll({
+            where: { show: true },
+            include: User,
+            order: [['createAt', 'DESC']]
+        });
+        res.status(200).json(allComments);
+    } catch (error) {
+        res.status(404).json({error: "No aprove comments found"})
+    }
+}
+
+module.exports = {
+    getComments,
+    getAproveComments
+}

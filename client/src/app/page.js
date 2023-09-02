@@ -5,12 +5,7 @@ import Categories from "./components/Categories/Categories";
 import axiosInstance from "../utils/axiosInstance";
 import Link from "next/link";
 import { IconFavWhite, IconFavRed } from "@/utils/svg/svg";
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
 import Image from "next/image";
-
-import { useSession } from "next-auth/react";
-
 import FloatingCommentBubble from "./components/comentarios/FloatingCommentBubble";
 
 
@@ -27,9 +22,12 @@ export default function LandingPage() {
         const eventData = await axiosInstance("/events");
         const slicedEvents = eventData.data.events.slice(0, 20);
         setEvents(slicedEvents);
-        setDataCarousel(eventData.data.topEvents);
-        const categoriesResponse = await axiosInstance("/categories");
-        const slicedCategories = categoriesResponse.data.slice(8, 15);
+
+        const eventTopData = await axiosInstance('/events/top')
+        setDataCarousel(eventTopData.data.topEvents);
+
+        const categoriesResponse = await axiosInstance("/categories?withEvent=true");
+        const slicedCategories = categoriesResponse.data;
         setCategories(slicedCategories);
       } catch (error) {
         console.log(error);
@@ -37,7 +35,7 @@ export default function LandingPage() {
     };
     fetchData();
   }, []);
-  
+
 
   const handleFavorite = (index) => {
     setIsFav((prevState) => {
@@ -52,15 +50,15 @@ export default function LandingPage() {
       <Carousel>
         {dataCarousel.map((event, index) => (
           <Image
-          priority={true}
-          className="w-[100%] h-80 object-cover"
-          src={event.event_image}
-          alt="Descripción de la imagen"
-          width={900}
-          height={300}
-          key={index}
+            priority={true}
+            className="w-[100%] h-80 object-cover"
+            src={event.event_image}
+            alt="Descripción de la imagen"
+            width={900}
+            height={300}
+            key={index}
           />
-          ))}
+        ))}
       </Carousel>
       <div className="pt-10">
 
@@ -68,22 +66,23 @@ export default function LandingPage() {
 
         <div className="w-[76%] mx-auto h-3 bg-black"></div>
       </div>
+      
       <div className="flex flex-col text-start justify-center w-full pt-3 pb-14">
-        <h2 className="text-1xl pl-6 pt-8 font-bold">CATEGORIES:</h2>
+        <h2 className="text-1xl pl-6 pt-8 font-bold text-black">CATEGORIES:</h2>
         <Categories>
           {categories.map((category, index) => (
             <Link
-            className="w-[5rem] h-[6rem] mx-1.5 ml-5 mr-6"
-            key={index}
-            href={{
-              pathname: "/events",
-              query: { name: `${category.name}` },
-            }}
+              className="w-[5rem] h-[6rem] mx-1.5 ml-5 mr-6"
+              key={index}
+              href={{
+                pathname: "/events",
+                query: { name: `${category.name}` },
+              }}
             >
-              <div className="rounded flex flex-col text-center items-center justify-center w-[6rem] h-[1rem] pt-20">
+              <div className="rounded flex flex-col text-center items-center justify-center w-[6rem] h-[8rem] pt-15">
                 <Image
                   loading="lazy"
-                  className="w-[10rem] h-[5rem] rounded-md text-xs object-cover"
+                  className="w-[10rem] h-[5rem] rounded-lg text-xs object-cover"
                   src={category.image}
                   width={100}
                   height={100}
@@ -118,7 +117,7 @@ export default function LandingPage() {
                 <p className="text-black text-[1rem] pb-2.5 pl-5 font-normal">From ${event.price}</p>
               </div>
             </Link>
-<FloatingCommentBubble comments={comments} />
+            <FloatingCommentBubble comments={comments} />
           </div>
         ))}
       </div>

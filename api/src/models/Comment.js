@@ -11,10 +11,19 @@ module.exports = (sequelize) => {
             type: DataTypes.UUID,
             allowNull: false
         },
+        show: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
         comment: {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        rating: {
+            type:DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+        }
     }, {
         timestamps: true
     })
