@@ -1,8 +1,9 @@
+"use client"
 import React from 'react'
 import Modal from 'react-modal'
 import { useState } from 'react';
 
-export default function commentModal({ isOpen, onRequestClose, onNextClick }) {
+export default function CommentModal({ isOpen, onRequestClose, onNextClick }) {
     const [rating, setRating] = useState(0);
     
     const handleStarClick = (newRating) => {
