@@ -6,7 +6,7 @@ import axiosInstance from "../utils/axiosInstance";
 import Link from "next/link";
 import { IconFavWhite, IconFavRed } from "@/utils/svg/svg";
 import Image from "next/image";
-import FloatingCommentBubble from "./components/comentarios/FloatingCommentBubble";
+import FloatingCommentBubble from "./components/Comments/FloatingCommentBubble";
 
 
 export default function LandingPage() {
@@ -19,7 +19,7 @@ export default function LandingPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventData = await axiosInstance("/events");
+        const eventData = await axiosInstance("/events?page=1");
         const slicedEvents = eventData.data.events.slice(0, 20);
         setEvents(slicedEvents);
 
