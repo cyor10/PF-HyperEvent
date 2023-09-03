@@ -32,14 +32,14 @@ export default function FetchEvents({ params }) {
         >
           <div className="mb-4 p-4 bg-white border-2 border-neutral-950 rounded-lg shadow-md flex flex-col text-center items-center">
             <h2 className="text-2xl text-black pb-4">{event.event_name}</h2>
-            <Image
+            {event.event_image &&<Image
               className="rounded-lg w-[20rem] h-[13rem]"
               key={event.event_image}
               src={event.event_image}
               alt={event.start_at}
               width={'570'}
               height={'570'}
-            />
+            />}
             <p className="text-[1.2rem] text-black pt-2">
               {event.city}, {event.country}
             </p>
