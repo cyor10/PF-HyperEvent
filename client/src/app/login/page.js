@@ -1,83 +1,87 @@
-'use client'
-  import axiosInstance from "../../utils/axiosInstance";
-  import Link from "next/link";
-  import { useState, useEffect } from "react";
-  import { validateLogin } from "../../validate/validate";
-  import { redirect, useRouter } from "next/navigation";
-  import { useDispatch } from "react-redux";
-  import { getUser } from "@/redux/features/counter/counterSlice";
+'use client';
+import axiosInstance from '../../utils/axiosInstance';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { validateLogin } from '../../validate/validate';
+import { redirect, useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { getUser } from '@/redux/features/counter/counterSlice';
 
-  import { GoogleSignInButton } from "../components/auth-buttons";
+import { GoogleSignInButton } from '../components/auth-buttons';
 
-  import { useSession } from "next-auth/react";
-  import { IconEyes } from "@/utils/svg/svg";
+import { useSession } from 'next-auth/react';
+import { IconEyes } from '@/utils/svg/svg';
 
-  export default function Login() {
-    const [tokencito,setTokencito]= useState("")
-    const [existAccount, setExistAccount] = useState(true)
-    const session = useSession()
-    const dispatch = useDispatch();
-    const router = useRouter();
-    const [enableSubmit, setEnableSubmit] = useState(false);
-    const [inputs, setInputs] = useState({
-      email: "",
-      password: "",
-    });
-    const [errors, setErrors] = useState({
-      email: "",
-      password: "",
-    });
-    const googleUser = async () => {
-      try {
-        if (session) {
-          let cloud = new FormData();
-          cloud.set("email", session.data?.user.email);
-          cloud.set("name", session.data?.user.name);
-          cloud.set("last_name", session.data?.user.last_name);
-          cloud.set("password", session.data?.user.password);
-          cloud.set("user_image", session.data?.user.user_image);
-          const { data } = await axiosInstance.post("/signup", cloud, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          });
-          if (data.token) {
-            localStorage.setItem("token", data.token);
-            await axiosInstance("/protected", {
-              headers: {
-                Authorization: `Bearer ${data.token}`,
-              },
-            });  
-          }
-        }
-      } catch (error) {
-        inputs.email=session.data?.user.email
-        const { data } = await axiosInstance.post("/loginGoogle", inputs);
+export default function Login() {
+  const [tokencito, setTokencito] = useState('');
+  const [existAccount, setExistAccount] = useState(true);
+  const session = useSession();
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const [enableSubmit, setEnableSubmit] = useState(false);
+  const [inputs, setInputs] = useState({
+    email: '',
+    password: '',
+  });
+  const [errors, setErrors] = useState({
+    email: '',
+    password: '',
+  });
+  const googleUser = async () => {
+    try {
+      if (session) {
+        let cloud = new FormData();
+        cloud.set('email', session.data?.user.email);
+        cloud.set('name', session.data?.user.name);
+        cloud.set('last_name', session.data?.user.last_name);
+        cloud.set('password', session.data?.user.password);
+        cloud.set('user_image', session.data?.user.user_image);
+        const { data } = await axiosInstance.post('/signup', cloud, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
         if (data.token) {
-          localStorage.setItem("token", data.token);
-          await axiosInstance("/protected", {
+          localStorage.setItem('token', data.token);
+          document.cookie = `tokens=${data.token}`;
+          await axiosInstance('/protected', {
             headers: {
               Authorization: `Bearer ${data.token}`,
             },
           });
         }
-        console.log(error);
       }
-      router.push("/");
+    } catch (error) {
+      inputs.email = session.data?.user.email;
+      const { data } = await axiosInstance.post('/loginGoogle', inputs);
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        document.cookie = `tokens=${data.token}`;
+        await axiosInstance('/protected', {
+          headers: {
+            Authorization: `Bearer ${data.token}`,
+          },
+        });
+      }
+      console.log(error);
     }
-    useEffect(()=>{
-      if(localStorage.getItem("token")){router.push("/")}
-    })
-    useEffect(() => {
-      if(session.data === undefined || session.data === null) {
-      } else {
-        googleUser()
-      }
-    }, [session]);
-    useEffect(() => {
-      console.log(tokencito); // This will log the correct value of tokencito
-      localStorage.setItem("token", tokencito);
-    }, [tokencito]);
+    router.push('/');
+  };
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      router.push('/');
+    }
+  });
+  useEffect(() => {
+    if (session.data === undefined || session.data === null) {
+    } else {
+      googleUser();
+    }
+  }, [session]);
+  useEffect(() => {
+    console.log(tokencito); // This will log the correct value of tokencito
+    localStorage.setItem('token', tokencito);
+  }, [tokencito]);
 
   function handleInputs(event) {
     setInputs({
@@ -92,7 +96,7 @@
     setErrors(checkingErrors);
 
     const hasErrors = Object.values(checkingErrors).some(
-      (error) => error !== ""
+      (error) => error !== ''
     );
     setEnableSubmit(!hasErrors);
   }
@@ -101,29 +105,29 @@
     event.preventDefault();
     (async () => {
       try {
-        const { data } = await axiosInstance.post("/login", inputs);
+        const { data } = await axiosInstance.post('/login', inputs);
         if (data.token) {
-          localStorage.setItem("token", data.token);
-          const response = await axiosInstance("/protected", {
+          localStorage.setItem('token', data.token);
+          const response = await axiosInstance('/protected', {
             headers: {
               Authorization: `Bearer ${data.token}`,
             },
           });
           dispatch(getUser(response.data.user));
-          router.push("/");
+          router.push('/');
         }
       } catch (error) {
         console.log(error);
-        setExistAccount(false)
+        setExistAccount(false);
       }
     })();
   }
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     if (token) {
-      console.log("Estoy logueado:", token);
+      console.log('Estoy logueado:', token);
     } else {
-      console.log("Token no encontrado en el LocalStorage");
+      console.log('Token no encontrado en el LocalStorage');
     }
   }, []);
 
@@ -143,7 +147,10 @@
           </Link>
         </h2>
       </div>
-      <form className="w-[90%] mx-auto p-2 font-[figtree] font-normal" onSubmit={onSubmit}>
+      <form
+        className="w-[90%] mx-auto p-2 font-[figtree] font-normal"
+        onSubmit={onSubmit}
+      >
         <div className="mt-4">
           <label className="block text-grey font-normal	 mb-2 ml-1">Email</label>
           <input
@@ -186,7 +193,7 @@
             className="text-[.8rem] text-start pl-1 relative bottom-5"
             href="/login/reset-password "
           >
-            Forgot your password?{" "}
+            Forgot your password?{' '}
           </Link>
         </h2>
         {errors.password ? (
@@ -200,20 +207,27 @@
         <button
           className={`w-full py-3 px-4 font-medium rounded-md ${
             enableSubmit
-              ? "bg-purpleOscuro hover:bg-purpleNav text-white"
-              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              ? 'bg-purpleOscuro hover:bg-purpleNav text-white'
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
           }`}
           type="submit"
           disabled={!enableSubmit}
         >
           LOG-IN
         </button>
-        {existAccount === false ? <p className="text-red-700 pb-5 ml-14 pt-5">This account does not exist.</p>: <p className="text-red-700 pb-5 ml-14 pt-5"></p>}
-        <div className={`w-[85%] h-2 bg-black mx-auto my-10 mt-2 rounded-md`}></div>
+        {existAccount === false ? (
+          <p className="text-red-700 pb-5 ml-14 pt-5">
+            This account does not exist.
+          </p>
+        ) : (
+          <p className="text-red-700 pb-5 ml-14 pt-5"></p>
+        )}
+        <div
+          className={`w-[85%] h-2 bg-black mx-auto my-10 mt-2 rounded-md`}
+        ></div>
       </form>
-      <div className="w-[90%] mx-auto relative bottom-6"> 
-      <GoogleSignInButton />
-
+      <div className="w-[90%] mx-auto relative bottom-6">
+        <GoogleSignInButton />
       </div>
     </div>
   );
