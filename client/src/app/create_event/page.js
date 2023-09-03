@@ -1,28 +1,28 @@
-"use client";
-import React, { useState } from "react";
-import axiosInstance from "../../utils/axiosInstance";
-import { validateEventField } from "@/validate/validate";
+'use client';
+import React, { useState } from 'react';
+import axiosInstance from '../../utils/axiosInstance';
+import { validateEventField } from '@/validate/validate';
 
 function EventForm() {
   const [eventData, setEventData] = useState({
     stock: 0,
     event_image: null,
-    event_name: "",
-    org_name: "",
-    place_name: "",
-    address: "",
-    city: "",
-    state: "",
-    postal: "",
-    country: "",
-    start_at: "",
-    end_at: "",
+    event_name: '',
+    org_name: '',
+    place_name: '',
+    address: '',
+    city: '',
+    state: '',
+    postal: '',
+    country: '',
+    start_at: '',
+    end_at: '',
     //review: "",
-    description: "",
-    intro: "",
+    description: '',
+    intro: '',
     social_media: [],
     price: 0,
-    category: ""
+    category: '',
     //TODO: location: {lat: 0, lon: 0 }
   });
   //console.log(eventData)
@@ -30,27 +30,27 @@ function EventForm() {
 event_name!, org_name!, category, location, place_name!, address!, city!, state!, country!, postal!, start_at!, end_at!, intro!, description!, social_media!, price!, stock! */
 
   const [errors, setErrors] = useState({
-    stock: "",
-    event_image: "",
-    event_name: "",
-    org_name: "",
-    place_name: "",
-    address: "",
-    city: "",
-    state: "",
-    postal: "",
-    country: "",
-    start_at: "",
-    end_at: "",
+    stock: '',
+    event_image: '',
+    event_name: '',
+    org_name: '',
+    place_name: '',
+    address: '',
+    city: '',
+    state: '',
+    postal: '',
+    country: '',
+    start_at: '',
+    end_at: '',
     //review: "",
-    description: "",
-    intro: "",
-    social_media: "",
+    description: '',
+    intro: '',
+    social_media: '',
     price: 0,
-    category: ""
+    category: '',
     //TODO: location: {lat: 0, lon: 0 }
   });
-  console.log(errors)
+  console.log(errors);
   const [enableSubmit, setEnableSubmit] = useState(false);
 
   function handleInputChange(event) {
@@ -58,11 +58,11 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
 
     let truncatedValue = value;
 
-    if (name === "intro") {
+    if (name === 'intro') {
       truncatedValue = value.slice(0, 140);
     }
 
-    if (type === "file") {
+    if (type === 'file') {
       setEventData({ ...eventData, [name]: event.target.files[0] });
       const checkingErrors = validateEventField({
         ...eventData,
@@ -72,7 +72,7 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
       setErrors(checkingErrors);
 
       const hasErrors = Object.values(checkingErrors).some(
-        (error) => error !== ""
+        (error) => error !== ''
       );
       setEnableSubmit(!hasErrors);
     } else {
@@ -89,12 +89,12 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
       setErrors(checkingErrors);
 
       const hasErrors = Object.values(checkingErrors).some(
-        (error) => error !== ""
+        (error) => error !== ''
       );
       setEnableSubmit(!hasErrors);
     }
   }
-  console.log(eventData)
+  console.log(eventData);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -104,19 +104,19 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
       for (const [key, value] of Object.entries(eventData)) {
         formData.append(`${key}`, value);
       }
-      
-      const { data } = await axiosInstance.post("/events", formData, {
+
+      const { data } = await axiosInstance.post('/events', formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       });
 
       if (data.created) {
-        console.log("Event created:", data.created);
+        console.log('Event created:', data.created);
         // Puedes hacer algo con la respuesta del servidor si es necesario
       }
     } catch (error) {
-      console.log("Error:", error);
+      console.log('Error:', error);
     }
   };
 
@@ -127,12 +127,10 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
         className="max-w-[90%] mx-auto p-4 bg-white shadow-md rounded-md mt-4"
       >
         <h3 className="text-2xl font-semibold mb-4 text-gray-700 text-center">
-          Form to create{" "}
+          Form to create{' '}
         </h3>
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold">
-            Quantity:
-            </label>
+          <label className="block text-gray-700 font-semibold">Quantity:</label>
           <input
             className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="number"
@@ -339,9 +337,12 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
             onChange={handleInputChange}
           />
         </div>
-        
+
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2" htmlFor="category">
+          <label
+            className="block text-gray-700 font-semibold mb-2"
+            htmlFor="category"
+          >
             Category
           </label>
           <input
@@ -358,8 +359,8 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
             type="submit"
             className={`w-full py-2 px-4 rounded-md font-semibold ${
               enableSubmit
-                ? "bg-blue-500 hover:bg-blue-600 text-white"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                ? 'bg-blue-500 hover:bg-blue-600 text-white'
+                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
             disabled={!enableSubmit}
           >
