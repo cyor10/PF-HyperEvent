@@ -1,13 +1,13 @@
 'use client';
-import React from "react";
-import { useState } from "react";
-import axiosInstance from "../../utils/axiosInstance";
-import { validateUser } from "@/validate/validate";
-import { useRouter } from "next/navigation";
-import { useSelector, useDispatch } from "react-redux";
-import { getUser } from "@/redux/features/counter/counterSlice";
-import Link from "next/link";
-import { IconEyes } from "@/utils/svg/svg";
+import React from 'react';
+import { useState } from 'react';
+import axiosInstance from '../../utils/axiosInstance';
+import { validateUser } from '@/validate/validate';
+import { useRouter } from 'next/navigation';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUser } from '@/redux/features/counter/counterSlice';
+import Link from 'next/link';
+import { IconEyes } from '@/utils/svg/svg';
 
 export default function SignUp() {
   const dispatch = useDispatch();
@@ -15,36 +15,36 @@ export default function SignUp() {
   const router = useRouter();
 
   const [inputs, setInputs] = useState({
-    email: "",
-    name: "",
-    last_name: "",
-    password: "",
+    email: '',
+    name: '',
+    last_name: '',
+    password: '',
     file: null,
   });
 
   const [errors, setErrors] = useState({
-    email: "",
-    name: "",
-    last_name: "",
-    password: "",
-    file: "",
+    email: '',
+    name: '',
+    last_name: '',
+    password: '',
+    file: '',
   });
-  console.log(errors)
+  console.log(errors);
   const [enableSubmit, setEnableSubmit] = useState(false);
 
   function handleInputs(event) {
-    if (event.target.type === "file") {
+    if (event.target.type === 'file') {
       setInputs({ ...inputs, file: event.target.files[0] });
-      
+
       const checkingErrors = validateUser({
         ...inputs,
         [event.target.type]: event.target.files[0],
       });
-  
+
       setErrors(checkingErrors);
-  
+
       const hasErrors = Object.values(checkingErrors).some(
-        (error) => error !== ""
+        (error) => error !== ''
       );
       setEnableSubmit(!hasErrors);
     } else {
@@ -61,7 +61,7 @@ export default function SignUp() {
     setErrors(checkingErrors);
 
     const hasErrors = Object.values(checkingErrors).some(
-      (error) => error !== ""
+      (error) => error !== ''
     );
     setEnableSubmit(!hasErrors);
   }
@@ -76,54 +76,54 @@ export default function SignUp() {
     event.preventDefault();
     try {
       let cloud = new FormData();
-      cloud.set("email", inputs.email);
-      cloud.set("name", inputs.name);
-      cloud.set("last_name", inputs.last_name);
-      cloud.set("password", inputs.password);
-      cloud.set("file", inputs.file);
-      const { data } = await axiosInstance.post("/signup", cloud, {
+      cloud.set('email', inputs.email);
+      cloud.set('name', inputs.name);
+      cloud.set('last_name', inputs.last_name);
+      cloud.set('password', inputs.password);
+      cloud.set('file', inputs.file);
+      const { data } = await axiosInstance.post('/signup', cloud, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       });
       if (data.token) {
-        localStorage.setItem("token", data.token);
-        const response = await axiosInstance("/protected", {
+        localStorage.setItem('token', data.token);
+        document.cookie = `tokens=${data.token}`;
+        const response = await axiosInstance('/protected', {
           headers: {
             Authorization: `Bearer ${data.token}`,
           },
         });
         dispatch(getUser(response.data.user));
-        router.push("/");
+        router.push('/');
       }
     } catch (error) {
       console.log(error);
     }
   }
   return (
-
     <div className="flex flex-col items-start">
- <Link className="w-40 mx-auto" href="/">
-    <img className="w-40 mx-auto" src="https://res.cloudinary.com/hyperevents/image/upload/v1693102330/fc69a7cd877a754674613136a28b00ed_ghlch4.png" alt="cloudinary-image"></img>
-    </Link>
+      <Link className="w-40 mx-auto" href="/">
+        <img
+          className="w-40 mx-auto"
+          src="https://res.cloudinary.com/hyperevents/image/upload/v1693102330/fc69a7cd877a754674613136a28b00ed_ghlch4.png"
+          alt="cloudinary-image"
+        ></img>
+      </Link>
       <div className="w-full flex flex-row items-center justify-between">
         <h2 className="text-3xl pl-10 w-[60%] font-black text-black">
-          CREATE AN ACCOUNT 
+          CREATE AN ACCOUNT
         </h2>
 
-          <Link href="/login" className="pr-10 text-purpleOscuro">
-        Log in
+        <Link href="/login" className="pr-10 text-purpleOscuro">
+          Log in
         </Link>
-
       </div>
-
-
 
       <form
         onSubmit={onSubmit}
         className="max-w-[90%] mx-auto p-2 mb-10 font-[figtree] font-normal"
       >
-
         <div className="mt-6">
           <label className="block text-gray-700 font-semibold mb-2">
             Email
@@ -192,9 +192,7 @@ export default function SignUp() {
         </div>
 
         <div className="mb-2">
-          <label className="block text-gray-700 font-semibold ">
-            Password
-          </label>
+          <label className="block text-gray-700 font-semibold ">Password</label>
           <input
             className="w-full px-3 py-2 text-[grey] border-[grey] rounded border-2 focus:outline-none focus:ring focus:border-blue-500"
             key="password"
@@ -204,16 +202,18 @@ export default function SignUp() {
             value={inputs.password}
             placeholder="Password"
           />
-          <button type='button' className="relative top-[-2rem] left-[18rem]">
-          <IconEyes/>
+          <button type="button" className="relative top-[-2rem] left-[18rem]">
+            <IconEyes />
           </button>
-        {errors.password ? (
-          <p className=" text-red-700 relative bottom-4">{errors.password}</p>
-        ) : (
-          <>
-            <div className="text-transparent relative bottom-4">`&ldquo;`</div>
-          </>
-        )}
+          {errors.password ? (
+            <p className=" text-red-700 relative bottom-4">{errors.password}</p>
+          ) : (
+            <>
+              <div className="text-transparent relative bottom-4">
+                `&ldquo;`
+              </div>
+            </>
+          )}
         </div>
         <div className="mb-6">
           <label className="block text-gray-700 font-semibold mb-2">
@@ -236,8 +236,8 @@ export default function SignUp() {
         <button
           className={`w-full py-3 px-4 rounded-md font-medium	 ${
             enableSubmit
-              ? "bg-purpleOscuro hover:bg-purpleNav text-white"
-              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              ? 'bg-purpleOscuro hover:bg-purpleNav text-white'
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
           }`}
           type="submit"
           disabled={!enableSubmit}

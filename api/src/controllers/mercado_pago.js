@@ -1,34 +1,34 @@
 //todo: Implementar controller para Mercado pago  ... x*xx**xxx***
-require("dotenv").config();
+require('dotenv').config();
 const { MERCADOPAGO_ACCESS_TOKEN } = process.env;
 
-const mercadopago = require("mercadopago");
+const mercadopago = require('mercadopago');
 //* Librería -> { configure, preferences:{create} }
 
 mercadopago.configure({
   sandbox: true,
   access_token: `${MERCADOPAGO_ACCESS_TOKEN}`,
 });
- 
+
 const pagar = (req, res) => {
   const { monto, descripcion } = req.body;
   // descripcion   "tv celu ventilador"
-  console.log(monto, descripcion)
+  console.log(monto, descripcion);
   const preference = {
     items: [
-      { 
+      {
         title: descripcion,
         unit_price: parseFloat(monto),
         quantity: 1,
       },
     ],
     back_urls: {
-      success: "http://localhost:3000/payment/success",  
-      failure: "http://localhost:3000/",
-      pending: "http://localhost:3000/payment/pending",
+      success: `${process.env.BASE_URL}/payment/success`,
+      failure: `${process.env.BASE_URL}/payment/error`,
+      pending: `${process.env.BASE_URL}/payment/pending`,
     },
-    auto_return: "approved",
-  }; 
+    auto_return: 'approved',
+  };
 
   mercadopago.preferences
     .create(preference)
@@ -38,7 +38,7 @@ const pagar = (req, res) => {
     })
     .catch((error) => {
       console.log(error);
-      res.status(500).json({ message: "Error al crear preferencia de pago" });
+      res.status(500).json({ message: 'Error al crear preferencia de pago' });
     });
 };
 

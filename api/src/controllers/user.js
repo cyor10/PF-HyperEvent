@@ -1,21 +1,21 @@
 // Endpoint para crear un usuario
-require("dotenv").config();
+require('dotenv').config();
 const { JWT_SECRET } = process.env;
-const { User } = require("../db");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const cloudinary = require("../utils/cloudinaryConfig");
-const sendEmail = require("../email/mandarEmail");
+const { User } = require('../db');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const cloudinary = require('../utils/cloudinaryConfig');
+const { sendEmail } = require('../email/mandarEmail');
 const signupUser = async (req, res) => {
   try {
-    const { email, name, last_name, password,user_image } = req.body;
+    const { email, name, last_name, password, user_image } = req.body;
 
     // Trae desde req.file el oobjeto imagen y pasa su buffer a string, ademas de formatearlo para que cloudinary lo acepte
-    let imageUrl = "";
+    let imageUrl = '';
 
     if (!user_image) {
-      const bufferString = Buffer.from(req.file.buffer).toString("base64");
-      const obj2 = "data:" + req.file.mimetype + ";base64," + bufferString;
+      const bufferString = Buffer.from(req.file.buffer).toString('base64');
+      const obj2 = 'data:' + req.file.mimetype + ';base64,' + bufferString;
       const result = await cloudinary.uploader.upload(obj2, {
         public_id: req.file.originalname,
       });
@@ -23,20 +23,20 @@ const signupUser = async (req, res) => {
     } else {
       imageUrl = user_image;
     }
-  
+
     // Verificar que el correo electrónico no existe en la base de datos
     const emailExist = await User.findOne({ where: { email: email } });
     if (emailExist) {
       return res
         .status(400)
-        .send({ alert: "El correo electrónico ya está registrado." });
+        .send({ alert: 'El correo electrónico ya está registrado.' });
     }
     // Se le pasa el buffer ya formateado a cloudinary para que suba la imagen al la nube y result es un objeto con la propiedad url de la imagen ya subida
 
     // Hashear la contraseña
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    
+
     // Guardar el correo electrónico y la contraseña hasheada en la base de datos
     const newUser = await User.create({
       email: email,
@@ -45,7 +45,7 @@ const signupUser = async (req, res) => {
       password: hashedPassword,
       user_image: imageUrl,
     });
-    
+
     const userId = newUser.dataValues.id;
 
     // Crear y firmar un JWT que contenga el ID del usuario
@@ -75,7 +75,7 @@ const loginUser = async (req, res) => {
       },
     });
     if (!user) {
-      return res.status(401).send({ message: "Credenciales inválidas." });
+      return res.status(401).send({ message: 'Credenciales inválidas.' });
     }
 
     // Verificar que la contraseña coincida con la contraseña hasheada en la base de datos
@@ -84,7 +84,7 @@ const loginUser = async (req, res) => {
       user.dataValues.password
     );
     if (!validPassword) {
-      return res.status(401).send({ message: "Credenciales inválidas." });
+      return res.status(401).send({ message: 'Credenciales inválidas.' });
     }
 
     // Crear y firmar un JWT que contenga el ID del usuario
@@ -124,24 +124,28 @@ const loginGoogleUser = async (req, res) => {
 // Endpoint protegido que solo puede ser accedido con un token JWT válido
 // ###
 const protectedUser = async (req, res) => {
-  const token = req.headers.authorization?.split(" ")[1];
+  const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
-    return res.status(401).send({ message: "No se proporcionó un token." });
+    return res.status(401).send({ message: 'No se proporcionó un token.' });
   }
 
   try {
     const decodedToken = jwt.verify(token, JWT_SECRET);
-    console.log("02.---decodedToken---> ", decodedToken);
+    console.log('02.---decodedToken---> ', decodedToken);
 
     const user = await User.findOne({
       where: {
-        id: decodedToken.userId
+        id: decodedToken.userId,
       },
     });
 
-    res.send({ message: "Solicitud exitosa.", userId: decodedToken.userId, user: user });
+    res.send({
+      message: 'Solicitud exitosa.',
+      userId: decodedToken.userId,
+      user: user,
+    });
   } catch (error) {
-    return res.status(401).send({ message: "Token inválido." });
+    return res.status(401).send({ message: 'Token inválido.' });
   }
 };
 
@@ -149,7 +153,7 @@ module.exports = {
   signupUser,
   loginUser,
   protectedUser,
-  loginGoogleUser
+  loginGoogleUser,
 };
 
 /*

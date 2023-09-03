@@ -1,15 +1,14 @@
-"use client";
-import React, { useState } from "react";
-import axiosInstance from "../../../utils/axiosInstance";
-import { IconMercadoPago, IconXPayment } from "@/utils/svg/svg";
-import { useRouter } from "next/navigation";
+'use client';
+import React, { useState } from 'react';
+import axiosInstance from '../../../utils/axiosInstance';
+import { IconMercadoPago, IconXPayment } from '@/utils/svg/svg';
+import { useRouter } from 'next/navigation';
 
-import { useParams } from "next/navigation";
+import { useParams } from 'next/navigation';
 
-export default function Payment({params}) {
+export default function Payment({ params }) {
+  const { price } = params;
 
-  const { price } =  params 
-  
   const router = useRouter();
 
   const [inputs, setInputs] = useState({
@@ -37,23 +36,21 @@ export default function Payment({params}) {
   async function pay(event) {
     event.preventDefault();
     try {
-      const token = localStorage.getItem("token")?localStorage.getItem("token"):sessionStorage.getItem("token")
-      if (!token) alert("Must have an account to buy tickets");
       const requestData = {
         monto: inputs.amount,
         descripcion: inputs.description,
       };
-      
-      const {data} = await axiosInstance.post('/pagar', requestData, {
+
+      const { data } = await axiosInstance.post('/pagar', requestData, {
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer "+ localStorage.getItem("token"),
-        }}
-      );
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      });
 
       console.log(data);
-      localStorage.setItem("paymentInfo", JSON.stringify(paymentInfo));
+      localStorage.setItem('paymentInfo', JSON.stringify(paymentInfo));
       window.location.href = data.init_point;
     } catch (error) {
       console.log(error);
@@ -101,24 +98,26 @@ export default function Payment({params}) {
             </div>
 
             <div className="flex flex-col pt-5">
-            <label className="block text-gray-700 font-semibold mb-2">
-              Last Name
-            </label>
-            <input
-              className="w-[90%] px-3 py-2 text-[grey] border-[grey] border-2 rounded-lg focus:outline-none focus:ring focus:border-blue-500"
-              key="last_name"
-              type="last_name"
-              name="last_name"
-              onChange={handleInputs}
-              value={inputs.last_name}
-              placeholder="Doe"
-            />
+              <label className="block text-gray-700 font-semibold mb-2">
+                Last Name
+              </label>
+              <input
+                className="w-[90%] px-3 py-2 text-[grey] border-[grey] border-2 rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+                key="last_name"
+                type="last_name"
+                name="last_name"
+                onChange={handleInputs}
+                value={inputs.last_name}
+                placeholder="Doe"
+              />
             </div>
           </div>
         </div>
 
         <div className="mt-4 mx-5">
-          <label className="block text-gray-700 font-semibold	 mb-2 ml-1">Email</label>
+          <label className="block text-gray-700 font-semibold	 mb-2 ml-1">
+            Email
+          </label>
           <input
             className="w-[100%] px-3 py-2 rounded-md text-[grey] border-[grey] border-2 focus:outline-none focus:ring focus:border-blue-500  font-normal"
             key="email"
@@ -131,24 +130,25 @@ export default function Payment({params}) {
         </div>
 
         <div className="pt-5">
-            <div className="flex flex-row-reverse px-6 gap-5">
-              <label className="text-[.9rem]">I want to stay informed about the events and news 
-              from this organizer.</label>
-              <input type="checkbox"></input>
-            </div>
+          <div className="flex flex-row-reverse px-6 gap-5">
+            <label className="text-[.9rem]">
+              I want to stay informed about the events and news from this
+              organizer.
+            </label>
+            <input type="checkbox"></input>
+          </div>
         </div>
 
         <h3 className="text-2xl ml-5 pt-5 font-bold">Pay with</h3>
 
         <div className="flex justify-center rounded-md mt-5 items-center w-[90%] border-2 border-purpleOscuro h-16 mx-auto">
-        <IconMercadoPago />
-
+          <IconMercadoPago />
         </div>
 
         <p className="text-end text-xl pr-10 pt-2">Total: ${price}</p>
 
         <button
-          className="mt-4 px-4 py-2 w-[50%] h-12 text-white text-xl rounded-md bg-purpleOscuro mx-auto" 
+          className="mt-4 px-4 py-2 w-[50%] h-12 text-white text-xl rounded-md bg-purpleOscuro mx-auto"
           type="submit"
         >
           Place an order
