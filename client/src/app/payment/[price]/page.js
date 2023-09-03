@@ -65,13 +65,13 @@ export default function Payment({params}) {
   };
 
   return (
-    <div className="flex flex-col w-[100%] min-h-[100vh] fixed">
-      <div className="w-[100%] flex flex-row justify-center items-center pt-5 relative">
+    <div className="flex flex-col w-full min-h-screen">
+      <div className="flex flex-row justify-center items-center p-5">
         <div className="text-center">
-          <h2 className="text-2xl font-bold	">Check-out</h2>
+          <h2 className="text-2xl font-bold">Check-out</h2>
           <p className="pt-3">Time left 20:00</p>
         </div>
-        <div className="absolute bottom-5 left-[19.5rem] w-[100%]">
+        <div className="ml-3">
           <button onClick={handleGoToHome}>
             <IconXPayment />
           </button>
