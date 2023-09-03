@@ -69,7 +69,7 @@ async function searchEvents(req, res) {
             orderClause.push(['start_at', 'DESC'])
         }
 
-        if (!word && !city && !start && !category && !sort && !date) {
+        if (!word && !city && !start && !category) {
             return res.status(400).json({ error: "Params is required" })
         }
 
@@ -80,7 +80,7 @@ async function searchEvents(req, res) {
 
         return res.status(200).json(events);
     } catch (error) {
-        return res.status(500).json({ error: error.message });//"Internal server error"
+        return res.status(500).json({ error: "Internal server error" });
     }
 }
 
