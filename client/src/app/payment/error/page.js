@@ -2,14 +2,37 @@
 import React, {useEffect} from 'react'
 import { useSearchParams } from 'next/navigation'
 import { IconXPayment, IconError } from '@/utils/svg/svg'
+import axiosInstance from "@/utils/axiosInstance"
 
 export default function Error() {
   const paymentQuery = useSearchParams()
   const status = paymentQuery.get('status')
   const paymentId = paymentQuery.get('payment_id')
   useEffect(() => {
-    localStorage.removeItem("paymentInfo");
-  }, []); // Empty dependency array ensures the effect runs only once after initial render
+    async function sendPaymentInfo() {
+      if(status==="failure"){ 
+      try {
+        const paymentInfo = JSON.parse(localStorage.getItem('paymentInfo'));
+        paymentInfo.status="failure"
+        const response = await axiosInstance.post('/sales', { paymentInfo }, {
+          headers: {
+            'Content-Type': 'application/json', // Use application/json for JSON data
+          },
+        });
+
+        if (response.status === 500) {
+          console.log('It has been an error in the payment');
+          localStorage.removeItem('paymentInfo');
+        } else {
+          console.error('Failed to send payment information');
+        }
+      } catch (error) {
+        console.error('Error sending payment information:', error);
+      }
+    }}
+
+    sendPaymentInfo();
+  }, []);
 
  
   return (

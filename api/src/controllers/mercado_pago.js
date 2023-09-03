@@ -24,7 +24,7 @@ const pagar = (req, res) => {
     ],
     back_urls: {
       success: "http://localhost:3000/payment/success",  
-      failure: "http://localhost:3000/",
+      failure: "http://localhost:3000/payment/error",
       pending: "http://localhost:3000/payment/pending",
     },
     auto_return: "approved",

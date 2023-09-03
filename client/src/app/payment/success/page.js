@@ -8,13 +8,12 @@ export default function Success() {
   const paymentQuery = useSearchParams();
   const status = paymentQuery.get('status');
   const paymentId = paymentQuery.get('payment_id');
-
   useEffect(() => {
     async function sendPaymentInfo() {
-      if(localStorage.getItem('paymentInfo')){ 
+      if(status==="approved"){ 
       try {
         const paymentInfo = JSON.parse(localStorage.getItem('paymentInfo'));
-
+        paymentInfo.status="approved"
         const response = await axiosInstance.post('/sales', { paymentInfo }, {
           headers: {
             'Content-Type': 'application/json', // Use application/json for JSON data
