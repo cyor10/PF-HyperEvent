@@ -5,6 +5,7 @@ const { createEvent } = require('./event/createEvent')
 const createMasiveEvents = require('./event/createMasiveEvents')
 const setTopEvent = require('./event/setTopEvent')
 const getTopEvents = require('./event/getTopEvents')
+const searchEvents = require('./event/searchEvents')
 
 const getCategories = require('./category/getCategories')
 const { getEventsByCategory } = require('./category/getEventsByCategory')
@@ -40,6 +41,7 @@ module.exports = {
     createMasiveEvents,
     setTopEvent,
     getTopEvents,
+    searchEvents,
     getCategories,
     getEventsByCategory,
     createCategory,

@@ -10,8 +10,8 @@ export default function SearchBar() {
     const [recentSearch, setRecentSearch] = useState([])
     const recomendations = ["The tour championship", "Bootcamp", "Conference"]
     const userLocation = "Buenos Aires"
-    const locations = ["Las Vegas", "Minneapolis", "Nashville"]
-    const categories = ["Sports", "Party", "Music"]
+    const locations = ["Las Vegas", "Chicago", "Nashville"]
+    const categories = ["Sports", "Theater", "Concerts"]
     const [orderFilters, setOrderFilters] = useState({
         search: "",
         category: "",
@@ -78,7 +78,7 @@ export default function SearchBar() {
                 <div className='flex mt-5'>
                     <div onClick={() => handleChange('filterDay', 1)} className={`bg-pinkChip text-fontColorChip ${orderFilters.filterDay === 1 ? " border-[1px] border-purpleOscuro": null} flex justify-center font-normal text-sm items-center h-8 cursor-pointer min-w-70 pl-2 pr-2 rounded-2xl`}>Today</div>
                     <div onClick={() => handleChange('filterDay', 2)} className={`bg-pinkChip text-fontColorChip ${orderFilters.filterDay === 2 ? " border-[1px] border-purpleOscuro": null} flex justify-center font-normal text-sm items-center h-8 cursor-pointer min-w-70 ml-2 pl-2 pr-2 rounded-2xl`}>Tomorrow</div>
-                    <div onClick={() => handleChange('filterDay', 7)} className={`bg-pinkChip text-fontColorChip ${orderFilters.filterDay === 7 ? " border-[1px] border-purpleOscuro": null} flex justify-center font-normal text-sm items-center h-8 cursor-pointer min-w-70 ml-2 pl-2 pr-2 rounded-2xl`}>This weekend</div>
+                    <div onClick={() => handleChange('filterDay', 7)} className={`bg-pinkChip text-fontColorChip ${orderFilters.filterDay === 7 ? " border-[1px] border-purpleOscuro": null} flex justify-center font-normal text-sm items-center h-8 cursor-pointer min-w-70 ml-2 pl-2 pr-2 rounded-2xl`}>Weekend</div>
                 </div>
                 <div className='flex mt-4'>
                     {categories.map((cat, index) => <div value={orderFilters.category} onClick={() => handleChange('category', cat)} key={index} className={`bg-pinkChip ${orderFilters.category === cat ? " border-[1px] border-purpleOscuro": null} font-normal text-sm text-fontColorChip h-8 items-center cursor-pointer min-w-70 flex justify-center mr-2 pl-2 pr-2 rounded-2xl`}>{cat}</div>)}

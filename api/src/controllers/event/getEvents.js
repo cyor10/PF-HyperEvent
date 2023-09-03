@@ -37,11 +37,7 @@ async function getEvents(req, res) {
       });
     }
 
-    const allEvents = await Event.findAll({
-      order: [['created', 'DESC']]
-    }
-    );
-    return res.status(200).json({ events: allEvents })
+    return res.status(400).json({ error: "Params is required: name or page" })
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });
   }

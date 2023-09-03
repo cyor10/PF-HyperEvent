@@ -9,8 +9,8 @@ export default function Search() {
     const reduxState = useSelector(state => state.events)
     const dispatch = useDispatch()
     const userLocation = "Buenos Aires"
-    const categories = ["sports", "party", "music"]
-    const locations = ["Las Vegas", "Minneapolis", "Nashville"]
+    const categories = ["Sports", "Theater", "Concerts"]
+    const locations = ["Las Vegas", "Chicago", "Nashville"]
     const [orderFilters, setOrderFilters] = useState({
         city: "",
         search: "",
@@ -74,12 +74,12 @@ export default function Search() {
             <select className='pl-2 pr-2 appearance-none flex text-fontColorChip mr-3 h-8 rounded-2xl bg-pinkChip' onChange={(event) => handleChange('order', event.target.value)} value={orderFilters.order}>
                 <option value="" disabled>Order by alphabetically</option>
                 <option value="alphaA">Ascending</option>
-                <option value="alphaD">descending</option>
+                <option value="alphaD">Descending</option>
             </select>
             <select className='flex appearance-none text-fontColorChip ml-3 h-8 w-40 rounded-2xl bg-pinkChip pl-6' onChange={(event) => handleChange('order', event.target.value)} value={orderFilters.order}>
                 <option value="" disabled>Order by date</option>
                 <option value="DateA">Newer</option>
-                <option value="DateD">Lastest</option>
+                <option value="DateD">Latest</option>
             </select>
         </div>
         <Pagination element={{pageRoute: "numPageSearch", pageCant: "5", stateRoute: "searchedEvents"}}/>
