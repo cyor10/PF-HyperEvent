@@ -15,6 +15,9 @@ export default function Payment({params}) {
   const [inputs, setInputs] = useState({
     amount: "1",
     description: "Ticket",
+    name: "",
+    last_name: "",
+    email: ""
   });
 
   function handleInputs(event) {
@@ -25,6 +28,10 @@ export default function Payment({params}) {
   }
   const paymentInfo = {
     amount: inputs.amount,
+    name: inputs.name,
+    last_name: inputs.last_name,
+    email: inputs.email,
+    status: ""
   };
 
   async function pay(event) {
@@ -87,6 +94,8 @@ export default function Payment({params}) {
                 key="name"
                 type="name"
                 name="name"
+                onChange={handleInputs}
+                value={inputs.name}
                 placeholder="John"
               />
             </div>
@@ -97,9 +106,11 @@ export default function Payment({params}) {
             </label>
             <input
               className="w-[90%] px-3 py-2 text-[grey] border-[grey] border-2 rounded-lg focus:outline-none focus:ring focus:border-blue-500"
-              key="lastName"
-              type="lastName"
-              name="lastName"
+              key="last_name"
+              type="last_name"
+              name="last_name"
+              onChange={handleInputs}
+              value={inputs.last_name}
               placeholder="Doe"
             />
             </div>
