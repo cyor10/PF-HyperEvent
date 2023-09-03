@@ -5,11 +5,14 @@ const {
   loginGoogleUser,
 } = require('./user');
 
-const getEvents = require('./event/getEvents');
-const { createEvent } = require('./event/createEvent');
-const createMasiveEvents = require('./event/createMasiveEvents');
-const setTopEvent = require('./event/setTopEvent');
-const getTopEvents = require('./event/getTopEvents');
+
+const getEvents = require('./event/getEvents')
+const { createEvent } = require('./event/createEvent')
+const createMasiveEvents = require('./event/createMasiveEvents')
+const setTopEvent = require('./event/setTopEvent')
+const getTopEvents = require('./event/getTopEvents')
+const searchEvents = require('./event/searchEvents')
+
 
 const getCategories = require('./category/getCategories');
 const { getEventsByCategory } = require('./category/getEventsByCategory');
@@ -36,34 +39,37 @@ const editReply = require('./replys/patchReply');
 const postReply = require('./replys/postReply');
 
 module.exports = {
-  signupUser,
-  loginUser,
-  protectedUser,
-  loginGoogleUser,
-  getEvents,
-  createEvent,
-  createMasiveEvents,
-  setTopEvent,
-  getTopEvents,
-  getCategories,
-  getEventsByCategory,
-  createCategory,
-  setCategories,
-  setCountries,
-  getCountries,
-  setStates,
-  getStates,
-  setCities,
-  getCities,
-  getSales,
-  postSales,
-  deleteComment,
-  getComments,
-  editComment,
-  postComment,
-  deleteReply,
-  getReply,
-  editReply,
-  postReply,
-  getAproveComments,
-};
+    signupUser,
+    loginUser,
+    protectedUser,
+    loginGoogleUser,
+    getEvents,
+    createEvent,
+    createMasiveEvents,
+    setTopEvent,
+    getTopEvents,
+    searchEvents,
+    getCategories,
+    getEventsByCategory,
+    createCategory,
+    setCategories,
+    setCountries,
+    getCountries,
+    setStates,
+    getStates,
+    setCities,
+    getCities,
+    getSales,
+    postSales,
+    deleteComment,
+    getComments,
+    editComment,
+    postComment,
+    deleteReply,
+    getReply,
+    editReply,
+    postReply,
+    getAproveComments,
+
+}
+
