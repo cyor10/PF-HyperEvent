@@ -1,58 +1,56 @@
 'use client'
 
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import AxiosInstance from '../../../utils/axiosInstance'
 
 const initialState = {
-    events: [],
-    allEvents: [],
     searchedEvents: [],
-    auxSearchedEvents: [],
-    searchBar: false,
+    coincidence: true,
+    status: 'idle',
     numPageSearch: 0,
     numPageHome: 0,
 }
+
+export const fetchSearchData = createAsyncThunk(
+    'search',
+    async (queryParams) => {
+        // Build the URL with the query parameters.
+        const queryString = new URLSearchParams(queryParams).toString();
+        const url = `/events/search?${queryString}`;
+
+        const response = await AxiosInstance(url);
+        return response.data;
+    }
+);
 
 export const counterSlice = createSlice({
     name: 'events',
     initialState,
     reducers: {
-        getEvents: (state, action) => {
-            state.events = action.payload.events, state.allEvents = action.payload.events, state.searchedEvents = action.payload.events, console.log(state.searchedEvents)},
-        searchEvents: (state, action) =>
-        {const {payload} = action 
-        state.searchedEvents = state.allEvents
-                .sort((a, b) => {
-                if (payload.order === "alphaA") {
-                    return a.event_name.localeCompare(b.event_name);
-                } else if (payload.order === "alphaD") {
-                    return b.event_name.localeCompare(a.event_name);
-                } else if (payload.order === "DateA") {
-                    return new Date(a.start_at) - new Date(b.start_at);
-                } else  if(payload.order === "DateD") {
-                    return new Date(b.start_at) - new Date(a.start_at);
-                } else return 0
+        pagination: (state, action) => { state[action.payload.pageRoute] = action.payload.pag },
+        setPagination: (state, action) => { state[action.payload.stateRoute] = action.payload.cardsSliced },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchSearchData.pending, (state) => {
+                state.status = 'loading';
             })
-            .filter(event => {
-                const actualDate = new Date();
-                const filterDate = new Date(actualDate);
-                if (payload.filterDay) {
-                    filterDate.setDate(filterDate.getDate() + payload.filterDay);
-                }       
-                const timeEvent = new Date(event.start_at).getTime()
-                return (
-                (!payload.filterDay || (timeEvent >= actualDate && timeEvent <= filterDate)) &&
-                event.event_name.toLowerCase().includes(payload.search.toLowerCase()) &&
-                (!payload.city || event.city === payload.city)
-                )
-            });
-        },
-        
-        setSearchBar: (state, action) => {state.searchBar = action.payload},
-        pagination: (state, action) => {state[action.payload.pageRoute] = action.payload.pag},
-        setPagination: (state, action) => {state[action.payload.stateRoute] = action.payload.cardsSliced},
-    }
-}) 
+            .addCase(fetchSearchData.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.searchedEvents = action.payload;
 
-export const {getEvents, searchEvents, setSearchBar, pagination, setPagination} = counterSlice.actions
+                if (action.payload.length === 0) {
+                    state.coincidence = false;
+                } else {
+                    state.coincidence = true;
+                }
+            })
+            .addCase(fetchSearchData.rejected, (state) => {
+                state.status = 'failed';
+            });
+    }
+})
+
+export const { pagination, setPagination } = counterSlice.actions
 
 export default counterSlice.reducer
