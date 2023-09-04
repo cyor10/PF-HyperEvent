@@ -2,14 +2,12 @@
 
 import React from 'react';
 import Link from 'next/link';
-import SearchBar from '../SearchBar/SearchBar';
 import Image from 'next/image';
 import { useSession, signOut } from 'next-auth/react';
-import { redirect, usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import axiosInstance from '../../../utils/axiosInstance';
 import { getUser } from '@/redux/features/counter/counterSlice';
-import { setSearchBar } from '@/redux/features/events/counterSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { IconHambuger, IconSearch, IconX } from '@/utils/svg/svg';
 import { useParams } from 'next/navigation';
@@ -23,7 +21,6 @@ export default function NavBar() {
   const dispatch = useDispatch();
   const pathname = usePathname();
   const reduxUser = useSelector((state) => state.counter);
-  const events = useSelector((state) => state.events);
   const [navbar, setNavbar] = useState(false);
   useEffect(() => {
     let token = localStorage?.getItem('token');
@@ -42,16 +39,6 @@ export default function NavBar() {
       })();
     }
   }, [dispatch]);
-
-  const handleSearch = () => {
-    if (navbar === true) {
-      setNavbar(false);
-
-      dispatch(setSearchBar(!events.searchBar));
-    } else {
-      dispatch(setSearchBar(!events.searchBar));
-    }
-  };
     
   return (price?.length > 0 ||pathname === '/signup' || pathname === '/login' || pathname === '/payment' || pathname === '/payment/success' || pathname === '/payment/error') ? null : (
     <div>
@@ -100,25 +87,15 @@ export default function NavBar() {
                 />
               )}
 
-              <div
-                className="w-10  h-10 bg-[#F4EFFD] flex justify-center items-center rounded-full"
-                onClick={handleSearch}
-              >
-                <IconSearch className="cursor-pointer z-10"></IconSearch>
+              <div className="w-10  h-10 bg-[#F4EFFD] flex justify-center items-center rounded-full cursor-pointer z-10">
+                  <Link href="/search">
+                    <IconSearch />
+                  </Link>
               </div>
 
               <div className="md:hidden">
                 <button
-                  className="p-2 text-white rounded-md outline-none focus:border-gray-400 focus:border mr-4"
-                  onClick={() => {
-                    if (events.searchBar === true) {
-                      dispatch(setSearchBar(false));
-                      setNavbar(!navbar);
-                    } else {
-                      setNavbar(!navbar);
-                    }
-                  }}
-                >
+                  className="p-2 text-white rounded-md outline-none focus:border-gray-400 focus:border mr-4">
                   {navbar ? (
                     <IconX className="min-h-5 max-h-6" />
                   ) : (
@@ -185,13 +162,6 @@ export default function NavBar() {
                 )}
               </ul>
             </div>
-          </div>
-          <div
-            className={`h-screen w-screen flex-1 bg-slate-50 justify-self-center pb-3 md:block md:pb-0 md:mt-0 ${
-              events.searchBar ? 'pt-6 md:p-0 block' : 'hidden'
-            }`}
-          >
-            <SearchBar />
           </div>
         </div>
       </nav>
