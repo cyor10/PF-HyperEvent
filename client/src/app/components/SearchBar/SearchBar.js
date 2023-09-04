@@ -25,7 +25,7 @@ export default function SearchBar() {
         (async () => { 
             let localSearch = JSON.parse(localStorage.getItem("recentSearch")) || []
             setRecentSearch(localSearch)
-            let { data } = await AxiosInstance("/events");
+            let { data } = await AxiosInstance("/events?page=1");
             // data.events = data.events.map(event => {return {...event, start_at: event.start_at.split("T")[0]}})
             dispatch(getEvents(data));
         })(); 

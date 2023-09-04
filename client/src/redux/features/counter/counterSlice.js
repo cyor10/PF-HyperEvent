@@ -4,7 +4,9 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     name: "",
-    user_image: ""
+    user_image: "",
+    email: "",
+    last_name: ""
 }
 
 export const counterSlice = createSlice({
@@ -14,7 +16,7 @@ export const counterSlice = createSlice({
         increment: (state) => {state.value += 1},
         decrement: (state) => {state.value -= 1},
         incrementByAmount: (state, action) => {state.value += action.payload},
-        getUser: (state, action) => {state.name = action.payload?.name, state.user_image = action.payload?.user_image}
+        getUser: (state, action) => { state.name = action.payload?.name , state.user_image = action.payload?.user_image , state.email = action.payload?.email , state.last_name = action.payload?.last_name }
 
     }
 }) 
