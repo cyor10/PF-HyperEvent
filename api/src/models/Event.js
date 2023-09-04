@@ -93,6 +93,10 @@ module.exports = (sequelize) => {
             type: DataTypes.JSON,
             allowNull: true
         },
+        active: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
+        }
     }, {
         freezeTableName: true,
         timestamps: false
