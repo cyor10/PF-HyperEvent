@@ -1,16 +1,17 @@
 'use client'
 import React, { useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import axiosInstance from '@/utils/axiosInstance';
 import { IconXPayment, IconSucces } from '@/utils/svg/svg';
 
 export default function Success() {
+  const router=useRouter()
   const paymentQuery = useSearchParams();
   const status = paymentQuery.get('status');
   const paymentId = paymentQuery.get('payment_id');
   useEffect(() => {
     async function sendPaymentInfo() {
-      if(status==="approved"){ 
+      if(status==="approved" && localStorage.getItem("paymentInfo")){ 
       try {
         const paymentInfo = JSON.parse(localStorage.getItem('paymentInfo'));
         paymentInfo.status="approved"
@@ -37,7 +38,7 @@ export default function Success() {
   return (
     <div className="flex w-[100%] flex-col items-center h-screen fixed">
         <div className="absolute top-5 left-[19.5rem] w-[100%]">
-          <button>
+          <button onClick={()=>router.push("/")}>
             <IconXPayment />
           </button>
         </div>

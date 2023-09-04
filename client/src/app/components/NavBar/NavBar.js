@@ -161,6 +161,7 @@ export default function NavBar() {
                         signOut();
                         localStorage.removeItem('token');
                         document.cookie = 'tokens=; max-age=0';
+                        router.push("/")
                       }}
                     >
                       Logout

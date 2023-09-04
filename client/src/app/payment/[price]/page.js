@@ -5,18 +5,24 @@ import { IconMercadoPago, IconXPayment } from '@/utils/svg/svg';
 import { useRouter } from 'next/navigation';
 
 import { useParams } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { useSelector } from 'react-redux';
 
 export default function Payment({ params }) {
-  const { price } = params;
+  const { data: session } = useSession({
+    required: false,
+  });
+  const reduxUser = useSelector((state) => state.counter);
+  const { price } = params; 
 
   const router = useRouter();
 
   const [inputs, setInputs] = useState({
     amount: '1',
     description: 'Ticket',
-    name: '',
-    last_name: '',
-    email: '',
+    name: reduxUser.name.split(" ")[0],
+    last_name: reduxUser.last_name || reduxUser.name.split(" ")[1],
+    email: reduxUser.email,
   });
 
   function handleInputs(event) {

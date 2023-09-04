@@ -1,10 +1,11 @@
 'use client'
 import React, {useEffect} from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { IconXPayment, IconError } from '@/utils/svg/svg'
 import axiosInstance from "@/utils/axiosInstance"
 
 export default function Error() {
+  const router = useRouter()
   const paymentQuery = useSearchParams()
   const status = paymentQuery.get('status')
   const paymentId = paymentQuery.get('payment_id')
@@ -38,7 +39,7 @@ export default function Error() {
   return (
     <div className="flex w-[100%] flex-col items-center h-screen fixed"> {/* Cambiar el color de fondo */}
       <div className="absolute top-5 left-[19.5rem] w-[100%]">
-          <button>
+          <button onClick={()=>router.push("/")}>
             <IconXPayment />
           </button>
         </div>
