@@ -39,10 +39,9 @@ module.exports = (sequelize) => {
             type: DataTypes.JSON,
             allowNull: true
         },
-        admin:{
+        active:{
             type: DataTypes.BOOLEAN,
-            allowNull: true,
-            defaultValue: false
+            defaultValue: true
         }
     },{
         freezeTableName: true,
