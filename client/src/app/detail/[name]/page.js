@@ -205,7 +205,7 @@ export default function Detail({ params }) {
           </div>
           </div>
           <div className="flex justify-center w-[90%] bg-purpleOscuro mt-10 h-20 mb-5 items-center rounded-md relative cursor-pointer">
-            <Link className="text-white" href="/payment/[price]" as={`/payment/${Math.floor(priceTotal)}`}>
+            <Link className="text-white" href="/payment/[name]" as={`/payment/${event.event_name}?ticketCount=${ticketCount}`}>
               Buy Tickets for ${Math.floor(priceTotal)}
             </Link>
           </div>
