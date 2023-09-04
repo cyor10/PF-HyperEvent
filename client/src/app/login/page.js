@@ -79,8 +79,8 @@ export default function Login() {
     }
   }, [session]);
   useEffect(() => {
-    console.log(tokencito); // This will log the correct value of tokencito
-    localStorage.setItem('token', tokencito);
+    console.log(tokencito); // This will log the correct value of tokencito 
+    if(!localStorage.getItem("token")){localStorage.setItem('token', tokencito);}
   }, [tokencito]);
 
   function handleInputs(event) {
