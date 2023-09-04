@@ -20,9 +20,9 @@ export default function Payment({ params }) {
   const [inputs, setInputs] = useState({
     amount: '1',
     description: 'Ticket',
-    name: reduxUser.name.split(" ")[0],
-    last_name: reduxUser.last_name || reduxUser.name.split(" ")[1],
-    email: reduxUser.email,
+    name: reduxUser.name?.split(" ")[0],
+    last_name: reduxUser?.last_name || reduxUser.name?.split(" ")[1],
+    email: reduxUser?.email,
   });
 
   function handleInputs(event) {
