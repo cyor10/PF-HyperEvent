@@ -13,7 +13,7 @@ import { IconHambuger, IconSearch, IconX } from '@/utils/svg/svg';
 import { useParams } from 'next/navigation';
 
 export default function NavBar() {
-  const { price } = useParams();
+  const { name } = useParams();
   const router = useRouter();
   const { data: session } = useSession({
     required: false,
@@ -40,7 +40,7 @@ export default function NavBar() {
     }
   }, [dispatch]);
     
-  return (price?.length > 0 ||pathname === '/signup' || pathname === '/login' || pathname === '/payment' || pathname === '/payment/success' || pathname === '/payment/error') ? null : (
+  return (name?.length > 0 ||pathname === '/signup' || pathname === '/login' || pathname === '/payment' || pathname === '/payment/success' || pathname === '/payment/error') ? null : (
     <div>
       <nav className="w-full bg-purpleNav top-0 left-0 right-0 z-10 fixed h-18">
         <div className="justify-between lg:max-w-7xl md:items-center md:flex md:px-8">
@@ -94,8 +94,12 @@ export default function NavBar() {
               </div>
 
               <div className="md:hidden">
-                <button
-                  className="p-2 text-white rounded-md outline-none focus:border-gray-400 focus:border mr-4">
+              <button
+                  className="p-2 text-white rounded-md outline-none focus:border-gray-400 focus:border mr-4"
+                  onClick={() => {
+                    setNavbar(!navbar)
+                  }}
+                >
                   {navbar ? (
                     <IconX className="min-h-5 max-h-6" />
                   ) : (
