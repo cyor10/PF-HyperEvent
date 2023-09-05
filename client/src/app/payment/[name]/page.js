@@ -27,9 +27,9 @@ export default function Payment({ params }) {
     event_name: '',
     amount: '',
     description: 'Ticket',
-    name: reduxUser.name.split(" ")[0],
-    last_name: reduxUser.last_name || reduxUser.name.split(" ")[1],
-    email: reduxUser.email,
+    name: reduxUser.name?.split(" ")[0],
+    last_name: reduxUser?.last_name || reduxUser.name?.split(" ")[1],
+    email: reduxUser?.email,
   });
   
   useEffect(() => {
