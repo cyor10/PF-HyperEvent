@@ -1,29 +1,49 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../../utils/axiosInstance';
 import { IconMercadoPago, IconXPayment } from '@/utils/svg/svg';
-import { useRouter } from 'next/navigation';
-
-import { useParams } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useSelector } from 'react-redux';
 
 export default function Payment({ params }) {
-  const { data: session } = useSession({
-    required: false,
-  });
+  const router = useRouter()
+  const [event, setEvent] = useState({});
   const reduxUser = useSelector((state) => state.counter);
-  const { price } = params; 
-
-  const router = useRouter();
-
+  const { name } = params; 
+  const query = useSearchParams()
+  const tikcetCount = query.get("ticketCount")
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await axiosInstance(`/events?name=${name}`);
+        setEvent(data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+  
   const [inputs, setInputs] = useState({
-    amount: '1',
+    event_name: '',
+    amount: '',
     description: 'Ticket',
     name: reduxUser.name?.split(" ")[0],
     last_name: reduxUser?.last_name || reduxUser.name?.split(" ")[1],
     email: reduxUser?.email,
   });
+  
+  useEffect(() => {
+    if (event.event_name && event.price) {
+      setInputs({
+        event_name: event.event_name,
+        amount: event.price*tikcetCount,
+        description: 'Ticket',
+        name: reduxUser.name.split(" ")[0],
+        last_name: reduxUser.last_name || reduxUser.name.split(" ")[1],
+        email: reduxUser.email,
+      });
+    }
+  }, [event, reduxUser]);
 
   function handleInputs(event) {
     setInputs({
@@ -32,11 +52,13 @@ export default function Payment({ params }) {
     });
   }
   const paymentInfo = {
+    event_name: inputs.event_name,
     amount: inputs.amount,
     name: inputs.name,
     last_name: inputs.last_name,
     email: inputs.email,
     status: '',
+    tikcetCount: tikcetCount,
   };
 
   async function pay(event) {
@@ -151,7 +173,7 @@ export default function Payment({ params }) {
           <IconMercadoPago />
         </div>
 
-        <p className="text-end text-xl pr-10 pt-2">Total: ${price}</p>
+        <p className="text-end text-xl pr-10 pt-2">Total: ${inputs.amount}</p>
 
         <button
           className="mt-4 px-4 py-2 w-[50%] h-12 text-white text-xl rounded-md bg-purpleOscuro mx-auto"
