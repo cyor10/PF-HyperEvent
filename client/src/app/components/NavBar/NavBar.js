@@ -148,7 +148,7 @@ export default function NavBar() {
                   </li>
                 )}
                 <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
-                  <Link href="/create_event" onClick={() => setNavbar(!navbar)}>
+                  <Link href="/form" onClick={() => setNavbar(!navbar)}>
                     Create Events
                   </Link>
                 </li>

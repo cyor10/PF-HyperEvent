@@ -1,0 +1,140 @@
+"use client"
+import React, { useState } from "react";
+import PartOne from "./PartOne";
+import PartTwo from "./PartTwo";
+import PartThree from "./PartThree";
+import PartFour from "./PartFour";
+import { IconArrowLeft } from "@/utils/svg/svg";
+import axiosInstance from "../../utils/axiosInstance"
+import { validateEventField } from "@/validate/validate";
+import { useRouter } from 'next/navigation';
+
+export default function Form() {
+  const [page, setPage] = useState(0);
+
+    const router = useRouter();
+
+  const [formData, setFormData] = useState({
+    event_name: '',   /// Ok
+    org_name: '',    /// OK
+    category: '',    /// Ok
+    address: '',     /// ok
+    place_name: '', /// ok
+    country: '',    
+    city: '',
+    state: '',
+    postal: '',    /// ok
+    start_at: '',  // ok
+    end_at: '',    // ok 
+    intro: '',     // ok
+    description: '',  // ok   
+    social_media: [], // 
+    event_image: null, // ok
+    stock: 0,    // ok 
+
+    price: 0,    
+    //TODO: location: {lat: 0, lon: 0 }
+  });
+  //console.log(eventData)
+  /* 
+event_name!, org_name!, category, location, place_name!, address!, city!, state!, country!, postal!, start_at!, end_at!, intro!, description!, social_media!, price!, stock! */
+
+  const [errors, setErrors] = useState({
+    event_name: '',
+    org_name: '',
+    category: '',
+    address: '',
+    country: '',
+    city: '',
+    state: '',
+    postal: '',
+    start_at: '',
+    end_at: '',
+    intro: '',
+    description: '',
+    social_media: [],
+    event_image: null,
+    stock: 0,
+    place_name: '',
+    price: 0,
+    //TODO: location: {lat: 0, lon: 0 }
+  });
+
+  const FormTitles = ["Sign Up", "Personal Info", "Other", "Finish"];
+
+  const PageDisplay = () => {
+    if (page === 0) {
+      return <PartOne formData={formData} setFormData={setFormData} errors={errors} setErrors={setErrors} validateEventField={validateEventField} />;
+    } else if (page === 1) {
+      return <PartTwo formData={formData} setFormData={setFormData} errors={errors} setErrors={setErrors} validateEventField={validateEventField} />;
+    } else if (page === 2){
+      return <PartThree formData={formData} setFormData={setFormData} errors={errors} setErrors={setErrors} validateEventField={validateEventField} />;
+    } else{
+      return <PartFour formData={formData} setFormData={setFormData} errors={errors} setErrors={setErrors} validateEventField={validateEventField} />;
+    }
+  };
+
+  console.log("",formData)
+
+  const handleSubmit = async (event) => {
+    try {
+      let cloud = new FormData();
+
+      for (const [key, value] of Object.entries(formData)) {
+        cloud.append(`${key}`, value);
+      }
+
+      const { data } = await axiosInstance.post('/events', cloud, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (data) {
+        console.log('Event created:', data);
+        alert("Event created")
+        router.push('/');
+        // Puedes hacer algo con la respuesta del servidor si es necesario
+      }
+    } catch (error) {
+      console.log('Error:', error);
+      alert("No puedes crear eventos duplicados")
+    }
+  };
+  
+
+  return (
+    <div className='pt-20 ml-4 pb-10 px-[.5rem]'>
+            <button
+          disabled={page == 0}
+          onClick={() => {
+            setPage((currPage) => currPage - 1);
+          }}
+        >
+          <IconArrowLeft/>
+        </button>
+    <div>
+    <form className="body" onSubmit={handleSubmit}>
+  {PageDisplay()} 
+  <button
+    className="mr-4 w-[95%] mt-8 mx-auto h-12 bg-purpleOscuro rounded text-white"
+    type="button" // Cambiamos el tipo de botón a "button"
+    onClick={() => {
+      if (page === FormTitles.length - 1 && document.activeElement.innerText === "PUBLISH") {
+        handleSubmit(); // Enviamos el formulario solo si la página actual es la última y el botón presionado es "PUBLISH"
+        
+      } else {
+        window.scrollTo({top: 0})
+        setPage((currPage) => currPage + 1);
+        
+      }
+    }}
+  >
+    {page === FormTitles.length - 1 ? "PUBLISH" : "NEXT"}
+  </button>
+  <button type="submit" style={{ display: "none" }}></button> {/* Agregamos un botón oculto de tipo "submit" para que el formulario se envíe al presionar "Enter" */}
+</form>
+    </div>
+  </div>
+  );
+}

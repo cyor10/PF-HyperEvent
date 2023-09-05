@@ -1,28 +1,33 @@
-'use client';
-import React, { useState } from 'react';
-import axiosInstance from '../../utils/axiosInstance';
-import { validateEventField } from '@/validate/validate';
+"use client";
+import React, { useState, useEffect } from "react";
+import axiosInstance from "../../utils/axiosInstance";
+import { validateEventField } from "@/validate/validate";
+import { IconArrowLeft } from "@/utils/svg/svg";
+import Link from "next/link";
 
 function EventForm() {
+
+  const [categories, setCategories] = useState([]);
+  const [ page, setPage ] = useState(0)
+
   const [eventData, setEventData] = useState({
-    stock: 0,
-    event_image: null,
     event_name: '',
     org_name: '',
-    place_name: '',
+    category: '',
     address: '',
+    country: '',
     city: '',
     state: '',
     postal: '',
-    country: '',
     start_at: '',
     end_at: '',
-    //review: "",
-    description: '',
     intro: '',
+    description: '',
     social_media: [],
+    event_image: null,
+    stock: 0,
+    place_name: '',
     price: 0,
-    category: '',
     //TODO: location: {lat: 0, lon: 0 }
   });
   //console.log(eventData)
@@ -30,344 +35,85 @@ function EventForm() {
 event_name!, org_name!, category, location, place_name!, address!, city!, state!, country!, postal!, start_at!, end_at!, intro!, description!, social_media!, price!, stock! */
 
   const [errors, setErrors] = useState({
-    stock: '',
-    event_image: '',
     event_name: '',
     org_name: '',
-    place_name: '',
+    category: '',
     address: '',
+    country: '',
     city: '',
     state: '',
     postal: '',
-    country: '',
     start_at: '',
     end_at: '',
-    //review: "",
-    description: '',
     intro: '',
-    social_media: '',
+    description: '',
+    social_media: [],
+    event_image: null,
+    stock: 0,
+    place_name: '',
     price: 0,
-    category: '',
     //TODO: location: {lat: 0, lon: 0 }
   });
-  console.log(errors);
-  const [enableSubmit, setEnableSubmit] = useState(false);
 
-  function handleInputChange(event) {
-    const { name, value, type } = event.target;
-
-    let truncatedValue = value;
-
-    if (name === 'intro') {
-      truncatedValue = value.slice(0, 140);
-    }
-
-    if (type === 'file') {
-      setEventData({ ...eventData, [name]: event.target.files[0] });
-      const checkingErrors = validateEventField({
-        ...eventData,
-        [event.target.name]: event.target.value,
-      });
-
-      setErrors(checkingErrors);
-
-      const hasErrors = Object.values(checkingErrors).some(
-        (error) => error !== ''
-      );
-      setEnableSubmit(!hasErrors);
-    } else {
-      setEventData({
-        ...eventData,
-        [name]: truncatedValue,
-      });
-
-      const checkingErrors = validateEventField({
-        ...eventData,
-        [event.target.name]: event.target.value,
-      });
-
-      setErrors(checkingErrors);
-
-      const hasErrors = Object.values(checkingErrors).some(
-        (error) => error !== ''
-      );
-      setEnableSubmit(!hasErrors);
-    }
-  }
-  console.log(eventData);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      let formData = new FormData();
-
-      for (const [key, value] of Object.entries(eventData)) {
-        formData.append(`${key}`, value);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const categoriesResponse = await axiosInstance("/categories");
+        setCategories([...categoriesResponse.data]);
+        console.log(categories);
+      } catch (error) {
+        console.log(error);
       }
+    };
 
-      const { data } = await axiosInstance.post('/events', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      if (data.created) {
-        console.log('Event created:', data.created);
-        // Puedes hacer algo con la respuesta del servidor si es necesario
-      }
-    } catch (error) {
-      console.log('Error:', error);
-    }
-  };
+    fetchData();
+  }, []);
 
   return (
-    <div className="flex flex-col items-start my-10 pt-16">
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-[90%] mx-auto p-4 bg-white shadow-md rounded-md mt-4"
-      >
-        <h3 className="text-2xl font-semibold mb-4 text-gray-700 text-center">
-          Form to create{' '}
-        </h3>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold">Quantity:</label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="number"
-            name="stock"
-            value={eventData.stock}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.stock && <p className=" text-red-700 mb-4">{errors.stock}</p>}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Upload image:
-          </label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="file"
-            name="event_image"
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.event_image && (
-          <p className=" text-red-700">{errors.event_image}</p>
-        )}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Event Name:
-          </label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="text"
-            name="event_name"
-            value={eventData.event_name}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.event_name && (
-          <p className=" text-red-700">{errors.event_name}</p>
-        )}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Organization Name:
-          </label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="text"
-            name="org_name"
-            value={eventData.org_name}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.org_name && <p className=" text-red-700">{errors.org_name}</p>}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Place Name:
-          </label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="text"
-            name="place_name"
-            value={eventData.place_name}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.place_name && (
-          <p className=" text-red-700">{errors.place_name}</p>
-        )}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Address:
-          </label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="text"
-            name="address"
-            value={eventData.address}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.address && <p className=" text-red-700">{errors.address}</p>}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            City:
-          </label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="text"
-            name="city"
-            value={eventData.city}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.city && <p className=" text-red-700">{errors.city}</p>}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            State:
-          </label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="text"
-            name="state"
-            value={eventData.state}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Postal Code:
-          </label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="text"
-            name="postal"
-            value={eventData.postal}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.postal && <p className=" text-red-700">{errors.postal}</p>}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Country:
-          </label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="text"
-            name="country"
-            value={eventData.country}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.country && <p className=" text-red-700">{errors.country}</p>}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Start Date:
-          </label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="date"
-            name="start_at"
-            value={eventData.start_at}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.start_at && <p className=" text-red-700">{errors.start_at}</p>}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            End Date:
-          </label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="date"
-            name="end_at"
-            value={eventData.end_at}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.end_at && <p className=" text-red-700">{errors.end_at}</p>}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Price:
-          </label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="number"
-            name="price"
-            value={eventData.price}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Summary (max 140 characters):
-          </label>
-          <textarea
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            name="intro"
-            value={eventData.intro}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.intro && <p className=" text-red-700">{errors.intro}</p>}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Description:
-          </label>
-          <textarea
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            name="description"
-            value={eventData.description}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.description && (
-          <p className=" text-red-700">{errors.description}</p>
-        )}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Social Media:
-          </label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="text"
-            name="social_media"
-            value={eventData.social_media}
-            onChange={handleInputChange}
-          />
-        </div>
+    <div className='pt-24 ml-4 pb-10 px-[.5rem]'>
+    <Link href={"/"}>
+    <IconArrowLeft/>
+    </Link>
+    <div className='flex flex-row items-center justify-center mr-4'>
+        <p className='text-[.8rem]'>Step 1 of 4 </p>
+        <div className='w-8 h-1 bg-purpleOscuro ml-2 rounded-md'></div>
+        <div className='w-20 h-1 bg-[#F4EFFD] rounded-r-md'></div>
+    </div>
 
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 font-semibold mb-2"
-            htmlFor="category"
-          >
-            Category
-          </label>
-          <input
-            className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="text"
-            name="category"
-            value={eventData.category}
-            onChange={handleInputChange}
-          />
-        </div>
-        {/* TODO LOCATION CON GOOGLE MAPS PARA OBTENER COORDENADAS */}
-        <div className="text-center mt-4">
-          <button
-            type="submit"
-            className={`w-full py-2 px-4 rounded-md font-semibold ${
-              enableSubmit
-                ? 'bg-blue-500 hover:bg-blue-600 text-white'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
-            disabled={!enableSubmit}
-          >
-            Create Event
-          </button>
-        </div>
-      </form>
+    <h3 className='pt-5 text-[2rem] font-bold mr-3 text-textForm'>Let’s begin with the basics</h3>
+    <p className='text-[1rem] font-ligth mr-4'>Name your event and tell event-goers why they should come. Add details that highlight what makes it unique.</p>
+
+    <form>
+      <div className="pt-8">
+
+    <label className='text-[1rem] pt-5 ml-1'>Event title</label>
+                <input className='w-[95%] p-2 mb-5 mt-2 mr-4 rounded-md border-gray-400 border-2' placeholder='Be clear an descriptive'></input>
+
+        <label className='text-[1rem] pt-5 ml-1'>Organizer name</label>
+        <input className='w-[95%] p-2 mb-5 mt-2 mr-4 rounded-md border-gray-400 border-2' placeholder='Enter your org name'></input>
+    </div>
+
+    <h4 className='pt-5 text-[1.6rem] font-bold text-textForm'>Categories</h4>
+    <p className='text-[1rem] font-ligth mr-4'>
+    Improve discoverability of your event by adding categories relevant to the subject matter.
+    </p>
+    
+    <select className="w-[95%] pt-2 pb-2 mt-5 mb-4 pl-2  border-gray-400 border-2 rounded-md">
+            <option value="Default" disabled selected>(Select Categories)</option>
+            {Array.isArray(categories) &&
+              categories?.map((categ, index) => {
+                return (
+                  <option value={categ.name} key={index} >
+                    {categ.name}
+                  </option>
+                );
+              })}
+    </select>
+
+    <Link className='w-[100%] mt-20' href={"/create_event/form_step_1"}>
+            <button className='mr-4 w-[95%] mt-5 mx-auto h-12 bg-purpleOscuro rounded text-white'>NEXT</button>
+    </Link>
+    </form>
     </div>
   );
 }
