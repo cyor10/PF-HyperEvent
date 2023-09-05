@@ -29,6 +29,9 @@ export const counterSlice = createSlice({
     reducers: {
         pagination: (state, action) => { state[action.payload.pageRoute] = action.payload.pag },
         setPagination: (state, action) => { state[action.payload.stateRoute] = action.payload.cardsSliced },
+        clearSearchedEvents: (state) => {
+            state.searchedEvents = [], state.coincidence = true;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -51,6 +54,6 @@ export const counterSlice = createSlice({
     }
 })
 
-export const { pagination, setPagination } = counterSlice.actions
+export const { pagination, setPagination, clearSearchedEvents } = counterSlice.actions
 
 export default counterSlice.reducer

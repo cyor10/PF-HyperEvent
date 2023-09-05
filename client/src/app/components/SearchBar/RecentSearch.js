@@ -14,8 +14,8 @@ export default function RecentSearch() {
     }, [dispatch]);
 
     return (
-        <div className='text-black mt-10'>
-            <h3 className='text-xl font-bold leading-6 tracking-custom mb-5'>Recent and most popular searches</h3>
+        <div className='text-black mt-8 ml-6'>
+            <h3 className='text-2xl font-bold leading-6 tracking-custom mb-5'>Recent and most popular searches</h3>
             <div className='flex items-center mb-8'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                     <path d="M14.6667 8.00001C14.6667 11.68 11.68 14.6667 8.00004 14.6667C4.32004 14.6667 1.33337 11.68 1.33337 8.00001C1.33337 4.32001 4.32004 1.33334 8.00004 1.33334C11.68 1.33334 14.6667 4.32001 14.6667 8.00001Z" stroke="#292D32" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

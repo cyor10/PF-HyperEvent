@@ -4,7 +4,7 @@ import SearchBar from '../components/SearchBar/SearchBar'
 
 export default function Search() {
   return (
-    <div className='pt-20 min-h-screen ml-5 bg-slate-50 font-figtree'>
+    <div className='pt-20 min-h-screen bg-slate-50 font-figtree'>
         <SearchBar />
     </div>
   )
