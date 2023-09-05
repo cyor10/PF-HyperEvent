@@ -1,5 +1,5 @@
 const { sendEmailPayment } = require('../email/mandarEmail');
-
+const { Sales } = require("../db")
 const sales = [];
 let totalProfit = 0; // Initialize totalProfit
 
@@ -19,6 +19,9 @@ async function postSales(req, res) {
     }
 
     sales.push(paymentInfo);
+    await Sales.create({
+      sales:paymentInfo
+    });
 
     return res.status(201).json({ message: 'Payment information saved' });
   } catch (error) {
