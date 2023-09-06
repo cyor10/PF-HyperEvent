@@ -8,12 +8,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from '@/redux/features/counter/counterSlice';
 import Link from 'next/link';
 import { IconEyes } from '@/utils/svg/svg';
-
+import { toast } from 'react-hot-toast'; 
 export default function SignUp() {
   const dispatch = useDispatch();
 
   const router = useRouter();
-
+  const [showPwd, setShowPwd]=useState(false)
   const [inputs, setInputs] = useState({
     email: '',
     name: '',
@@ -95,7 +95,18 @@ export default function SignUp() {
           },
         });
         dispatch(getUser(response.data.user));
-        router.push('/');
+        toast.success('User created successfully!', {
+          style: {
+            border: '3px solid #925FF0',
+            padding: '16px',
+            color: "#925FF0",
+          },
+          iconTheme: {
+            primary: "#925FF0",
+            secondary: '#FFFAEE',
+          },
+        });
+        setTimeout(()=>router.push('/'),1500);
       }
     } catch (error) {
       console.log(error);
@@ -196,13 +207,13 @@ export default function SignUp() {
           <input
             className="w-full px-3 py-2 text-[grey] border-[grey] rounded border-2 focus:outline-none focus:ring focus:border-blue-500"
             key="password"
-            type="password"
+            type={showPwd ? "text" : "password"}
             name="password"
             onChange={handleInputs}
             value={inputs.password}
             placeholder="Password"
           />
-          <button type="button" className="relative top-[-2rem] left-[18rem]">
+          <button type="button" className="relative top-[-2rem] left-[18rem]" onClick={()=>setShowPwd(!showPwd)}>
             <IconEyes />
           </button>
           {errors.password ? (
