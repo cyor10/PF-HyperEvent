@@ -20,6 +20,8 @@ export default function RootLayout({ children }) {
             <NavBar />
           </header>
           <main>
+              <ToastProvider />
+              <link rel="icon" href="/hyperevents.png" sizes="any" />
               {children}
           </main>
         </Providers>
