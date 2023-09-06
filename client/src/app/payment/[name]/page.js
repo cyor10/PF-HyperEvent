@@ -90,20 +90,20 @@ export default function Payment({ params }) {
   };
 
   return (
-    <div className="flex flex-col w-full min-h-screen">
+    <div className="flex flex-col w-full min-h-screen mt-2">
       <div className="flex flex-row justify-center items-center p-5">
-        <div className="text-center">
+        <div className="text-center relative">
           <h2 className="text-2xl font-bold">Check-out</h2>
           <p className="pt-3">Time left 20:00</p>
         </div>
-        <div className="ml-3">
+        <div className="ml-3 absolute right-10 top-[1.8rem]">
           <button onClick={handleGoToHome}>
             <IconXPayment />
           </button>
         </div>
       </div>
 
-      <div className="border-[.1rem] border-black mt-6"></div>
+      <div className="border-[.1rem] border-black mt-3"></div>
 
       <form className="flex flex-col" onSubmit={pay}>
         <h3 className="pt-5 ml-5 text-xl font-bold">Billing information</h3>
@@ -176,7 +176,7 @@ export default function Payment({ params }) {
         <p className="text-end text-xl pr-10 pt-2">Total: ${inputs.amount}</p>
 
         <button
-          className="mt-4 px-4 py-2 w-[50%] h-12 text-white text-xl rounded-md bg-purpleOscuro mx-auto"
+          className="mt-4 px-4 py-2 w-[50%] mb-10 h-12 text-white text-xl rounded-md bg-purpleOscuro mx-auto"
           type="submit"
         >
           Place an order

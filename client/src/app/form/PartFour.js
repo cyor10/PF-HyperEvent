@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function PartFour({ formData, setFormData }) {
   return (
-    <div>
+    <div className='text-black'>
       <div className="flex flex-row items-center justify-center mr-4">
         <p className="text-[.8rem]">Step 4 of 4 </p>
         <div className="w-28 h-1 bg-purpleOscuro ml-2 rounded-md"></div>

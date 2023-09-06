@@ -11,7 +11,7 @@ export default function PartThree({ formData, setFormData, errors, setErrors, va
   return (
     <div>
 
-<div className="flex flex-row items-center justify-center mr-4">
+<div className="flex flex-row items-center justify-center mr-4 text-black">
         <p className="text-[.8rem]">Step 3 of 4 </p>
         <div className="w-20 h-1 bg-purpleOscuro ml-2 rounded-md"></div>
         <div className="w-8 h-1 bg-[#F4EFFD] rounded-r-md"></div>
