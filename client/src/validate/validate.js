@@ -56,10 +56,11 @@ export function validateEventField(inputs) {
   let errors = {};
 
   // Perform validation based on the input field name
-  if (!inputs.event_name) {
+  console.log(inputs)
+  if (inputs.event_name?.length < 5) {
     errors.event_name = "Event Name is required";
   }
-  if (!inputs.org_name) {
+  if (inputs.org_name?.length < 5) {
     errors.org_name = "Organization Name is required";
   }
   if (!inputs.stock) {
@@ -86,7 +87,7 @@ export function validateEventField(inputs) {
   if(!inputs.intro){
     errors.intro = "Summary is required"
   }
-  if(inputs.intro.length >140){
+  if(inputs.intro?.length >140){
     errors.intro = "Max chars 140"
   }
   if(!inputs.description){

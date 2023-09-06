@@ -13,7 +13,7 @@ export default function LandingPage() {
   const [dataCarousel, setDataCarousel] = useState([]);
   const [categories, setCategories] = useState([]);
   const [events, setEvents] = useState([]);
- 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,23 +40,26 @@ export default function LandingPage() {
       const updatedState = [...prevState];
       updatedState[index] = !prevState[index];
       console.log(updatedState[index])
-      if(updatedState[index]===true){toast('Event added to favorites!', {
-        icon: '❤', 
-        style: {
-          border: '3px solid #925FF0',
-          padding: '16px',
-          color: "#925FF0",
-        }
-      });}
-      if(updatedState[index]===false){toast("Event deleted from favorites",{
-        icon: '🤍', 
-        style: {
-          border: '3px solid #925FF0',
-          padding: '16px',
-          color: "#925FF0",
-        }
-      });
-    }
+      if (updatedState[index] === true) {
+        toast('Event added to favorites!', {
+          icon: '❤',
+          style: {
+            border: '3px solid #925FF0',
+            padding: '16px',
+            color: "#925FF0",
+          }
+        });
+      }
+      if (updatedState[index] === false) {
+        toast("Event deleted from favorites", {
+          icon: '🤍',
+          style: {
+            border: '3px solid #925FF0',
+            padding: '16px',
+            color: "#925FF0",
+          }
+        });
+      }
       return updatedState;
     });
   };
@@ -78,13 +81,13 @@ export default function LandingPage() {
       </Carousel>
       <div className="pt-10">
 
-        <h1 className="text-[clamp(2.25rem,8vw,4rem)] text-center pb-3 font-black tracking-tighter leading-[clamp(2.25rem,8vw,4rem)] text-black">FIND YOUR <br/>EXPERIENCE</h1>
+        <h1 className="text-[clamp(2.25rem,8vw,4rem)] text-center pb-3 font-black tracking-tighter leading-[clamp(2.25rem,8vw,4rem)] text-black">FIND YOUR <br />EXPERIENCE</h1>
 
         <div className="w-[clamp(12rem,42vw,21rem)] mx-auto h-2 bg-black"></div>
       </div>
-      
+
       <div className="flex flex-col text-start justify-center w-full pt-3 pb-14 mt-8">
-        
+
         <Categories events={events}>
           {categories.map((category, index) => (
             <Link
@@ -111,7 +114,7 @@ export default function LandingPage() {
         </Categories>
       </div>
       <div className="grid mx-auto pb-10 pt-3 md:grid-cols-2 gap-6 w-full justify-center lg:grid-cols-3">
-        { events.map((event, index) => (
+        {events.map((event, index) => (
           <div className="bg-white shadow-md mx-auto w-[21rem] h-[19.5rem] rounded-lg flex flex-col relative" key={index}>
             <Image
               className="w-[100%] h-[45%] object-cover rounded-t-lg z-100 relative"

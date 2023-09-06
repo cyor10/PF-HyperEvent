@@ -1,14 +1,13 @@
-import React from 'react';
-import { IconArrowLeft } from '@/utils/svg/svg';
-import Link from 'next/link';
+"use client"
+import React from "react";
 
-export default function FormStep1() {
+export default function PartTwo({ formData, setFormData }) {
+
+  const currentDate = new Date().toISOString().split("T")[0];
+
   return (
-    <div className="pt-24 ml-4 pb-10 px-[.5rem]">
-      <Link href={'/create_event'}>
-        <IconArrowLeft />
-      </Link>
-      <div className="flex flex-row items-center justify-center mr-4">
+    <div className="text-black">
+     <div className="flex flex-row items-center justify-center mr-4">
         <p className="text-[.8rem]">Step 2 of 4 </p>
         <div className="w-14 h-1 bg-purpleOscuro ml-2 rounded-md"></div>
         <div className="w-14 h-1 bg-[#F4EFFD] rounded-r-md"></div>
@@ -24,26 +23,42 @@ export default function FormStep1() {
         to show up.
       </p>
 
-      <form className="flex flex-col items-center">
+      <div className="flex flex-col items-center">
         <input
           className="w-[95%] p-2 mt-4 mr-4 rounded-md border-gray-400 border-2"
           placeholder="Venue Name *"
+          value={formData.place_name}
+          onChange={(e) => {
+            setFormData({ ...formData, place_name: e.target.value });
+          }}
         ></input>
 
         <input
           className="w-[95%] p-2 mt-4 mr-4 rounded-md border-gray-400 border-2"
           placeholder="Adress 1 *"
+          value={formData.address}
+          onChange={(e) => {
+            setFormData({ ...formData, address: e.target.value });
+          }}
         ></input>
 
         <div className="flex flex-row items-center justify-center">
           <input
             className="w-[46%] p-2 mt-4 mr-4 rounded-md border-gray-400 border-2"
             placeholder="Country *"
+            value={formData.country}
+          onChange={(e) => {
+            setFormData({ ...formData, country: e.target.value });
+          }}
           ></input>
 
           <input
             className="w-[46%] p-2 mt-4 mr-4 rounded-md border-gray-400 border-2"
             placeholder="City *"
+            value={formData.city}
+          onChange={(e) => {
+            setFormData({ ...formData, city: e.target.value });
+          }}
           ></input>
         </div>
 
@@ -51,10 +66,18 @@ export default function FormStep1() {
           <input
             className="w-[46%] p-2 mt-4 mr-4 rounded-md border-gray-400 border-2"
             placeholder="State/Province *"
+            value={formData.state}
+          onChange={(e) => {
+            setFormData({ ...formData, state: e.target.value });
+          }}
           ></input>
           <input
             className="w-[46%] p-2 mt-4 mr-4 rounded-md border-gray-400 border-2"
             placeholder="Postal Code*" type='number'
+            value={formData.postal}
+          onChange={(e) => {
+            setFormData({ ...formData, postal: e.target.value });
+          }}
           ></input>
         </div>
         <div>
@@ -73,32 +96,45 @@ export default function FormStep1() {
           <input
             className="w-[95%] p-2 mt-4 mr-4 rounded-md border-gray-400 border-2"
             placeholder="11/12/2023" type='date'
+            value={formData.start_at}
+            min={currentDate}
+          onChange={(e) => {
+            setFormData({ ...formData, start_at: e.target.value });
+          }}
           ></input>
 
           <label className="text-[1rem] pt-5 ml-1">Start time *</label>
           <input
             className="w-[95%] p-2 mt-4 mr-4 rounded-md border-gray-400 border-2"
-            placeholder="11/12/2023" type='date'
+            placeholder="19:00hs" type='number'
+            value={formData.start_at}
+            onChange={(e) => {
+              setFormData({ ...formData, start_at: e.target.value });
+            }}
           ></input>
 
           <label className="text-[1rem] pt-5 ml-1">Event End*</label>
           <input
             className="w-[95%] p-2 mt-4 mr-4 rounded-md border-gray-400 border-2"
             placeholder="11/12/2023" type='date'
+            value={formData.end_at}
+            min={formData.start_at}
+            onChange={(e) => {
+              setFormData({ ...formData, end_at: e.target.value });
+            }}
           ></input>
 
           <label className="text-[1rem] pt-5 ml-1">End time *</label>
           <input
             className="w-[95%] p-2 mt-4 mr-4 rounded-md border-gray-400 border-2"
             placeholder="19:00hs" type='text'
+            value={formData.end_at}
+            onChange={(e) => {
+              setFormData({ ...formData, end_at: e.target.value });
+            }}
           ></input>
         </div>
-        <Link className="w-[100%] pt-8" href={'/create_event/form_step_2'}>
-          <button className="mr-4 w-[95%] mx-auto h-12 bg-purpleOscuro rounded text-white">
-            NEXT
-          </button>
-        </Link>
-      </form>
+    </div>
     </div>
   );
 }

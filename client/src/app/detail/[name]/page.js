@@ -107,10 +107,11 @@ export default function Detail({ params }) {
           width={200}
           alt="event-image"
         />
-        <h3 className="ml-4 pt-5 text-black font-medium">{`${dayName}, ${month} ${dayNum}nd`}</h3>
-        <h2 className="text-4xl mt-2 ml-4 font-bold	">
+        <h3 className="ml-4 pt-5 text-black font-medium">{`${dayName}, ${month} ${dayNum}`}</h3>
+        <h2 className="text-4xl mt-3 mb-2 ml-4 px-2 font-bold	">
           &quot;{event && event.event_name}&quot;
         </h2>
+        <p className="ml-5 py-2 text-lg">{event?.intro}</p>
         <p className="px-5 pt-2 text-[.95rem] font-normal">
           Dive into &quot;JODOROWSKY&apos;S DUNE&quot; at our LUNES MÍSTICOS
           event – an exclusive tribute to visionary filmmaker Alejandro
@@ -128,7 +129,7 @@ export default function Detail({ params }) {
               <h3 className="text-lg ml-4 font-[1.2x  rem] font-medium">
                 Date and time
               </h3>
-              <h3 className="ml-4">{event.start_at?.split("T")[0]}</h3>
+              <h3 className="ml-4">{event.start_at?.split("T")[0]}  To  {event.end_at?.split("T")[0]}</h3>
             </div>
           </div>
           <div className="flex ml-6 mt-4 items-baseline">
@@ -190,14 +191,14 @@ export default function Detail({ params }) {
           </div>
           <div className="flex flex-row gap-3">
             <div
-              className="w-5 h-5 bg-purpleOscuro flex justify-center items-center rounded-full cursor-pointer"
+              className="w-6 h-6 bg-purpleOscuro flex justify-center items-center rounded-full cursor-pointer"
               onClick={decrementCount}
             >
               <p className="text-[1.2rem] mb-1 text-white">-</p>
             </div>
             <p>{ticketCount}</p> {/* Mostrar el valor del contador */}
             <div
-              className="w-5 h-5 bg-purpleOscuro flex justify-center items-center rounded-full cursor-pointer"
+              className="w-6 h-6 bg-purpleOscuro flex justify-center items-center rounded-full cursor-pointer"
               onClick={incrementCount}
             >
               <p className="text-[1.2rem] mb-1 text-white">+</p>
