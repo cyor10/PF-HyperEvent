@@ -13,15 +13,16 @@ export default function LandingPage() {
   const [dataCarousel, setDataCarousel] = useState([]);
   const [categories, setCategories] = useState([]);
   const [events, setEvents] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventData = await axiosInstance("/events?page=1");
-        const slicedEvents = eventData.data.events.slice(0, 20);
-        setEvents(slicedEvents);
+        const eventData = await axiosInstance(`/events?page=${currentPage}`);
+        const newEvents = eventData.data.events.slice(0, 20);
+        setEvents((prevEvents) => [...prevEvents, ...newEvents]);
 
-        const eventTopData = await axiosInstance('/events/top')
+        const eventTopData = await axiosInstance('/events/top');
         setDataCarousel(eventTopData.data.topEvents);
 
         const categoriesResponse = await axiosInstance("/categories?withEvent=true");
@@ -32,8 +33,7 @@ export default function LandingPage() {
       }
     };
     fetchData();
-  }, []);
-
+  }, [currentPage]);
 
   const handleFavorite = (index) => {
     setIsFav((prevState) => {
@@ -43,6 +43,8 @@ export default function LandingPage() {
       if (updatedState[index] === true) {
         toast('Event added to favorites!', {
           icon: '❤',
+          duration: 1500,
+          position: 'top-right',
           style: {
             border: '3px solid #925FF0',
             padding: '16px',
@@ -53,6 +55,8 @@ export default function LandingPage() {
       if (updatedState[index] === false) {
         toast("Event deleted from favorites", {
           icon: '🤍',
+          duration: 1500,
+          position: 'top-right',
           style: {
             border: '3px solid #925FF0',
             padding: '16px',
@@ -64,6 +68,9 @@ export default function LandingPage() {
     });
   };
 
+  const handleSeeMoreClick = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
   return (
     <div className="min-h-screen w-full bg-white font-figtree">
       <Carousel>
@@ -139,9 +146,9 @@ export default function LandingPage() {
           </div>
         ))}
       </div>
-      <div className="text-purpleOscuro mx-auto flex items-center justify-center w-[40%] h-[3.4rem] rounded-md bg-pinkChip mb-10 cursor-pointer">
+      <button onClick={handleSeeMoreClick} className="text-purpleOscuro mx-auto flex items-center justify-center w-[40%] h-[3.4rem] rounded-md bg-pinkChip mb-10 cursor-pointer">
         <h4 className="font-medium">See More</h4>
-      </div>
+      </button>
     </div>
   );
 }
