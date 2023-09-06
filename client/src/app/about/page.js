@@ -49,11 +49,11 @@ export default function About() {
     <div className='flex flex-col items-center justify-center min-h-screen mt-16 ml-8'>
       <h2 className='text-5xl mt-3 mb-2 ml-4 px-2 font-bold'>About us</h2>
       <p className='text-3xl font-medium text-center'>
-        We're a team of seven fullstack developers finishing the challenging Henry coding bootcamp. Our project, Hyper Events, is a testament to our coding skills and collaborative spirit.
+        We&apos;re a team of seven fullstack developers finishing the challenging Henry coding bootcamp. Our project, Hyper Events, is a testament to our coding skills and collaborative spirit.
         <br /><br />
-        We've honed our abilities through intensive training and are excited to showcase our innovation.
+        We&apos;ve honed our abilities through intensive training and are excited to showcase our innovation.
         <br /><br />
-        Hyper Events is more than just a project; it's a reflection of our shared vision to revolutionize event experiences in the digital age. Join us on this exciting journey as we turn lines of code into groundbreaking solutions. Thank you for being a part of our adventure!
+        Hyper Events is more than just a project; it&apos;s a reflection of our shared vision to revolutionize event experiences in the digital age. Join us on this exciting journey as we turn lines of code into groundbreaking solutions. Thank you for being a part of our adventure!
       </p>
       <h2 className="text-4xl mt-3 mb-2 ml-4 px-2 font-bold	">Meet the team</h2>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full mt-5'>
