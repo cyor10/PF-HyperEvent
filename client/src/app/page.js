@@ -47,7 +47,6 @@ export default function LandingPage() {
     setIsFav((prevState) => {
       const updatedState = [...prevState];
       updatedState[index] = !prevState[index];
-      console.log(updatedState[index])
       if (updatedState[index] === true) {
         toast('Event added to favorites!', {
           icon: '❤',
@@ -95,11 +94,10 @@ export default function LandingPage() {
       </div>
 
       <div className="mx-[min(3.5rem,5%)] pb-7">
-
         <Categories categories={categories}>
-
         </Categories>
       </div>
+      
       <div className="grid mx-auto pb-10 pt-3 md:grid-cols-2 gap-6 w-full justify-center lg:grid-cols-3">
         {events.map((event, index) => (
           <div className="bg-white shadow-md mx-auto w-[21rem] h-[19.5rem] rounded-lg flex flex-col relative" key={index}>
