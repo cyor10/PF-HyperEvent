@@ -7,13 +7,13 @@ async function setCategories(req, res) {
     try {
         const { data } = await axios.get(`${API_URL}/taxonomies?client_id=${API_KEY}`)
         const filteredTaxonomies = data?.taxonomies.filter(obj => {
-            return obj.is_visible === true;
+            return obj.parent_id === null && obj.is_visible === true;
         });
 
         await Category.findOrCreate({
-            where: { name: "Mixed" },
+            where: { name: "Entertainment" },
             defaults: {
-                name: "Mixed",
+                name: "Entertainment",
                 image: "https://seatgeek.com/images/performers-landscape/generic-club-passes-3c1159/677148/500_700.jpg"
             }
         });
