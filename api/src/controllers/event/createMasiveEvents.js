@@ -36,7 +36,7 @@ async function createMasiveEvents(req, res) {
                     categoryId = category.id;
                 } else {
                     // If no matching category is found, use the "Mixed" category
-                    const mixedCategory = await Category.findOne({ where: { name: "Mixed" } });
+                    const mixedCategory = await Category.findOne({ where: { name: "Entertainment" } });
                     if (mixedCategory) {
                         categoryId = mixedCategory.id;
                     }
