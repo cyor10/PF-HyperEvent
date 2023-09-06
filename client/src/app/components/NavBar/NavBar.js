@@ -44,8 +44,8 @@ export default function NavBar() {
   return (pathname === `/payment/${name}` || pathname === '/signup' || pathname === '/login' || pathname === '/payment' || pathname === '/payment/success' || pathname === '/payment/error' || pathname === '/payment/pending') ? null : (
     <div>
       <nav className="w-full bg-purpleNav top-0 left-0 right-0 z-10 fixed h-18 font-figtree">
-        <div className="justify-between mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
-          <div className="flex items-center justify-between py-3">
+        <div className="justify-between mx-auto md:items-center md:flex py-3">
+          <div className="flex items-center justify-between ">
             <Link href="/">
               <img
                 src="https://res.cloudinary.com/hyperevents/image/upload/v1693104043/2f79163d9c2b01b94bee3fbfe55cf941_ifonjr.png"
@@ -55,37 +55,6 @@ export default function NavBar() {
               ></img>
             </Link>
 
-            {reduxUser.name && !session && (
-              <label htmlFor="user" className="text-white mr-2">
-                {reduxUser.name}
-              </label>
-            )}
-            {session?.user.name && (
-              <label htmlFor="user" className="text-white mr-2">
-                {session.user.name}
-              </label>
-            )}
-            {session?.user.user_image && (
-              <Image
-                name="user"
-                className="w-10 h-10 rounded-full"
-                src={session.user.user_image}
-                height={100}
-                width={100}
-                alt="user-session"
-              />
-            )}
-
-            {reduxUser.user_image && !session && (
-              <Image
-                name="user"
-                className="w-10 h-10 rounded-full"
-                src={reduxUser.user_image}
-                height={100}
-                width={100}
-                alt="user-image"
-              />
-            )}
             <Link href="/search">
               <div className="w-10  h-10 bg-[#F4EFFD] flex items-center justify-center rounded-full cursor-pointer z-10 md:w-[16rem] md:pl-4 md:ml-4">
                 <div>
@@ -112,7 +81,7 @@ export default function NavBar() {
           </div>
           <div>
             <div
-              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? 'p-12 md:p-0 block' : 'hidden'
+              className={`flex-1 justify-self-center md:flex md:pb-0 md:mt-0 ${navbar ? ' block' : 'hidden'
                 }`}
             >
               <ul className="h-screen overflow-hidden md:h-auto items-center justify-center md:flex">
@@ -137,7 +106,7 @@ export default function NavBar() {
                 )}
 
                 {session && (
-                  <li className="pb-4 pt-4 text-lg text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                  <li className="text-lg text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                     <Link
                       href="/"
                       onClick={() => {
@@ -161,8 +130,9 @@ export default function NavBar() {
                     </Link>
                   </li>
                 )}
+
                 {reduxUser.name && !session && (
-                  <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                  <li className=" text-xl text-white text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                     <button
                       onClick={() => {
                         setNavbar(!navbar);
@@ -185,8 +155,40 @@ export default function NavBar() {
                       Logout
                     </button>
                   </li>
+                 
                 )}
               </ul>
+              {reduxUser.name && !session && (
+              <label htmlFor="user" className="text-white mr-2 ">
+                {reduxUser.name}
+              </label>
+            )}
+            {session?.user.name && (
+              <label htmlFor="user" className="text-white mr-3 hidden lg:flex mt-[1.2rem] ml-6">
+                {session.user.name}
+              </label>
+            )}
+            {session?.user.user_image && (
+              <Image
+                name="user"
+                className="w-10 h-10 rounded-full mt-3 mr-4"
+                src={session.user.user_image}
+                height={100}
+                width={100}
+                alt="user-session"
+              />
+            )}
+
+            {reduxUser.user_image && !session && (
+              <Image
+                name="user"
+                className="w-10 h-10 rounded-full"
+                src={reduxUser.user_image}
+                height={100}
+                width={100}
+                alt="user-image"
+              />
+            )}
             </div>
           </div>
         </div>
