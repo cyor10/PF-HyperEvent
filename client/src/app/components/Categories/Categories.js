@@ -19,13 +19,12 @@ export default function Categories({ categories }) {
       <motion.div drag="x" dragConstraints={{ right: 0, left: -width }} className='flex'>
         {categories.map((category, index) => {
           return (
-            <motion.div className=' h-[clamp(7rem,15vw,9.7rem)] w-[clamp(7rem,15vw,9.7rem)] p-[min(2%,0.8rem)] flex-col align-middle justify-center shrink-0'>
-              <Link 
-              key={index}
-              href={{
-                pathname: "/events",
-                query: { name: `${category.name}` },
-              }}>
+            <motion.div key={index} className=' h-[clamp(7rem,15vw,9.7rem)] w-[clamp(7rem,15vw,9.7rem)] p-[min(2%,0.8rem)] flex-col align-middle justify-center shrink-0'>
+              <Link
+                href={{
+                  pathname: "/events",
+                  query: { name: `${category.name}` },
+                }}>
                 <Image
                   src={category.image}
                   className='w-[90%] h-[90%] object-cover rounded-[1rem] justify-center ml-1'
