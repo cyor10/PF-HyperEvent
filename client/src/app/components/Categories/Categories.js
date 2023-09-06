@@ -1,53 +1,44 @@
 "use client"
 
-import {React, useState} from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import {React, useState, useEffect, useRef} from 'react'
+import {motion} from "framer-motion"
+import Image from 'next/image'
+import Link from 'next/link'
 
-export default function Categories( {children :  categories}) {
+export default function Categories( {categories}) {
 
-  const [pag, setPage] = useState(0);
+  
+  const [width,setWidth]= useState(0);
+  const carousel = useRef();
 
-  const prev = () => {
-    setPage((curr) => (curr === 0 ? curr : curr - 1));
-  };
-
-  const next = () => {
-    setPage((curr) => (curr === categories.length - 1 ? curr : curr + 1));
-  };
+  useEffect(()=>{
+    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+  })
 
   return (
-    <div className='overflow-hidden relative h-28 flex justify-center pt-3'>
-      <div
-        className="flex flex-row absolute transition-transform ease-out duration-500"
-        style={{ transform: `translateX(-${pag * 100}%)` }}
-      >
-        {categories} {/* Renderiza los elementos categories aquí */}
-      </div>
-
-      <div className='overflow-hidden flex flex-row justify-evenly pb-20 gap-1'></div>
-
-      {/* <div className="z-0 w-screen inset-0 flex items-center justify-between bottom-2 absolute">
-        <button
-          onClick={prev}
-          className="p-1 rounded shadow bg-white/80 text-gray-800 hover:bg-white"
-        >
-          <FontAwesomeIcon
-            className="text-gray-800"
-            icon={faChevronLeft}
-          ></FontAwesomeIcon>
-        </button>
-
-        <button
-          onClick={next}
-          className="p-1 rounded shadow bg-white/80 text-gray-800 hover:bg-white"
-        >
-          <FontAwesomeIcon
-            className="text-gray-800"
-            icon={faChevronRight}
-          ></FontAwesomeIcon>
-        </button>
-      </div> */}
-    </div>
+    <motion.div ref={carousel} className='cursor-grab overflow-hidden'>
+      <motion.div drag="x" dragConstraints={{right:0, left:-width}} className='flex'>
+        {categories.map(category => {
+          return(
+            <motion.div className=' h-[clamp(7rem,15vw,9.7rem)] w-[clamp(7rem,15vw,9.7rem)] p-[min(2%,0.8rem)] flex-col align-middle justify-center shrink-0'>
+              <Link href={{
+                pathname: "/events",
+                query: { name: `${category.name}` },
+              }}>
+              <Image 
+              src={category.image}
+              className='w-[90%] h-[90%] object-cover rounded-[1rem] justify-center ml-1'
+              width={200}
+              height={200}
+              />
+              <p className='w-[100%] h-[20%] font-figtree text-center text-sm'>
+                {category.name}
+              </p>
+              </Link>
+            </motion.div>
+          )
+        })}
+      </motion.div>
+    </motion.div>
   );
 }

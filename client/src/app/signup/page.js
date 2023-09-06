@@ -114,7 +114,7 @@ export default function SignUp() {
     }
   }
   return (
-    <div className='mb-40 grid font-figtree md:grid-cols-2 max-h-[45rem]'>
+    <div className='mb-[6rem] grid font-figtree md:grid-cols-2 max-h-[45rem] pb-[4rem]'>
       <div className="w-[65%] mx-auto flex flex-col align-start h-[100%] pb-5">
         <Link href='/'>
           <img

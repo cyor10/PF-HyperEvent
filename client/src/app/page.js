@@ -23,10 +23,6 @@ export default function LandingPage() {
 
         const eventTopData = await axiosInstance('/events/top')
         setDataCarousel(eventTopData.data.topEvents);
-
-        const categoriesResponse = await axiosInstance("/categories?withEvent=true");
-        const slicedCategories = categoriesResponse.data;
-        setCategories(slicedCategories);
       } catch (error) {
         console.log(error);
       }
@@ -34,6 +30,20 @@ export default function LandingPage() {
     fetchData();
   }, []);
 
+  useEffect(()=>{
+    const fetchCategoriesData = async ()=>{
+      try {
+        const categoriesResponse = await axiosInstance("/categories?withEvent=true");
+        const slicedCategories = categoriesResponse.data;
+        setCategories(slicedCategories);
+      } catch (error) {
+        console.log(error)
+      }
+    };
+    fetchCategoriesData();
+  },[])
+
+  console.log(categories);
 
   const handleFavorite = (index) => {
     setIsFav((prevState) => {
@@ -79,38 +89,17 @@ export default function LandingPage() {
           />
         ))}
       </Carousel>
-      <div className="pt-10">
+      <div className="pt-10 pb-8">
 
         <h1 className="text-[clamp(2.25rem,8vw,4rem)] text-center pb-3 font-black tracking-tighter leading-[clamp(2.25rem,8vw,4rem)] text-black">FIND YOUR <br />EXPERIENCE</h1>
 
-        <div className="w-[clamp(12rem,42vw,21rem)] mx-auto h-2 bg-black"></div>
+        <div className="w-[clamp(12rem,42vw,21rem)] mx-auto h-[clamp(0.6rem,2vw,0.8rem)] bg-black"></div>
       </div>
 
-      <div className="flex flex-col text-start justify-center w-full pt-3 pb-14 mt-8">
-
-        <Categories events={events}>
-          {categories.map((category, index) => (
-            <Link
-              className="w-[5rem] h-[6rem] mx-1.5 ml-5 mr-6"
-              key={index}
-              href={{
-                pathname: "/events",
-                query: { name: `${category.name}` },
-              }}
-            >
-              <div className="rounded flex flex-col text-center items-center justify-center w-[6rem] h-[8rem] pt-15">
-                <Image
-                  loading="lazy"
-                  className="w-[10rem] h-[5rem] rounded-lg text-xs object-cover"
-                  src={category.image}
-                  width={100}
-                  height={100}
-                  alt="Category"
-                />
-                <p className="pb-7 text-black">{category.name}</p>
-              </div>
-            </Link>
-          ))}
+      <div className="mx-[min(3.5rem,5%)] pb-7">
+         
+        <Categories categories= {categories}>
+          
         </Categories>
       </div>
       <div className="grid mx-auto pb-10 pt-3 md:grid-cols-2 gap-6 w-full justify-center lg:grid-cols-3">
