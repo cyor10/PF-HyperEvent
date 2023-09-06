@@ -6,13 +6,14 @@ import { validateLogin } from '../../validate/validate';
 import { redirect, useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { getUser } from '@/redux/features/counter/counterSlice';
-
+import { toast } from 'react-hot-toast';
 import { GoogleSignInButton } from '../components/auth-buttons';
 
 import { useSession } from 'next-auth/react';
 import { IconEyes } from '@/utils/svg/svg';
 
 export default function Login() {
+  const [showPwd, setShowPwd]=useState(false)
   const [tokencito, setTokencito] = useState('');
   const [existAccount, setExistAccount] = useState(true);
   const session = useSession();
@@ -75,7 +76,18 @@ export default function Login() {
   useEffect(() => {
     if (session.data === undefined || session.data === null) {
     } else {
-      googleUser();
+      toast.success('You logged in succesfully!', {
+        style: {
+          border: '3px solid #925FF0',
+          padding: '16px',
+          color: "#925FF0",
+        },
+        iconTheme: {
+          primary: "#925FF0",
+          secondary: '#FFFAEE',
+        },
+      });
+      googleUser()
     }
   }, [session]);
   useEffect(() => {
@@ -106,7 +118,8 @@ export default function Login() {
     (async () => {
       try {
         const { data } = await axiosInstance.post('/login', inputs);
-        if (data.token) {
+        if (data.token) {          
+          document.cookie = `tokens=${data.token}`
           localStorage.setItem('token', data.token);
           const response = await axiosInstance('/protected', {
             headers: {
@@ -114,7 +127,18 @@ export default function Login() {
             },
           });
           dispatch(getUser(response.data.user));
-          router.push('/');
+          toast.success('You logged in succesfully!', {
+            style: {
+              border: '3px solid #925FF0',
+              padding: '16px',
+              color: "#925FF0",
+            },
+            iconTheme: {
+              primary: "#925FF0",
+              secondary: '#FFFAEE',
+            },
+          });
+          setTimeout(()=>router.push('/'),1500);
         }
       } catch (error) {
         console.log(error);
@@ -178,13 +202,13 @@ export default function Login() {
           <input
             className="w-full px-3 py-2 rounded-md text-[grey] border-[grey] border-2 focus:outline-none focus:ring focus:border-blue-500 font-normal"
             key="password"
-            type="password"
+            type={showPwd ? "text" : "password"}
             name="password"
             onChange={handleInputs}
             value={inputs.password}
             placeholder="Password"
-          ></input>
-          <button type="button" className="relative top-[-2rem] left-[18rem]">
+          />
+          <button type="button" className="relative top-[-2rem] left-[18rem]" onClick={()=>setShowPwd(!showPwd)}>
             <IconEyes />
           </button>
         </div>
