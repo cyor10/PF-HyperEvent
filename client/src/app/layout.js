@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="flex flex-col">
+
           <Providers>
             <header>
               <NavBar />
@@ -24,8 +25,8 @@ export default function RootLayout({ children }) {
               <ToastProvider />
               <link rel="icon" href="/hyperevents.png" sizes="any" />
               {children}
-            </main>
-          </Providers>
+          </main>
+        </Providers>
         <Footer />
       </body>
     </html>
