@@ -14,14 +14,14 @@ export default function LandingPage() {
   const [categories, setCategories] = useState([]);
   const [events, setEvents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [hasMoreEvents, setHasMoreEvents] = useState(true); 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const eventData = await axiosInstance(`/events?page=${currentPage}`);
         const newEvents = eventData.data.events
         setEvents((prevEvents) => [...prevEvents, ...newEvents]);
-
+        if(eventData.data.events.length<14){setHasMoreEvents(false)}        
         const eventTopData = await axiosInstance('/events/top');
         setDataCarousel(eventTopData.data.topEvents);
 
@@ -146,9 +146,9 @@ export default function LandingPage() {
           </div>
         ))}
       </div>
-      <button onClick={handleSeeMoreClick} className="text-purpleOscuro mx-auto flex items-center justify-center w-[40%] h-[3.4rem] rounded-md bg-pinkChip mb-10 cursor-pointer">
+      {hasMoreEvents && (<button onClick={handleSeeMoreClick} className="text-purpleOscuro mx-auto flex items-center justify-center w-[40%] h-[3.4rem] rounded-md bg-pinkChip mb-10 cursor-pointer">
         <h4 className="font-medium">See More</h4>
-      </button>
+      </button>)}
     </div>
   );
 }
