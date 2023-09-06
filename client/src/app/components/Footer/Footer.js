@@ -16,7 +16,7 @@ export default function Footer() {
           <h3 className='font-bold'>ABOUT US</h3>
         </Link>
         <h3 className='font-bold'>CONTACT</h3>
-        <Link href='/create_events'>
+        <Link href='/create_event'>
           <h3 className='font-bold'>CREATE</h3>
         </Link>
         <Link href='/search'>
