@@ -15,14 +15,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="flex flex-col">
-          <Providers>
-            <header>
-              <NavBar />
-            </header>
-            <main>
+        <Providers>
+          <header>
+            <NavBar />
+          </header>
+          <main>
               {children}
-            </main>
-          </Providers>
+          </main>
+        </Providers>
         <Footer />
       </body>
     </html>

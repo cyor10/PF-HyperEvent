@@ -10,7 +10,7 @@ export default function Footer() {
     window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazamiento suave al principio
   };
   return (pathname === "/payment/" || pathname === "/create_event" || pathname === "/create_event/form_step_1" || pathname === "/create_event/form_step_2" || pathname === "/create_event/form_step_3" || pathname === '/payment/success' || pathname === '/payment/error') ? null : (
-    <footer className='bg-[#000] text-white h-[20%] flex flex-row justify-between p-6'>
+    <footer className='bg-[#000] text-white h-[28vh] flex flex-row justify-between p-6 '>
       <div className='flex flex-col gap-3'>
         <Link href='/about'>
           <h3 className='font-bold'>ABOUT US</h3>
