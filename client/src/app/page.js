@@ -19,7 +19,6 @@ export default function LandingPage() {
     const fetchData = async () => {
       try {
         const eventData = await axiosInstance(`/events?page=${currentPage}`);
-        console.log(eventData)
         const newEvents = eventData.data.events
         setEvents((prevEvents) => [...prevEvents, ...newEvents]);
         if(eventData.data.events.length<14){setHasMoreEvents(false)}        
