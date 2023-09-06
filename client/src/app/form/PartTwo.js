@@ -6,7 +6,7 @@ export default function PartTwo({ formData, setFormData }) {
   const currentDate = new Date().toISOString().split("T")[0];
 
   return (
-    <div>
+    <div className="text-black">
      <div className="flex flex-row items-center justify-center mr-4">
         <p className="text-[.8rem]">Step 2 of 4 </p>
         <div className="w-14 h-1 bg-purpleOscuro ml-2 rounded-md"></div>
