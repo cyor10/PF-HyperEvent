@@ -19,7 +19,7 @@ export default function LandingPage() {
     const fetchData = async () => {
       try {
         const eventData = await axiosInstance(`/events?page=${currentPage}`);
-        const newEvents = eventData.data.events.slice(0, 20);
+        const newEvents = eventData.data.events
         setEvents((prevEvents) => [...prevEvents, ...newEvents]);
 
         const eventTopData = await axiosInstance('/events/top');
