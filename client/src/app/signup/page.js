@@ -8,12 +8,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from '@/redux/features/counter/counterSlice';
 import Link from 'next/link';
 import { IconEyes } from '@/utils/svg/svg';
+import backgroundImage from "../../../public/backgroundSignUp.png"
+import Image from 'next/image';
+import { toast } from 'react-hot-toast'; 
 
 export default function SignUp() {
   const dispatch = useDispatch();
 
   const router = useRouter();
-
+  const [showPwd, setShowPwd]=useState(false)
   const [inputs, setInputs] = useState({
     email: '',
     name: '',
@@ -95,37 +98,49 @@ export default function SignUp() {
           },
         });
         dispatch(getUser(response.data.user));
-        router.push('/');
+        toast.success('User created successfully!', {
+          style: {
+            border: '3px solid #925FF0',
+            padding: '16px',
+            color: "#925FF0",
+          },
+          iconTheme: {
+            primary: "#925FF0",
+            secondary: '#FFFAEE',
+          },
+        });
+        setTimeout(()=>router.push('/'),1500);;
       }
     } catch (error) {
       console.log(error);
     }
   }
   return (
-    <div className="flex flex-col items-start">
-      <Link className="w-40 mx-auto" href="/">
-        <img
-          className="w-40 mx-auto"
-          src="https://res.cloudinary.com/hyperevents/image/upload/v1693102330/fc69a7cd877a754674613136a28b00ed_ghlch4.png"
-          alt="cloudinary-image"
-        ></img>
-      </Link>
-      <div className="w-full flex flex-row items-center justify-between">
-        <h2 className="text-3xl pl-10 w-[60%] font-black text-black">
-          CREATE AN ACCOUNT
-        </h2>
+    <div className='mb-40 grid font-figtree md:grid-cols-2 max-h-[45rem]'>
+    <div className="w-[65%] mx-auto flex flex-col align-start h-[100%] pb-5">
+      <img
+        className="w-40 mx-auto"
+        src="https://res.cloudinary.com/hyperevents/image/upload/v1693102330/fc69a7cd877a754674613136a28b00ed_ghlch4.png"
+      ></img>
 
-        <Link href="/login" className="pr-10 text-purpleOscuro">
-          Log in
-        </Link>
+      <div className="flex flex-row items-center justify-between ">
+        <div className='flex flex-col'>
+        <h2 className="text-4xl font-bold tracking-tight leading-9 text-black">Create an</h2>
+        <h2 className="text-4xl font-bold tracking-tight leading-9 text-black">account</h2>
+        </div>
+        <h2 className="text-grey text-center flex flex-col">
+          <Link className="text-purpleOscuro hover:underline" href="/login">
+            Log in
+          </Link>
+        </h2>
       </div>
 
       <form
         onSubmit={onSubmit}
-        className="max-w-[90%] mx-auto p-2 mb-10 font-[figtree] font-normal"
+        className="w-[100%] font-normal mx-auto"
       >
-        <div className="mt-6">
-          <label className="block text-gray-700 font-semibold mb-2">
+        <div className="mt-6 ">
+          <label className="block text-gray-700 font-semibold mb-1">
             Email
           </label>
           <input
@@ -139,16 +154,15 @@ export default function SignUp() {
           />
         </div>
         {errors.email ? (
-          <p className=" text-red-700 pt-2 pb-5 ml-1">{errors.email}</p>
+          <p className=" text-red-700 pt-1 ml-1">{errors.email}</p>
         ) : (
           <>
-            <div className="text-transparent pt-2 pb-5 ml-1">`&ldquo;`</div>
           </>
         )}
 
-        <div className="grid grid-cols-2 gap-4">
-          <div className="mb-2">
-            <label className="block text-gray-700 font-semibold mb-2">
+        <div className="grid  grid-cols-2 gap-4 mt-2">
+          <div>
+            <label className="block text-gray-700 font-semibold mb-1">
               Name
             </label>
             <input
@@ -161,15 +175,14 @@ export default function SignUp() {
               placeholder="John"
             />
             {errors.name ? (
-              <p className="text-red-700 pt-2">{errors.name}</p>
+              <p className="text-red-700 pt-1">{errors.name}</p>
             ) : (
               <>
-                <div className="text-transparent pt-2">`&ldquo;`</div>
               </>
             )}
           </div>
-          <div className="mb-2">
-            <label className="block text-gray-700 font-semibold mb-2">
+          <div>
+            <label className="block text-gray-700 font-semibold mb-1">
               Last Name
             </label>
             <input
@@ -182,42 +195,41 @@ export default function SignUp() {
               placeholder="Doe"
             />
             {errors.last_name ? (
-              <p className="text-red-700 pt-2">{errors.last_name}</p>
+              <p className="text-red-700 pt-1">{errors.last_name}</p>
             ) : (
               <>
-                <div className="text-transparent pt-2">`&ldquo;`</div>
               </>
             )}
           </div>
         </div>
 
-        <div className="mb-2">
-          <label className="block text-gray-700 font-semibold ">Password</label>
+        <div>
+          <label className="block text-grey font-normal	mt-3 mb-1 ml-1">
+            Password
+          </label>
           <input
-            className="w-full px-3 py-2 text-[grey] border-[grey] rounded border-2 focus:outline-none focus:ring focus:border-blue-500"
+            className="w-full px-3 py-2 rounded-md text-[grey] border-[grey] border-2 focus:outline-none focus:ring focus:border-blue-500 font-normal"
             key="password"
-            type="password"
+            type={showPwd ? "text" : "password"}
             name="password"
             onChange={handleInputs}
             value={inputs.password}
             placeholder="Password"
-          />
-          <button type="button" className="relative top-[-2rem] left-[18rem]">
+             />
+          <button type="button" className="relative top-[-2rem] left-[17rem]" onClick={()=> setShowPwd(!showPwd)}>
+          
             <IconEyes />
           </button>
-          {errors.password ? (
-            <p className=" text-red-700 relative bottom-4">{errors.password}</p>
-          ) : (
-            <>
-              <div className="text-transparent relative bottom-4">
-                `&ldquo;`
-              </div>
-            </>
-          )}
         </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 font-semibold mb-2">
-            User Image
+        {errors.password ? (
+          <p className="text-red-700 mt-[-1rem] ml-1 font-light text-md">{errors.password}</p>
+        ) : (
+          <>
+          </>
+        )}
+        <div className="mt-2 mb-4">
+          <label className="block text-gray-700 font-semibold mb-1">
+            Profile picture
           </label>
           <input
             className="w-full px-3 py-2 text-[grey] border-[grey] border-2 rounded-md focus:outline-none focus:ring focus:border-blue-500 "
@@ -226,10 +238,9 @@ export default function SignUp() {
             onChange={handleInputs}
           />
           {errors.file ? (
-            <p className="text-red-700 pt-2">{errors.file}</p>
+            <p className="text-red-700 pt-1">{errors.file}</p>
           ) : (
             <>
-              <div className="text-transparent pt-2">`&ldquo;`</div>
             </>
           )}
         </div>
@@ -245,6 +256,14 @@ export default function SignUp() {
           CREATE ACOUNT
         </button>
       </form>
+    </div>
+
+    <div className='hidden md:inline'>
+          <Image
+          className='w-full h-[min(60rem,120%)] object-cover'
+          src={backgroundImage}
+          />
+    </div>
     </div>
   );
 }

@@ -11,6 +11,7 @@ import { getUser } from '@/redux/features/counter/counterSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { IconHambuger, IconSearch, IconX } from '@/utils/svg/svg';
 import { useParams } from 'next/navigation';
+import { toast } from 'react-hot-toast';
 
 export default function NavBar() {
   const { name } = useParams();
@@ -42,10 +43,9 @@ export default function NavBar() {
     
   return (name?.length > 0 ||pathname === '/signup' || pathname === '/login' || pathname === '/payment' || pathname === '/payment/success' || pathname === '/payment/error') ? null : (
     <div>
-      <nav className="w-full bg-purpleNav top-0 left-0 right-0 z-10 fixed h-18">
-        <div className="justify-between lg:max-w-7xl md:items-center md:flex md:px-8">
-          <div>
-            <div className="flex items-center justify-between py-3 md:py-5 md:block">
+      <nav className="w-full bg-purpleNav top-0 left-0 right-0 z-10 fixed h-18 font-figtree">
+        <div className="justify-between mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+            <div className="flex items-center justify-between py-3">
               <Link href="/">
                 <img
                   src="https://res.cloudinary.com/hyperevents/image/upload/v1693104043/2f79163d9c2b01b94bee3fbfe55cf941_ifonjr.png"
@@ -86,12 +86,14 @@ export default function NavBar() {
                   alt="user-image"
                 />
               )}
-
-              <div className="w-10  h-10 bg-[#F4EFFD] flex justify-center items-center rounded-full cursor-pointer z-10">
-                  <Link href="/search">
-                    <IconSearch />
-                  </Link>
+              <Link href="/search">
+              <div className="w-10  h-10 bg-[#F4EFFD] flex items-center justify-center rounded-full cursor-pointer z-10 md:w-[16rem] md:pl-4 md:ml-4">
+                    <div>
+                    <IconSearch/>
+                    </div>
+                    <p className='hidden md:inline-flex w-full ml-4'>Search events</p>
               </div>
+              </Link>
 
               <div className="md:hidden">
               <button
@@ -107,7 +109,6 @@ export default function NavBar() {
                   )}
                 </button>
               </div>
-            </div>
           </div>
           <div>
             <div
@@ -116,33 +117,47 @@ export default function NavBar() {
               }`}
             >
               <ul className="h-screen overflow-hidden md:h-auto items-center justify-center md:flex">
-                <li className="pb-4 pt-4 text-xl text-white py-2 md:px-6 text-center border-b-2 md:border-b-0  hover:bg-purple-900  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
-                  <Link href="/" onClick={() => setNavbar(!navbar)}>
-                    Home
-                  </Link>
-                </li>
-                {!reduxUser.name && !session && (
-                  <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
-                    <Link href="/login" onClick={() => setNavbar(!navbar)}>
-                      Login
-                    </Link>
-                  </li>
-                )}
-                <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+              <li className="pb-4 pt-4 text-lg text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                   <Link href="/create_event" onClick={() => setNavbar(!navbar)}>
                     Create Events
                   </Link>
                 </li>
+                {!reduxUser.name && !session && (
+                  <li className="pb-4 pt-4 text-lg text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                    <Link href="/login" onClick={() => setNavbar(!navbar)}>
+                      Log in
+                    </Link>
+                  </li>
+                )}
+                 {!reduxUser.name && !session && (
+                  <li className="pb-4 pt-4 text-lg text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                    <Link href="/signup" onClick={() => setNavbar(!navbar)}>
+                      Sign up
+                    </Link>
+                  </li>
+                )}
+                
                 {session && (
-                  <li className="pb-4 pt-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                  <li className="pb-4 pt-4 text-lg text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                     <Link
                       href="/"
                       onClick={() => {
                         setNavbar(!navbar);
-                        signOut();
+                        
                         localStorage.removeItem('token');
                         document.cookie = 'tokens=; max-age=0';
-                        router.push("/")
+                        toast.success('You logged out succesfully!', {
+                          style: {
+                            border: '1px solid #BE9FF6',
+                            padding: '16px',
+                            color: "#925FF0",
+                          },
+                          iconTheme: {
+                            primary: "#925FF0",
+                            secondary: '#FFFAEE',
+                          },
+                        });
+                        setTimeout(()=>signOut(),1500);
                       }}
                     >
                       Logout
@@ -157,7 +172,18 @@ export default function NavBar() {
                         document.cookie = 'tokens=; max-age=0';
                         localStorage.removeItem('token');
                         dispatch(getUser({ username: '', password: '' }));
-                        router.push('/');
+                        toast.success('You logged out succesfully!', {
+                          style: {
+                            border: '1px solid #BE9FF6',
+                            padding: '16px',
+                            color: "#925FF0",
+                          },
+                          iconTheme: {
+                            primary: "#925FF0",
+                            secondary: '#FFFAEE',
+                          },
+                        });
+                        setTimeout(()=>router.push('/'),1500);
                       }}
                     >
                       Logout
