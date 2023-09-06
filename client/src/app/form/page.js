@@ -8,6 +8,7 @@ import { IconArrowLeft } from "@/utils/svg/svg";
 import axiosInstance from "../../utils/axiosInstance"
 import { validateEventField } from "@/validate/validate";
 import { useRouter } from 'next/navigation';
+import { toast } from "react-hot-toast";
 
 export default function Form() {
   const [page, setPage] = useState(0);
@@ -92,13 +93,33 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
 
       if (data) {
         console.log('Event created:', data);
-        alert("Event created")
+        toast.success("Event created succesfully", {
+          style: {
+            border: '3px solid #925FF0',
+            padding: '16px',
+            color: "#925FF0",
+          },
+          iconTheme: {
+            primary: "#925FF0",
+            secondary: '#FFFAEE',
+          },
+        })
         router.push('/');
         // Puedes hacer algo con la respuesta del servidor si es necesario
       }
     } catch (error) {
       console.log('Error:', error);
-      alert("No puedes crear eventos duplicados")
+      toast.error("No puedes crear eventos duplicados", {
+        style: {
+          border: '3px solid #925FF0',
+          padding: '16px',
+          color: "#925FF0",
+        },
+        iconTheme: {
+          primary: "#925FF0",
+          secondary: '#FFFAEE',
+        },
+      })
     }
   };
   

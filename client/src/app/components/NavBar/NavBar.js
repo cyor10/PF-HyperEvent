@@ -11,7 +11,7 @@ import { getUser } from '@/redux/features/counter/counterSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { IconHambuger, IconSearch, IconX } from '@/utils/svg/svg';
 import { useParams } from 'next/navigation';
-
+import { toast } from 'react-hot-toast';
 export default function NavBar() {
   const { name } = useParams();
   const router = useRouter();
@@ -139,10 +139,20 @@ export default function NavBar() {
                       href="/"
                       onClick={() => {
                         setNavbar(!navbar);
-                        signOut();
                         localStorage.removeItem('token');
                         document.cookie = 'tokens=; max-age=0';
-                        router.push("/")
+                        toast.success('You logged out succesfully!', {
+                          style: {
+                            border: '1px solid #BE9FF6',
+                            padding: '16px',
+                            color: "#925FF0",
+                          },
+                          iconTheme: {
+                            primary: "#925FF0",
+                            secondary: '#FFFAEE',
+                          },
+                        });
+                        setTimeout(()=>signOut(),1500);
                       }}
                     >
                       Logout
@@ -157,7 +167,18 @@ export default function NavBar() {
                         document.cookie = 'tokens=; max-age=0';
                         localStorage.removeItem('token');
                         dispatch(getUser({ username: '', password: '' }));
-                        router.push('/');
+                        toast.success('You logged out succesfully!', {
+                          style: {
+                            border: '1px solid #BE9FF6',
+                            padding: '16px',
+                            color: "#925FF0",
+                          },
+                          iconTheme: {
+                            primary: "#925FF0",
+                            secondary: '#FFFAEE',
+                          },
+                        });
+                        setTimeout(()=>router.push('/'),1500);
                       }}
                     >
                       Logout

@@ -7,7 +7,7 @@ import Link from "next/link";
 import { IconFavWhite, IconFavRed } from "@/utils/svg/svg";
 import Image from "next/image";
 import FloatingCommentBubble from "./components/Comments/FloatingCommentBubble";
-
+import { toast } from "react-hot-toast";
 
 export default function LandingPage() {
   const [isFav, setIsFav] = useState([]);
@@ -41,6 +41,24 @@ export default function LandingPage() {
     setIsFav((prevState) => {
       const updatedState = [...prevState];
       updatedState[index] = !prevState[index];
+      console.log(updatedState[index])
+      if(updatedState[index]===true){toast('Event added to favorites!', {
+        icon: '❤', 
+        style: {
+          border: '3px solid #925FF0',
+          padding: '16px',
+          color: "#925FF0",
+        }
+      });}
+      if(updatedState[index]===false){toast("Event deleted from favorites",{
+        icon: '🤍', 
+        style: {
+          border: '3px solid #925FF0',
+          padding: '16px',
+          color: "#925FF0",
+        }
+      });
+    }
       return updatedState;
     });
   };
@@ -106,7 +124,7 @@ export default function LandingPage() {
             />
             <div className="absolute flex justify-center rounded-full w-9 h-9 z-100 right-[1rem] bottom-[11.5rem] bg-white">
               <button className="" onClick={() => handleFavorite(index)}>
-                {isFav[index] ? <IconFavRed /> : <IconFavWhite />}
+                {isFav[index] ? <IconFavRed />  : <IconFavWhite />}
               </button>
             </div>
             <Link className="z-0" href="/detail/[name]" as={`/detail/${event.event_name}`}>
