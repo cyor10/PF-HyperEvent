@@ -101,7 +101,7 @@ export default function Detail({ params }) {
     <div className=" bg-white pt-16 font-figtree min-h-[105%] md:pb-0 md:min-h-[90%]">
       <img
           src={event?.event_image}
-          className="w-[100%] h-[20vh] rounded-b-3xl object-cover md:hidden"
+          className="w-[100%] h-[20vhrem] rounded-b-3xl object-cover md:hidden"
           height={200}
           width={200}
           alt="event-image"

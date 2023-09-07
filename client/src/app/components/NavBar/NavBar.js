@@ -85,13 +85,13 @@ export default function NavBar() {
                 }`}
             >
               <ul className="h-screen overflow-hidden md:h-auto items-center justify-center md:flex">
-                <li className="pb-4 pt-4 text-lg text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                <li className="pb-4 pt-4 text-xl md:text-lg text-white py-3 px-10 text-center md:mx-4 border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                   <Link href="/form" onClick={() => setNavbar(!navbar)}>
                     Create Events
                   </Link>
                 </li>
                 {!reduxUser.name && !session && (
-                  <li className="pb-4 pt-4 text-lg text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                  <li className="py-4 text-lg text-white  px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                     <Link href="/login" onClick={() => setNavbar(!navbar)}>
                       Log in
                     </Link>
@@ -106,7 +106,7 @@ export default function NavBar() {
                 )}
 
                 {session && (
-                  <li className="text-lg text-white py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                  <li className="text-lg text-white py-4 px-6 text-center  md:mx-[3rem] border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                     <Link
                       href="/"
                       onClick={() => {
@@ -126,13 +126,13 @@ export default function NavBar() {
                         });
                         setTimeout(() => signOut(), 1500);
                       }}>
-                      Logout
+                      Log out
                     </Link>
                   </li>
                 )}
 
                 {reduxUser.name && !session && (
-                  <li className=" text-xl text-white text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                  <li className=" text-xl md:text-lg py-2 text-white text-center md:mx-8 border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                     <button
                       onClick={() => {
                         setNavbar(!navbar);
@@ -152,19 +152,19 @@ export default function NavBar() {
                         });
                         setTimeout(() => router.push('/'), 1500);
                       }}>
-                      Logout
+                      Log out
                     </button>
                   </li>
                  
                 )}
               </ul>
               {reduxUser.name && !session && (
-              <label htmlFor="user" className="text-white mr-2 ">
+              <label htmlFor="user" className="text-white mr-3 mt-[1.2rem] ml-[3.5rem] ">
                 {reduxUser.name}
               </label>
             )}
             {session?.user.name && (
-              <label htmlFor="user" className="text-white mr-3 hidden lg:flex mt-[1.2rem] ml-6">
+              <label htmlFor="user" className="text-white mr-3 mt-[1.2rem] ml-[3.5rem]">
                 {session.user.name}
               </label>
             )}
@@ -182,7 +182,7 @@ export default function NavBar() {
             {reduxUser.user_image && !session && (
               <Image
                 name="user"
-                className="w-10 h-10 rounded-full"
+                className="w-10 h-10 rounded-full mt-3 mr-4"
                 src={reduxUser.user_image}
                 height={100}
                 width={100}
