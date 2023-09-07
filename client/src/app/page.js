@@ -46,7 +46,7 @@ export default function LandingPage() {
     setCurrentPage((prevPage) => prevPage + 1);
   };
   return (
-    <div className="min-h-screen w-full bg-white font-figtree">
+    <div className="min-h-screen w-full bg-white font-figtree text-black">
       <Carousel>
         {dataCarousel.map((event, index) => (
           <Image
@@ -67,7 +67,7 @@ export default function LandingPage() {
         <div className="w-[clamp(12rem,42vw,22rem)] mx-auto h-[clamp(0.6rem,2vw,0.8rem)] bg-black pb-3"></div>
       </div>
 
-      <div className="mx-[max(1rem,7%)] pb-7">
+      <div className="mx-[max(1rem,7%)] pb-7 text-black">
         <Categories categories={categories} />
       </div>
       
