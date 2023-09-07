@@ -99,15 +99,15 @@ export default function LandingPage() {
 
         <h1 className="text-[clamp(2.25rem,8vw,4rem)] text-center pb-3 font-black tracking-tighter leading-[clamp(2.25rem,8vw,4rem)] text-black">FIND YOUR <br />EXPERIENCE</h1>
 
-        <div className="w-[clamp(12rem,42vw,21rem)] mx-auto h-[clamp(0.6rem,2vw,0.8rem)] bg-black"></div>
+        <div className="w-[clamp(12rem,42vw,22rem)] mx-auto h-[clamp(0.6rem,2vw,0.8rem)] bg-black pb-3"></div>
       </div>
 
-      <div className="mx-[min(3.5rem,5%)] pb-7">
+      <div className="mx-[max(1rem,7%)] pb-7">
         <Categories categories={categories}>
         </Categories>
       </div>
       
-      <div className="grid mx-auto pb-10 pt-3 md:grid-cols-2 gap-6 w-full justify-center lg:grid-cols-3">
+      <div className="grid mx-auto pb-10 pt-6 md:grid-cols-2 gap-6 w-full justify-center lg:grid-cols-3">
         {events.map((event, index) => (
           <div className="bg-white shadow-md mx-auto w-[21rem] h-[19.5rem] rounded-lg flex flex-col relative" key={index}>
             <Image
