@@ -12,5 +12,5 @@ export function middleware(request) {
 }
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/payment/:path*', '/create_event/:path*'],
+  matcher: ['/payment/:path*', '/form/:path*'],
 };
