@@ -9,11 +9,14 @@ import axiosInstance from "../../utils/axiosInstance"
 import { validateEventField } from "@/validate/validate";
 import { useRouter } from 'next/navigation';
 import { toast } from "react-hot-toast";
+import { useSelector } from "react-redux";
+import StarsModal from "../components/Modals/starsModal";
+import CommentModal from "../components/Modals/commentModal";
 
 export default function Form() {
   const [page, setPage] = useState(0);
 
-    const router = useRouter();
+   
 
   const [formData, setFormData] = useState({
     event_name: '',
@@ -69,7 +72,12 @@ export default function Form() {
     }
   };
 
-  console.log("",formData)
+  //console.log("",formData)
+  const [showStarsModal, setShowStarsModal] = useState(false);
+  const [showCommentModal, setShowCommentModal] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+  const reduxUser = useSelector((state) => state.counter);
 
   const handleSubmit = async (event) => {
     try {
@@ -98,7 +106,8 @@ export default function Form() {
             secondary: '#FFFAEE',
           },
         })
-        router.push('/');
+        setShowStarsModal(true);
+      
         // Puedes hacer algo con la respuesta del servidor si es necesario
       }
     } catch (error) {
@@ -116,7 +125,19 @@ export default function Form() {
       })
     }
   };
-  
+  const sendCommentAndRatingToServer = async (comment, rating, reduxUser ) => {
+    try {
+      const dataToSend = {
+        comment: comment,
+        rating: rating,
+        user_id: reduxUser.id, 
+      };
+      const response = await axiosInstance.post("/postComment", dataToSend);
+      console.log("Comentario y calificación enviados exitosamente:", response.data);
+    } catch (error) {
+      console.error("Error al enviar el comentario y calificación:", error);
+    }
+  };
 
   return (
     <div className='pt-20 ml-4 pb-10 px-[.5rem]'>
@@ -149,6 +170,32 @@ export default function Form() {
   <button type="submit" style={{ display: "none" }}></button> {/* Agregamos un botón oculto de tipo "submit" para que el formulario se envíe al presionar "Enter" */}
 </form>
     </div>
+    {/* Modal de calificación de estrellas */}
+    {showStarsModal && (
+        <StarsModal
+          isOpen={showStarsModal}
+          onRequestClose={() => setShowStarsModal(false)}
+          onNextClick={(rating) => {
+            setRating(rating);
+            setShowCommentModal(true);
+          }}
+          user={user}
+          />
+      )}
+
+      {/* Modal de comentarios */}
+      {showCommentModal && (
+        <CommentModal
+          isOpen={showCommentModal}
+          onRequestClose={() => setShowCommentModal(false)}
+          onNextClick={(comment) => {
+            setComment(comment);
+            // Llama a la función sendCommentAndRatingToServer para enviar el comentario, calificación y usuario
+            sendCommentAndRatingToServer(comment, rating, reduxUser);
+          }}
+          user={user} // Pasa la información del usuario
+        />
+      )}
   </div>
   );
 }
