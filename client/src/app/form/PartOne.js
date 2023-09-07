@@ -28,7 +28,7 @@ export default function PartOne({ formData, setFormData, errors, setErrors, vali
 
 
   return (
-    <div className="text-black">
+    <div className="text-black font-figtree md:my-10 md:px-[15rem]">
           <div className='flex flex-row items-center justify-center mr-4'>
         <p className='text-[.8rem]'>Step 1 of 4 </p>
         <div className='w-8 h-1 bg-purpleOscuro ml-2 rounded-md'></div>
