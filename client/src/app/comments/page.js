@@ -21,10 +21,11 @@ export default function Comments() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col w-full items-center font-figtree mt-16 mb-10">
-      <h2 className="text-[#29154D] text-[30px] font-extrabold tracking-[-1.8px] ml-10 mt-5">
+    <div className="min-h-screen w-full ml-[5%] font-figtree mt-16 md:mt-32 mb-10">
+      <h2 className="mx-auto mt-20 md:mt-32 tracking-[-2.5px] font-bold text-[clamp(2.5rem,6vw,3.5rem)]">
         What our customers have to say
       </h2>
+      <div className="grid mx-auto pb-10 pt-6 md:grid-cols-2 gap-6 w-full justify-center">
       {comments.length > 0 ? (
         comments.map((comment, index) => (
           <CommentCard key={index} comment={comment} />
@@ -32,6 +33,7 @@ export default function Comments() {
       ) : (
         <p>No comments available.</p>
       )}
+      </div>
     </div>
   );
 }

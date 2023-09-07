@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 export default function CommentCard({ comment }) {
   function renderStars(rating) {
@@ -53,13 +54,15 @@ export default function CommentCard({ comment }) {
           whiteSpace: "normal", // Permite dividir automáticamente el texto en líneas
         }}
       >
-        &quot{comment.comment}&quot
+        &quot;{comment.comment}&quot;
       </p>
       <div className="w-full flex justify-center">
-        <img
-          src={comment.user.user_image}
-          alt={comment.user.name}
-          className="rounded-full w-[65 px] h-[70px] border-2 absolute bottom-[-40px]"
+        <Image
+        src={comment.user.user_image}
+        alt={comment.user.name}
+        className="rounded-full max-w-[70px] h-[70px] border-2 object-cover absolute bottom-[-40px]"
+        width={100}
+        height={100}
         />
         <p
           className="absolute right-4 text-black text-sm"
