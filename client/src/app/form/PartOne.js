@@ -93,7 +93,7 @@ export default function PartOne({ formData, setFormData, errors, setErrors, vali
   }}
 >
   <option disabled value="">
-    (Select Categories)
+    Select Category
   </option>
   {Array.isArray(categories) &&
     categories?.map((categ, index) => {

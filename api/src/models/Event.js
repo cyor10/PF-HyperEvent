@@ -69,7 +69,7 @@ module.exports = (sequelize) => {
             defaultValue : "https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
         },
         price: {
-            type: DataTypes.DECIMAL(6, 2),
+            type: DataTypes.DECIMAL(8, 2),
             allowNull: true
         },
         stock: {
