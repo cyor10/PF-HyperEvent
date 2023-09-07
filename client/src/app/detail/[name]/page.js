@@ -27,7 +27,8 @@ export default function Detail({ params }) {
     (async () => {
       try {
         const { data } = await axiosInstance(`/events?name=${name}`);
-        setEvent(data);
+        setEvent(data.events[0]);
+
       } catch (error) {
         console.log(error);
       }
