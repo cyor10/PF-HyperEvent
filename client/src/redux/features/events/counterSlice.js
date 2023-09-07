@@ -7,8 +7,7 @@ const initialState = {
     searchedEvents: [],
     coincidence: true,
     status: 'idle',
-    numPageSearch: 0,
-    numPageHome: 0,
+    numPageSearch: 0
 }
 
 export const fetchSearchData = createAsyncThunk(
@@ -28,7 +27,7 @@ export const counterSlice = createSlice({
     initialState,
     reducers: {
         pagination: (state, action) => { state[action.payload.pageRoute] = action.payload.pag },
-        setPagination: (state, action) => { state[action.payload.stateRoute] = action.payload.cardsSliced },
+        resetNumPage: (state) => { state.numPageSearch = 0 },
         clearSearchedEvents: (state) => {
             state.searchedEvents = [], state.coincidence = true;
         },
@@ -54,6 +53,6 @@ export const counterSlice = createSlice({
     }
 })
 
-export const { pagination, setPagination, clearSearchedEvents } = counterSlice.actions
+export const { pagination, resetNumPage, clearSearchedEvents } = counterSlice.actions
 
 export default counterSlice.reducer

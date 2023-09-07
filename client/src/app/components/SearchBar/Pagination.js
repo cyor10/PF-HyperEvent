@@ -27,7 +27,7 @@ export default function Pagination(params) {
                 </div> : null}
                 {reduxEvents[pageRoute] > 2 && <div className='ml-2'>. . .</div>}
                 {buttonPages.map(pag => {
-                    if (pag >= reduxEvents[pageRoute] - 2 && pag <= reduxEvents[pageRoute] + 2) return (<h3 onClick={() => handlePagination(pag)} className={`cursor-pointer mr-2 ml-2 ${pag === reduxEvents[pageRoute] ? "bg-slate-500" : "bg-slate-300"} w-7 flex justify-center rounded`} key={pag}>{pag + 1}</h3>
+                    if (pag >= reduxEvents[pageRoute] - 2 && pag <= reduxEvents[pageRoute] + 2) return (<h3 onClick={() => handlePagination(pag)} className={`cursor-pointer mr-2 ml-2 ${pag === reduxEvents[pageRoute] ? "bg-purpleOscuro" : "bg-pinkChip"} w-7 flex justify-center rounded`} key={pag}>{pag + 1}</h3>
                     )
                 })}
                 {reduxEvents[pageRoute] < buttonPages.length - 3 && <div className='mr-2'>. . .</div>}
