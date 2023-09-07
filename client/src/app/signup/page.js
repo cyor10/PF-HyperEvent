@@ -259,7 +259,7 @@ export default function SignUp() {
 
       <div className='hidden md:inline'>
         <Image
-          className='w-full h-[87vh] object-cover'
+          className='w-full h-[125%] object-cover'
           src="https://res.cloudinary.com/hyperevents/image/upload/v1694018915/backgroundSignUp_mupjgg.png"
           alt='SignupImage'
           width={1036}
