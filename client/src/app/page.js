@@ -51,7 +51,7 @@ export default function LandingPage() {
         {dataCarousel.map((event, index) => (
           <Image
             priority={true}
-            className="w-full h-60 object-cover"
+            className="w-[100%] h-72 object-cover"
             src={event.event_image}
             alt={event.event_name}
             width={900}
