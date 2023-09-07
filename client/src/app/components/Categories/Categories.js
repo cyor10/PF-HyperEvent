@@ -21,13 +21,12 @@ export default function Categories({ categories }) {
           return (
             <motion.div key={index} className=' h-[clamp(7rem,15vw,9.7rem)] w-[clamp(7rem,15vw,9.7rem)] p-[min(2%,0.8rem)] flex-col align-middle justify-center shrink-0'>
               <Link
-                href={{
-                  pathname: "/events",
-                  query: { name: `${category.name}` },
-                }}>
+                href='/events'
+                as={`/events  /${category.name}`}>
                 <Image
                   src={category.image}
                   className='w-[90%] h-[90%] object-cover rounded-[1rem] justify-center ml-1'
+                  alt={category.name}
                   width={200}
                   height={200}
                 />

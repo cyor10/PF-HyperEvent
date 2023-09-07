@@ -88,7 +88,7 @@ export default function LandingPage() {
             priority={true}
             className="w-full h-60 object-cover"
             src={event.event_image}
-            alt="Descripción de la imagen"
+            alt={event.event_name}
             width={900}
             height={300}
             key={index}
@@ -113,7 +113,7 @@ export default function LandingPage() {
             <Image
               className="w-[100%] h-[45%] object-cover rounded-t-lg z-100 relative"
               src={event.event_image}
-              alt="Descripción de la imagen"
+              alt={event.event_name}
               width={1200}
               height={300}
             />

@@ -207,18 +207,19 @@ export default function SignUp() {
             <label className="block text-grey font-normal	mt-3 mb-1 ml-1">
               Password
             </label>
-            <input
-              className="w-full px-3 py-2 rounded-md text-[grey] border-[grey] border-2 focus:outline-none focus:ring focus:border-blue-500 font-normal"
-              key="password"
-              type={showPwd ? "text" : "password"}
-              name="password"
-              onChange={handleInputs}
-              value={inputs.password}
-              placeholder="Password" />
-            <button type="button" className="relative top-[-2rem] left-[17rem]" onClick={() => setShowPwd(!showPwd)}>
-
-              <IconEyes />
-            </button>
+            <div className='flex relative mb-4'>
+              <input
+                className="w-full px-3 py-2 rounded-md text-[grey] border-[grey] border-2 focus:outline-none focus:ring focus:border-blue-500 font-normal"
+                key="password"
+                type={showPwd ? "text" : "password"}
+                name="password"
+                onChange={handleInputs}
+                value={inputs.password}
+                placeholder="Password" />
+              <button type="button" className="absolute top-[15px] right-4" onClick={() => setShowPwd(!showPwd)}>
+                <IconEyes />
+              </button>
+            </div>
           </div>
           {errors.password ? (
             <p className="text-red-700 mt-[-1rem] ml-1 font-light text-md">{errors.password}</p>
@@ -258,10 +259,11 @@ export default function SignUp() {
 
       <div className='hidden md:inline'>
         <Image
-          className='w-full h-[min(60rem,120%)] object-cover'
+          className='w-full h-[87vh] object-cover'
           src="https://res.cloudinary.com/hyperevents/image/upload/v1694018915/backgroundSignUp_mupjgg.png"
+          alt='SignupImage'
           width={1036}
-          height={1040}
+          height={820}
         />
       </div>
     </div>
