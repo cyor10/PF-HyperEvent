@@ -85,7 +85,7 @@ export default function NavBar() {
                 }`}
             >
               <ul className="h-screen overflow-hidden md:h-auto items-center justify-center md:flex">
-                <li className="pb-4 pt-4 text-xl md:text-sm text-white lg:text-lg py-3 px-10 md:px-3 text-center md:mx-0 lg:mx-4 border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                <li className="pb-4 pt-4 text-xl md:text-sm text-white py-3 lg:text-lg  lg:mr-8 px-10 md:px-3 text-center md:mx-0 lg:mx-4 border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                   <Link href="/form" onClick={() => setNavbar(!navbar)}>
                     Create Events
                   </Link>
@@ -106,7 +106,7 @@ export default function NavBar() {
                 )}
 
                 {session && (
-                  <li className="text-white py-4 px-6 text-sm lg:ml-[3rem] lg:text-lg md:text-center md:px-0 md:mx-[1rem] border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                  <li className="text-xl text-white md:text-sm lg:text-lg py-4 px-6 text-center md:px-0 md:mx-[1rem] border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                     <Link
                       href="/"
                       onClick={() => {
@@ -132,7 +132,7 @@ export default function NavBar() {
                 )}
 
                 {reduxUser.name && !session && (
-                  <li className=" text-xl md:text-lg py-2 text-white text-center md:mx-8 border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                  <li className=" text-sm md:text-lg py-2 text-white text-center md:mx-8 border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                     <button
                       onClick={() => {
                         setNavbar(!navbar);
@@ -159,19 +159,19 @@ export default function NavBar() {
                 )}
               </ul>
               {reduxUser.name && !session && (
-              <label htmlFor="user" className="text-white mr-3 ml-[1rem] text-xs mt-[1.2rem] lg:ml-[3.5rem] lg:pt-1">
+              <label htmlFor="user" className="text-white mr-3 text-xs ml-[2.5rem] mt-[1.4rem] lg:ml-[3.5rem] lg:text-sm">
                 {reduxUser.name}
               </label>
             )}
             {session?.user.name && (
-              <label htmlFor="user" className="text-white mr-3 ml-[1rem] text-xs mt-[1.2rem] lg:ml-[3.5rem] lg:pt-1">
+              <label htmlFor="user" className="text-white mr-3 ml-[1rem] text-xs mt-[1.2rem] lg:ml-[3.5rem] lg:text-sm">
                 {session.user.name}
               </label>
             )}
             {session?.user.user_image && (
               <Image
                 name="user"
-                className="w-10 h-10 rounded-full mt-3 mr-4"
+                className="w-10 h-10 rounded-full mt-2 mr-4"
                 src={session.user.user_image}
                 height={100}
                 width={100}
@@ -182,7 +182,7 @@ export default function NavBar() {
             {reduxUser.user_image && !session && (
               <Image
                 name="user"
-                className="w-10 h-10 rounded-full mt-3 mr-4"
+                className="w-10 h-10 rounded-full mt-2 mr-4"
                 src={reduxUser.user_image}
                 height={100}
                 width={100}
