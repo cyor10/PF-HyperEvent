@@ -2,12 +2,39 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { IconFavWhite, IconFavRed } from '@/utils/svg/svg'
 import Image from 'next/image'
+import { toast } from "react-hot-toast";
 
 export default function Card({props}) {
   const {event, index} = props
-  const [isFav, setIsfav] = useState(false)
+  const [isFav, setIsFav] = useState(false)
+
   const handleFavorite = () => {
-    setIsfav(!isFav)
+      const updatedState = !isFav;
+      if (updatedState === true) {
+        toast('Event added to favorites!', {
+          icon: '❤',
+          duration: 1500,
+          position: 'top-right',
+          style: {
+            border: '3px solid #925FF0',
+            padding: '16px',
+            color: "#925FF0",
+          }
+        });
+      }
+      if (updatedState === false) {
+        toast("Event deleted from favorites", {
+          icon: '🤍',
+          duration: 1500,
+          position: 'top-right',
+          style: {
+            border: '3px solid #925FF0',
+            padding: '16px',
+            color: "#925FF0",
+          }
+        });
+      }
+      setIsFav(updatedState);
   }
   return (
     <div className="flex flex-col gap-6 w-[22rem] justify-center pb-10 pt-3">

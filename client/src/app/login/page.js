@@ -158,9 +158,10 @@ export default function Login() {
 
   return (
     <div className='mb-10 grid font-figtree md:grid-cols-2 max-h-[45rem]'>
-      <div className="mx-auto flex flex-col align-start h-[100%] pb-5">
+      <div className="mx-auto flex flex-col align-start h-[100%] max-h-[720px] pb-5">
         <Link href='/'>
           <img
+            alt='HyperIcon'
             className="w-40 mx-auto"
             src="https://res.cloudinary.com/hyperevents/image/upload/v1693102330/fc69a7cd877a754674613136a28b00ed_ghlch4.png"
           ></img>
@@ -260,10 +261,11 @@ export default function Login() {
 
       <div className='hidden md:inline'>
         <Image
-          className='w-full h-[min(50rem,120%)] object-cover'
+          alt="LoginImage"
+          className='w-full h-[85vh]'
           src="https://res.cloudinary.com/hyperevents/image/upload/v1694018916/backgroundImageLogin_cn8mqy.png"
           width={721}
-          height={1039}
+          height={720}
         />
       </div>
     </div>
