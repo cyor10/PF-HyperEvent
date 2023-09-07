@@ -9,7 +9,7 @@ export default function PartThree({ formData, setFormData, errors, setErrors, va
     setErrors(iptError)
   }
   return (
-    <div>
+    <div className="font-figtree md:px-[15rem]">
 
 <div className="flex flex-row items-center justify-center mr-4 text-black">
         <p className="text-[.8rem]">Step 3 of 4 </p>
@@ -22,7 +22,7 @@ export default function PartThree({ formData, setFormData, errors, setErrors, va
       </h3>
 
       <div>
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-start">
           <h4 className="pt-5 text-[1.6rem] font-bold  text-textForm">
             Summary
           </h4>
@@ -34,7 +34,7 @@ export default function PartThree({ formData, setFormData, errors, setErrors, va
           </p>
 
           <textarea
-            className="shadow-lg mr-5 p-2 w-[95%] h-[10rem] mt-4 border-2 text-textForm border-purpleNav rounded mx-auto"
+            className="shadow-lg p-2 w-[95%] h-[10rem] mt-4 border-2 text-textForm border-purpleNav rounded"
             value={formData.intro}
             onChange={(e) => {
               setFormData({ ...formData, intro: e.target.value });

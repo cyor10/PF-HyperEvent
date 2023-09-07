@@ -140,7 +140,7 @@ export default function Form() {
   };
 
   return (
-    <div className='pt-20 ml-4 pb-10 px-[.5rem]'>
+    <div className='pt-20 ml-4 pb-10 px-[.5rem] font-figtree md:my-10'>
             <button
           hidden={page === 0}
           onClick={() => {
@@ -152,7 +152,7 @@ export default function Form() {
     <form className="body" onSubmit={handleSubmit}>
   {PageDisplay()} 
   <button
-    className="mr-4 w-[95%] mt-8 mx-auto h-12 bg-purpleOscuro rounded text-white"
+    className="mr-4 w-[95%] mt-8 mx-auto h-12 bg-purpleOscuro rounded text-white md:w-[50%] md:mx-[25%]"
     type="button" // Cambiamos el tipo de botón a "button"
     onClick={() => {
       if (page === FormTitles.length - 1 && document.activeElement.innerText === "PUBLISH") {

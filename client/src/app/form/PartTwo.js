@@ -71,24 +71,24 @@ export default function PartTwo({ formData, setFormData }) {
   };
 
   return (
-    <div className="text-black">
+    <div className="text-black font-figtree md:my-10">
       <div className="flex flex-row items-center justify-center mr-4">
         <p className="text-[.8rem]">Step 2 of 4 </p>
         <div className="w-14 h-1 bg-purpleOscuro ml-2 rounded-md"></div>
         <div className="w-14 h-1 bg-[#F4EFFD] rounded-r-md"></div>
       </div>
 
-      <h3 className="pt-5 text-[2rem] font-bold mr-3 text-textForm">
+      <h3 className="pt-5 text-[2rem] font-bold mr-3 text-textForm md:mx-[15rem]">
         Location, date and time
       </h3>
 
-      <h4 className="pt-5 text-[1.6rem] font-bold text-textForm">Location</h4>
-      <p className="text-[1rem] font-ligth mr-4">
+      <h4 className="pt-5 text-[1.6rem] font-bold text-textForm md:mx-[15rem]">Location</h4>
+      <p className="text-[1rem] font-ligth mr-4 md:mx-[15rem]">
         Help people in the area discover your event and let attendees know where
         to show up.
       </p>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-start md:px-[15rem]">
         <input
           className="w-[95%] p-2 mt-4 mr-4 rounded-md border-gray-400 border-2 focus:outline-none"
           placeholder="Venue Name *"

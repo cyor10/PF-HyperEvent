@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function PartFour({ formData, setFormData }) {
   return (
-    <div className='text-black'>
+    <div className='text-black font-figtree md:px-[15rem]'>
       <div className="flex flex-row items-center justify-center mr-4">
         <p className="text-[.8rem]">Step 4 of 4 </p>
         <div className="w-28 h-1 bg-purpleOscuro ml-2 rounded-md"></div>
@@ -36,7 +36,7 @@ export default function PartFour({ formData, setFormData }) {
           for your attendees
         </p>
 
-        <div className="flex flex-row justify-evenly mr-6 mb-5">
+        <div className="flex flex-row items-start mb-5 gap-4">
           <button
             type="button"
             className="w-[47%] h-[2.5rem] rounded bg-[#F4EFFD]"
