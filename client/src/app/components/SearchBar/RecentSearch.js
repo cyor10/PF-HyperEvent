@@ -24,7 +24,7 @@ export default function RecentSearch({ orderFilters, setOrderFilters }) {
             updatedOrderFilters.word = 'Soccer'
         }
         if (index === 2) {
-            updatedOrderFilters.start = 'weekend',
+            updatedOrderFilters.start = 'Weekend',
                 updatedOrderFilters.category = 'Entertainment'
         }
 

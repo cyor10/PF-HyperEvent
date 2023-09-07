@@ -13,7 +13,7 @@ export default function SearchBar() {
     const dispatch = useDispatch()
 
     const locations = ["Las Vegas", "Chicago", "Nashville"]
-    const possibleDays = ["today", "tomorrow", "weekend"]
+    const possibleDays = ["Today", "Tomorrow", "Weekend"]
     const categories = ["Sports", "Theater", "Concerts"]
     const [orderFilters, setOrderFilters] = useState({
         word: "",
@@ -34,7 +34,7 @@ export default function SearchBar() {
 
         // If the value is a string and the name is 'start', convert to lowercase
         if (typeof value === 'string' && name === 'start') {
-            updatedFilters[name] = value.toLowerCase();
+            updatedFilters[name] = value;
         } else {
             updatedFilters[name] = value;
         }
