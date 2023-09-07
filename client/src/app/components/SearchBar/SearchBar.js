@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSearchData, clearSearchedEvents } from '@/redux/features/events/counterSlice'
 import Pagination from './Pagination'
+import { resetNumPage } from '../../../redux/features/events/counterSlice'
 import RecentSearch from './RecentSearch'
 import EmptyState from './EmptyState'
 
@@ -62,6 +63,24 @@ export default function SearchBar() {
         } else {
             dispatch(clearSearchedEvents())
         }
+
+        const recentSearch = JSON.parse(localStorage.getItem("recentSearch")) || [];
+
+        const addRecentSearch = (search) => {
+            if (recentSearch.length === 3) {
+                recentSearch.shift();
+            }
+            
+            recentSearch.unshift(search);
+            localStorage.setItem("recentSearch", JSON.stringify(recentSearch));
+        };
+
+        const addRecentSearchWithDelay = async (filtersWithValues) => {
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            addRecentSearch(filtersWithValues);
+        }
+        
+        addRecentSearchWithDelay(filtersWithValues);
     }
 
     const handleClick = () => {
@@ -76,11 +95,12 @@ export default function SearchBar() {
 
         setOrderFilters(initialState)
         dispatch(clearSearchedEvents());
+        dispatch(resetNumPage())
     }
 
     return (
         <div className='font-figtree'>
-            <div className='ml-6'>
+            <div className='ml-6 pt-3'>
                 <div className='pt-3 flex h-10 bg-slate-50 items-center mb-4'>
                     <svg className='mr-5' xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M9.58329 17.5C13.9555 17.5 17.5 13.9556 17.5 9.58335C17.5 5.2111 13.9555 1.66669 9.58329 1.66669C5.21104 1.66669 1.66663 5.2111 1.66663 9.58335C1.66663 13.9556 5.21104 17.5 9.58329 17.5Z" fill="#292D32" />
@@ -132,9 +152,9 @@ export default function SearchBar() {
                     <div className='mt-4'>
                         <h3 className='font-bold leading-6 tracking-custom text-black w-64 h-10 text-2xl ml-6'>Most popular matches</h3>
                     </div>
-                    <Pagination element={{ pageRoute: "numPageSearch", pageCant: "5", stateRoute: "searchedEvents" }} /></div>
+                    <Pagination element={{ pageRoute: "numPageSearch", pageCant: "6", stateRoute: "searchedEvents" }} /></div>
                 : reduxEvents.coincidence === false ?
-                    <EmptyState /> : <RecentSearch />
+                    <EmptyState /> : <RecentSearch orderFilters={orderFilters} setOrderFilters={setOrderFilters} />
             }
         </div>
     )
