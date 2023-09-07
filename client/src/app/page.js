@@ -3,13 +3,10 @@ import React, { useState, useEffect } from "react";
 import Carousel from "./components/Carousel/Carousel";
 import Categories from "./components/Categories/Categories";
 import axiosInstance from "../utils/axiosInstance";
-import Link from "next/link";
-import { IconFavWhite, IconFavRed } from "@/utils/svg/svg";
 import Image from "next/image";
-import { toast } from "react-hot-toast";
+import Cards from "./components/Cards/Cards";
 
 export default function LandingPage() {
-  const [isFav, setIsFav] = useState([]);
   const [dataCarousel, setDataCarousel] = useState([]);
   const [categories, setCategories] = useState([]);
   const [events, setEvents] = useState([]);
@@ -45,38 +42,6 @@ export default function LandingPage() {
     fetchCategoriesData();
   }, [])
 
-  const handleFavorite = (index) => {
-    setIsFav((prevState) => {
-      const updatedState = [...prevState];
-      updatedState[index] = !prevState[index];
-      if (updatedState[index] === true) {
-        toast('Event added to favorites!', {
-          icon: '❤',
-          duration: 1500,
-          position: 'top-right',
-          style: {
-            border: '3px solid #925FF0',
-            padding: '16px',
-            color: "#925FF0",
-          }
-        });
-      }
-      if (updatedState[index] === false) {
-        toast("Event deleted from favorites", {
-          icon: '🤍',
-          duration: 1500,
-          position: 'top-right',
-          style: {
-            border: '3px solid #925FF0',
-            padding: '16px',
-            color: "#925FF0",
-          }
-        });
-      }
-      return updatedState;
-    });
-  };
-
   const handleSeeMoreClick = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
@@ -103,36 +68,11 @@ export default function LandingPage() {
       </div>
 
       <div className="mx-[max(1rem,7%)] pb-7">
-        <Categories categories={categories}>
-        </Categories>
+        <Categories categories={categories} />
       </div>
       
-      <div className="grid mx-auto pb-10 pt-6 md:grid-cols-2 gap-6 w-full justify-center lg:grid-cols-3">
-        {events.map((event, index) => (
-          <div className="bg-white shadow-md mx-auto w-[21rem] h-[19.5rem] rounded-lg flex flex-col relative" key={index}>
-            <Image
-              className="w-[100%] h-[45%] object-cover rounded-t-lg z-100 relative"
-              src={event.event_image}
-              alt={event.event_name}
-              width={1200}
-              height={300}
-            />
-            <div className="absolute flex justify-center rounded-full w-9 h-9 z-100 right-[1rem] bottom-[11.5rem] bg-white">
-              <button className="" onClick={() => handleFavorite(index)}>
-                {isFav[index] ? <IconFavRed /> : <IconFavWhite />}
-              </button>
-            </div>
-            <Link className="z-0" href="/detail/[name]" as={`/detail/${event.event_name}`}>
-              <div>
-                <h2 className="text-black text-[1.3rem] pt-2 pl-5 font-normal">{event.event_name}</h2>
-                <p className="text-[#784DC7] text-[1rem] pt-2 pl-5 font-normal">{event.start_at.split("T")[0]}</p>
-                <p className="text-black text-[.9rem] mt-2 pb-2.5 pl-5 font-light">{event.city}</p>
-                <p className="text-black text-[1rem] pb-2.5 pl-5 font-normal">From ${event.price}</p>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </div>
+      <Cards props={ events }></Cards>
+
       {hasMoreEvents && (<button onClick={handleSeeMoreClick} className="text-purpleOscuro mx-auto flex items-center justify-center w-[40%] h-[3.4rem] rounded-md bg-pinkChip mb-10 cursor-pointer">
         <h4 className="font-medium">See More</h4>
       </button>)}

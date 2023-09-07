@@ -23,17 +23,17 @@ async function searchEvents(req, res) {
             const tomorrow = new Date();
             tomorrow.setDate(today.getDate() + 1);
 
-            if (start === 'today') {
+            if (start === 'Today') {
                 whereClause.start_at = {
                     [Op.between]: [today, tomorrow],
                 };
-            } else if (start === 'tomorrow') {
+            } else if (start === 'Tomorrow') {
                 const dayAfterTomorrow = new Date();
                 dayAfterTomorrow.setDate(today.getDate() + 2);
                 whereClause.start_at = {
                     [Op.between]: [tomorrow, dayAfterTomorrow],
                 };
-            } else if (start === 'weekend') {
+            } else if (start === 'Weekend') {
                 const nextWeekend = new Date();
                 nextWeekend.setDate(today.getDate() + (6 - today.getDay()) + 1); // Calculate next weekend
                 const endOfWeekend = new Date(nextWeekend);
