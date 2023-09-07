@@ -262,7 +262,7 @@ export default function Login() {
       <div className='hidden md:inline'>
         <Image
           alt="LoginImage"
-          className='w-full h-[85vh]'
+          className='w-full h-[105%]'
           src="https://res.cloudinary.com/hyperevents/image/upload/v1694018916/backgroundImageLogin_cn8mqy.png"
           width={721}
           height={720}

@@ -43,7 +43,7 @@ export default function NavBar() {
 
   return (pathname === `/payment/${name}` || pathname === '/signup' || pathname === '/login' || pathname === '/payment' || pathname === '/payment/success' || pathname === '/payment/error' || pathname === '/payment/pending') ? null : (
     <div>
-      <nav className="w-full bg-purpleNav top-0 left-0 right-0 z-10 fixed h-18 font-figtree">
+      <nav className="w-full bg-purpleNav text-black top-0 left-0 right-0 z-10 fixed h-18 font-figtree">
         <div className="justify-between mx-auto md:items-center md:flex py-3">
           <div className="flex items-center justify-between ">
             <Link href="/">
@@ -91,7 +91,7 @@ export default function NavBar() {
                   </Link>
                 </li>
                 {!reduxUser.name && !session && (
-                  <li className="py-4 text-lg text-white  px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
+                  <li className="py-4 text-lg text-white md:mr-6 px-6 text-center  border-b-2 md:border-b-0  hover:bg-purple-600  border-white  md:hover:text-purple-600 md:hover:bg-transparent">
                     <Link href="/login" onClick={() => setNavbar(!navbar)}>
                       Log in
                     </Link>

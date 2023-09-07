@@ -27,7 +27,8 @@ export default function Detail({ params }) {
     (async () => {
       try {
         const { data } = await axiosInstance(`/events?name=${name}`);
-        setEvent(data);
+        setEvent(data.events[0]);
+
       } catch (error) {
         console.log(error);
       }
@@ -98,7 +99,7 @@ export default function Detail({ params }) {
     }
   };
   return (
-    <div className=" bg-white pt-16 font-figtree min-h-[105%] md:pb-0 md:min-h-[90%]">
+    <div className=" bg-white text-black pt-16 font-figtree min-h-[105%] md:pb-0 md:min-h-[90%]">
       <img
           src={event?.event_image}
           className="w-[100%] h-[20vhrem] rounded-b-3xl object-cover md:hidden"
@@ -135,7 +136,7 @@ export default function Detail({ params }) {
           <div className="flex ml-6 mt-4 items-center">
             <IconCalendar />
             <div>
-              <h3 className="text-lg ml-4 font-[1.2x  rem] font-medium">
+              <h3 className="text-lg ml-4 font-medium">
                 Date and time
               </h3>
               <h3 className="ml-4">{event.start_at?.split("T")[0]}  To  {event.end_at?.split("T")[0]}</h3>
