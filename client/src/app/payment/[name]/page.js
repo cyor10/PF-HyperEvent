@@ -85,19 +85,19 @@ export default function Payment({ params }) {
     }
   }
 
-  const handleGoToHome = () => {
-    router.push(`/`);
+  const handleGoBack = () => {
+    router.push(`/detail/${name}`);
   };
 
   return (
-    <div className="flex flex-col w-full min-h-screen mt-2">
+    <div className="flex flex-col w-full min-h-screen mt-2 font-figtree">
       <div className="flex flex-row justify-center items-center p-5">
         <div className="text-center relative">
           <h2 className="text-2xl font-bold">Check-out</h2>
           <p className="pt-3">Time left 20:00</p>
         </div>
         <div className="ml-3 absolute right-10 top-[1.8rem]">
-          <button onClick={handleGoToHome}>
+          <button onClick={handleGoBack}>
             <IconXPayment />
           </button>
         </div>
@@ -105,17 +105,17 @@ export default function Payment({ params }) {
 
       <div className="border-[.1rem] border-black mt-3"></div>
 
-      <form className="flex flex-col" onSubmit={pay}>
-        <h3 className="pt-5 ml-5 text-xl font-bold">Billing information</h3>
+      <form className="mx-auto" onSubmit={pay}>
+        <h3 className="pt-5 ml-5 text-xl font-bold md:text-3xl md:mt-6">Billing information</h3>
 
-        <div className="mb-2 flex flex-col">
-          <div className="flex">
-            <div className="flex flex-col pl-5 pt-5">
+        <div className="mb-2 mx-5">
+          <div className="flex justify-between gap-2 ">
+            <div className="flex flex-col pt-5 w-[100%]">
               <label className="block text-gray-700 font-semibold mb-2">
                 Name
               </label>
               <input
-                className="w-[80%] px-3 py-2 text-[grey] border-[grey] border-2 rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+                className="w-[100%] px-3 py-2 text-[grey] border-[grey] border-2 rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 key="name"
                 type="name"
                 name="name"
@@ -125,12 +125,12 @@ export default function Payment({ params }) {
               />
             </div>
 
-            <div className="flex flex-col pt-5">
+            <div className="flex flex-col pt-5 w-[100%]">
               <label className="block text-gray-700 font-semibold mb-2">
                 Last Name
               </label>
               <input
-                className="w-[90%] px-3 py-2 text-[grey] border-[grey] border-2 rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+                className="w-[100%] px-3 py-2 text-[grey] border-[grey] border-2 rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 key="last_name"
                 type="last_name"
                 name="last_name"
@@ -176,7 +176,7 @@ export default function Payment({ params }) {
         <p className="text-end text-xl pr-10 pt-2">Total: ${inputs.amount}</p>
 
         <button
-          className="mt-4 px-4 py-2 w-[50%] mb-10 h-12 text-white text-xl rounded-md bg-purpleOscuro mx-auto"
+          className="mt-4 mx-[25%] px-4 py-2 w-[50%] mb-10 h-12 text-white text-xl rounded-md bg-purpleOscuro"
           type="submit"
         >
           Place an order
