@@ -30,10 +30,11 @@ export default function FetchEvents({ params }) {
 
   return (
     <div className="min-h-[66vh] mx-auto text-black font-figtree ">
-      <h2 className="mx-auto mt-32 tracking-[-2.5px] font-bold text-[clamp(1.25rem,6vw,3rem)]">
+      <div className="ml-[4%]">
+      <h2 className="mx-auto mt-20 md:mt-32 tracking-[-2.5px] font-bold text-[clamp(2.5rem,6vw,4rem)]">
         {name}
       </h2>
-      <div className="flex mt-8 items-center">
+      <div className="flex mt-8 items-center justify-start">
         <p className="text-[22px] mr-5">Order by: </p>
         <select className='text-black w-[12vw] min-w-[100px] h-10 border-solid border-2 rounded-md text-center focus:outline-none mr-8' onChange={(event) => handleChange('date', event.target.value)} value={"orderFilters.date"}>
           <option value="" disabled>Date</option>
@@ -46,7 +47,9 @@ export default function FetchEvents({ params }) {
           <option value="desc">Descending</option>
         </select>
       </div>
-      <h3 className="text-textForm text-[37px] font-bold mt-8 tracking-[-1.8px] mb-8">Most popular matches</h3>
+      
+      <h3 className="text-textForm text-[clamp(1.8rem,4vw,2.3rem)] font-bold mt-8 tracking-[-1.8px] mb-8">Most popular matches</h3>
+      </div>
       <Cards props={events} />
       {hasMoreEvents && (<button onClick={handleSeeMoreClick} className=" mt-16 mb-20 text-purpleOscuro mx-auto flex items-center justify-center w-[40%] h-[3.4rem] rounded-md bg-pinkChip cursor-pointer">
         <h4 className="font-medium">See More</h4>
