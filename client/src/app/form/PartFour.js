@@ -39,7 +39,7 @@ export default function PartFour({ formData, setFormData }) {
         <div className="flex flex-row items-start mb-5 gap-4">
           <button
             type="button"
-            className="w-[47%] h-[2.5rem] rounded bg-[#F4EFFD]"
+            className="w-[47%] h-[2.5rem] rounded bg-[#F4EFFD] bg-purpleOscuro text-white"
           >
             Paid
           </button>
@@ -54,17 +54,17 @@ export default function PartFour({ formData, setFormData }) {
         <label className="text-[1rem] mt-5">Ticket Name *</label>
         <input
           className="w-[95%] p-2 mb-5 mt-2 mr-4 rounded-md border-gray-400 border-2"
-          placeholder="General Admission"
-          value={formData.place_name}
-          onChange={(e) => {
-            setFormData({ ...formData, place_name: e.target.value });
-          }}
+          value={"General Admission"}
+          readOnly
         ></input>
 
         <label className="text-[1rem] mt-5">Price *</label>
         <input
           className="w-[95%] p-2 mb-5 mt-2 mr-4 rounded-md border-gray-400 border-2"
           placeholder="Eg. $500,00" type='number'
+          step="0.01"
+          pattern="^\d{1,6}(\.\d{0,2})?$"
+          maxLength={8}
           value={formData.price}
           onChange={(e) => {
             setFormData({ ...formData, price: e.target.value });
