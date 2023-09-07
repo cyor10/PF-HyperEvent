@@ -4,7 +4,7 @@ async function getComments(req, res) {
     try {
         const allComments = await Comment.findAll({
             include: User,
-            order: [['createAt', 'DESC']]
+            order: [['createdAt', 'DESC']],
         });
         res.status(200).json(allComments);
     } catch (error) {
@@ -17,7 +17,7 @@ async function getAproveComments(req, res) {
         const allComments = await Comment.findAll({
             where: { show: true },
             include: User,
-            order: [['createAt', 'DESC']]
+            order: [['createdAt', 'DESC']],
         });
         res.status(200).json(allComments);
     } catch (error) {
