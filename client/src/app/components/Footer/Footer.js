@@ -11,22 +11,22 @@ export default function Footer() {
   };
   return (pathname === `/payment/${name}` || pathname === "/create_event" || pathname === "/create_event/form_step_1" || pathname === "/create_event/form_step_2" || pathname === "/create_event/form_step_3" || pathname === '/payment/success' || pathname === '/payment/error'  || pathname === '/payment/pending'|| pathname === `/detail/${name}`) ? null : (
     <footer className='bg-[#000] text-white h-[32vh] flex flex-row justify-between p-6 font-figtree'>
-      <div className='flex flex-col gap-3'>
+      <div className='flex flex-col gap-3 md:gap-6'>
         <Link href='/about'>
-          <h3 className='font-bold'>ABOUT US</h3>
+          <h3 className='font-bold md:text-xl'>ABOUT US</h3>
         </Link>
         <Link href='/comments'>
-          <h3 className='font-bold'>COMMENTS</h3>
+          <h3 className='font-bold md:text-xl'>COMMENTS</h3>
         </Link>
         <Link href='/form'>
-          <h3 className='font-bold'>CREATE</h3>
+          <h3 className='font-bold md:text-xl'>CREATE</h3>
         </Link>
         <Link href='/search'>
-          <h3 className='font-bold'>SEARCH</h3>
+          <h3 className='font-bold md:text-xl'>SEARCH</h3>
         </Link>
       </div>
 
-      <div className='flex flex-col gap-4 text-center items-center relative bottom-5'>
+      <div className='flex flex-col gap-4 text-center items-center relative bottom-5 md:gap-6'>
         <div className='w-28 h-[4rem]'>
 
         <img className='w-28 h-20' src='https://res.cloudinary.com/hyperevents/image/upload/v1693173297/eaa18030c4d08143afa9c965bd38bff8_zud8ee.png' alt='cloudinary-image'></img>
@@ -37,7 +37,7 @@ export default function Footer() {
           <IconTwitter/>
         </div>
         <div
-          className='bg-purpleOscuro w-12 h-12 flex justify-center items-center rounded-full'
+          className='bg-purpleOscuro w-12 h-12 flex justify-center items-center rounded-full md:w-18 md:h-18'
           onClick={handleScrollToTop}
         >
           <IconArrow />
