@@ -45,7 +45,7 @@ export default function Login() {
         });
         if (data.token) {
           localStorage.setItem('token', data.token);
-          document.cookie = `tokens=${data.token}`;
+          document.cookie = `tokens=${data.token};max-age=31536000;path=/`;
           await axiosInstance('/protected', {
             headers: {
               Authorization: `Bearer ${data.token}`,
@@ -58,7 +58,7 @@ export default function Login() {
       const { data } = await axiosInstance.post('/loginGoogle', inputs);
       if (data.token) {
         localStorage.setItem('token', data.token);
-        document.cookie = `tokens=${data.token}`;
+        document.cookie = `tokens=${data.token};max-age=31536000;path=/`;
         await axiosInstance('/protected', {
           headers: {
             Authorization: `Bearer ${data.token}`,
@@ -120,7 +120,7 @@ export default function Login() {
       try {
         const { data } = await axiosInstance.post('/login', inputs);
         if (data.token) {
-          document.cookie = `tokens=${data.token}`
+          document.cookie = `tokens=${data.token};max-age=31536000;path=/`
           localStorage.setItem('token', data.token);
           const response = await axiosInstance('/protected', {
             headers: {

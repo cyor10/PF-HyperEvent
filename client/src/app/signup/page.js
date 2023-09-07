@@ -89,7 +89,7 @@ export default function SignUp() {
       });
       if (data.token) {
         localStorage.setItem('token', data.token);
-        document.cookie = `tokens=${data.token}`;
+        document.cookie = `tokens=${data.token};max-age=31536000;path=/`;
         const response = await axiosInstance('/protected', {
           headers: {
             Authorization: `Bearer ${data.token}`,
