@@ -98,26 +98,35 @@ export default function Detail({ params }) {
     }
   };
   return (
-    <div className=" bg-white pt-16">
-      <div className="bg-white text-black w-[100%]">
-        <img
+    <div className=" bg-white pt-16 font-figtree min-h-[105%] md:pb-0 md:min-h-[90%]">
+      <img
           src={event?.event_image}
-          className="w-[100%] h-[35vh] rounded-b-3xl"
+          className="w-[100%] h-[20vh] rounded-b-3xl object-cover md:hidden"
           height={200}
           width={200}
           alt="event-image"
         />
-        <h3 className="ml-4 pt-5 text-black font-medium">{`${dayName}, ${month} ${dayNum}`}</h3>
-        <h2 className="text-4xl mt-3 mb-2 ml-4 px-2 font-bold	">
+        
+      <div className= "w-[100%] h-[15rem] bg-[#F4EFFD] hidden md:flex md:mb-20">
+      <img
+          src={event?.event_image}
+          className="w-[60%] h-[120%] mx-[20%] rounded-b-3xl"
+          height={200}
+          width={200}
+          alt="event-image"
+        />
+      </div>
+
+    
+      <div className="grid md:grid-cols-2">
+        <div>
+        <h3 className="ml-4 pt-5 text-bold font-medium">{`${dayName}, ${month} ${dayNum}`}</h3>
+        <h2 className="text-[clamp(2.25rem,1vw,2.5rem)] mt-3 mb-2 ml-6 font-bold	">
           &quot;{event && event.event_name}&quot;
         </h2>
-        <p className="ml-5 py-2 text-lg">{event?.intro}</p>
-        <p className="px-5 pt-2 text-[.95rem] font-normal">
-          Dive into &quot;JODOROWSKY&apos;S DUNE&quot; at our LUNES MÍSTICOS
-          event – an exclusive tribute to visionary filmmaker Alejandro
-          Jodorowsky.🎬✨
-        </p>
-        <div className="flex mt-8 justify-between">
+        <p className="ml-6 py-2 text-lg">{event?.intro}</p>
+
+        <div className="flex mt-3 justify-between">
           <div className="flex mr-11"></div>
         </div>
         <div>
@@ -150,67 +159,81 @@ export default function Detail({ params }) {
                 </div>
           </div>
         </div>
-        <h2 className="text-2xl ml-6 mt-8 mb-2 text-black font-medium">
+        <h2 className="text-2xl ml-6 mt-8 font-bold">
           About this event
         </h2>
-        <p className="px-5 pt-2 text-[.95rem] text-black font-normal	">
-          On Monday, August 28th, at 7 pm, in our movie theater, we will screen
-          the award-winning documentary &quot;JODOROWSKY&apos;S DUNE&quot; by
-          Frank Pavich.
-          <br />
-          <br /> In 1975, the versatile artist and cult director Alejandro
-          Jodorowsky dreamed of a project: the adaptation of the classic science
-          fiction novel &quot;Dune&quot; by Frank Herbert. Alongside Hollywood
-          screenwriter and master of special effects Dan O&apos;Bannon, the
-          (future) designer of &quot;Alien&quot; H.R. Giger, and comic artist
-          Jean “Moebius” Giraud, all under Jodorowsky&apos;s direction,
-          &quot;Dune&quot; would be an all-out blockbuster.
-          <br />
-          <br /> We&apos;ll enhance the evening with tarot readings by Yanina
-          Faccio. Tickets can be reserved by clicking the link in our bio. With
-          your reservation, you&apos;ll have access to a seat in our movie
-          theater, a pair of wireless headphones for watching the film, and a
-          glass of wine or beer.
-        </p>
-        <h3 className="text-lg ml-6 mt-2">{event && event.description}</h3>
-        <h3 className="text-2xl ml-6 mt-10 text-black font-medium">
+       
+        <h3 className="text-lg ml-6 mt-8">{event && event.description}</h3>
+        <h3 className="text-2xl ml-6 mt-4 font-bold">
           Follow this event
         </h3>
-        <div className="flex mt-6 justify-center gap-10">
+        <div className="flex mt-6 pl-6 justify-start gap-10 mb-40 md:mb-10">
           <IconFacePurple />
 
           <IconIgPurple />
 
           <IconTwitterPurple />
         </div>
-        <div className="flex flex-col justify-center mt-8 min-h-[40vh] items-center bg-purpleNav bg-opacity-20 max-h-40">
-        <div className="flex flex-row w-[90%] justify-between h-40 p-5 bg-white border-2 border-purpleOscuro rounded mt-5">
-        <div>
-            <h3 className="text-lg">&quot;{event && event.event_name}&quot;</h3>
-            <p>${Math.floor(priceTotal)}</p> {/* Actualizar el precio según el contador */}
-          </div>
-          <div className="flex flex-row gap-3">
-            <div
+        <div className="mx-auto flex flex-col fixed bottom-0 pb-3 right-0 left-0 min-h-[12rem] items-center bg-[#F4EFFD] md:hidden">
+          <div className="flex w-[90%] max-w-[30rem] justify-between h-[40%] px-4 py-6 bg-white border-4 border-purpleOscuro rounded mt-5">
+            <div>
+              <h3 className="text-[clamp(1.02rem,3.5vw,1.4rem)]">&quot;{event && event.event_name}&quot;</h3>
+              <p className="text-bold pt-1 mt-1 text-[clamp(1.2rem,6vw,1.4rem)]">${Math.floor(priceTotal)}</p> {/* Actualizar el precio según el contador */}
+            </div>
+            <div className="flex flex-row gap-3 flex-shrink-0 align-center">
+              <div
               className="w-6 h-6 bg-purpleOscuro flex justify-center items-center rounded-full cursor-pointer"
               onClick={decrementCount}
-            >
-              <p className="text-[1.2rem] mb-1 text-white">-</p>
+              >
+              <p className="text-[1.2rem] text-white">-</p>
             </div>
-            <p>{ticketCount}</p> {/* Mostrar el valor del contador */}
+            <p className="text-bold text-[1.2rem]">{ticketCount}</p> {/* Mostrar el valor del contador */}
             <div
               className="w-6 h-6 bg-purpleOscuro flex justify-center items-center rounded-full cursor-pointer"
               onClick={incrementCount}
             >
-              <p className="text-[1.2rem] mb-1 text-white">+</p>
+              <p className="text-[1.2rem] text-white">+</p>
             </div>
           </div>
           </div>
-          <div className="flex justify-center w-[90%] bg-purpleOscuro mt-10 h-20 mb-5 items-center rounded-md relative cursor-pointer">
-            <Link className="text-white" href="/payment/[name]" as={`/payment/${event.event_name}?ticketCount=${ticketCount}`}>
-              Buy Tickets for ${Math.floor(priceTotal)}
-            </Link>
+            <div className="flex p-2 justify-center w-[90%] max-w-[30rem] bg-purpleOscuro mt-3 h-[20%] items-center rounded-md relative cursor-pointer">
+              <Link className="text-white text-[clamp(1.15rem,4vw,1.3rem)]" href="/payment/[name]" as={`/payment/${event.event_name}?ticketCount=${ticketCount}`}>
+               Buy Tickets for ${Math.floor(priceTotal)}
+              </Link>
+            </div>
+        </div>
+        </div>
+        <div className="w-[100%]">
+          <div className="hidden w-[35%]  mx-auto fixed md:flex flex-col bottom-0 pb-3 right-0 min-h-[15rem] items-center bg-[#F4EFFD] rounded-2xl">
+          <div className="flex w-[90%] max-w-[25rem] justify-between h-[40%] px-4 py-6 bg-white border-4 border-purpleOscuro rounded mt-5">
+            <div>
+              <h3 className="text-[clamp(0.6rem,3vw,1.3rem)]">&quot;{event && event.event_name}&quot;</h3>
+              <p className="text-bold pt-1 mt-1 text-[clamp(1.2rem,6vw,1.4rem)]">${Math.floor(priceTotal)}</p> {/* Actualizar el precio según el contador */}
+            </div>
+            <div className="flex flex-row gap-3 flex-shrink-0 align-center">
+              <div
+              className="w-6 h-6 bg-purpleOscuro flex justify-center items-center rounded-full cursor-pointer"
+              onClick={decrementCount}
+              >
+              <p className="text-[1.2rem] text-white">-</p>
+            </div>
+            <p className="text-bold text-[1.2rem]">{ticketCount}</p> {/* Mostrar el valor del contador */}
+            <div
+              className="w-6 h-6 bg-purpleOscuro flex justify-center items-center rounded-full cursor-pointer"
+              onClick={incrementCount}
+            >
+              <p className="text-[1.2rem] text-white">+</p>
+            </div>
+            </div>
+            </div>
+            <div className="flex p-2 justify-center w-[90%] max-w-[25rem] bg-purpleOscuro mt-3 h-[20%] items-center rounded-md relative cursor-pointer">
+              <Link className="text-white text-[clamp(1.15rem,4vw,1.3rem)]" href="/payment/[name]" as={`/payment/${event.event_name}?ticketCount=${ticketCount}`}>
+               Buy Tickets for ${Math.floor(priceTotal)}
+              </Link>
+            </div>
           </div>
         </div>
+     
       </div>
     </div>
   );
