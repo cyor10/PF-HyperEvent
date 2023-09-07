@@ -53,7 +53,7 @@ export default function CommentCard({ comment }) {
           whiteSpace: "normal", // Permite dividir automáticamente el texto en líneas
         }}
       >
-        &quot;{comment.comment}&quot;
+        &quot{comment.comment}&quot
       </p>
       <div className="w-full flex justify-center">
         <img
