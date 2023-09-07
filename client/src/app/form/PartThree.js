@@ -27,14 +27,14 @@ export default function PartThree({ formData, setFormData, errors, setErrors, va
             Summary
           </h4>
 
-          <p className="text-[1.1rem] font-ligth mr-4 pt-1">
+          <p className="text-[1.1rem] font-ligth mr-4 pt-1 text-textForm">
             Grab people&apos;s attention with a short description about your
             event. Attendees will see this at the top of your event page. (140
             characters max)
           </p>
 
           <textarea
-            className="shadow-lg mr-5 p-2 w-[95%] h-[10rem] mt-4 border-2 border-purpleNav rounded mx-auto"
+            className="shadow-lg mr-5 p-2 w-[95%] h-[10rem] mt-4 border-2 text-textForm border-purpleNav rounded mx-auto"
             value={formData.intro}
             onChange={(e) => {
               setFormData({ ...formData, intro: e.target.value });
@@ -48,13 +48,13 @@ export default function PartThree({ formData, setFormData, errors, setErrors, va
             Description
           </h4>
 
-          <p className="text-[1.1rem] font-ligth mr-4 pt-1">
+          <p className="text-[1.1rem] font-ligth mr-4 pt-1 text-textForm">
             Add more details to your event like your schedule, sponsors, or
             featured guests.
           </p>
 
           <textarea
-            className="shadow-lg mr-5 p-2 w-[95%] h-[10rem] mt-4 border-2 border-purpleNav rounded mx-auto"
+            className="shadow-lg mr-5 p-2 w-[95%]  text-textForm h-[10rem] mt-4 border-2 border-purpleNav rounded mx-auto"
             value={formData.description}
             onChange={(e) => {
               setFormData({ ...formData, description: e.target.value });
@@ -67,14 +67,14 @@ export default function PartThree({ formData, setFormData, errors, setErrors, va
             Social media
           </h4>
 
-          <p className="text-[1.1rem] font-ligth mr-4 mb-5 pt-1">
+          <p className="text-[1.1rem] font-ligth mr-4 mb-5 pt-1 text-textForm">
             Share your social media information to have all your attendees
             updated an grow your online presence
           </p>
 
-          <label className="text-[1rem] pt-5 ml-1">Twitter</label>
+          <label className="text-[1rem] pt-5 ml-1 text-textForm">Twitter</label>
           <input
-            className="w-[95%] p-2 mb-5 mt-2 mr-4 rounded-md border-gray-400 border-2"
+            className="w-[95%] p-2 mb-5 mt-2 mr-4 rounded-md text-textForm border-gray-400 border-2"
             placeholder="Twitter"
             value={formData.social_media[0] || ""}
             onChange={(e) => {
@@ -84,9 +84,9 @@ export default function PartThree({ formData, setFormData, errors, setErrors, va
             }}
           ></input>
 
-          <label className="text-[1rem] pt-5 ml-1">Facebook</label>
+          <label className="text-[1rem] pt-5 ml-1 text-textForm">Facebook</label>
           <input
-            className="w-[95%] p-2 mb-5 mt-2 mr-4 rounded-md border-gray-400 border-2"
+            className="w-[95%] p-2 mb-5 mt-2 mr-4 rounded-md border-gray-400 text-textForm border-2"
             placeholder="Facebook"
             value={formData.social_media[1] || ""}
             onChange={(e) => {
@@ -96,9 +96,9 @@ export default function PartThree({ formData, setFormData, errors, setErrors, va
             }}
           ></input>
 
-          <label className="text-[1rem] pt-5 ml-1">Instagram</label>
+          <label className="text-[1rem] pt-5 ml-1 text-textForm">Instagram</label>
           <input
-            className="w-[95%] p-2 mt-2 mr-4 rounded-md border-gray-400 border-2"
+            className="w-[95%] p-2 mt-2 mr-4 rounded-md text-textForm border-gray-400 border-2"
             placeholder="Instagram"
             value={formData.social_media[2] || ""}
             onChange={(e) => {
@@ -112,7 +112,7 @@ export default function PartThree({ formData, setFormData, errors, setErrors, va
         <div className="p-2">
           <h4 className="pt-5 text-[1.6rem] font-bold  text-textForm">Image</h4>
 
-          <p className="text-[1.1rem] font-ligth mr-4 mb-5 pt-1">
+          <p className="text-[1.1rem] font-ligth mr-4 mb-5 pt-1 text-textForm">
             Add a photo to show what your event is about
           </p>
 
@@ -121,7 +121,7 @@ export default function PartThree({ formData, setFormData, errors, setErrors, va
               Drag and drop an image or
             </label>
             <input
-              className="w-44 px-3 py-2 rounded-lg focus:outline-none focus:ring-2"
+              className="w-44 px-3 py-2 rounded-lg focus:outline-none text-textForm focus:ring-2"
               type="file"
               name="event_image"
               placeholder="Upload an image"

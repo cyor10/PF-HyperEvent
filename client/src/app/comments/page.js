@@ -10,7 +10,7 @@ export default function Comments() {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const { data } = await axiosIntance("/allComments");
+        const { data } = await axiosIntance("/aproveComments");
         setComments(data);
       } catch (error) {
         console.error("Error al obtener comentarios:", error);

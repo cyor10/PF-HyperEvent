@@ -3,13 +3,17 @@ import React from "react";
 import Modal from "react-modal";
 import { useState } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
+import { useRouter } from "next/navigation";
 
 export default function CommentModal({ isOpen, onRequestClose, onNextClick }) {
   const [comment, setComment] = useState("");
+ 
+  const router = useRouter();
 
   const handleSkipComment = () => {
     // Realiza acciones específicas cuando se omite el comentario
     onRequestClose(); // Cierra el modal
+    router.push('/');
   };
   const handleComent = (event) => {
     const inputComment = event.target.value;
@@ -21,6 +25,7 @@ export default function CommentModal({ isOpen, onRequestClose, onNextClick }) {
   const handleNext = () => {
     onNextClick(comment);
     onRequestClose();
+    router.push('/');
   };
 
   return (
