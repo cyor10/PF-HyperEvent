@@ -17,7 +17,7 @@ export default function Carousel({ children: events }) {
   return (
     <div className="overflow-hidden relative pt-[4rem]">
       <div
-        className="flex transition-transform ease-out duration-500"
+        className="flex transition-transform ease-out duration-500 w-[100%]"
         style={{ transform: `translateX(-${pag * 100}%)` }}
       >
         {events}
