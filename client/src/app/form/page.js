@@ -16,29 +16,24 @@ export default function Form() {
     const router = useRouter();
 
   const [formData, setFormData] = useState({
-    event_name: '',   /// Ok
-    org_name: '',    /// OK
-    category: '',    /// Ok
-    address: '',     /// ok
-    place_name: '', /// ok
+    event_name: '',
+    org_name: '',
+    category: '',
+    address: '',
+    place_name: '',
     country: '',    
     city: '',
     state: '',
-    postal: '',    /// ok
-    start_at: '',  // ok
-    end_at: '',    // ok 
-    intro: '',     // ok
-    description: '',  // ok   
-    social_media: [], // 
-    event_image: null, // ok
-    stock: 0,    // ok 
-
+    postal: '',
+    start_at: '',
+    end_at: '',
+    intro: '',
+    description: '',  
+    social_media: [],
+    event_image: null,
+    stock: 0,
     price: 0,    
-    //TODO: location: {lat: 0, lon: 0 }
   });
-  //console.log(eventData)
-  /* 
-event_name!, org_name!, category, location, place_name!, address!, city!, state!, country!, postal!, start_at!, end_at!, intro!, description!, social_media!, price!, stock! */
 
   const [errors, setErrors] = useState({
     event_name: '',
@@ -58,7 +53,6 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
     stock: 0,
     place_name: '',
     price: 0,
-    //TODO: location: {lat: 0, lon: 0 }
   });
 
   const FormTitles = ["Sign Up", "Personal Info", "Other", "Finish"];
@@ -127,11 +121,10 @@ event_name!, org_name!, category, location, place_name!, address!, city!, state!
   return (
     <div className='pt-20 ml-4 pb-10 px-[.5rem]'>
             <button
-          disabled={page == 0}
+          hidden={page === 0}
           onClick={() => {
             setPage((currPage) => currPage - 1);
-          }}
-        >
+          }}>
           <IconArrowLeft/>
         </button>
     <div>
