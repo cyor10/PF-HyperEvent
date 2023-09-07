@@ -194,10 +194,10 @@ export default function PartTwo({ formData, setFormData }) {
           <label className="text-[1rem] pt-5 ml-1">Start time *</label>
           <input
             className="w-[95%] p-2 mt-4 mr-4 rounded-md border-gray-400 border-2 focus:outline-none"
-            placeholder="19:00hs" type='number'
-            value={formData.start_at}
+            placeholder="19:00hs" type='time'
+            value={formData.startTime}
             onChange={(e) => {
-              setFormData({ ...formData, start_at: e.target.value });
+              setFormData({ ...formData, startTime: e.target.value });
             }}
           ></input>
 
@@ -215,10 +215,11 @@ export default function PartTwo({ formData, setFormData }) {
           <label className="text-[1rem] pt-5 ml-1">End time *</label>
           <input
             className="w-[95%] p-2 mt-4 mr-4 rounded-md border-gray-400 border-2 focus:outline-none"
-            placeholder="19:00hs" type='text'
-            value={formData.end_at}
+            placeholder="19:00hs" type='time'
+            value={formData.endTime}
+            min={formData.startTime}
             onChange={(e) => {
-              setFormData({ ...formData, end_at: e.target.value });
+              setFormData({ ...formData, endTime: e.target.value });
             }}
           ></input>
         </div>
