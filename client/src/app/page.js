@@ -5,6 +5,7 @@ import Categories from "./components/Categories/Categories";
 import axiosInstance from "../utils/axiosInstance";
 import Image from "next/image";
 import Cards from "./components/Cards/Cards";
+import Link from "next/link";
 
 export default function LandingPage() {
   const [dataCarousel, setDataCarousel] = useState([]);
@@ -47,19 +48,32 @@ export default function LandingPage() {
   };
   return (
     <div className="min-h-screen w-full bg-white font-figtree text-black">
+        <div>
       <Carousel>
         {dataCarousel.map((event, index) => (
-          <Image
-            priority={true}
-            className="w-[100%] h-72 object-cover"
-            src={event.event_image}
-            alt={event.event_name}
-            width={900}
-            height={300}
-            key={index}
-          />
+       <div key={index} className="relative">
+       <Image
+         priority={true}
+         className="w-[100%] h-72 mt-16 mb-10 object-center"
+         src={event.event_image}
+         alt={event.event_name}
+         width={900}
+         height={300}
+       />
+            
+              <div className="z-0">
+       <Link href="/detail/[name]" as={`/detail/${event.event_name}`}>
+                <h2 className="cursor-pointer absolute text-[1.3rem] pt-2 pl-5 font-normal bottom-12 left-0 right-0 p-4 bg-black/50 text-white text-center"
+                >
+                  {event.event_name}
+                </h2>
+          </Link>
+              </div>
+            
+        </div>
         ))}
       </Carousel>
+        </div>
       <div className="pt-10 pb-8">
 
         <h1 className="text-[clamp(2.25rem,8vw,4rem)] text-center pb-3 font-black tracking-tighter leading-[clamp(2.25rem,8vw,4rem)] text-black">FIND YOUR <br />EXPERIENCE</h1>
