@@ -28,14 +28,6 @@
         "iso2": "EC"
     },
     {
-        "name": "Falkland Islands",
-        "iso2": "FK"
-    },
-    {
-        "name": "French Guiana",
-        "iso2": "GF"
-    },
-    {
         "name": "Guyana",
         "iso2": "GY"
     },
@@ -50,10 +42,6 @@
     {
         "name": "Peru",
         "iso2": "PE"
-    },
-    {
-        "name": "South Georgia",
-        "iso2": "GS"
     },
     {
         "name": "Suriname",
