@@ -23,7 +23,7 @@ export default function Detail({ params }) {
     (async () => {
       try {
         const { data } = await axiosInstance(`/events?name=${name}`);
-        setEvent(data.events[0]);
+        setEvent(data.events);
 
       } catch (error) {
         console.log(error);
@@ -95,7 +95,6 @@ export default function Detail({ params }) {
     }
   };
 
-  console.log(event)
   const clock = new Date(event?.start_at);
   const hours = clock.getHours();
   const minutes = clock.getMinutes();
