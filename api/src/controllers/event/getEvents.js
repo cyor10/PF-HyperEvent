@@ -1,7 +1,8 @@
 const { Event } = require("../../db");
 const { Op } = require('sequelize');
 
-let shownEventIds = [];
+const eventsPerPage = 15;
+let shownEventIds = new Set();
 
 async function getEvents(req, res) {
   const { name, page } = req.query;
@@ -19,27 +20,25 @@ async function getEvents(req, res) {
     }
 
     if (page) {
-      const elementsPerPage = 15
-      const offset = (page - 1) * elementsPerPage;
+      const offset = (page - 1) * eventsPerPage;
 
       const whereClause = {
         active: true,
         id: { [Op.notIn]: shownEventIds },
       };
-      
+
       const { count, rows } = await Event.findAndCountAll({
         offset,
-        limit: elementsPerPage,
+        limit: eventsPerPage,
         where: whereClause,
         order: [['created', 'DESC']]
       });
-      const totalPages = Math.ceil(count / elementsPerPage);
+      const totalPages = Math.ceil(count / eventsPerPage);
       if (page > totalPages) {
         return res.status(400).json({ error: "Page not found" })
       }
 
-      const eventIdsInPage = rows.map(event => event.id);
-      shownEventIds = shownEventIds.concat(eventIdsInPage);
+      rows.forEach(event => shownEventIds.add(event.id));
 
       return res.status(200).json({
         currentPage: +page,
