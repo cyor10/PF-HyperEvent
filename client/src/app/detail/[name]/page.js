@@ -17,21 +17,21 @@ export default function Detail({ params }) {
   const [showMap, setShowMap] = useState(false); // Nueva variable de estado
   const [ticketCount, setTicketCount] = useState(1);
 
-  const priceTotal = ticketCount * event.price
+  const priceTotal = ticketCount * event?.price
 
   useEffect(() => {
     (async () => {
       try {
         const { data } = await axiosInstance(`/events?name=${name}`);
-        setEvent(data.events[0]);
+        setEvent(data.events);
 
       } catch (error) {
         console.log(error);
       }
     })();
-  }, []);
+  }, [setEvent]);
 
-  const numericDate = new Date(event.start_at);
+  const numericDate = new Date(event?.start_at);
   const week = [
     "Sunday",
     "Monday",
@@ -95,7 +95,6 @@ export default function Detail({ params }) {
     }
   };
 
-  console.log(event)
   const clock = new Date(event?.start_at);
   const hours = clock.getHours();
   const minutes = clock.getMinutes();
@@ -110,13 +109,13 @@ export default function Detail({ params }) {
     <div className=" bg-white text-black pt-16 font-figtree min-h-[105%] md:pb-0 md:min-h-[90%]">
       <img
         src={event?.event_image}
-        className="w-[100%] h-[20vhrem] rounded-b-3xl object-cover md:hidden"
+        className="w-[100%] h-[22rem] rounded-b-3xl object-cover md:hidden"
         height={200}
         width={200}
         alt="event-image"
       />
 
-      <div className="w-[100%] h-[15rem] bg-[#F4EFFD] hidden md:flex md:mb-20">
+      <div className="w-[100%] h-[20rem] bg-[#F4EFFD] hidden md:flex md:mb-20">
         <img
           src={event?.event_image}
           className="w-[60%] h-[120%] mx-[20%] rounded-b-3xl"
@@ -131,7 +130,7 @@ export default function Detail({ params }) {
         <div>
           <h3 className="ml-4 pt-5 text-bold font-medium">{`${dayName}, ${month} ${dayNum}`}</h3>
           <h2 className="text-[clamp(2.25rem,1vw,2.5rem)] mt-3 mb-2 ml-6 font-bold	">
-            &quot;{event && event.event_name}&quot;
+            &quot;{event && event?.event_name}&quot;
           </h2>
           <p className="ml-6 py-2 text-lg">{event?.intro}</p>
 
@@ -147,7 +146,7 @@ export default function Detail({ params }) {
                 <h3 className="text-lg ml-4 font-medium">
                   Date and time
                 </h3>
-                <h3 className="ml-4">{event.start_at?.split("T")[0]}  To  {timeFormatted}</h3>
+                <h3 className="ml-4">{event?.start_at?.split("T")[0]}  To  {timeFormatted}</h3>
               </div>
             </div>
             <div className="flex ml-6 mt-4 items-baseline">
@@ -186,7 +185,7 @@ export default function Detail({ params }) {
           <div className="mx-auto flex flex-col fixed bottom-0 pb-3 right-0 left-0 min-h-[12rem] items-center bg-[#F4EFFD] md:hidden">
             <div className="flex w-[90%] max-w-[30rem] justify-between h-[40%] px-4 py-6 bg-white border-4 border-purpleOscuro rounded mt-5">
               <div>
-                <h3 className="text-[clamp(1.02rem,3.5vw,1.4rem)]">&quot;{event && event.event_name}&quot;</h3>
+                <h3 className="text-[clamp(1.02rem,3.5vw,1.4rem)]">&quot;{event && event?.event_name}&quot;</h3>
                 <p className="text-bold pt-1 mt-1 text-[clamp(1.2rem,6vw,1.4rem)]">${Math.floor(priceTotal)}</p> {/* Actualizar el precio según el contador */}
               </div>
               <div className="flex flex-row gap-3 flex-shrink-0 align-center">
@@ -206,7 +205,7 @@ export default function Detail({ params }) {
               </div>
             </div>
             <div className="flex p-2 justify-center w-[90%] max-w-[30rem] bg-purpleOscuro mt-3 h-[20%] items-center rounded-md relative cursor-pointer">
-              <Link className="text-white text-[clamp(1.15rem,4vw,1.3rem)]" href="/payment/[name]" as={`/payment/${event.event_name}?ticketCount=${ticketCount}`}>
+              <Link className="text-white text-[clamp(1.15rem,4vw,1.3rem)]" href="/payment/[name]" as={`/payment/${event?.event_name}?ticketCount=${ticketCount}`}>
                 Buy Tickets for ${Math.floor(priceTotal)}
               </Link>
             </div>
@@ -216,7 +215,7 @@ export default function Detail({ params }) {
           <div className="hidden w-[35%]  mx-auto fixed md:flex flex-col bottom-0 pb-3 right-0 min-h-[15rem] items-center bg-[#F4EFFD] rounded-2xl">
             <div className="flex w-[90%] max-w-[25rem] justify-between h-[40%] px-4 py-6 bg-white border-4 border-purpleOscuro rounded mt-5">
               <div>
-                <h3 className="text-[clamp(0.6rem,3vw,1.3rem)]">&quot;{event && event.event_name}&quot;</h3>
+                <h3 className="text-[clamp(0.6rem,3vw,1.3rem)]">&quot;{event && event?.event_name}&quot;</h3>
                 <p className="text-bold pt-1 mt-1 text-[clamp(1.2rem,6vw,1.4rem)]">${Math.floor(priceTotal)}</p> {/* Actualizar el precio según el contador */}
               </div>
               <div className="flex flex-row gap-3 flex-shrink-0 align-center">
@@ -236,7 +235,7 @@ export default function Detail({ params }) {
               </div>
             </div>
             <div className="flex p-2 justify-center w-[90%] max-w-[25rem] bg-purpleOscuro mt-3 h-[20%] items-center rounded-md relative cursor-pointer">
-              <Link className="text-white text-[clamp(1.15rem,4vw,1.3rem)]" href="/payment/[name]" as={`/payment/${event.event_name}?ticketCount=${ticketCount}`}>
+              <Link className="text-white text-[clamp(1.15rem,4vw,1.3rem)]" href="/payment/[name]" as={`/payment/${event?.event_name}?ticketCount=${ticketCount}`}>
                 Buy Tickets for ${Math.floor(priceTotal)}
               </Link>
             </div>
