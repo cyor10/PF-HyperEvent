@@ -16,7 +16,7 @@ export default function Carousel({ children: events }) {
   const itemsPerPage = 1; 
 
   return (
-    <div className="overflow-hidden relative pt-[4rem]">
+    <div className="overflow-hidden relative ">
       <div className="flex justify-center items-center w-full h max-w-screen-md mx-auto h-[50vh] mt-6 transition-transform ease-out duration-500">
         {events.slice(pag * itemsPerPage, (pag + 1) * itemsPerPage).map((event, index) => (
           <div key={index} className="w-full">
