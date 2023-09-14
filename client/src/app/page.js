@@ -54,7 +54,7 @@ export default function LandingPage() {
        <div key={index} className="relative">
        <Image
          priority={true}
-         className="w-[100%] h-72 mt-16 mb-10 object-center"
+         className="w-[100%] h-72 mb-10 object-cover"
          src={event.event_image}
          alt={event.event_name}
          width={900}
