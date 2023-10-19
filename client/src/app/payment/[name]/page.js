@@ -16,7 +16,7 @@ export default function Payment({ params }) {
     (async () => {
       try {
         const { data } = await axiosInstance(`/events?name=${name}`);
-        setEvent(data.events[0]);
+        setEvent(data.events);
       } catch (error) {
         console.log(error);
       }
@@ -90,7 +90,7 @@ export default function Payment({ params }) {
   };
 
   return (
-    <div className="flex flex-col w-full min-h-screen mt-2 font-figtree">
+    <div className="flex flex-col w-full min-h-screen mt-2 font-figtree text-black">
       <div className="flex flex-row justify-center items-center p-5">
         <div className="text-center relative">
           <h2 className="text-2xl font-bold">Check-out</h2>
